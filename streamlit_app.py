@@ -4,23 +4,35 @@ Entry point com st.navigation() para navegacao agrupada.
 """
 
 import subprocess
+import sys
 from pathlib import Path
 
 import streamlit as st
-
-# ---------------------------------------------------------------------------
-# Auto-sync: gerar parquets se nao existirem (primeiro deploy)
-# ---------------------------------------------------------------------------
-DATA_DIR = Path(__file__).resolve().parent / "data"
-if not DATA_DIR.exists() or not list(DATA_DIR.glob("*.parquet")):
-    with st.spinner("Sincronizando datasets pela primeira vez... isso pode levar alguns minutos."):
-        subprocess.run(["python", "sync.py"], check=True)
 
 st.set_page_config(
     page_title="NEUU Analytics",
     page_icon="📊",
     layout="wide",
 )
+
+# ---------------------------------------------------------------------------
+# Auto-sync: gerar parquets se nao existirem (primeiro deploy)
+# ---------------------------------------------------------------------------
+ROOT = Path(__file__).resolve().parent
+DATA_DIR = ROOT / "data"
+if not DATA_DIR.exists() or not list(DATA_DIR.glob("*.parquet")):
+    st.info("Primeira execucao detectada. Sincronizando datasets...")
+    with st.spinner("Clonando repositorios e gerando parquets... isso pode levar alguns minutos."):
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "sync.py")],
+            capture_output=True, text=True, cwd=str(ROOT),
+        )
+        if result.returncode != 0:
+            st.error(f"Erro no sync:\n```\n{result.stderr}\n```")
+            st.stop()
+        else:
+            st.success("Sync completo! Recarregando...")
+            st.rerun()
 
 # ---------------------------------------------------------------------------
 # Idioma global (session_state para persistir entre paginas)
