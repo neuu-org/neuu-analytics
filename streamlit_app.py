@@ -3,10 +3,6 @@ NEUU Analytics — Dashboard central dos datasets biblicos.
 Entry point com st.navigation() para navegacao agrupada.
 """
 
-import subprocess
-import sys
-from pathlib import Path
-
 import streamlit as st
 
 st.set_page_config(
@@ -14,29 +10,6 @@ st.set_page_config(
     page_icon="📊",
     layout="wide",
 )
-
-# ---------------------------------------------------------------------------
-# Auto-sync: gerar parquets se algum estiver faltando
-# ---------------------------------------------------------------------------
-ROOT = Path(__file__).resolve().parent
-DATA_DIR = ROOT / "data"
-EXPECTED_PARQUETS = ["commentaries.parquet", "crossrefs.parquet", "bibletext.parquet"]
-missing = [f for f in EXPECTED_PARQUETS if not (DATA_DIR / f).exists()]
-
-if missing:
-    st.info(f"Sincronizando datasets: {', '.join(f.replace('.parquet','') for f in missing)}...")
-    with st.spinner("Clonando repositorios e gerando parquets... isso pode levar alguns minutos."):
-        result = subprocess.run(
-            [sys.executable, str(ROOT / "sync.py")],
-            capture_output=True, text=True, cwd=str(ROOT),
-            timeout=600,
-        )
-        if result.returncode != 0:
-            st.error(f"Erro no sync:\n```\n{result.stderr[-2000:]}\n```")
-            st.stop()
-        else:
-            st.success("Sync completo! Recarregando...")
-            st.rerun()
 
 # ---------------------------------------------------------------------------
 # Idioma global (session_state para persistir entre paginas)

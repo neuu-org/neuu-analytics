@@ -1,9 +1,8 @@
 # Dados clonados dos repos de dataset (nunca commitados)
 datasets/
 
-# Parquet processado (gerado pelo sync)
-data/*.parquet
-data/**/*.parquet
+# Parquets sao commitados para deploy rapido no Streamlit Cloud
+# Para regenerar: python sync.py
 
 # Python
 __pycache__/
