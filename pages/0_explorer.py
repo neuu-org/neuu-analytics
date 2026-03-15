@@ -335,7 +335,10 @@ df_verse = get_verse_data(selected_book, selected_chapter, selected_verse)
 
 verse_ref = f"{selected_book.upper()} {selected_chapter}:{selected_verse}"
 _en_book_name = friendly_name(selected_book)
-_display_book = book_name_for_translation(_en_book_name, selected_translation) if translations else _en_book_name
+if is_pt:
+    _display_book = EN_TO_PT_BOOK.get(_en_book_name, _en_book_name)
+else:
+    _display_book = _en_book_name
 verse_display = f"{_display_book} {selected_chapter}:{selected_verse}"
 
 st.markdown(f'<div class="verse-ref">{html.escape(verse_display)}</div>', unsafe_allow_html=True)
@@ -480,7 +483,7 @@ with tab_crossrefs:
 
         for idx, (_, ref) in enumerate(df_crossrefs.iterrows()):
             to_name_en = friendly_name(ref["to_book"])
-            to_name = book_name_for_translation(to_name_en, selected_translation)
+            to_name = EN_TO_PT_BOOK.get(to_name_en, to_name_en) if is_pt else to_name_en
             strength = ref["connection_strength"]
             votes = ref["votes"]
             score = ref["score"]
