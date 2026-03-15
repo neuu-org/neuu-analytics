@@ -1,0 +1,25 @@
+# Dados clonados dos repos de dataset (nunca commitados)
+datasets/
+
+# Parquet processado (gerado pelo sync)
+data/*.parquet
+data/**/*.parquet
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Env
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

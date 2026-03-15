@@ -1,0 +1,22 @@
+# Registro central dos datasets da org NEUU
+# Cada entrada define como sincronizar e carregar um dataset
+
+org: neuu-org
+
+datasets:
+  commentaries:
+    name: "Bible Commentaries"
+    repo: bible-commentaries-dataset
+    description: "Comentarios patristicos e historicos (AD 100-1700)"
+    data_glob: "data/01_cleaned/**/*.json"
+    enriched_glob: "data/03_enriched/**/*.json"
+    loader: commentaries
+    enabled: true
+
+  crossrefs:
+    name: "Bible Cross-References"
+    repo: bible-crossrefs-dataset
+    description: "1.1M+ referencias cruzadas biblicas (OpenBible + TSK)"
+    data_glob: "data/processed/**/*.json"
+    loader: crossrefs
+    enabled: false  # habilitar quando o repo tiver dados
