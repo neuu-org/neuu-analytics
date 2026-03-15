@@ -19,6 +19,13 @@ ENRICHED_PARQUET = DATA_DIR / "commentaries_enriched.parquet"
 
 st.set_page_config(page_title="Commentaries | NEUU Analytics", page_icon="📖", layout="wide")
 
+# Plotly template dark consistente com o tema NEUU
+PLOTLY_LAYOUT = dict(
+    plot_bgcolor="rgba(0,0,0,0)",
+    paper_bgcolor="rgba(0,0,0,0)",
+    font_color="#E8E0D4",
+)
+
 
 def parse_period_year(period: str) -> int | None:
     if not period:
