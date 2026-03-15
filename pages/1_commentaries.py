@@ -50,7 +50,7 @@ con = duckdb.connect()
 
 
 @st.cache_data(ttl=3600)
-def load_data() -> pd.DataFrame:
+def load_data(_parquet_mtime: float) -> pd.DataFrame:
     return con.sql(f"SELECT * FROM '{PARQUET}'").df()
 
 
@@ -61,8 +61,11 @@ def load_enriched() -> pd.DataFrame | None:
     return None
 
 
-df = load_data()
-df["book_name"] = df["book"].apply(friendly_name)
+df = load_data(PARQUET.stat().st_mtime)
+if "book" in df.columns:
+    df["book_name"] = df["book"].apply(friendly_name)
+else:
+    df["book_name"] = "Unknown"
 df_with = df[df["author"].notna()]
 df_empty = df[df["author"].isna()]
 

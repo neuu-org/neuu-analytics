@@ -200,10 +200,56 @@ def crossrefs_to_parquet(repo_dir: Path, cfg: dict) -> Path:
     return DATA_DIR / "crossrefs.parquet"
 
 
+def bibletext_to_parquet(repo_dir: Path, cfg: dict) -> Path:
+    """Converte JSONs do bible-text-dataset para Parquet."""
+    json_files = collect_json_files(repo_dir, cfg["data_glob"])
+    print(f"  Encontrados {len(json_files)} arquivos de traducoes")
+
+    rows = []
+    for jf in tqdm(json_files, desc="  Processando", unit="file"):
+        try:
+            with open(jf, encoding="utf-8") as f:
+                data = json.load(f)
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+
+        translation = data.get("translation", jf.stem)
+        abbrev = jf.stem  # ex: KJV, NVI, ARA
+        lang = jf.parent.name  # ex: english, portuguese
+
+        for book in data.get("books", []):
+            book_name = book.get("name", "")
+            for chapter in book.get("chapters", []):
+                ch_num = chapter.get("chapter", 0)
+                for verse in chapter.get("verses", []):
+                    text = verse.get("text", "")
+                    if isinstance(text, list):
+                        text = " ".join(str(t) for t in text)
+                    rows.append({
+                        "translation": abbrev,
+                        "language": lang,
+                        "book": book_name,
+                        "chapter": int(ch_num),
+                        "verse": int(verse.get("verse", 0)),
+                        "text": str(text),
+                    })
+
+    if rows:
+        df = pd.DataFrame(rows)
+        out = DATA_DIR / "bibletext.parquet"
+        df.to_parquet(out, index=False)
+        print(f"  Salvo: {out} ({len(df):,} linhas, {out.stat().st_size / 1024 / 1024:.1f} MB)")
+        return out
+
+    print("  Nenhum dado encontrado")
+    return DATA_DIR / "bibletext.parquet"
+
+
 # Mapa de loaders por nome
 LOADERS = {
     "commentaries": commentaries_to_parquet,
     "crossrefs": crossrefs_to_parquet,
+    "bibletext": bibletext_to_parquet,
 }
 
 

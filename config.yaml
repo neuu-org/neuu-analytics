@@ -20,3 +20,11 @@ datasets:
     data_glob: "data/02_unified/verses/**/*.json"
     loader: crossrefs
     enabled: true
+
+  bibletext:
+    name: "Bible Text"
+    repo: bible-text-dataset
+    description: "17 traducoes biblicas (9 EN + 8 PT) em formato estruturado"
+    data_glob: "data/01_structured/**/*.json"
+    loader: bibletext
+    enabled: true

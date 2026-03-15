@@ -19,6 +19,7 @@ DATA_DIR = ROOT / "data"
 PARQUET = DATA_DIR / "commentaries.parquet"
 ENRICHED_PARQUET = DATA_DIR / "commentaries_enriched.parquet"
 CROSSREFS_PARQUET = DATA_DIR / "crossrefs.parquet"
+BIBLETEXT_PARQUET = DATA_DIR / "bibletext.parquet"
 
 st.set_page_config(page_title="Explorador | NEUU Analytics", page_icon="🔍", layout="wide")
 
@@ -204,6 +205,76 @@ def get_crossrefs(book_abbrev: str, chapter: int, verse: int) -> pd.DataFrame | 
     return df if not df.empty else None
 
 
+@st.cache_data(ttl=3600)
+def get_available_translations() -> list[str]:
+    """Lista traducoes disponiveis no dataset de texto biblico."""
+    if not BIBLETEXT_PARQUET.exists():
+        return []
+    return con.sql(
+        f"SELECT DISTINCT translation FROM '{BIBLETEXT_PARQUET}' ORDER BY translation"
+    ).df()["translation"].tolist()
+
+
+@st.cache_data(ttl=3600)
+def get_verse_text(book_name: str, chapter: int, verse: int, translation: str) -> str | None:
+    """Busca o texto de um versiculo em uma traducao especifica."""
+    if not BIBLETEXT_PARQUET.exists():
+        return None
+    result = con.sql(
+        f"""
+        SELECT text FROM '{BIBLETEXT_PARQUET}'
+        WHERE book = '{book_name}'
+          AND chapter = {chapter}
+          AND verse = {verse}
+          AND translation = '{translation}'
+        LIMIT 1
+        """
+    ).df()
+    return result["text"].iloc[0] if not result.empty else None
+
+
+@st.cache_data(ttl=3600)
+def get_crossref_verse_text(crossref_book: str, chapter: int, verse: int, translation: str) -> str | None:
+    """Busca texto de um versiculo referenciado (formato crossref OSIS → nome do livro)."""
+    if not BIBLETEXT_PARQUET.exists():
+        return None
+    book_name = friendly_name(crossref_book)
+    result = con.sql(
+        f"""
+        SELECT text FROM '{BIBLETEXT_PARQUET}'
+        WHERE book = '{book_name}'
+          AND chapter = {chapter}
+          AND verse = {verse}
+          AND translation = '{translation}'
+        LIMIT 1
+        """
+    ).df()
+    return result["text"].iloc[0] if not result.empty else None
+
+
+# ---------------------------------------------------------------------------
+# Sidebar — Configuracoes globais
+# ---------------------------------------------------------------------------
+translations = get_available_translations()
+if translations:
+    with st.sidebar:
+        st.markdown("### Configuracoes")
+        # Separar por idioma
+        en_trans = [t for t in translations if t in ["KJV", "AKJV", "ASV", "BSB", "Darby", "DRC", "Geneva1599", "Webster", "YLT"]]
+        pt_trans = [t for t in translations if t not in en_trans]
+        all_trans = en_trans + pt_trans
+
+        selected_translation = st.selectbox(
+            "Traducao Biblica",
+            all_trans,
+            index=all_trans.index("KJV") if "KJV" in all_trans else 0,
+            key="global_translation",
+            help="Versao usada para exibir texto dos versiculos",
+        )
+else:
+    selected_translation = "KJV"
+
+
 # ---------------------------------------------------------------------------
 # Header
 # ---------------------------------------------------------------------------
@@ -249,6 +320,20 @@ verse_ref = f"{selected_book.upper()} {selected_chapter}:{selected_verse}"
 verse_display = f"{friendly_name(selected_book)} {selected_chapter}:{selected_verse}"
 
 st.markdown(f'<div class="verse-ref">{html.escape(verse_display)}</div>', unsafe_allow_html=True)
+
+# Mostrar texto do versiculo selecionado (se disponivel)
+main_verse_text = get_verse_text(friendly_name(selected_book), selected_chapter, selected_verse, selected_translation)
+if main_verse_text:
+    st.markdown(
+        f'<div style="background:rgba(212,168,83,0.08);border-left:3px solid #D4A853;'
+        f'padding:16px 20px;border-radius:0 8px 8px 0;margin:8px 0 16px 0;">'
+        f'<div style="font-family:Crimson Pro,serif;font-size:1.15rem;line-height:1.8;'
+        f'color:#E8E0D4;font-style:italic;">'
+        f'&ldquo;{html.escape(main_verse_text)}&rdquo;</div>'
+        f'<div style="font-size:0.75rem;color:#8B8072;margin-top:8px;">{html.escape(selected_translation)}</div>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
 
 if df_verse.empty:
     st.info("Nenhum comentario disponivel para este versiculo.")
@@ -368,34 +453,40 @@ with tab_crossrefs:
         rc2.metric("Fortes", strong)
         rc3.metric("Moderadas", moderate)
 
-        # Lista de referencias com score
-        st.markdown('<div class="section-label">Referencias Cruzadas (por relevancia)</div>', unsafe_allow_html=True)
-
+        # Lista de referencias com expander e texto do versiculo
         for _, ref in df_crossrefs.iterrows():
             to_name = friendly_name(ref["to_book"])
             strength = ref["connection_strength"]
             votes = ref["votes"]
             score = ref["score"]
 
-            strength_color = {"strong": "#D4A853", "moderate": "#636EFA", "weak": "#5A5550"}.get(strength, "#5A5550")
+            strength_icon = {"strong": "🟡", "moderate": "🔵", "weak": "⚫", "primary": "🟠"}.get(strength, "⚫")
             vote_text = f" · {votes} votos" if votes > 0 else ""
+            label = f"{strength_icon} {to_name} {ref['to_chapter']}:{ref['to_verse']}  —  score {score}{vote_text} · {strength}"
 
-            st.markdown(
-                f'<div style="display:flex;align-items:center;gap:12px;padding:8px 12px;'
-                f'border-bottom:1px solid #2A2D34;">'
-                f'<span style="color:{strength_color};font-size:1.5rem;">●</span>'
-                f'<span style="color:#E8E0D4;font-weight:500;">'
-                f'{html.escape(to_name)} {ref["to_chapter"]}:{ref["to_verse"]}</span>'
-                f'<span style="color:#8B8072;font-size:0.8rem;">score {score}{vote_text}</span>'
-                f'<span class="tag" style="font-size:0.65rem;">{html.escape(strength)}</span>'
-                f'</div>',
-                unsafe_allow_html=True,
-            )
+            with st.expander(label):
+                # Buscar texto do versiculo referenciado
+                ref_text = get_crossref_verse_text(
+                    ref["to_book"], int(ref["to_chapter"]), int(ref["to_verse"]),
+                    selected_translation,
+                )
+                if ref_text:
+                    st.markdown(
+                        f'<div style="font-family:Crimson Pro,serif;font-size:1.1rem;'
+                        f'line-height:1.8;color:#E8E0D4;font-style:italic;'
+                        f'padding:12px 16px;background:rgba(212,168,83,0.06);'
+                        f'border-left:3px solid #D4A853;border-radius:0 8px 8px 0;">'
+                        f'&ldquo;{html.escape(ref_text)}&rdquo;'
+                        f'<div style="font-size:0.75rem;color:#8B8072;margin-top:8px;font-style:normal;">'
+                        f'{html.escape(to_name)} {ref["to_chapter"]}:{ref["to_verse"]} · {html.escape(selected_translation)}'
+                        f'</div></div>',
+                        unsafe_allow_html=True,
+                    )
+                else:
+                    st.caption(f"Texto nao disponivel na traducao {selected_translation}")
 
-        # Mini grafo das conexoes
-        st.markdown('<div class="section-label" style="margin-top:24px;">Grafo de Conexoes</div>', unsafe_allow_html=True)
-
-        # Agrupar por livro de destino
+        # Grafo por livro
+        st.markdown("---")
         book_targets = (
             df_crossrefs.groupby("to_book")
             .agg(count=("to_book", "size"), avg_score=("score", "mean"))
@@ -407,8 +498,7 @@ with tab_crossrefs:
 
         fig = px.bar(
             book_targets,
-            x="to_book_name",
-            y="count",
+            x="to_book_name", y="count",
             color="avg_score",
             color_continuous_scale=["#2A2D34", "#D4A853"],
             title=f"Livros mais referenciados por {verse_display}",
