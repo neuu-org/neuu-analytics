@@ -385,7 +385,22 @@ with tab_comm:
     df_filtered = df_verse[df_verse["author"].isin(selected_authors)]
 
     for _, row in df_filtered.iterrows():
+        # Tentar mostrar em PT se idioma selecionado e traducao disponivel
         content_raw = row["content"] or ""
+        content_lang_tag = ""
+
+        if is_pt and df_enriched is not None:
+            author_match = df_enriched[df_enriched["author"] == row["author"]]
+            if not author_match.empty:
+                pt_text = author_match.iloc[0].get("content_pt", "")
+                if pt_text and str(pt_text).strip():
+                    content_raw = str(pt_text)
+                    content_lang_tag = '<span style="font-size:0.65rem;color:#00CC96;margin-left:8px;">PT-BR</span>'
+                else:
+                    content_lang_tag = '<span style="font-size:0.65rem;color:#5A5550;margin-left:8px;">EN · traducao indisponivel</span>'
+            else:
+                content_lang_tag = '<span style="font-size:0.65rem;color:#5A5550;margin-left:8px;">EN · traducao indisponivel</span>'
+
         if len(content_raw) > 1500:
             content_raw = content_raw[:1500] + "..."
         content_preview = html.escape(content_raw).replace("\n", "<br>")
@@ -436,6 +451,7 @@ with tab_comm:
             '<div class="commentary-card">'
             f'<span class="author-name">{author_safe}</span>'
             f'<span class="period">{period_safe}</span>'
+            f'{content_lang_tag}'
             f'<div class="content">{content_preview}</div>'
             f'{enriched_html}'
             '</div>'

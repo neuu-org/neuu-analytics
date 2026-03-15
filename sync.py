@@ -130,6 +130,7 @@ def commentaries_to_parquet(repo_dir: Path, cfg: dict) -> Path:
                     enrich_rows.append({
                         "verse_reference": ref,
                         "author": comm.get("author", "Unknown"),
+                        "content_pt": comm.get("content_pt", ""),
                         "doctrines": "|".join(theo.get("doctrines", [])),
                         "traditions": "|".join(theo.get("traditions", [])),
                         "theological_method": theo.get("theological_method", ""),
