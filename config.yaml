@@ -17,6 +17,6 @@ datasets:
     name: "Bible Cross-References"
     repo: bible-crossrefs-dataset
     description: "1.1M+ referencias cruzadas biblicas (OpenBible + TSK)"
-    data_glob: "data/processed/**/*.json"
+    data_glob: "data/02_unified/verses/**/*.json"
     loader: crossrefs
-    enabled: false  # habilitar quando o repo tiver dados
+    enabled: true

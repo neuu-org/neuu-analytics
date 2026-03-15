@@ -3,6 +3,7 @@ Explorador de Versiculos — busca qualquer versiculo e ve todos os dados dispon
 Comentarios, autores, enriquecimento teologico, tudo num lugar so.
 """
 
+import html
 from collections import Counter
 from pathlib import Path
 
@@ -11,10 +12,13 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+from book_names import BOOK_NAMES, BOOK_ORDER, COMM_TO_CROSSREF, friendly_name, abbrev_from_name
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 PARQUET = DATA_DIR / "commentaries.parquet"
 ENRICHED_PARQUET = DATA_DIR / "commentaries_enriched.parquet"
+CROSSREFS_PARQUET = DATA_DIR / "crossrefs.parquet"
 
 st.set_page_config(page_title="Explorador | NEUU Analytics", page_icon="🔍", layout="wide")
 
@@ -182,6 +186,24 @@ def get_enriched_data(verse_ref: str) -> pd.DataFrame | None:
     return df if not df.empty else None
 
 
+@st.cache_data(ttl=3600)
+def get_crossrefs(book_abbrev: str, chapter: int, verse: int) -> pd.DataFrame | None:
+    """Busca referencias cruzadas para um versiculo."""
+    if not CROSSREFS_PARQUET.exists():
+        return None
+    crossref_book = COMM_TO_CROSSREF.get(book_abbrev, book_abbrev.upper())
+    df = con.sql(
+        f"""
+        SELECT * FROM '{CROSSREFS_PARQUET}'
+        WHERE from_book = '{crossref_book}'
+          AND from_chapter = {chapter}
+          AND from_verse = {verse}
+        ORDER BY score DESC
+        """
+    ).df()
+    return df if not df.empty else None
+
+
 # ---------------------------------------------------------------------------
 # Header
 # ---------------------------------------------------------------------------
@@ -198,8 +220,15 @@ books = get_books()
 
 col1, col2, col3 = st.columns([2, 1, 1])
 
+# Ordenar livros na ordem canonica, com nomes amigaveis
+books_sorted = [b for b in BOOK_ORDER if b in books]
+books_sorted += [b for b in books if b not in books_sorted]
+book_display = [friendly_name(b) for b in books_sorted]
+
 with col1:
-    selected_book = st.selectbox("Livro", books, index=books.index("mt") if "mt" in books else 0)
+    default_idx = books_sorted.index("mt") if "mt" in books_sorted else 0
+    selected_display = st.selectbox("Livro", book_display, index=default_idx)
+    selected_book = abbrev_from_name(selected_display)
 
 with col2:
     chapters = get_chapters(selected_book)
@@ -217,8 +246,9 @@ st.markdown("---")
 df_verse = get_verse_data(selected_book, selected_chapter, selected_verse)
 
 verse_ref = f"{selected_book.upper()} {selected_chapter}:{selected_verse}"
+verse_display = f"{friendly_name(selected_book)} {selected_chapter}:{selected_verse}"
 
-st.markdown(f'<div class="verse-ref">{verse_ref}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="verse-ref">{html.escape(verse_display)}</div>', unsafe_allow_html=True)
 
 if df_verse.empty:
     st.info("Nenhum comentario disponivel para este versiculo.")
@@ -248,7 +278,9 @@ df_enriched = get_enriched_data(verse_ref)
 # ---------------------------------------------------------------------------
 # Tabs: Comentarios | Analise | Visao Geral
 # ---------------------------------------------------------------------------
-tab_comm, tab_analysis, tab_overview = st.tabs(["Comentarios", "Analise Teologica", "Visao Geral"])
+tab_comm, tab_crossrefs, tab_analysis, tab_overview = st.tabs(
+    ["Comentarios", "Referencias Cruzadas", "Analise Teologica", "Visao Geral"]
+)
 
 # --- Tab 1: Comentarios ---
 with tab_comm:
@@ -264,61 +296,135 @@ with tab_comm:
     df_filtered = df_verse[df_verse["author"].isin(selected_authors)]
 
     for _, row in df_filtered.iterrows():
-        content_preview = row["content"] or ""
-        if len(content_preview) > 1500:
-            content_preview = content_preview[:1500] + "..."
+        content_raw = row["content"] or ""
+        if len(content_raw) > 1500:
+            content_raw = content_raw[:1500] + "..."
+        content_preview = html.escape(content_raw).replace("\n", "<br>")
 
-        # Verificar se tem dados enriched para este autor
+        author_safe = html.escape(row["author"] or "")
+        period_safe = html.escape(row["period"] or "")
+
+        # Construir bloco enriched (se disponivel)
         enriched_html = ""
         if df_enriched is not None:
             author_enriched = df_enriched[df_enriched["author"] == row["author"]]
             if not author_enriched.empty:
                 e = author_enriched.iloc[0]
 
-                # Tags de doutrinas
-                doctrines = [d.strip() for d in str(e.get("doctrines", "")).split("|") if d.strip()]
-                traditions = [t.strip() for t in str(e.get("traditions", "")).split("|") if t.strip()]
-                method = e.get("theological_method", "")
-                theme = e.get("theme", "")
-                one_sentence = e.get("one_sentence", "")
+                doctrines = [html.escape(d.strip()) for d in str(e.get("doctrines", "")).split("|") if d.strip()]
+                traditions = [html.escape(t.strip()) for t in str(e.get("traditions", "")).split("|") if t.strip()]
+                method = html.escape(str(e.get("theological_method", "")))
+                theme = html.escape(str(e.get("theme", "")))
+                one_sentence = html.escape(str(e.get("one_sentence", "")))
 
-                tags_html = ""
+                tags_parts = []
                 for d in doctrines[:5]:
-                    tags_html += f'<span class="tag">{d}</span>'
+                    tags_parts.append(f'<span class="tag">{d}</span>')
                 for t in traditions[:3]:
-                    tags_html += f'<span class="tag tag-tradition">{t}</span>'
+                    tags_parts.append(f'<span class="tag tag-tradition">{t}</span>')
                 if method:
-                    tags_html += f'<span class="tag tag-method">{method}</span>'
+                    tags_parts.append(f'<span class="tag tag-method">{method}</span>')
+
+                tags_html = " ".join(tags_parts)
 
                 insight_html = ""
                 if theme or one_sentence:
-                    insight_html = f"""
-                    <div class="insight-box">
-                        <div class="theme">"{theme}"</div>
-                        <div class="reflection">{one_sentence}</div>
-                    </div>
-                    """
+                    insight_html = (
+                        '<div class="insight-box">'
+                        f'<div class="theme">&ldquo;{theme}&rdquo;</div>'
+                        f'<div class="reflection">{one_sentence}</div>'
+                        '</div>'
+                    )
 
                 if tags_html or insight_html:
-                    enriched_html = f"""
-                    <div class="section-label">Analise Teologica</div>
-                    {tags_html}
-                    {insight_html}
-                    """
+                    enriched_html = (
+                        '<div class="section-label">Analise Teologica</div>'
+                        f'{tags_html}'
+                        f'{insight_html}'
+                    )
 
-        st.markdown(
-            f"""
-            <div class="commentary-card">
-                <span class="author-name">{row['author']}</span>
-                <span class="period">{row['period'] or ''}</span>
-                <div class="content">{content_preview}</div>
-                {enriched_html}
-            </div>
-            """,
-            unsafe_allow_html=True,
+        card_html = (
+            '<div class="commentary-card">'
+            f'<span class="author-name">{author_safe}</span>'
+            f'<span class="period">{period_safe}</span>'
+            f'<div class="content">{content_preview}</div>'
+            f'{enriched_html}'
+            '</div>'
         )
 
-# --- Tab 2: Analise Teologica ---
+        st.markdown(card_html, unsafe_allow_html=True)
+
+# --- Tab 2: Referencias Cruzadas ---
+with tab_crossrefs:
+    df_crossrefs = get_crossrefs(selected_book, selected_chapter, selected_verse)
+
+    if df_crossrefs is not None and not df_crossrefs.empty:
+        total_refs = len(df_crossrefs)
+        strong = len(df_crossrefs[df_crossrefs["connection_strength"] == "strong"])
+        moderate = len(df_crossrefs[df_crossrefs["connection_strength"] == "moderate"])
+
+        rc1, rc2, rc3 = st.columns(3)
+        rc1.metric("Referencias", total_refs)
+        rc2.metric("Fortes", strong)
+        rc3.metric("Moderadas", moderate)
+
+        # Lista de referencias com score
+        st.markdown('<div class="section-label">Referencias Cruzadas (por relevancia)</div>', unsafe_allow_html=True)
+
+        for _, ref in df_crossrefs.iterrows():
+            to_name = friendly_name(ref["to_book"])
+            strength = ref["connection_strength"]
+            votes = ref["votes"]
+            score = ref["score"]
+
+            strength_color = {"strong": "#D4A853", "moderate": "#636EFA", "weak": "#5A5550"}.get(strength, "#5A5550")
+            vote_text = f" · {votes} votos" if votes > 0 else ""
+
+            st.markdown(
+                f'<div style="display:flex;align-items:center;gap:12px;padding:8px 12px;'
+                f'border-bottom:1px solid #2A2D34;">'
+                f'<span style="color:{strength_color};font-size:1.5rem;">●</span>'
+                f'<span style="color:#E8E0D4;font-weight:500;">'
+                f'{html.escape(to_name)} {ref["to_chapter"]}:{ref["to_verse"]}</span>'
+                f'<span style="color:#8B8072;font-size:0.8rem;">score {score}{vote_text}</span>'
+                f'<span class="tag" style="font-size:0.65rem;">{html.escape(strength)}</span>'
+                f'</div>',
+                unsafe_allow_html=True,
+            )
+
+        # Mini grafo das conexoes
+        st.markdown('<div class="section-label" style="margin-top:24px;">Grafo de Conexoes</div>', unsafe_allow_html=True)
+
+        # Agrupar por livro de destino
+        book_targets = (
+            df_crossrefs.groupby("to_book")
+            .agg(count=("to_book", "size"), avg_score=("score", "mean"))
+            .reset_index()
+            .sort_values("count", ascending=False)
+            .head(15)
+        )
+        book_targets["to_book_name"] = book_targets["to_book"].apply(friendly_name)
+
+        fig = px.bar(
+            book_targets,
+            x="to_book_name",
+            y="count",
+            color="avg_score",
+            color_continuous_scale=["#2A2D34", "#D4A853"],
+            title=f"Livros mais referenciados por {verse_display}",
+            labels={"count": "Referencias", "to_book_name": "Livro", "avg_score": "Score medio"},
+        )
+        fig.update_layout(
+            plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="rgba(0,0,0,0)",
+            font_color="#E8E0D4",
+            xaxis_tickangle=-45,
+        )
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.info("Nenhuma referencia cruzada encontrada para este versiculo.")
+
+# --- Tab 3: Analise Teologica ---
 with tab_analysis:
     if df_enriched is not None and not df_enriched.empty:
         col1, col2 = st.columns(2)

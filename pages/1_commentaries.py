@@ -12,6 +12,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
+from book_names import friendly_name
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 PARQUET = DATA_DIR / "commentaries.parquet"
@@ -60,6 +62,7 @@ def load_enriched() -> pd.DataFrame | None:
 
 
 df = load_data()
+df["book_name"] = df["book"].apply(friendly_name)
 df_with = df[df["author"].notna()]
 df_empty = df[df["author"].isna()]
 
@@ -126,7 +129,7 @@ with col2:
 st.header("2. Analise por Livro")
 
 book_counts = (
-    df_with.groupby("book")
+    df_with.groupby("book_name")
     .size()
     .reset_index(name="total")
     .sort_values("total", ascending=False)
@@ -136,7 +139,7 @@ top_n = st.slider("Top N livros", 10, 50, 20, key="top_books")
 
 fig = px.bar(
     book_counts.head(top_n),
-    x="book",
+    x="book_name",
     y="total",
     title=f"Top {top_n} Livros por Quantidade de Comentarios",
     color="total",
@@ -147,8 +150,8 @@ st.plotly_chart(fig, use_container_width=True)
 # Heatmap
 st.subheader("Densidade de Comentarios por Capitulo")
 
-available_books = sorted(df_with["book"].unique())
-default_books = [b for b in ["mt", "gn", "ps", "rm"] if b in available_books]
+available_books = sorted(df_with["book_name"].unique())
+default_books = [friendly_name(b) for b in ["mt", "gn", "ps", "rom"] if friendly_name(b) in available_books]
 if not default_books:
     default_books = available_books[:4]
 
@@ -160,12 +163,12 @@ books_for_heatmap = st.multiselect(
 
 if books_for_heatmap:
     heat_df = (
-        df_with[df_with["book"].isin(books_for_heatmap)]
-        .groupby(["book", "chapter"])
+        df_with[df_with["book_name"].isin(books_for_heatmap)]
+        .groupby(["book_name", "chapter"])
         .size()
         .reset_index(name="count")
     )
-    heat_pivot = heat_df.pivot(index="book", columns="chapter", values="count").fillna(0)
+    heat_pivot = heat_df.pivot(index="book_name", columns="chapter", values="count").fillna(0)
     fig = px.imshow(
         heat_pivot,
         title="Comentarios por Capitulo",
@@ -203,7 +206,7 @@ with col1:
 
 with col2:
     author_diversity = (
-        df_with.groupby("author")["book"]
+        df_with.groupby("author")["book_name"]
         .nunique()
         .reset_index(name="books_covered")
         .sort_values("books_covered", ascending=False)
@@ -296,7 +299,7 @@ with col2:
 
     st.subheader("Comentarios Mais Longos")
     longest = df_with.nlargest(5, "word_count")[
-        ["author", "book", "chapter", "verse", "word_count"]
+        ["author", "book_name", "chapter", "verse", "word_count"]
     ]
     longest.columns = ["Autor", "Livro", "Cap", "Vers", "Palavras"]
     st.dataframe(longest, hide_index=True)

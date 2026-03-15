@@ -149,7 +149,10 @@ def commentaries_to_parquet(repo_dir: Path, cfg: dict) -> Path:
 def crossrefs_to_parquet(repo_dir: Path, cfg: dict) -> Path:
     """Converte JSONs do bible-crossrefs-dataset para Parquet."""
     json_files = collect_json_files(repo_dir, cfg["data_glob"])
-    print(f"  Encontrados {len(json_files)} arquivos JSON")
+    # Filtrar indexes e metadata
+    json_files = [f for f in json_files if "/indexes/" not in str(f).replace("\\", "/")
+                  and "/metadata/" not in str(f).replace("\\", "/")]
+    print(f"  Encontrados {len(json_files)} arquivos de versiculos")
 
     rows = []
     for jf in tqdm(json_files, desc="  Processando", unit="file"):
@@ -158,20 +161,42 @@ def crossrefs_to_parquet(repo_dir: Path, cfg: dict) -> Path:
                 data = json.load(f)
         except (json.JSONDecodeError, UnicodeDecodeError):
             continue
-        # Schema TBD — adaptar quando o repo tiver dados
-        if isinstance(data, list):
-            rows.extend(data)
-        elif isinstance(data, dict):
-            rows.append(data)
+
+        source = data.get("source_info", {})
+        from_book = source.get("book", "")
+        from_chapter = source.get("chapter", 0)
+        from_verse = source.get("verse", 0)
+        from_testament = source.get("testament", "")
+
+        for ref in data.get("cross_references", []):
+            has_openbible = "openbible" in ref.get("sources", {})
+            has_tsk = "souliberty" in ref.get("sources", {})
+            votes = ref.get("votes", 0)
+
+            rows.append({
+                "from_book": from_book,
+                "from_chapter": int(from_chapter),
+                "from_verse": int(from_verse),
+                "from_testament": from_testament,
+                "to_book": ref.get("to_book", ""),
+                "to_chapter": int(ref.get("to_chapter", 0)),
+                "to_verse": int(ref.get("to_verse_num", 0)),
+                "to_testament": ref.get("to_testament", ""),
+                "votes": int(votes),
+                "score": int(ref.get("score", 0)),
+                "connection_strength": ref.get("connection_strength", ""),
+                "source_openbible": has_openbible,
+                "source_tsk": has_tsk,
+            })
 
     if rows:
         df = pd.DataFrame(rows)
         out = DATA_DIR / "crossrefs.parquet"
         df.to_parquet(out, index=False)
-        print(f"  Salvo: {out} ({len(df):,} linhas)")
+        print(f"  Salvo: {out} ({len(df):,} linhas, {out.stat().st_size / 1024 / 1024:.1f} MB)")
         return out
 
-    print("  Nenhum dado encontrado (repo vazio?)")
+    print("  Nenhum dado encontrado")
     return DATA_DIR / "crossrefs.parquet"
 
 
