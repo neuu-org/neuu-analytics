@@ -19,7 +19,8 @@ DATA_DIR = ROOT / "data"
 PARQUET = DATA_DIR / "commentaries.parquet"
 ENRICHED_PARQUET = DATA_DIR / "commentaries_enriched.parquet"
 
-st.set_page_config(page_title="Commentaries | NEUU Analytics", page_icon="📖", layout="wide")
+from loading import show_loading
+show_loading()
 
 # Plotly template dark consistente com o tema NEUU
 PLOTLY_LAYOUT = dict(
@@ -50,7 +51,7 @@ con = duckdb.connect()
 
 
 @st.cache_data(ttl=3600)
-def load_data(_parquet_mtime: float) -> pd.DataFrame:
+def load_data(parquet_mtime: float) -> pd.DataFrame:
     return con.sql(f"SELECT * FROM '{PARQUET}'").df()
 
 

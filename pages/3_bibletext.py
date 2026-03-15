@@ -14,7 +14,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 PARQUET = DATA_DIR / "bibletext.parquet"
 
-st.set_page_config(page_title="Bible Text | NEUU Analytics", page_icon="📜", layout="wide")
+from loading import show_loading
+show_loading()
 
 PLOTLY_LAYOUT = dict(
     plot_bgcolor="rgba(0,0,0,0)",
@@ -30,11 +31,11 @@ con = duckdb.connect()
 
 
 @st.cache_data(ttl=3600)
-def load_data() -> pd.DataFrame:
+def load_data(parquet_mtime: float) -> pd.DataFrame:
     return con.sql(f"SELECT * FROM '{PARQUET}'").df()
 
 
-df = load_data()
+df = load_data(PARQUET.stat().st_mtime)
 df["word_count"] = df["text"].str.split().str.len()
 
 st.title("📜 Bible Text — Analise")
@@ -149,54 +150,9 @@ with col2:
     st.plotly_chart(fig, use_container_width=True)
 
 # ---------------------------------------------------------------------------
-# 4. Comparador de Versiculos
+# 4. Livros por Tamanho
 # ---------------------------------------------------------------------------
-st.header("4. Comparador de Versiculos")
-st.caption("Compare o mesmo versiculo em diferentes traducoes")
-
-# Pegar livros em ingles para o seletor
-en_books = sorted(df[df["language"] == "english"]["book"].unique())
-
-col1, col2, col3 = st.columns([2, 1, 1])
-with col1:
-    comp_book = st.selectbox("Livro", en_books, index=en_books.index("John") if "John" in en_books else 0, key="comp_book")
-with col2:
-    comp_chapters = sorted(df[(df["book"] == comp_book)]["chapter"].unique())
-    comp_chapter = st.selectbox("Capitulo", comp_chapters, key="comp_ch")
-with col3:
-    comp_verses = sorted(df[(df["book"] == comp_book) & (df["chapter"] == comp_chapter)]["verse"].unique())
-    comp_verse = st.selectbox("Versiculo", comp_verses, key="comp_v")
-
-# Buscar em todas as traducoes
-verse_texts = df[
-    (df["book"] == comp_book) & (df["chapter"] == comp_chapter) & (df["verse"] == comp_verse)
-].sort_values(["language", "translation"])
-
-if not verse_texts.empty:
-    st.markdown(
-        f'<div style="font-family:Crimson Pro,serif;font-size:1.4rem;color:#D4A853;'
-        f'margin:16px 0 8px 0;">{comp_book} {comp_chapter}:{comp_verse}</div>',
-        unsafe_allow_html=True,
-    )
-
-    for _, row in verse_texts.iterrows():
-        lang_icon = "🇬🇧" if row["language"] == "english" else "🇧🇷"
-        st.markdown(
-            f'<div style="background:#1A1D24;border:1px solid #2A2D34;border-radius:8px;'
-            f'padding:14px 18px;margin-bottom:8px;">'
-            f'<span style="font-weight:600;color:#D4A853;">{lang_icon} {row["translation"]}</span>'
-            f'<div style="font-family:Crimson Pro,serif;font-size:1.05rem;line-height:1.7;'
-            f'color:#E8E0D4;margin-top:8px;">'
-            f'&ldquo;{row["text"]}&rdquo;</div></div>',
-            unsafe_allow_html=True,
-        )
-else:
-    st.info("Versiculo nao encontrado nesta traducao.")
-
-# ---------------------------------------------------------------------------
-# 5. Livros por Tamanho
-# ---------------------------------------------------------------------------
-st.header("5. Livros por Tamanho")
+st.header("4. Livros por Tamanho")
 
 # Usar KJV como referencia
 kjv_books = df[df["translation"] == "KJV"].groupby("book").agg(

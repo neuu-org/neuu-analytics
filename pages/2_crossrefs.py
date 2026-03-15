@@ -19,7 +19,8 @@ DATA_DIR = ROOT / "data"
 PARQUET = DATA_DIR / "crossrefs.parquet"
 COMM_PARQUET = DATA_DIR / "commentaries.parquet"
 
-st.set_page_config(page_title="Cross-References | NEUU Analytics", page_icon="🔗", layout="wide")
+from loading import show_loading
+show_loading()
 
 PLOTLY_LAYOUT = dict(
     plot_bgcolor="rgba(0,0,0,0)",
@@ -41,11 +42,11 @@ con = duckdb.connect()
 
 
 @st.cache_data(ttl=3600)
-def load_data() -> pd.DataFrame:
+def load_data(parquet_mtime: float) -> pd.DataFrame:
     return con.sql(f"SELECT * FROM '{PARQUET}'").df()
 
 
-df = load_data()
+df = load_data(PARQUET.stat().st_mtime)
 df["from_book_name"] = df["from_book"].apply(friendly_name)
 df["to_book_name"] = df["to_book"].apply(friendly_name)
 

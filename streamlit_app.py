@@ -1,23 +1,20 @@
 """
 NEUU Analytics — Dashboard central dos datasets biblicos.
-Entry point do Streamlit multi-page app.
+Entry point com st.navigation() para navegacao agrupada.
 """
 
+import subprocess
 from pathlib import Path
 
-import duckdb
 import streamlit as st
-import yaml
 
-ROOT = Path(__file__).resolve().parent
-CONFIG_PATH = ROOT / "config.yaml"
-DATA_DIR = ROOT / "data"
-
-
-def load_config() -> dict:
-    with open(CONFIG_PATH, encoding="utf-8") as f:
-        return yaml.safe_load(f)
-
+# ---------------------------------------------------------------------------
+# Auto-sync: gerar parquets se nao existirem (primeiro deploy)
+# ---------------------------------------------------------------------------
+DATA_DIR = Path(__file__).resolve().parent / "data"
+if not DATA_DIR.exists() or not list(DATA_DIR.glob("*.parquet")):
+    with st.spinner("Sincronizando datasets pela primeira vez... isso pode levar alguns minutos."):
+        subprocess.run(["python", "sync.py"], check=True)
 
 st.set_page_config(
     page_title="NEUU Analytics",
@@ -26,218 +23,85 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------------------------
-# Custom CSS — identidade visual NEUU
+# Idioma global (session_state para persistir entre paginas)
 # ---------------------------------------------------------------------------
-st.markdown(
-    """
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-    /* Global */
-    html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
-    }
-
-    /* Header brand */
-    .neuu-header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 8px 0 24px 0;
-    }
-    .neuu-logo {
-        font-size: 2.4rem;
-        font-weight: 700;
-        letter-spacing: 4px;
-        color: #D4A853;
-    }
-    .neuu-logo span {
-        color: #E8E0D4;
-        font-weight: 300;
-    }
-    .neuu-tagline {
-        font-size: 0.85rem;
-        color: #8B8072;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
-
-    /* Dataset cards */
-    .dataset-card {
-        background: #1A1D24;
-        border: 1px solid #2A2D34;
-        border-radius: 12px;
-        padding: 24px;
-        transition: border-color 0.2s;
-    }
-    .dataset-card:hover {
-        border-color: #D4A853;
-    }
-    .dataset-card h3 {
-        color: #E8E0D4;
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-    }
-    .dataset-card .metric {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #D4A853;
-    }
-    .dataset-card .desc {
-        font-size: 0.85rem;
-        color: #8B8072;
-        margin-top: 8px;
-    }
-    .dataset-card .badge {
-        display: inline-block;
-        padding: 2px 10px;
-        border-radius: 20px;
-        font-size: 0.7rem;
-        font-weight: 600;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-    .badge-active {
-        background: rgba(212, 168, 83, 0.15);
-        color: #D4A853;
-        border: 1px solid rgba(212, 168, 83, 0.3);
-    }
-    .badge-pending {
-        background: rgba(139, 128, 114, 0.15);
-        color: #8B8072;
-        border: 1px solid rgba(139, 128, 114, 0.3);
-    }
-
-    /* Sidebar */
-    [data-testid="stSidebar"] {
-        border-right: 1px solid #2A2D34;
-    }
-
-    /* Divider */
-    .neuu-divider {
-        border: none;
-        border-top: 1px solid #2A2D34;
-        margin: 32px 0;
-    }
-
-    /* Footer */
-    .neuu-footer {
-        text-align: center;
-        font-size: 0.75rem;
-        color: #5A5550;
-        padding: 24px 0;
-        letter-spacing: 1px;
-    }
-
-    /* Hide default streamlit header */
-    header[data-testid="stHeader"] {
-        background: #0E1117;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+if "language" not in st.session_state:
+    st.session_state.language = "English"
 
 # ---------------------------------------------------------------------------
-# Header
+# Custom CSS
 # ---------------------------------------------------------------------------
-st.markdown(
-    """
-    <div class="neuu-header">
-        <div>
-            <div class="neuu-logo">NEUU <span>Analytics</span></div>
-            <div class="neuu-tagline">Nossa Essencia Uniao e Upgrade</div>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+from loading import show_loading
+show_loading()
 
-config = load_config()
-
-# Verificar se os dados foram sincronizados
-parquet_files = list(DATA_DIR.glob("*.parquet"))
-
-if not parquet_files:
-    st.warning(
-        "Nenhum dado encontrado. Execute o sync primeiro:\n\n"
-        "```bash\n"
-        "pip install -r requirements.txt\n"
-        "python sync.py\n"
-        "```"
+# ---------------------------------------------------------------------------
+# Sidebar — Configuracoes globais
+# ---------------------------------------------------------------------------
+with st.sidebar:
+    st.markdown(
+        '<div style="padding:1.2rem 0 1rem 0;border-bottom:1px solid #2A2D34;margin-bottom:0.5rem;">'
+        '<div style="font-family:Inter,sans-serif;font-size:1.4rem;font-weight:700;letter-spacing:4px;color:#D4A853;">'
+        'NEUU <span style="color:#5A5550;font-weight:300;font-size:1rem;">Analytics</span></div>'
+        '<div style="font-size:0.6rem;color:#5A5550;letter-spacing:2px;text-transform:uppercase;margin-top:4px;">'
+        'Nossa Essencia Uniao e Upgrade</div></div>',
+        unsafe_allow_html=True,
     )
-    st.stop()
+    st.markdown("---")
+    is_pt = st.session_state.language == "Portugues"
+    st.session_state.language = st.radio(
+        "Idioma" if is_pt else "Language",
+        ["English", "Portugues"],
+        index=1 if is_pt else 0,
+        horizontal=True,
+        key="lang_radio",
+    )
+
+is_pt = st.session_state.language == "Portugues"
 
 # ---------------------------------------------------------------------------
-# Dataset cards
+# Definir paginas com st.Page()
 # ---------------------------------------------------------------------------
-st.markdown('<hr class="neuu-divider">', unsafe_allow_html=True)
-
-cols = st.columns(len(config["datasets"]))
-for col, (key, cfg) in zip(cols, config["datasets"].items()):
-    with col:
-        parquet = DATA_DIR / f"{key}.parquet"
-        has_data = parquet.exists()
-        enabled = cfg.get("enabled", False)
-
-        if has_data:
-            count = duckdb.sql(f"SELECT COUNT(*) FROM '{parquet}'").fetchone()[0]
-            size_mb = parquet.stat().st_size / 1024 / 1024
-            badge = '<span class="badge badge-active">Ativo</span>'
-            metric_html = f'<div class="metric">{count:,}</div>'
-            detail = f"registros &middot; {size_mb:.1f} MB"
-        else:
-            badge = '<span class="badge badge-pending">Em breve</span>'
-            metric_html = '<div class="metric" style="color:#5A5550;">—</div>'
-            detail = "aguardando dados"
-
-        st.markdown(
-            f"""
-            <div class="dataset-card">
-                <h3>{cfg['name']} {badge}</h3>
-                {metric_html}
-                <div class="desc">{detail}</div>
-                <div class="desc" style="margin-top:12px;">{cfg['description']}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-st.markdown('<hr class="neuu-divider">', unsafe_allow_html=True)
-
-# ---------------------------------------------------------------------------
-# Quick stats
-# ---------------------------------------------------------------------------
-if (DATA_DIR / "commentaries.parquet").exists():
-    parquet = DATA_DIR / "commentaries.parquet"
-    stats = duckdb.sql(
-        f"""
-        SELECT
-            COUNT(*) as total_rows,
-            COUNT(DISTINCT book) as books,
-            COUNT(DISTINCT author) FILTER (WHERE author IS NOT NULL) as authors,
-            COUNT(*) FILTER (WHERE author IS NOT NULL) as commentaries,
-            COUNT(*) FILTER (WHERE author IS NULL) as empty_verses
-        FROM '{parquet}'
-        """
-    ).fetchone()
-
-    st.markdown("### Panorama Geral")
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Livros Biblicos", stats[1])
-    c2.metric("Autores", f"{stats[2]:,}")
-    c3.metric("Comentarios", f"{stats[3]:,}")
-    c4.metric("Versiculos Vazios", f"{stats[4]:,}")
-
-# ---------------------------------------------------------------------------
-# Footer
-# ---------------------------------------------------------------------------
-st.markdown(
-    """
-    <div class="neuu-footer">
-        NEUU &middot; Open datasets & AI tools for biblical scholarship
-    </div>
-    """,
-    unsafe_allow_html=True,
+home = st.Page(
+    "pages/home.py",
+    title="Overview" if not is_pt else "Visao Geral",
+    icon=":material/home:",
+    default=True,
 )
+
+explorer = st.Page(
+    "pages/0_explorer.py",
+    title="Verse Explorer" if not is_pt else "Explorador de Versiculos",
+    icon=":material/search:",
+)
+
+commentaries = st.Page(
+    "pages/1_commentaries.py",
+    title="Commentaries" if not is_pt else "Comentarios",
+    icon=":material/menu_book:",
+)
+
+crossrefs = st.Page(
+    "pages/2_crossrefs.py",
+    title="Cross-References" if not is_pt else "Referencias Cruzadas",
+    icon=":material/link:",
+)
+
+bibletext = st.Page(
+    "pages/3_bibletext.py",
+    title="Bible Text" if not is_pt else "Texto Biblico",
+    icon=":material/auto_stories:",
+)
+
+# ---------------------------------------------------------------------------
+# Navegacao agrupada
+# ---------------------------------------------------------------------------
+section_explorer = "Explorer" if not is_pt else "Explorador"
+section_analytics = "Dataset Analytics" if not is_pt else "Analise de Datasets"
+
+pg = st.navigation({
+    "": [home],
+    section_explorer: [explorer],
+    section_analytics: [commentaries, crossrefs, bibletext],
+})
+
+pg.run()

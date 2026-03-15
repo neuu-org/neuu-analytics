@@ -124,6 +124,34 @@ CROSSREF_TO_COMM = {
 
 COMM_TO_CROSSREF = {v: k for k, v in CROSSREF_TO_COMM.items()}
 
+# Mapa nome EN → nome PT (para buscar versiculos em traducoes portuguesas)
+EN_TO_PT_BOOK = {
+    "Genesis": "Gênesis", "Exodus": "Êxodo", "Leviticus": "Levítico",
+    "Numbers": "Números", "Deuteronomy": "Deuteronômio", "Joshua": "Josué",
+    "Judges": "Juízes", "Ruth": "Rute", "1 Samuel": "1 Samuel", "2 Samuel": "2 Samuel",
+    "1 Kings": "1 Reis", "2 Kings": "2 Reis", "1 Chronicles": "1 Crônicas",
+    "2 Chronicles": "2 Crônicas", "Ezra": "Esdras", "Nehemiah": "Neemias",
+    "Esther": "Ester", "Job": "Jó", "Psalms": "Salmos", "Proverbs": "Provérbios",
+    "Ecclesiastes": "Eclesiastes", "Song of Songs": "Cânticos",
+    "Isaiah": "Isaías", "Jeremiah": "Jeremias",
+    "Lamentations": "Lamentações de Jeremias", "Ezekiel": "Ezequiel",
+    "Daniel": "Daniel", "Hosea": "Oséias", "Joel": "Joel", "Amos": "Amós",
+    "Obadiah": "Obadias", "Jonah": "Jonas", "Micah": "Miquéias", "Nahum": "Naum",
+    "Habakkuk": "Habacuque", "Zephaniah": "Sofonias", "Haggai": "Ageu",
+    "Zechariah": "Zacarias", "Malachi": "Malaquias",
+    "Matthew": "Mateus", "Mark": "Marcos", "Luke": "Lucas", "John": "João",
+    "Acts": "Atos", "Romans": "Romanos", "1 Corinthians": "1 Coríntios",
+    "2 Corinthians": "2 Coríntios", "Galatians": "Gálatas", "Ephesians": "Efésios",
+    "Philippians": "Filipenses", "Colossians": "Colossenses",
+    "1 Thessalonians": "1 Tessalonicenses", "2 Thessalonians": "2 Tessalonicenses",
+    "1 Timothy": "1 Timóteo", "2 Timothy": "2 Timóteo", "Titus": "Tito",
+    "Philemon": "Filemom", "Hebrews": "Hebreus", "James": "Tiago",
+    "1 Peter": "1 Pedro", "2 Peter": "2 Pedro", "1 John": "1 João",
+    "2 John": "2 João", "3 John": "3 João", "Jude": "Judas",
+    "Revelation": "Apocalipse",
+}
+PT_TO_EN_BOOK = {v: k for k, v in EN_TO_PT_BOOK.items()}
+
 # Ordem canonica dos livros
 BOOK_ORDER = list(BOOK_NAMES.keys())
 
@@ -137,3 +165,11 @@ def abbrev_from_name(name: str) -> str:
     """Retorna a abreviacao (commentaries) a partir do nome completo."""
     reverse = {v: k for k, v in BOOK_NAMES.items()}
     return reverse.get(name, name)
+
+
+def book_name_for_translation(en_name: str, translation: str) -> str:
+    """Retorna o nome do livro adequado para a traducao (PT ou EN)."""
+    pt_translations = {"ACF", "ARA", "ARC", "AS21", "NAA", "NTLH", "NVI", "NVT"}
+    if translation in pt_translations:
+        return EN_TO_PT_BOOK.get(en_name, en_name)
+    return en_name

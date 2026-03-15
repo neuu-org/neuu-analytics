@@ -12,7 +12,10 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from book_names import BOOK_NAMES, BOOK_ORDER, COMM_TO_CROSSREF, friendly_name, abbrev_from_name
+from book_names import (
+    BOOK_NAMES, BOOK_ORDER, COMM_TO_CROSSREF, EN_TO_PT_BOOK,
+    friendly_name, abbrev_from_name, book_name_for_translation,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
@@ -21,7 +24,8 @@ ENRICHED_PARQUET = DATA_DIR / "commentaries_enriched.parquet"
 CROSSREFS_PARQUET = DATA_DIR / "crossrefs.parquet"
 BIBLETEXT_PARQUET = DATA_DIR / "bibletext.parquet"
 
-st.set_page_config(page_title="Explorador | NEUU Analytics", page_icon="🔍", layout="wide")
+from loading import show_loading
+show_loading()
 
 # ---------------------------------------------------------------------------
 # CSS
@@ -216,14 +220,15 @@ def get_available_translations() -> list[str]:
 
 
 @st.cache_data(ttl=3600)
-def get_verse_text(book_name: str, chapter: int, verse: int, translation: str) -> str | None:
-    """Busca o texto de um versiculo em uma traducao especifica."""
+def get_verse_text(book_name_en: str, chapter: int, verse: int, translation: str) -> str | None:
+    """Busca o texto de um versiculo, traduzindo o nome do livro conforme a traducao."""
     if not BIBLETEXT_PARQUET.exists():
         return None
+    book = book_name_for_translation(book_name_en, translation)
     result = con.sql(
         f"""
         SELECT text FROM '{BIBLETEXT_PARQUET}'
-        WHERE book = '{book_name}'
+        WHERE book = '{book}'
           AND chapter = {chapter}
           AND verse = {verse}
           AND translation = '{translation}'
@@ -235,14 +240,15 @@ def get_verse_text(book_name: str, chapter: int, verse: int, translation: str) -
 
 @st.cache_data(ttl=3600)
 def get_crossref_verse_text(crossref_book: str, chapter: int, verse: int, translation: str) -> str | None:
-    """Busca texto de um versiculo referenciado (formato crossref OSIS → nome do livro)."""
+    """Busca texto de um versiculo referenciado (formato crossref OSIS)."""
     if not BIBLETEXT_PARQUET.exists():
         return None
-    book_name = friendly_name(crossref_book)
+    en_name = friendly_name(crossref_book)
+    book = book_name_for_translation(en_name, translation)
     result = con.sql(
         f"""
         SELECT text FROM '{BIBLETEXT_PARQUET}'
-        WHERE book = '{book_name}'
+        WHERE book = '{book}'
           AND chapter = {chapter}
           AND verse = {verse}
           AND translation = '{translation}'
@@ -253,23 +259,25 @@ def get_crossref_verse_text(crossref_book: str, chapter: int, verse: int, transl
 
 
 # ---------------------------------------------------------------------------
-# Sidebar — Configuracoes globais
+# Traducao biblica (sidebar global via streamlit_app.py controla idioma)
 # ---------------------------------------------------------------------------
 translations = get_available_translations()
-if translations:
-    with st.sidebar:
-        st.markdown("### Configuracoes")
-        # Separar por idioma
-        en_trans = [t for t in translations if t in ["KJV", "AKJV", "ASV", "BSB", "Darby", "DRC", "Geneva1599", "Webster", "YLT"]]
-        pt_trans = [t for t in translations if t not in en_trans]
-        all_trans = en_trans + pt_trans
+selected_language = st.session_state.get("language", "English")
 
+if translations:
+    en_trans = [t for t in translations if t in ["KJV", "AKJV", "ASV", "BSB", "Darby", "DRC", "Geneva1599", "Webster", "YLT"]]
+    pt_trans = [t for t in translations if t not in en_trans]
+    filtered_trans = en_trans if selected_language == "English" else pt_trans
+    default_idx = filtered_trans.index("KJV") if "KJV" in filtered_trans else 0
+
+    with st.sidebar:
+        is_pt = selected_language == "Portugues"
         selected_translation = st.selectbox(
-            "Traducao Biblica",
-            all_trans,
-            index=all_trans.index("KJV") if "KJV" in all_trans else 0,
+            "Traducao" if is_pt else "Translation",
+            filtered_trans,
+            index=default_idx,
             key="global_translation",
-            help="Versao usada para exibir texto dos versiculos",
+            help="Versao usada para exibir texto dos versiculos" if is_pt else "Version used to display verse text",
         )
 else:
     selected_translation = "KJV"
@@ -282,7 +290,7 @@ st.markdown(
     '<div class="verse-ref" style="font-size:1.8rem;">Explorador de Versiculos</div>',
     unsafe_allow_html=True,
 )
-st.caption("Selecione qualquer versiculo para ver todos os comentarios e dados disponíveis")
+st.caption("Texto, comentarios patristicos, referencias cruzadas e traducoes — tudo num lugar so")
 
 # ---------------------------------------------------------------------------
 # Seletores
@@ -294,12 +302,21 @@ col1, col2, col3 = st.columns([2, 1, 1])
 # Ordenar livros na ordem canonica, com nomes amigaveis
 books_sorted = [b for b in BOOK_ORDER if b in books]
 books_sorted += [b for b in books if b not in books_sorted]
-book_display = [friendly_name(b) for b in books_sorted]
+
+# Nomes em PT ou EN conforme idioma selecionado
+is_pt = selected_language == "Portugues"
+if is_pt:
+    book_display = [EN_TO_PT_BOOK.get(friendly_name(b), friendly_name(b)) for b in books_sorted]
+else:
+    book_display = [friendly_name(b) for b in books_sorted]
+
+# Mapa reverso para encontrar a abreviacao a partir do display name
+_display_to_abbrev = dict(zip(book_display, books_sorted))
 
 with col1:
     default_idx = books_sorted.index("mt") if "mt" in books_sorted else 0
     selected_display = st.selectbox("Livro", book_display, index=default_idx)
-    selected_book = abbrev_from_name(selected_display)
+    selected_book = _display_to_abbrev.get(selected_display, abbrev_from_name(selected_display))
 
 with col2:
     chapters = get_chapters(selected_book)
@@ -317,7 +334,9 @@ st.markdown("---")
 df_verse = get_verse_data(selected_book, selected_chapter, selected_verse)
 
 verse_ref = f"{selected_book.upper()} {selected_chapter}:{selected_verse}"
-verse_display = f"{friendly_name(selected_book)} {selected_chapter}:{selected_verse}"
+_en_book_name = friendly_name(selected_book)
+_display_book = book_name_for_translation(_en_book_name, selected_translation) if translations else _en_book_name
+verse_display = f"{_display_book} {selected_chapter}:{selected_verse}"
 
 st.markdown(f'<div class="verse-ref">{html.escape(verse_display)}</div>', unsafe_allow_html=True)
 
@@ -363,8 +382,8 @@ df_enriched = get_enriched_data(verse_ref)
 # ---------------------------------------------------------------------------
 # Tabs: Comentarios | Analise | Visao Geral
 # ---------------------------------------------------------------------------
-tab_comm, tab_crossrefs, tab_analysis, tab_overview = st.tabs(
-    ["Comentarios", "Referencias Cruzadas", "Analise Teologica", "Visao Geral"]
+tab_comm, tab_crossrefs, tab_translations, tab_analysis, tab_overview = st.tabs(
+    ["Comentarios", "Referencias Cruzadas", "Traducoes", "Analise Teologica", "Visao Geral"]
 )
 
 # --- Tab 1: Comentarios ---
@@ -453,19 +472,42 @@ with tab_crossrefs:
         rc2.metric("Fortes", strong)
         rc3.metric("Moderadas", moderate)
 
-        # Lista de referencias com expander e texto do versiculo
-        for _, ref in df_crossrefs.iterrows():
-            to_name = friendly_name(ref["to_book"])
+        # Lista de referencias (design original com bolinhas + collapse para texto)
+        st.markdown(
+            '<div class="section-label">Referencias Cruzadas (por relevancia)</div>',
+            unsafe_allow_html=True,
+        )
+
+        for idx, (_, ref) in enumerate(df_crossrefs.iterrows()):
+            to_name_en = friendly_name(ref["to_book"])
+            to_name = book_name_for_translation(to_name_en, selected_translation)
             strength = ref["connection_strength"]
             votes = ref["votes"]
             score = ref["score"]
 
-            strength_icon = {"strong": "🟡", "moderate": "🔵", "weak": "⚫", "primary": "🟠"}.get(strength, "⚫")
+            strength_color = {
+                "strong": "#D4A853", "primary": "#D4A853",
+                "moderate": "#636EFA", "weak": "#5A5550",
+            }.get(strength, "#5A5550")
             vote_text = f" · {votes} votos" if votes > 0 else ""
-            label = f"{strength_icon} {to_name} {ref['to_chapter']}:{ref['to_verse']}  —  score {score}{vote_text} · {strength}"
 
-            with st.expander(label):
-                # Buscar texto do versiculo referenciado
+            # Linha visual com bolinha + tag + toggle na mesma linha
+            ref_col1, ref_col2 = st.columns([20, 1])
+            with ref_col1:
+                st.markdown(
+                    f'<div style="display:flex;align-items:center;gap:12px;padding:8px 0;">'
+                    f'<span style="color:{strength_color};font-size:1.5rem;">●</span>'
+                    f'<span style="color:#E8E0D4;font-weight:500;">'
+                    f'{html.escape(to_name)} {ref["to_chapter"]}:{ref["to_verse"]}</span>'
+                    f'<span style="color:#8B8072;font-size:0.8rem;">score {score}{vote_text}</span>'
+                    f'<span class="tag" style="font-size:0.65rem;">{html.escape(strength)}</span>'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
+            with ref_col2:
+                show_text = st.toggle("", key=f"ref_{idx}", label_visibility="collapsed")
+
+            if show_text:
                 ref_text = get_crossref_verse_text(
                     ref["to_book"], int(ref["to_chapter"]), int(ref["to_verse"]),
                     selected_translation,
@@ -474,16 +516,17 @@ with tab_crossrefs:
                     st.markdown(
                         f'<div style="font-family:Crimson Pro,serif;font-size:1.1rem;'
                         f'line-height:1.8;color:#E8E0D4;font-style:italic;'
-                        f'padding:12px 16px;background:rgba(212,168,83,0.06);'
-                        f'border-left:3px solid #D4A853;border-radius:0 8px 8px 0;">'
+                        f'padding:4px 16px 12px 40px;background:rgba(212,168,83,0.06);'
+                        f'border-left:3px solid #D4A853;border-radius:0 8px 8px 0;'
+                        f'margin:-8px 0 4px 0;">'
                         f'&ldquo;{html.escape(ref_text)}&rdquo;'
-                        f'<div style="font-size:0.75rem;color:#8B8072;margin-top:8px;font-style:normal;">'
-                        f'{html.escape(to_name)} {ref["to_chapter"]}:{ref["to_verse"]} · {html.escape(selected_translation)}'
+                        f'<div style="font-size:0.75rem;color:#8B8072;margin-top:6px;font-style:normal;">'
+                        f'{html.escape(selected_translation)}'
                         f'</div></div>',
                         unsafe_allow_html=True,
                     )
                 else:
-                    st.caption(f"Texto nao disponivel na traducao {selected_translation}")
+                    st.caption(f"Texto nao disponivel em {selected_translation}")
 
         # Grafo por livro
         st.markdown("---")
@@ -514,7 +557,63 @@ with tab_crossrefs:
     else:
         st.info("Nenhuma referencia cruzada encontrada para este versiculo.")
 
-# --- Tab 3: Analise Teologica ---
+# --- Tab 3: Traducoes (Comparador) ---
+with tab_translations:
+    if BIBLETEXT_PARQUET.exists():
+        @st.cache_data(ttl=3600)
+        def get_all_translations(book_en: str, chapter: int, verse: int) -> pd.DataFrame:
+            return con.sql(
+                f"""
+                SELECT translation, language, text
+                FROM '{BIBLETEXT_PARQUET}'
+                WHERE chapter = {chapter} AND verse = {verse}
+                ORDER BY language, translation
+                """
+            ).df()
+
+        # Buscar o nome do livro em EN e PT para cobrir todas as traducoes
+        _book_en = friendly_name(selected_book)
+        all_trans_df = get_all_translations(_book_en, selected_chapter, selected_verse)
+
+        # Filtrar pelo nome do livro (EN ou PT conforme traducao)
+        matched = []
+        for _, row in all_trans_df.iterrows():
+            expected_book = book_name_for_translation(_book_en, row["translation"])
+            matched.append(row)
+
+        # Busca direta com ambos os nomes
+        _book_pt = EN_TO_PT_BOOK.get(_book_en, _book_en)
+        verse_texts = con.sql(
+            f"""
+            SELECT translation, language, text
+            FROM '{BIBLETEXT_PARQUET}'
+            WHERE (book = '{_book_en}' OR book = '{_book_pt}')
+              AND chapter = {selected_chapter}
+              AND verse = {selected_verse}
+            ORDER BY language, translation
+            """
+        ).df()
+
+        if not verse_texts.empty:
+            st.caption(f"{len(verse_texts)} traducoes disponiveis para este versiculo")
+
+            for _, row in verse_texts.iterrows():
+                lang_icon = "🇬🇧" if row["language"] == "english" else "🇧🇷"
+                st.markdown(
+                    f'<div style="background:#1A1D24;border:1px solid #2A2D34;border-radius:8px;'
+                    f'padding:14px 18px;margin-bottom:8px;">'
+                    f'<span style="font-weight:600;color:#D4A853;">{lang_icon} {html.escape(row["translation"])}</span>'
+                    f'<div style="font-family:Crimson Pro,serif;font-size:1.05rem;line-height:1.7;'
+                    f'color:#E8E0D4;margin-top:8px;">'
+                    f'&ldquo;{html.escape(str(row["text"]))}&rdquo;</div></div>',
+                    unsafe_allow_html=True,
+                )
+        else:
+            st.info("Nenhuma traducao encontrada para este versiculo.")
+    else:
+        st.info("Dataset de texto biblico nao disponivel. Execute `python sync.py bibletext`.")
+
+# --- Tab 4: Analise Teologica ---
 with tab_analysis:
     if df_enriched is not None and not df_enriched.empty:
         col1, col2 = st.columns(2)
