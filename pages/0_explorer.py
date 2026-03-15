@@ -556,18 +556,10 @@ with tab_translations:
                 """
             ).df()
 
-        # Buscar o nome do livro em EN e PT para cobrir todas as traducoes
         _book_en = friendly_name(selected_book)
-        all_trans_df = get_all_translations(_book_en, selected_chapter, selected_verse)
-
-        # Filtrar pelo nome do livro (EN ou PT conforme traducao)
-        matched = []
-        for _, row in all_trans_df.iterrows():
-            expected_book = book_name_for_translation(_book_en, row["translation"])
-            matched.append(row)
-
-        # Busca direta com ambos os nomes
         _book_pt = EN_TO_PT_BOOK.get(_book_en, _book_en)
+        _lang_filter = "portuguese" if is_pt else "english"
+
         verse_texts = con.sql(
             f"""
             SELECT translation, language, text
@@ -575,19 +567,20 @@ with tab_translations:
             WHERE (book = '{_book_en}' OR book = '{_book_pt}')
               AND chapter = {selected_chapter}
               AND verse = {selected_verse}
-            ORDER BY language, translation
+              AND language = '{_lang_filter}'
+            ORDER BY translation
             """
         ).df()
 
         if not verse_texts.empty:
-            st.caption(f"{len(verse_texts)} traducoes disponiveis para este versiculo")
+            lang_label = "Portugues" if is_pt else "English"
+            st.caption(f"{len(verse_texts)} traducoes em {lang_label}")
 
             for _, row in verse_texts.iterrows():
-                lang_icon = "🇬🇧" if row["language"] == "english" else "🇧🇷"
                 st.markdown(
                     f'<div style="background:#1A1D24;border:1px solid #2A2D34;border-radius:8px;'
                     f'padding:14px 18px;margin-bottom:8px;">'
-                    f'<span style="font-weight:600;color:#D4A853;">{lang_icon} {html.escape(row["translation"])}</span>'
+                    f'<span style="font-weight:600;color:#D4A853;">{html.escape(row["translation"])}</span>'
                     f'<div style="font-family:Crimson Pro,serif;font-size:1.05rem;line-height:1.7;'
                     f'color:#E8E0D4;margin-top:8px;">'
                     f'&ldquo;{html.escape(str(row["text"]))}&rdquo;</div></div>',
