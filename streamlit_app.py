@@ -16,19 +16,23 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------------------------
-# Auto-sync: gerar parquets se nao existirem (primeiro deploy)
+# Auto-sync: gerar parquets se algum estiver faltando
 # ---------------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
-if not DATA_DIR.exists() or not list(DATA_DIR.glob("*.parquet")):
-    st.info("Primeira execucao detectada. Sincronizando datasets...")
+EXPECTED_PARQUETS = ["commentaries.parquet", "crossrefs.parquet", "bibletext.parquet"]
+missing = [f for f in EXPECTED_PARQUETS if not (DATA_DIR / f).exists()]
+
+if missing:
+    st.info(f"Sincronizando datasets: {', '.join(f.replace('.parquet','') for f in missing)}...")
     with st.spinner("Clonando repositorios e gerando parquets... isso pode levar alguns minutos."):
         result = subprocess.run(
             [sys.executable, str(ROOT / "sync.py")],
             capture_output=True, text=True, cwd=str(ROOT),
+            timeout=600,
         )
         if result.returncode != 0:
-            st.error(f"Erro no sync:\n```\n{result.stderr}\n```")
+            st.error(f"Erro no sync:\n```\n{result.stderr[-2000:]}\n```")
             st.stop()
         else:
             st.success("Sync completo! Recarregando...")
