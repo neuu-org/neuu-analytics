@@ -67,6 +67,22 @@ with st.sidebar:
         horizontal=True,
         key="lang_radio",
     )
+    is_pt = st.session_state.language == "Portugues"
+
+    # Seletor de traducao biblica
+    en_trans = ["KJV", "AKJV", "ASV", "BSB", "Darby", "DRC", "Geneva1599", "Webster", "YLT"]
+    pt_trans = ["ACF", "ARA", "ARC", "AS21", "NAA", "NTLH", "NVI", "NVT"]
+    filtered_trans = pt_trans if is_pt else en_trans
+    default_trans = "ARA" if is_pt else "KJV"
+    default_idx = filtered_trans.index(default_trans) if default_trans in filtered_trans else 0
+
+    st.session_state.translation = st.selectbox(
+        "Traducao" if is_pt else "Translation",
+        filtered_trans,
+        index=default_idx,
+        key="translation_select",
+        help="Versao usada para exibir texto dos versiculos" if is_pt else "Version used to display verse text",
+    )
 
 is_pt = st.session_state.language == "Portugues"
 

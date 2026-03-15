@@ -259,28 +259,10 @@ def get_crossref_verse_text(crossref_book: str, chapter: int, verse: int, transl
 
 
 # ---------------------------------------------------------------------------
-# Traducao biblica (sidebar global via streamlit_app.py controla idioma)
+# Idioma e traducao (lidos do session_state, definidos no streamlit_app.py)
 # ---------------------------------------------------------------------------
-translations = get_available_translations()
 selected_language = st.session_state.get("language", "English")
-
-if translations:
-    en_trans = [t for t in translations if t in ["KJV", "AKJV", "ASV", "BSB", "Darby", "DRC", "Geneva1599", "Webster", "YLT"]]
-    pt_trans = [t for t in translations if t not in en_trans]
-    filtered_trans = en_trans if selected_language == "English" else pt_trans
-    default_idx = filtered_trans.index("KJV") if "KJV" in filtered_trans else 0
-
-    with st.sidebar:
-        is_pt = selected_language == "Portugues"
-        selected_translation = st.selectbox(
-            "Traducao" if is_pt else "Translation",
-            filtered_trans,
-            index=default_idx,
-            key="global_translation",
-            help="Versao usada para exibir texto dos versiculos" if is_pt else "Version used to display verse text",
-        )
-else:
-    selected_translation = "KJV"
+selected_translation = st.session_state.get("translation", "KJV")
 
 
 # ---------------------------------------------------------------------------
