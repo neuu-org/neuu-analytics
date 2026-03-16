@@ -205,15 +205,16 @@ for i, (_, row) in enumerate(page_data.iterrows()):
 
         if image_url:
             uploading_msg = "Fazendo upload... disponivel em instantes" if is_pt else "Uploading... available shortly"
+            # Use background-image CSS — if image fails to load, the fallback div shows through
             st.markdown(
                 f'<div style="border-radius:8px;overflow:hidden;background:#1A1D24;'
-                f'border:1px solid #2A2D34;min-height:180px;">'
-                f'<img src="{image_url}" style="width:100%;display:block;border-radius:8px;"'
-                f' onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'
-                f'<div style="display:none;height:180px;align-items:center;justify-content:center;'
-                f'flex-direction:column;gap:8px;color:#5A5550;font-size:0.75rem;text-align:center;padding:16px;">'
-                f'<span style="font-size:1.5rem;">&#9697;</span>'
+                f'border:1px solid #2A2D34;min-height:200px;position:relative;">'
+                f'<div style="position:absolute;inset:0;display:flex;align-items:center;'
+                f'justify-content:center;flex-direction:column;gap:6px;color:#5A5550;'
+                f'font-size:0.75rem;text-align:center;padding:16px;z-index:1;">'
                 f'{uploading_msg}</div>'
+                f'<img src="{image_url}" style="width:100%;display:block;border-radius:8px;'
+                f'position:relative;z-index:2;">'
                 f'</div>',
                 unsafe_allow_html=True,
             )
