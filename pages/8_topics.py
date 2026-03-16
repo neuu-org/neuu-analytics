@@ -175,48 +175,9 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 
 # ============================================================
-# 5. DEFINITION REFS COVERAGE
+# 5. DATA QUALITY
 # ============================================================
-st.header("5. " + ("Cobertura de Definition Refs" if is_pt else "Definition Refs Coverage"))
-
-with_def = int(df["has_def_refs"].sum())
-without_def = total - with_def
-
-col1, col2 = st.columns(2)
-
-with col1:
-    fig = go.Figure(go.Pie(
-        values=[with_def, without_def],
-        labels=[
-            "Com Def Refs" if is_pt else "With Def Refs",
-            "Sem Def Refs" if is_pt else "Without Def Refs",
-        ],
-        marker=dict(colors=["#D4A853", "#2A2D34"]),
-        hole=0.5,
-    ))
-    fig.update_layout(
-        **PLOTLY_LAYOUT,
-        title=f"Definition Refs: {with_def/total*100:.1f}%",
-        height=300,
-    )
-    st.plotly_chart(fig, use_container_width=True)
-
-with col2:
-    top_def = df[df["n_def_refs"] > 0].nlargest(10, "n_def_refs")[["topic", "n_def_refs"]]
-    fig = px.bar(
-        top_def.sort_values("n_def_refs", ascending=True),
-        x="n_def_refs", y="topic", orientation="h",
-        title="Top 10 por Definition Refs" if is_pt else "Top 10 by Definition Refs",
-        labels={"n_def_refs": "Refs", "topic": ""},
-        color_discrete_sequence=["#D4A853"],
-    )
-    fig.update_layout(**PLOTLY_LAYOUT, height=300)
-    st.plotly_chart(fig, use_container_width=True)
-
-# ============================================================
-# 6. DATA QUALITY
-# ============================================================
-st.header("6. " + ("Qualidade dos Dados" if is_pt else "Data Quality"))
+st.header("5. " + ("Qualidade dos Dados" if is_pt else "Data Quality"))
 
 quality_data = pd.DataFrame({
     "metric": [
