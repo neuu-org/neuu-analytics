@@ -221,10 +221,7 @@ def show_image_detail(key: str):
 
     # Full image
     if url:
-        st.markdown(
-            f'<img src="{url}" style="width:100%;border-radius:10px;">',
-            unsafe_allow_html=True,
-        )
+        st.image(url, width="stretch")
 
     # Metadata pills
     st.markdown("")
@@ -283,19 +280,7 @@ for i, (_, row) in enumerate(page_data.iterrows()):
             year_text = str(int(completion))
 
         if image_url:
-            uploading_msg = "Fazendo upload... disponivel em instantes" if is_pt else "Uploading... available shortly"
-            st.markdown(
-                f'<div style="border-radius:8px;overflow:hidden;background:#1A1D24;'
-                f'border:1px solid #2A2D34;min-height:200px;position:relative;">'
-                f'<div style="position:absolute;inset:0;display:flex;align-items:center;'
-                f'justify-content:center;flex-direction:column;gap:6px;color:#5A5550;'
-                f'font-size:0.75rem;text-align:center;padding:16px;z-index:1;">'
-                f'{uploading_msg}</div>'
-                f'<img src="{image_url}" style="width:100%;display:block;border-radius:8px;'
-                f'position:relative;z-index:2;">'
-                f'</div>',
-                unsafe_allow_html=True,
-            )
+            st.image(image_url, width="stretch")
 
         # Title as clickable button to open detail dialog
         if st.button(
