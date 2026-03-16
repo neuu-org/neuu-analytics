@@ -103,6 +103,12 @@ gazetteers = st.Page(
     icon=":material/library_books:",
 )
 
+dictionary = st.Page(
+    "pages/5_dictionary.py",
+    title="Dictionary" if not is_pt else "Dicionarios",
+    icon=":material/book:",
+)
+
 # ---------------------------------------------------------------------------
 # Navegacao agrupada
 # ---------------------------------------------------------------------------
@@ -112,7 +118,7 @@ section_analytics = "Dataset Analytics" if not is_pt else "Analise de Datasets"
 pg = st.navigation({
     "": [home],
     section_explorer: [explorer],
-    section_analytics: [commentaries, crossrefs, bibletext, gazetteers],
+    section_analytics: [commentaries, crossrefs, bibletext, gazetteers, dictionary],
 })
 
 pg.run()

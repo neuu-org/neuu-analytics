@@ -36,3 +36,11 @@ datasets:
     data_glob: "data/pt/structured/*.json"
     loader: gazetteers
     enabled: true
+
+  dictionary:
+    name: "Bible Dictionary"
+    repo: bible-dictionary-dataset
+    description: "20.900 entradas de 5 dicionarios biblicos classicos (Easton, Smith, Hastings, Hitchcock, Schaff)"
+    data_glob: "data/02_sources/**/*.json"
+    loader: dictionary
+    enabled: true

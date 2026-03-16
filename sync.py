@@ -287,12 +287,65 @@ def gazetteers_to_parquet(repo_dir: Path, cfg: dict) -> Path:
     return DATA_DIR / "gazetteers_entities.parquet"
 
 
+def dictionary_to_parquet(repo_dir: Path, cfg: dict) -> Path:
+    """Converte JSONs do bible-dictionary-dataset para Parquet."""
+    sources_dir = repo_dir / "data" / "02_sources"
+    source_names = {
+        "easton": "EAS",
+        "smith": "SMI",
+        "hastings": "HAS",
+        "hitchcock": "HIT",
+        "schaff": "SCH",
+    }
+
+    rows = []
+    for source_dir_name, source_code in source_names.items():
+        source_path = sources_dir / source_dir_name
+        if not source_path.exists():
+            continue
+
+        json_files = sorted(source_path.glob("*.json"))
+        for jf in json_files:
+            if jf.name == "_index.json":
+                continue
+            try:
+                with open(jf, encoding="utf-8") as f:
+                    data = json.load(f)
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                continue
+
+            for term_key, entry in data.items():
+                for defn in entry.get("definitions", []):
+                    text = defn.get("text", "")
+                    rows.append({
+                        "term": term_key,
+                        "name": entry.get("name", term_key),
+                        "source": source_code,
+                        "source_name": source_dir_name.title(),
+                        "definition": text,
+                        "refs_count": len(entry.get("scripture_refs", [])),
+                        "word_count": len(text.split()),
+                        "letter": term_key[0].upper() if term_key else "",
+                    })
+
+    if rows:
+        df = pd.DataFrame(rows)
+        out = DATA_DIR / "dictionary.parquet"
+        df.to_parquet(out, index=False)
+        print(f"  Salvo: {out} ({len(df):,} linhas, {out.stat().st_size / 1024 / 1024:.1f} MB)")
+        return out
+
+    print("  Nenhum dado encontrado")
+    return DATA_DIR / "dictionary.parquet"
+
+
 # Mapa de loaders por nome
 LOADERS = {
     "commentaries": commentaries_to_parquet,
     "crossrefs": crossrefs_to_parquet,
     "bibletext": bibletext_to_parquet,
     "gazetteers": gazetteers_to_parquet,
+    "dictionary": dictionary_to_parquet,
 }
 
 
