@@ -190,7 +190,7 @@ st.markdown("---")
 # ---------------------------------------------------------------------------
 # Image detail dialog
 # ---------------------------------------------------------------------------
-@st.dialog("", width="large")
+@st.dialog(" ", width="large")
 def show_image_detail(key: str):
     """Show full-size image with metadata in a modal dialog."""
     img_row = df[df["key"] == key]
