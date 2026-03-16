@@ -389,16 +389,17 @@ with tab_comm:
         content_raw = row["content"] or ""
         content_lang_tag = ""
 
-        if is_pt and df_enriched is not None:
-            author_match = df_enriched[df_enriched["author"] == row["author"]]
-            if not author_match.empty:
-                pt_text = author_match.iloc[0].get("content_pt", "")
-                if pt_text and str(pt_text).strip():
-                    content_raw = str(pt_text)
-                    content_lang_tag = '<span style="font-size:0.65rem;color:#00CC96;margin-left:8px;">PT-BR</span>'
-                else:
-                    content_lang_tag = '<span style="font-size:0.65rem;color:#5A5550;margin-left:8px;">EN · traducao indisponivel</span>'
-            else:
+        if is_pt:
+            found_pt = False
+            if df_enriched is not None:
+                author_match = df_enriched[df_enriched["author"] == row["author"]]
+                if not author_match.empty:
+                    pt_text = author_match.iloc[0].get("content_pt", "")
+                    if pt_text and str(pt_text).strip():
+                        content_raw = str(pt_text)
+                        content_lang_tag = '<span style="font-size:0.65rem;color:#00CC96;margin-left:8px;">PT-BR</span>'
+                        found_pt = True
+            if not found_pt:
                 content_lang_tag = '<span style="font-size:0.65rem;color:#5A5550;margin-left:8px;">EN · traducao indisponivel</span>'
 
         if len(content_raw) > 1500:
