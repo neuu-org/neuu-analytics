@@ -1,5 +1,6 @@
 """
 Topic Explorer — Browse and study biblical topics.
+All data loaded from parquet (no JSON repo dependency).
 """
 
 from pathlib import Path
@@ -16,7 +17,6 @@ show_loading()
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 TOPICS_FILE = DATA_DIR / "topics.parquet"
-TOPICS_REPO = ROOT / "datasets" / "bible-topics-dataset" / "data" / "01_parsed"
 
 if not TOPICS_FILE.exists():
     st.info("Dados nao encontrados. Execute `python sync.py topics`.")
@@ -31,48 +31,30 @@ def load_topics(mtime: float) -> pd.DataFrame:
     return con.sql(f"SELECT * FROM '{TOPICS_FILE}'").df()
 
 
-def load_full_topic(slug: str) -> dict | None:
-    """Load the full JSON for a topic from the repo."""
-    letter = slug[0].upper() if slug else ""
-    path = TOPICS_REPO / letter / f"{slug}.json"
-    if path.exists():
-        with open(path, encoding="utf-8") as f:
-            return json.load(f)
-    return None
-
-
-def render_full_topic(full: dict):
-    """Render a full topic in study format."""
-    topic_name = full.get("topic", "")
-    sources = full.get("sources", [])
-    stats = full.get("stats", {})
+def render_full_topic(row: pd.Series):
+    """Render a full topic in study format from parquet row."""
+    topic_name = row["topic"]
 
     src_labels = []
-    for s in sources:
-        if s == "NAV":
-            src_labels.append("Nave's Topical Bible (1896)")
-        elif s == "TOR":
-            src_labels.append("Torrey's Topical Textbook (1897)")
+    if row["source_nav"]:
+        src_labels.append("Nave's Topical Bible (1896)")
+    if row["source_tor"]:
+        src_labels.append("Torrey's Topical Textbook (1897)")
 
     st.markdown(f"## {topic_name}")
     st.caption(" · ".join(src_labels))
 
     # Metrics
     mcols = st.columns(4)
-    mcols[0].metric("Refs", stats.get("total_refs", 0))
-    mcols[1].metric("Aspects", stats.get("total_aspects", 0))
-    mcols[2].metric(
-        "Livros" if is_pt else "Books",
-        stats.get("books_count", 0),
-    )
-    ot = stats.get("ot_refs", 0)
-    nt = stats.get("nt_refs", 0)
-    mcols[3].metric("AT/NT" if is_pt else "OT/NT", f"{ot}/{nt}")
+    mcols[0].metric("Refs", int(row["n_biblical_refs"]))
+    aspects = json.loads(row.get("aspects_json", "[]"))
+    mcols[1].metric("Aspects", len(aspects))
+    mcols[2].metric("Livros" if is_pt else "Books", int(row.get("n_books", 0)))
+    mcols[3].metric("AT/NT" if is_pt else "OT/NT", f"{int(row.get('ot_refs', 0))}/{int(row.get('nt_refs', 0))}")
 
     st.markdown("---")
 
     # Aspects — the core content
-    aspects = full.get("aspects", [])
     if aspects:
         for asp in aspects:
             label = asp.get("label", "")
@@ -97,13 +79,13 @@ def render_full_topic(full: dict):
                 st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;{refs_md}")
 
     # Books mentioned
-    books = full.get("books_mentioned", [])
+    books = json.loads(row.get("books_json", "[]"))
     if books:
         st.markdown("---")
         st.markdown(f"**{'Livros mencionados' if is_pt else 'Books mentioned'}:** {', '.join(books)}")
 
     # See also
-    see_also = full.get("see_also", [])
+    see_also = json.loads(row.get("see_also_json", "[]"))
     if see_also:
         st.markdown(f"**See also:** {', '.join(see_also)}")
 
@@ -116,21 +98,17 @@ df = load_topics(TOPICS_FILE.stat().st_mtime)
 selected_slug = st.query_params.get("topic", "")
 
 if selected_slug:
-    # Back button
     if st.button("← " + ("Voltar" if is_pt else "Back")):
         st.query_params.clear()
         st.rerun()
 
-    full = load_full_topic(selected_slug)
-    if full:
-        render_full_topic(full)
+    match = df[df["slug"] == selected_slug]
+    if not match.empty:
+        render_full_topic(match.iloc[0])
     else:
         st.error(f"Topic '{selected_slug}' not found")
 
 else:
-    # ---------------------------------------------------------------------------
-    # Main page: search + featured cards
-    # ---------------------------------------------------------------------------
     title = "Explorar Topicos" if is_pt else "Explore Topics"
     st.title(f"📖 {title}")
 
@@ -140,8 +118,7 @@ else:
         key="topic_query",
     )
 
-    def render_card(row, border_color: str, src_label: str, key_prefix: str):
-        """Render a clickable card."""
+    def render_card(row, src_label: str, key_prefix: str):
         if st.button(
             f"{row['topic']}\n{row['n_biblical_refs']} refs · {src_label}",
             key=f"{key_prefix}_{row['slug']}",
@@ -151,7 +128,6 @@ else:
             st.rerun()
 
     if not query:
-        # Featured: both sources
         st.markdown("#### " + ("Topicos em Destaque" if is_pt else "Featured Topics"))
         st.caption(
             "Topicos presentes em ambas as fontes, ordenados por referencias"
@@ -162,26 +138,24 @@ else:
         cols = st.columns(4)
         for i, (_, row) in enumerate(featured.iterrows()):
             with cols[i % 4]:
-                render_card(row, "#D4A853", "Nave + Torrey", "feat")
+                render_card(row, "Nave + Torrey", "feat")
 
         st.markdown("---")
 
-        # Nave + Torrey highlights side by side
         col_a, col_b = st.columns(2)
         with col_a:
             st.markdown("#### " + ("Destaques Nave" if is_pt else "Nave Highlights"))
             nave_top = df[df["source_nav"] & ~df["source_tor"]].nlargest(8, "n_biblical_refs")
             for _, row in nave_top.iterrows():
-                render_card(row, "#4CAF50", "Nave", "nave")
+                render_card(row, "Nave", "nave")
 
         with col_b:
             st.markdown("#### " + ("Destaques Torrey" if is_pt else "Torrey Highlights"))
             torrey_top = df[df["source_tor"] & ~df["source_nav"]].nlargest(8, "n_biblical_refs")
             for _, row in torrey_top.iterrows():
-                render_card(row, "#2196F3", "Torrey", "torrey")
+                render_card(row, "Torrey", "torrey")
 
     else:
-        # Search results
         mask = df["topic"].str.contains(query.upper(), na=False)
         results = df[mask].sort_values("n_biblical_refs", ascending=False).head(20)
 
@@ -196,7 +170,5 @@ else:
                     src_parts.append("Nave")
                 if row["source_tor"]:
                     src_parts.append("Torrey")
-                src_text = " + ".join(src_parts)
-                color = "#D4A853" if len(src_parts) > 1 else ("#4CAF50" if "Nave" in src_parts else "#2196F3")
                 with cols[i % 4]:
-                    render_card(row, color, src_text, "search")
+                    render_card(row, " + ".join(src_parts), "search")
