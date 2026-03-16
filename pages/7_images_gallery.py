@@ -1,6 +1,6 @@
 """
 Galeria de Imagens Biblicas — navegacao visual pelo dataset de pinturas.
-Ordenado por fama, estetica ou periodo. Algoritmo interno seleciona as melhores.
+Ordenado por fama, estetica ou periodo. Clique no artista para filtrar.
 """
 
 from pathlib import Path
@@ -32,16 +32,43 @@ def load_images(mtime: float) -> pd.DataFrame:
 
 df = load_images(IMAGES_FILE.stat().st_mtime)
 
+# ---------------------------------------------------------------------------
+# Artist filter via session state (set when user clicks an artist name)
+# ---------------------------------------------------------------------------
+if "gallery_artist" not in st.session_state:
+    st.session_state.gallery_artist = None
+
+active_artist = st.session_state.gallery_artist
+
+# Header
 title = "Galeria de Pinturas Biblicas" if is_pt else "Bible Paintings Gallery"
 st.title(title)
-st.caption(
-    "16.914 pinturas religiosas ordenadas por relevancia"
-    if is_pt else
-    "16,914 religious paintings sorted by relevance"
-)
+
+if active_artist:
+    # Show active artist filter with clear button
+    count = len(df[df["artist"] == active_artist])
+    col_h1, col_h2 = st.columns([4, 1])
+    with col_h1:
+        st.markdown(
+            f'<div style="font-size:1.1rem;color:#D4A853;font-weight:600;">'
+            f'{active_artist} <span style="color:#8B8072;font-weight:400;">'
+            f'({count} {"pinturas" if is_pt else "paintings"})</span></div>',
+            unsafe_allow_html=True,
+        )
+    with col_h2:
+        if st.button("Mostrar todas" if is_pt else "Show all", type="secondary"):
+            st.session_state.gallery_artist = None
+            st.session_state.gallery_page = 1
+            st.rerun()
+else:
+    st.caption(
+        "16.914 pinturas religiosas ordenadas por relevancia"
+        if is_pt else
+        "16,914 religious paintings sorted by relevance"
+    )
 
 # ---------------------------------------------------------------------------
-# Sort control (simple, clean)
+# Sort control
 # ---------------------------------------------------------------------------
 ITEMS_PER_PAGE = 20
 
@@ -60,9 +87,12 @@ sort_by = st.radio(
 )
 
 # ---------------------------------------------------------------------------
-# Sort
+# Filter by artist + Sort
 # ---------------------------------------------------------------------------
 sorted_df = df.copy()
+
+if active_artist:
+    sorted_df = sorted_df[sorted_df["artist"] == active_artist]
 
 if sort_by == "fame" and "fame_score" in sorted_df.columns:
     sorted_df = sorted_df.sort_values("fame_score", ascending=False)
@@ -74,9 +104,16 @@ elif sort_by == "oldest":
     sorted_df = sorted_df.sort_values("completion", ascending=True, na_position="last")
 
 total = len(sorted_df)
-st.markdown(
-    f"**{total:,}** {'pinturas' if is_pt else 'paintings'}"
-)
+if not active_artist:
+    st.markdown(
+        f"**{total:,}** {'pinturas' if is_pt else 'paintings'}"
+    )
+
+if total == 0:
+    st.info(
+        "Nenhuma pintura encontrada." if is_pt else "No paintings found."
+    )
+    st.stop()
 
 # ---------------------------------------------------------------------------
 # Pagination
@@ -87,9 +124,10 @@ if "gallery_page" not in st.session_state:
     st.session_state.gallery_page = 1
 
 # Reset page when sort changes
-if st.session_state.get("_gallery_sort") != sort_by:
+state_key = f"{sort_by}|{active_artist or ''}"
+if st.session_state.get("_gallery_state") != state_key:
     st.session_state.gallery_page = 1
-    st.session_state._gallery_sort = sort_by
+    st.session_state._gallery_state = state_key
 
 page = st.session_state.gallery_page
 if page > total_pages:
@@ -147,18 +185,30 @@ for i, (_, row) in enumerate(page_data.iterrows()):
                 unsafe_allow_html=True,
             )
 
-        # Caption with title, artist, year
-        caption_parts = [
+        # Title
+        st.markdown(
             f'<div style="font-weight:600;color:#E8E0D4;font-size:0.85rem;'
             f'line-height:1.3;margin-top:4px;">{title_text}</div>',
-            f'<div style="color:#D4A853;font-size:0.75rem;">{artist_text}</div>',
-        ]
+            unsafe_allow_html=True,
+        )
+
+        # Artist name as clickable button
+        if st.button(
+            artist_text,
+            key=f"artist_{row.get('key', i)}",
+            type="tertiary",
+        ):
+            st.session_state.gallery_artist = artist_text
+            st.session_state.gallery_page = 1
+            st.rerun()
+
+        # Year
         if year_text:
-            caption_parts.append(
-                f'<div style="color:#8B8072;font-size:0.7rem;">{year_text}</div>'
+            st.markdown(
+                f'<div style="color:#8B8072;font-size:0.7rem;margin-top:-8px;">{year_text}</div>',
+                unsafe_allow_html=True,
             )
-        st.markdown("".join(caption_parts), unsafe_allow_html=True)
-        st.markdown("")  # spacer between rows
+        st.markdown("")  # spacer
 
 # Bottom pagination
 st.markdown("---")
