@@ -26,6 +26,7 @@ CROSSREFS_PARQUET = DATA_DIR / "crossrefs.parquet"
 BIBLETEXT_PARQUET = DATA_DIR / "bibletext.parquet"
 GAZ_ENTITIES_PARQUET = DATA_DIR / "gazetteers_entities.parquet"
 GAZ_SYMBOLS_PARQUET = DATA_DIR / "gazetteers_symbols.parquet"
+DICT_PARQUET = DATA_DIR / "dictionary.parquet"
 
 from loading import show_loading
 show_loading()
@@ -370,10 +371,11 @@ df_enriched = get_enriched_data(verse_ref)
 # ---------------------------------------------------------------------------
 # Tabs: Comentarios | Analise | Visao Geral
 # ---------------------------------------------------------------------------
-tab_comm, tab_entities, tab_crossrefs, tab_translations, tab_analysis, tab_overview = st.tabs(
+tab_comm, tab_entities, tab_dict, tab_crossrefs, tab_translations, tab_analysis, tab_overview = st.tabs(
     [
         "Comentarios" if is_pt else "Commentaries",
         "Entidades" if is_pt else "Entities",
+        "Dicionario" if is_pt else "Dictionary",
         "Referencias Cruzadas" if is_pt else "Cross-References",
         "Traducoes" if is_pt else "Translations",
         "Analise Teologica" if is_pt else "Theological Analysis",
@@ -623,7 +625,89 @@ with tab_entities:
             "Entities & symbols dataset not available. Run `python sync.py gazetteers`."
         )
 
-# --- Tab 3: Referencias Cruzadas ---
+# --- Tab 3: Dicionario ---
+with tab_dict:
+    if DICT_PARQUET.exists():
+        SOURCE_LABELS = {
+            "EAS": "Easton's (1897)", "SMI": "Smith's (1863)",
+            "HAS": "Hastings (1880)", "HIT": "Hitchcock (1869)", "SCH": "Schaff (1880)",
+        }
+
+        # Buscar termos do dicionario que correspondam a entidades no versiculo
+        # Usar o nome do livro e entidades encontradas como chaves de busca
+        _book_en_name = friendly_name(selected_book)
+
+        @st.cache_data(ttl=3600)
+        def search_dict_terms(search_terms: tuple) -> pd.DataFrame:
+            """Busca termos no dicionario."""
+            if not search_terms:
+                return pd.DataFrame()
+            conditions = " OR ".join(f"UPPER(term) = '{t.upper()}'" for t in search_terms)
+            return con.sql(
+                f"SELECT * FROM '{DICT_PARQUET}' WHERE {conditions} ORDER BY term, source"
+            ).df()
+
+        # Coletar termos para buscar: entidades encontradas no versiculo + nomes proprios
+        search_keys = set()
+
+        # Adicionar entidades encontradas na tab anterior (se existirem)
+        if has_gaz and 'verse_entities' in dir():
+            for ent in verse_entities:
+                search_keys.add(str(ent["name"]).upper())
+        if has_gaz and 'comm_entities' in dir():
+            for ent in comm_entities[:5]:
+                search_keys.add(str(ent["name"]).upper())
+
+        # Buscar tambem palavras capitalizadas do texto do versiculo (nomes proprios)
+        if main_verse_text:
+            import re as _re2
+            capitalized = _re2.findall(r'\b[A-Z][a-z]{3,}\b', main_verse_text)
+            for word in capitalized:
+                search_keys.add(word.upper())
+
+        dict_results = search_dict_terms(tuple(sorted(search_keys))) if search_keys else pd.DataFrame()
+
+        if not dict_results.empty:
+            matched_terms = dict_results["term"].unique()
+            st.caption(
+                f"{len(matched_terms)} {'termos encontrados' if is_pt else 'terms found'}"
+            )
+
+            for term in matched_terms:
+                term_rows = dict_results[dict_results["term"] == term]
+                name = term_rows.iloc[0]["name"]
+                num_defs = len(term_rows)
+
+                with st.expander(f"**{name}** · {num_defs} {'definicoes' if is_pt else 'definitions'}"):
+                    for _, row in term_rows.iterrows():
+                        source_label = SOURCE_LABELS.get(row["source"], row["source"])
+                        definition = str(row["definition"])
+                        preview = definition[:600] + ("..." if len(definition) > 600 else "")
+
+                        st.markdown(
+                            f'<div style="border-left:3px solid #D4A853;padding:8px 14px;margin-bottom:10px;">'
+                            f'<span style="font-weight:600;color:#D4A853;font-size:0.85rem;">{html.escape(source_label)}</span>'
+                            f'<span style="color:#5A5550;font-size:0.75rem;margin-left:8px;">'
+                            f'{row["word_count"]} {"palavras" if is_pt else "words"}</span>'
+                            f'<div style="font-family:Crimson Pro,serif;font-size:1rem;line-height:1.7;'
+                            f'color:#E8E0D4;margin-top:6px;">{html.escape(preview)}</div>'
+                            f'</div>',
+                            unsafe_allow_html=True,
+                        )
+        else:
+            st.info(
+                "Nenhuma entrada de dicionario encontrada para este versiculo."
+                if is_pt else
+                "No dictionary entries found for this verse."
+            )
+    else:
+        st.info(
+            "Dataset de dicionarios nao disponivel. Execute `python sync.py dictionary`."
+            if is_pt else
+            "Dictionary dataset not available. Run `python sync.py dictionary`."
+        )
+
+# --- Tab 4: Referencias Cruzadas ---
 with tab_crossrefs:
     df_crossrefs = get_crossrefs(selected_book, selected_chapter, selected_verse)
 
