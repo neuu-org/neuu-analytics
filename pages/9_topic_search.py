@@ -140,26 +140,13 @@ else:
         key="topic_query",
     )
 
-    # Hide default button styling to make cards look clickable
-    st.markdown("""<style>
-    div[data-testid="stButton"] > button[kind="secondary"] {
-        background: linear-gradient(135deg, #1A1D24 0%, #2A2D34 100%);
-        border: 1px solid #3A3D44;
-        border-radius: 8px;
-        padding: 0;
-        height: auto;
-        min-height: 0;
-    }
-    div[data-testid="stButton"] > button[kind="secondary"]:hover {
-        border-color: #D4A853;
-        background: linear-gradient(135deg, #22252C 0%, #32353C 100%);
-    }
-    </style>""", unsafe_allow_html=True)
-
     def render_card(row, border_color: str, src_label: str, key_prefix: str):
-        """Render a clickable styled card."""
-        label = f"**{row['topic']}**\n\n{row['n_biblical_refs']} refs · {src_label}"
-        if st.button(label, key=f"{key_prefix}_{row['slug']}", use_container_width=True):
+        """Render a clickable card."""
+        if st.button(
+            f"{row['topic']}\n{row['n_biblical_refs']} refs · {src_label}",
+            key=f"{key_prefix}_{row['slug']}",
+            use_container_width=True,
+        ):
             st.query_params["topic"] = row["slug"]
             st.rerun()
 
