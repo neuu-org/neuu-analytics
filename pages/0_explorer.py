@@ -647,23 +647,23 @@ with tab_dict:
                 f"SELECT * FROM '{DICT_PARQUET}' WHERE {conditions} ORDER BY term, source"
             ).df()
 
-        # Coletar termos para buscar: entidades encontradas no versiculo + nomes proprios
+        # Coletar termos APENAS do texto do versiculo (sem comentarios)
         search_keys = set()
 
-        # Adicionar entidades encontradas na tab anterior (se existirem)
+        # Buscar texto do versiculo em INGLES (dicionarios sao em ingles)
+        verse_text_en = get_verse_text(friendly_name(selected_book), selected_chapter, selected_verse, "KJV")
+
+        if verse_text_en:
+            import re as _re2
+            # Nomes proprios (capitalizados, 4+ chars) do texto ingles
+            capitalized = _re2.findall(r'\b[A-Z][a-z]{3,}\b', verse_text_en)
+            for word in capitalized:
+                search_keys.add(word.upper())
+
+        # Adicionar apenas entidades encontradas NO VERSICULO (nao nos comentarios)
         if has_gaz and 'verse_entities' in dir():
             for ent in verse_entities:
                 search_keys.add(str(ent["name"]).upper())
-        if has_gaz and 'comm_entities' in dir():
-            for ent in comm_entities[:5]:
-                search_keys.add(str(ent["name"]).upper())
-
-        # Buscar tambem palavras capitalizadas do texto do versiculo (nomes proprios)
-        if main_verse_text:
-            import re as _re2
-            capitalized = _re2.findall(r'\b[A-Z][a-z]{3,}\b', main_verse_text)
-            for word in capitalized:
-                search_keys.add(word.upper())
 
         dict_results = search_dict_terms(tuple(sorted(search_keys))) if search_keys else pd.DataFrame()
 
