@@ -1,6 +1,6 @@
 """
 Galeria de Imagens Biblicas — navegacao visual pelo dataset de pinturas.
-Ordenado por fama, estetica ou periodo. Clique no artista para filtrar.
+Clique no artista para filtrar. Busca por titulo ou tag.
 """
 
 from pathlib import Path
@@ -45,7 +45,6 @@ title = "Galeria de Pinturas Biblicas" if is_pt else "Bible Paintings Gallery"
 st.title(title)
 
 if active_artist:
-    # Show active artist filter with clear button
     count = len(df[df["artist"] == active_artist])
     col_h1, col_h2 = st.columns([4, 1])
     with col_h1:
@@ -62,52 +61,83 @@ if active_artist:
             st.rerun()
 else:
     st.caption(
-        "16.914 pinturas religiosas ordenadas por relevancia"
+        "16.914 pinturas religiosas — clique no artista para filtrar"
         if is_pt else
-        "16,914 religious paintings sorted by relevance"
+        "16,914 religious paintings — click an artist to filter"
     )
 
 # ---------------------------------------------------------------------------
-# Sort control
+# Filters: Artist, Style, Search
 # ---------------------------------------------------------------------------
 ITEMS_PER_PAGE = 20
 
-sort_options = {
-    "fame": "Mais Famosas" if is_pt else "Most Famous",
-    "aesthetic": "Mais Belas" if is_pt else "Most Beautiful",
-    "recent": "Mais Recentes" if is_pt else "Most Recent",
-    "oldest": "Mais Antigas" if is_pt else "Oldest First",
-}
+col_f1, col_f2, col_f3 = st.columns(3)
 
-sort_by = st.radio(
-    "Ordenar por" if is_pt else "Sort by",
-    options=list(sort_options.keys()),
-    format_func=lambda x: sort_options[x],
-    horizontal=True,
-)
-
-# ---------------------------------------------------------------------------
-# Filter by artist + Sort
-# ---------------------------------------------------------------------------
-sorted_df = df.copy()
-
-if active_artist:
-    sorted_df = sorted_df[sorted_df["artist"] == active_artist]
-
-if sort_by == "fame" and "fame_score" in sorted_df.columns:
-    sorted_df = sorted_df.sort_values("fame_score", ascending=False)
-elif sort_by == "aesthetic":
-    sorted_df = sorted_df.sort_values("aesthetic", ascending=False)
-elif sort_by == "recent":
-    sorted_df = sorted_df.sort_values("completion", ascending=False, na_position="last")
-elif sort_by == "oldest":
-    sorted_df = sorted_df.sort_values("completion", ascending=True, na_position="last")
-
-total = len(sorted_df)
-if not active_artist:
-    st.markdown(
-        f"**{total:,}** {'pinturas' if is_pt else 'paintings'}"
+with col_f1:
+    artists_sorted = sorted(df["artist"].dropna().unique())
+    default_idx = 0
+    if active_artist and active_artist in artists_sorted:
+        default_idx = artists_sorted.index(active_artist) + 1
+    selected_artist = st.selectbox(
+        "Artista" if is_pt else "Artist",
+        options=[""] + artists_sorted,
+        index=default_idx,
+        format_func=lambda x: ("Todos" if is_pt else "All") if x == "" else x,
     )
+
+with col_f2:
+    all_styles = (
+        df["styles"].dropna()
+        .str.split("|").explode().str.strip()
+        .replace("", pd.NA).dropna()
+        .unique()
+    )
+    styles_sorted = sorted(all_styles)
+    selected_styles = st.multiselect(
+        "Estilos" if is_pt else "Styles",
+        options=styles_sorted,
+    )
+
+with col_f3:
+    tag_search = st.text_input(
+        "Buscar" if is_pt else "Search",
+        placeholder="Ex: Jesus, crucifixion, Doré...",
+    )
+
+# ---------------------------------------------------------------------------
+# Apply filters + Sort by fame
+# ---------------------------------------------------------------------------
+filtered = df.copy()
+
+# Artist: prefer clicked artist over selectbox
+artist_filter = active_artist or selected_artist
+if artist_filter:
+    filtered = filtered[filtered["artist"] == artist_filter]
+
+if selected_styles:
+    mask = filtered["styles"].dropna().apply(
+        lambda s: any(style in s.split("|") for style in selected_styles)
+    )
+    mask = mask.reindex(filtered.index, fill_value=False)
+    filtered = filtered[mask]
+
+if tag_search.strip():
+    search_lower = tag_search.strip().lower()
+    mask = (
+        filtered["tags"].fillna("").str.lower().str.contains(search_lower, regex=False)
+        | filtered["title"].fillna("").str.lower().str.contains(search_lower, regex=False)
+        | filtered["artist"].fillna("").str.lower().str.contains(search_lower, regex=False)
+    )
+    filtered = filtered[mask]
+
+# Always sort by fame score
+if "fame_score" in filtered.columns:
+    filtered = filtered.sort_values("fame_score", ascending=False)
+
+total = len(filtered)
+st.markdown(
+    f"**{total:,}** {'pinturas encontradas' if is_pt else 'paintings found'}"
+)
 
 if total == 0:
     st.info(
@@ -123,8 +153,8 @@ total_pages = max(1, (total + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE)
 if "gallery_page" not in st.session_state:
     st.session_state.gallery_page = 1
 
-# Reset page when sort changes
-state_key = f"{sort_by}|{active_artist or ''}"
+# Reset page when filters change
+state_key = f"{artist_filter or ''}|{'|'.join(selected_styles)}|{tag_search}"
 if st.session_state.get("_gallery_state") != state_key:
     st.session_state.gallery_page = 1
     st.session_state._gallery_state = state_key
@@ -136,7 +166,7 @@ if page > total_pages:
 
 start_idx = (page - 1) * ITEMS_PER_PAGE
 end_idx = min(start_idx + ITEMS_PER_PAGE, total)
-page_data = sorted_df.iloc[start_idx:end_idx]
+page_data = filtered.iloc[start_idx:end_idx]
 
 # Page controls
 nav_col1, nav_col2, nav_col3 = st.columns([1, 2, 1])
