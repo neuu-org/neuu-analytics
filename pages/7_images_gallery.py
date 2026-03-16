@@ -191,13 +191,15 @@ for i, (_, row) in enumerate(page_data.iterrows()):
         if pd.notna(completion) and int(completion) >= 100:
             year_text = str(int(completion))
 
-        try:
-            st.image(image_url, width="stretch")
-        except Exception:
+        if image_url:
             st.markdown(
-                '<div style="background:#1A1D24;border:1px solid #2A2D34;'
-                'border-radius:8px;padding:40px;text-align:center;color:#5A5550;">'
-                'Imagem indisponivel</div>',
+                f'<div style="border-radius:8px;overflow:hidden;background:#1A1D24;'
+                f'border:1px solid #2A2D34;min-height:180px;">'
+                f'<img src="{image_url}" style="width:100%;display:block;border-radius:8px;"'
+                f' onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'
+                f'<div style="display:none;height:180px;align-items:center;justify-content:center;'
+                f'color:#5A5550;font-size:0.8rem;">Uploading...</div>'
+                f'</div>',
                 unsafe_allow_html=True,
             )
 
