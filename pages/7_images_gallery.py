@@ -1,6 +1,6 @@
 """
 Galeria de Imagens Biblicas — navegacao visual pelo dataset de pinturas.
-Filtros por artista, estilo e tag com grid de imagens do HuggingFace.
+Ordenado por fama, estetica ou periodo. Algoritmo interno seleciona as melhores.
 """
 
 from pathlib import Path
@@ -35,117 +35,61 @@ df = load_images(IMAGES_FILE.stat().st_mtime)
 title = "Galeria de Pinturas Biblicas" if is_pt else "Bible Paintings Gallery"
 st.title(title)
 st.caption(
-    "Navegue pelas 16.914 pinturas religiosas do WikiArt"
+    "16.914 pinturas religiosas ordenadas por relevancia"
     if is_pt else
-    "Browse 16,914 religious paintings from WikiArt"
+    "16,914 religious paintings sorted by relevance"
 )
 
 # ---------------------------------------------------------------------------
-# Filters
+# Sort control (simple, clean)
 # ---------------------------------------------------------------------------
 ITEMS_PER_PAGE = 20
 
-col_f1, col_f2, col_f3, col_f4 = st.columns([1, 1, 1, 1])
+sort_options = {
+    "fame": "Mais Famosas" if is_pt else "Most Famous",
+    "aesthetic": "Mais Belas" if is_pt else "Most Beautiful",
+    "recent": "Mais Recentes" if is_pt else "Most Recent",
+    "oldest": "Mais Antigas" if is_pt else "Oldest First",
+}
 
-with col_f1:
-    artists_sorted = sorted(df["artist"].dropna().unique())
-    selected_artist = st.selectbox(
-        "Artista" if is_pt else "Artist",
-        options=[""] + artists_sorted,
-        index=0,
-        format_func=lambda x: ("Todos" if is_pt else "All") if x == "" else x,
-    )
-
-with col_f2:
-    # Collect unique styles
-    all_styles = (
-        df["styles"].dropna()
-        .str.split("|").explode().str.strip()
-        .replace("", pd.NA).dropna()
-        .unique()
-    )
-    styles_sorted = sorted(all_styles)
-    selected_styles = st.multiselect(
-        "Estilos" if is_pt else "Styles",
-        options=styles_sorted,
-    )
-
-with col_f3:
-    tag_search = st.text_input(
-        "Buscar tag" if is_pt else "Search tag",
-        placeholder="Ex: Jesus, Mary, crucifixion...",
-    )
-
-with col_f4:
-    sort_options = {
-        "fame": "Mais Famosas" if is_pt else "Most Famous",
-        "aesthetic": "Mais Belas" if is_pt else "Most Beautiful",
-        "recent": "Mais Recentes" if is_pt else "Most Recent",
-        "oldest": "Mais Antigas" if is_pt else "Oldest First",
-    }
-    sort_by = st.selectbox(
-        "Ordenar" if is_pt else "Sort by",
-        options=list(sort_options.keys()),
-        format_func=lambda x: sort_options[x],
-    )
-
-# ---------------------------------------------------------------------------
-# Apply filters
-# ---------------------------------------------------------------------------
-filtered = df.copy()
-
-if selected_artist:
-    filtered = filtered[filtered["artist"] == selected_artist]
-
-if selected_styles:
-    mask = filtered["styles"].dropna().apply(
-        lambda s: any(style in s.split("|") for style in selected_styles)
-    )
-    # Reindex mask to align with filtered, filling missing with False
-    mask = mask.reindex(filtered.index, fill_value=False)
-    filtered = filtered[mask]
-
-if tag_search.strip():
-    search_lower = tag_search.strip().lower()
-    mask = filtered["tags"].fillna("").str.lower().str.contains(search_lower, regex=False)
-    filtered = filtered[mask]
-
-# Sort
-if sort_by == "fame" and "fame_score" in filtered.columns:
-    filtered = filtered.sort_values("fame_score", ascending=False)
-elif sort_by == "aesthetic":
-    filtered = filtered.sort_values("aesthetic", ascending=False)
-elif sort_by == "recent":
-    filtered = filtered.sort_values("completion", ascending=False, na_position="last")
-elif sort_by == "oldest":
-    filtered = filtered.sort_values("completion", ascending=True, na_position="last")
-
-total_filtered = len(filtered)
-st.markdown(
-    f"**{total_filtered:,}** {'pinturas encontradas' if is_pt else 'paintings found'}"
+sort_by = st.radio(
+    "Ordenar por" if is_pt else "Sort by",
+    options=list(sort_options.keys()),
+    format_func=lambda x: sort_options[x],
+    horizontal=True,
 )
 
-if total_filtered == 0:
-    st.info(
-        "Nenhuma pintura corresponde aos filtros selecionados."
-        if is_pt else
-        "No paintings match the selected filters."
-    )
-    st.stop()
+# ---------------------------------------------------------------------------
+# Sort
+# ---------------------------------------------------------------------------
+sorted_df = df.copy()
+
+if sort_by == "fame" and "fame_score" in sorted_df.columns:
+    sorted_df = sorted_df.sort_values("fame_score", ascending=False)
+elif sort_by == "aesthetic":
+    sorted_df = sorted_df.sort_values("aesthetic", ascending=False)
+elif sort_by == "recent":
+    sorted_df = sorted_df.sort_values("completion", ascending=False, na_position="last")
+elif sort_by == "oldest":
+    sorted_df = sorted_df.sort_values("completion", ascending=True, na_position="last")
+
+total = len(sorted_df)
+st.markdown(
+    f"**{total:,}** {'pinturas' if is_pt else 'paintings'}"
+)
 
 # ---------------------------------------------------------------------------
 # Pagination
 # ---------------------------------------------------------------------------
-total_pages = max(1, (total_filtered + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE)
+total_pages = max(1, (total + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE)
 
 if "gallery_page" not in st.session_state:
     st.session_state.gallery_page = 1
 
-# Reset page when filters change
-filter_key = f"{selected_artist}|{'|'.join(selected_styles)}|{tag_search}|{sort_by}"
-if st.session_state.get("_gallery_filter_key") != filter_key:
+# Reset page when sort changes
+if st.session_state.get("_gallery_sort") != sort_by:
     st.session_state.gallery_page = 1
-    st.session_state._gallery_filter_key = filter_key
+    st.session_state._gallery_sort = sort_by
 
 page = st.session_state.gallery_page
 if page > total_pages:
@@ -153,8 +97,8 @@ if page > total_pages:
     st.session_state.gallery_page = page
 
 start_idx = (page - 1) * ITEMS_PER_PAGE
-end_idx = min(start_idx + ITEMS_PER_PAGE, total_filtered)
-page_data = filtered.iloc[start_idx:end_idx]
+end_idx = min(start_idx + ITEMS_PER_PAGE, total)
+page_data = sorted_df.iloc[start_idx:end_idx]
 
 # Page controls
 nav_col1, nav_col2, nav_col3 = st.columns([1, 2, 1])
