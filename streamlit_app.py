@@ -121,6 +121,12 @@ topics = st.Page(
     icon=":material/topic:",
 )
 
+topic_search = st.Page(
+    "pages/9_topic_search.py",
+    title="Topic Search" if not is_pt else "Busca de Topicos",
+    icon=":material/manage_search:",
+)
+
 images_gallery = st.Page(
     "pages/7_images_gallery.py",
     title="Image Gallery" if not is_pt else "Galeria de Imagens",
@@ -135,7 +141,7 @@ section_analytics = "Dataset Analytics" if not is_pt else "Analise de Datasets"
 
 pg = st.navigation({
     "": [home],
-    section_explorer: [explorer, images_gallery],
+    section_explorer: [explorer, topic_search, images_gallery],
     section_analytics: [commentaries, crossrefs, bibletext, gazetteers, dictionary, topics, images_analytics],
 })
 
