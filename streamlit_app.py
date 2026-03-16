@@ -97,6 +97,12 @@ bibletext = st.Page(
     icon=":material/auto_stories:",
 )
 
+gazetteers = st.Page(
+    "pages/4_gazetteers.py",
+    title="Gazetteers" if not is_pt else "Dicionario Biblico",
+    icon=":material/library_books:",
+)
+
 # ---------------------------------------------------------------------------
 # Navegacao agrupada
 # ---------------------------------------------------------------------------
@@ -106,7 +112,7 @@ section_analytics = "Dataset Analytics" if not is_pt else "Analise de Datasets"
 pg = st.navigation({
     "": [home],
     section_explorer: [explorer],
-    section_analytics: [commentaries, crossrefs, bibletext],
+    section_analytics: [commentaries, crossrefs, bibletext, gazetteers],
 })
 
 pg.run()

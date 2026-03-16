@@ -28,3 +28,11 @@ datasets:
     data_glob: "data/01_structured/**/*.json"
     loader: bibletext
     enabled: true
+
+  gazetteers:
+    name: "Bible Gazetteers"
+    repo: bible-gazetteers-dataset
+    description: "2.474 entidades, 347 simbolos e 436 relacionamentos biblicos"
+    data_glob: "data/pt/structured/*.json"
+    loader: gazetteers
+    enabled: true

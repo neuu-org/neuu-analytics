@@ -246,11 +246,53 @@ def bibletext_to_parquet(repo_dir: Path, cfg: dict) -> Path:
     return DATA_DIR / "bibletext.parquet"
 
 
+def gazetteers_to_parquet(repo_dir: Path, cfg: dict) -> Path:
+    """Converte JSONs do bible-gazetteers-dataset para Parquets."""
+    structured_dir = repo_dir / "data" / "pt" / "structured"
+
+    for name in ["entities", "symbols", "relationships"]:
+        fpath = structured_dir / f"{name}.json"
+        if not fpath.exists():
+            print(f"  ⚠ {fpath} nao encontrado")
+            continue
+
+        with open(fpath, encoding="utf-8") as f:
+            data = json.load(f)
+
+        if isinstance(data, list):
+            rows = data
+        elif isinstance(data, dict):
+            rows = list(data.values()) if not any(isinstance(v, list) for v in data.values()) else []
+            for v in data.values():
+                if isinstance(v, list):
+                    rows.extend(v)
+
+        # Converter listas/dicts em strings para parquet
+        clean_rows = []
+        for row in rows:
+            clean = {}
+            for k, v in row.items():
+                if isinstance(v, (list, dict)):
+                    clean[k] = json.dumps(v, ensure_ascii=False)
+                else:
+                    clean[k] = v
+            clean_rows.append(clean)
+
+        if clean_rows:
+            df = pd.DataFrame(clean_rows)
+            out = DATA_DIR / f"gazetteers_{name}.parquet"
+            df.to_parquet(out, index=False)
+            print(f"  Salvo: {out} ({len(df):,} linhas)")
+
+    return DATA_DIR / "gazetteers_entities.parquet"
+
+
 # Mapa de loaders por nome
 LOADERS = {
     "commentaries": commentaries_to_parquet,
     "crossrefs": crossrefs_to_parquet,
     "bibletext": bibletext_to_parquet,
+    "gazetteers": gazetteers_to_parquet,
 }
 
 
