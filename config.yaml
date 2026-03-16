@@ -44,3 +44,11 @@ datasets:
     data_glob: "data/02_sources/**/*.json"
     loader: dictionary
     enabled: true
+
+  images:
+    name: "Bible Images"
+    repo: bible-images-dataset
+    description: "16,914 pinturas religiosas de 1,892 artistas (WikiArt)"
+    data_glob: "data/00_raw/wikiart/filtered_religious.parquet"
+    loader: images
+    enabled: true

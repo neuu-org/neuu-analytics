@@ -75,7 +75,7 @@ home = st.Page(
 
 explorer = st.Page(
     "pages/0_explorer.py",
-    title="Verse Explorer" if not is_pt else "Explorador de Versiculos",
+    title="Verses" if not is_pt else "Versiculos",
     icon=":material/search:",
 )
 
@@ -109,6 +109,18 @@ dictionary = st.Page(
     icon=":material/book:",
 )
 
+images_analytics = st.Page(
+    "pages/6_images.py",
+    title="Images" if not is_pt else "Imagens",
+    icon=":material/palette:",
+)
+
+images_gallery = st.Page(
+    "pages/7_images_gallery.py",
+    title="Image Gallery" if not is_pt else "Galeria de Imagens",
+    icon=":material/image:",
+)
+
 # ---------------------------------------------------------------------------
 # Navegacao agrupada
 # ---------------------------------------------------------------------------
@@ -117,8 +129,8 @@ section_analytics = "Dataset Analytics" if not is_pt else "Analise de Datasets"
 
 pg = st.navigation({
     "": [home],
-    section_explorer: [explorer],
-    section_analytics: [commentaries, crossrefs, bibletext, gazetteers, dictionary],
+    section_explorer: [explorer, images_gallery],
+    section_analytics: [commentaries, crossrefs, bibletext, gazetteers, dictionary, images_analytics],
 })
 
 pg.run()

@@ -339,6 +339,42 @@ def dictionary_to_parquet(repo_dir: Path, cfg: dict) -> Path:
     return DATA_DIR / "dictionary.parquet"
 
 
+def images_to_parquet(repo_dir: Path, cfg: dict) -> Path:
+    """Converte o parquet do bible-images-dataset para formato otimizado."""
+    src = repo_dir / cfg["data_glob"]
+    # Fallback: parquet is gitignored, try local path on E: drive
+    if not src.exists():
+        src = Path("E:/bible-images-dataset/data/00_raw/wikiart/filtered_religious.parquet")
+    if not src.exists():
+        print(f"  Arquivo fonte nao encontrado. Esperado em:")
+        print(f"    {repo_dir / cfg['data_glob']}")
+        print(f"    E:/bible-images-dataset/data/00_raw/wikiart/filtered_religious.parquet")
+        return DATA_DIR / "images.parquet"
+
+    df = pd.read_parquet(src)
+    print(f"  Lidos {len(df):,} registros de {src.name}")
+
+    # Achatar colunas de arrays (numpy arrays -> string separada por |)
+    array_cols = [
+        "styles", "genres", "tags", "media",
+        "artist_nations", "artist_movements", "artist_genres",
+    ]
+    for col in array_cols:
+        if col in df.columns:
+            df[col] = df[col].apply(
+                lambda v: "|".join(str(x) for x in v) if v is not None and hasattr(v, "__iter__") else ""
+            )
+
+    # Adicionar URL das imagens no HuggingFace
+    HF_BASE = "https://huggingface.co/datasets/Iuryeng/bible-images-dataset/resolve/main/images"
+    df["hf_image_url"] = df["key"].apply(lambda k: f"{HF_BASE}/{k}.jpg")
+
+    out = DATA_DIR / "images.parquet"
+    df.to_parquet(out, index=False)
+    print(f"  Salvo: {out} ({len(df):,} linhas, {out.stat().st_size / 1024 / 1024:.1f} MB)")
+    return out
+
+
 # Mapa de loaders por nome
 LOADERS = {
     "commentaries": commentaries_to_parquet,
@@ -346,6 +382,7 @@ LOADERS = {
     "bibletext": bibletext_to_parquet,
     "gazetteers": gazetteers_to_parquet,
     "dictionary": dictionary_to_parquet,
+    "images": images_to_parquet,
 }
 
 
