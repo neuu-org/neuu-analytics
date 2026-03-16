@@ -140,27 +140,28 @@ else:
         key="topic_query",
     )
 
+    # Hide default button styling to make cards look clickable
+    st.markdown("""<style>
+    div[data-testid="stButton"] > button[kind="secondary"] {
+        background: linear-gradient(135deg, #1A1D24 0%, #2A2D34 100%);
+        border: 1px solid #3A3D44;
+        border-radius: 8px;
+        padding: 0;
+        height: auto;
+        min-height: 0;
+    }
+    div[data-testid="stButton"] > button[kind="secondary"]:hover {
+        border-color: #D4A853;
+        background: linear-gradient(135deg, #22252C 0%, #32353C 100%);
+    }
+    </style>""", unsafe_allow_html=True)
+
     def render_card(row, border_color: str, src_label: str, key_prefix: str):
-        """Render a single styled card with click."""
-        with st.container():
-            st.markdown(
-                f"""<div style="
-                    background: linear-gradient(135deg, #1A1D24 0%, #2A2D34 100%);
-                    border: 1px solid #3A3D44;
-                    border-left: 3px solid {border_color};
-                    border-radius: 8px;
-                    padding: 12px 16px;
-                    margin-bottom: 4px;
-                ">
-                    <div style="font-weight:600;color:#E8E0D4;font-size:0.9rem;">{row['topic']}</div>
-                    <div style="color:{border_color};font-size:0.75rem;margin-top:4px;">{row['n_biblical_refs']} refs</div>
-                    <div style="color:#5A5550;font-size:0.65rem;margin-top:2px;">{src_label}</div>
-                </div>""",
-                unsafe_allow_html=True,
-            )
-            if st.button("Abrir" if is_pt else "Open", key=f"{key_prefix}_{row['slug']}", use_container_width=True):
-                st.query_params["topic"] = row["slug"]
-                st.rerun()
+        """Render a clickable styled card."""
+        label = f"**{row['topic']}**\n\n{row['n_biblical_refs']} refs · {src_label}"
+        if st.button(label, key=f"{key_prefix}_{row['slug']}", use_container_width=True):
+            st.query_params["topic"] = row["slug"]
+            st.rerun()
 
     if not query:
         # Featured: both sources
