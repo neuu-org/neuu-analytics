@@ -475,112 +475,146 @@ with tab_entities:
     has_gaz = GAZ_ENTITIES_PARQUET.exists() and GAZ_SYMBOLS_PARQUET.exists()
 
     if has_gaz:
-        # Buscar entidades que podem estar neste versiculo
-        # Verificar nos comentarios se alguma entidade eh mencionada
-        verse_content = ""
-        for _, row in df_verse.iterrows():
-            verse_content += " " + (row["content"] or "")
+        import re as _re
 
-        # Tambem buscar texto do versiculo
-        if main_verse_text:
-            verse_content = main_verse_text + " " + verse_content
+        # Texto do versiculo (fonte primaria) e comentarios (fonte secundaria)
+        verse_text_only = main_verse_text or ""
+        commentary_text = " ".join((row["content"] or "") for _, row in df_verse.iterrows())
 
-        verse_content_lower = verse_content.lower()
+        @st.cache_data(ttl=3600)
+        def load_gaz_entities():
+            return con.sql(f"SELECT * FROM '{GAZ_ENTITIES_PARQUET}'").df()
 
-        if verse_content_lower.strip():
-            # Carregar entidades e simbolos
-            @st.cache_data(ttl=3600)
-            def load_gaz_entities():
-                return con.sql(f"SELECT * FROM '{GAZ_ENTITIES_PARQUET}'").df()
+        @st.cache_data(ttl=3600)
+        def load_gaz_symbols():
+            return con.sql(f"SELECT * FROM '{GAZ_SYMBOLS_PARQUET}'").df()
 
-            @st.cache_data(ttl=3600)
-            def load_gaz_symbols():
-                return con.sql(f"SELECT * FROM '{GAZ_SYMBOLS_PARQUET}'").df()
+        gaz_ent = load_gaz_entities()
+        gaz_sym = load_gaz_symbols()
 
-            gaz_ent = load_gaz_entities()
-            gaz_sym = load_gaz_symbols()
+        def find_whole_word(name: str, text: str) -> bool:
+            """Match palavra inteira, ignorando substrings parciais."""
+            if len(name) < 4:
+                return False
+            pattern = r'\b' + _re.escape(name) + r'\b'
+            return bool(_re.search(pattern, text, _re.IGNORECASE))
 
-            # Encontrar entidades mencionadas
-            found_entities = []
-            for _, ent in gaz_ent.iterrows():
-                name = str(ent["name"]).lower()
-                if len(name) > 2 and name in verse_content_lower:
-                    found_entities.append(ent)
+        # Cores por tipo de entidade
+        TYPE_COLORS = {
+            "DEITY": "#D4A853", "ANGEL": "#D4A853",
+            "LEADER": "#E8A035", "PERSON": "#E8A035",
+            "REGION": "#636EFA", "PLACE": "#636EFA",
+            "CONCEPT": "#00CC96", "SPIRITUAL_CONCEPT": "#00CC96",
+            "EVENT": "#EF553B",
+            "OBJECT": "#AB63FA",
+        }
 
-            # Encontrar simbolos mencionados
-            found_symbols = []
-            for _, sym in gaz_sym.iterrows():
-                name = str(sym["name"]).lower()
-                if len(name) > 2 and name in verse_content_lower:
-                    found_symbols.append(sym)
+        # 1. Entidades no texto do versiculo (alta relevancia)
+        verse_entities = []
+        verse_symbols = []
+        # 2. Entidades nos comentarios (menor relevancia)
+        comm_entities = []
+        comm_symbols = []
 
-            if found_entities or found_symbols:
-                if found_entities:
-                    st.markdown(
-                        f'<div class="section-label">'
-                        f'{"Entidades encontradas" if is_pt else "Entities found"} ({len(found_entities)})'
-                        f'</div>',
-                        unsafe_allow_html=True,
-                    )
-                    for ent in sorted(found_entities, key=lambda e: e["boost"], reverse=True):
-                        desc = html.escape(str(ent.get("description", "")))
-                        aliases_raw = ent.get("aliases", "[]")
-                        try:
-                            aliases = json.loads(aliases_raw) if isinstance(aliases_raw, str) else aliases_raw
-                        except (json.JSONDecodeError, TypeError):
-                            aliases = []
-                        aliases_text = ", ".join(str(a) for a in aliases[:5]) if aliases else ""
-
-                        st.markdown(
-                            f'<div style="background:#1A1D24;border:1px solid #2A2D34;border-radius:8px;'
-                            f'padding:14px 18px;margin-bottom:8px;">'
-                            f'<span style="font-weight:600;color:#D4A853;">{html.escape(ent["name"])}</span>'
-                            f'<span style="color:#8B8072;font-size:0.8rem;margin-left:8px;">{ent["type"]} · boost {ent["boost"]:.1f}</span>'
-                            f'<div style="color:#E8E0D4;margin-top:6px;font-size:0.95rem;">{desc}</div>'
-                            + (f'<div style="color:#5A5550;font-size:0.8rem;margin-top:4px;">Aliases: {html.escape(aliases_text)}</div>' if aliases_text else "")
-                            + f'</div>',
-                            unsafe_allow_html=True,
-                        )
-
-                if found_symbols:
-                    st.markdown(
-                        f'<div class="section-label" style="margin-top:16px;">'
-                        f'{"Simbolos encontrados" if is_pt else "Symbols found"} ({len(found_symbols)})'
-                        f'</div>',
-                        unsafe_allow_html=True,
-                    )
-                    for sym in sorted(found_symbols, key=lambda s: s["boost"], reverse=True):
-                        literal = html.escape(str(sym.get("literal_meaning", "")))
-                        symbolic_raw = sym.get("symbolic_meaning", "[]")
-                        try:
-                            symbolic = json.loads(symbolic_raw) if isinstance(symbolic_raw, str) else symbolic_raw
-                        except (json.JSONDecodeError, TypeError):
-                            symbolic = []
-                        symbolic_text = ", ".join(str(s) for s in symbolic[:5]) if symbolic else ""
-
-                        st.markdown(
-                            f'<div style="background:#1A1D24;border:1px solid #2A2D34;border-radius:8px;'
-                            f'padding:14px 18px;margin-bottom:8px;">'
-                            f'<span style="font-weight:600;color:#00CC96;">{html.escape(sym["name"])}</span>'
-                            f'<span style="color:#8B8072;font-size:0.8rem;margin-left:8px;">{sym["type"]} · boost {sym["boost"]:.1f}</span>'
-                            f'<div style="color:#E8E0D4;margin-top:6px;font-size:0.95rem;">'
-                            f'<strong>{"Literal" if is_pt else "Literal"}:</strong> {literal}</div>'
-                            + (f'<div style="color:#D4A853;font-size:0.9rem;margin-top:4px;">'
-                               f'<strong>{"Simbolico" if is_pt else "Symbolic"}:</strong> {html.escape(symbolic_text)}</div>' if symbolic_text else "")
-                            + f'</div>',
-                            unsafe_allow_html=True,
-                        )
+        for _, ent in gaz_ent.iterrows():
+            name = str(ent["name"])
+            if find_whole_word(name, verse_text_only):
+                verse_entities.append(ent)
+            elif find_whole_word(name, commentary_text):
+                comm_entities.append(ent)
             else:
-                st.info(
-                    "Nenhuma entidade ou simbolo identificado neste versiculo."
-                    if is_pt else
-                    "No entities or symbols identified in this verse."
+                # Tentar aliases
+                aliases_raw = ent.get("aliases", "[]")
+                try:
+                    aliases = json.loads(aliases_raw) if isinstance(aliases_raw, str) else (aliases_raw or [])
+                except (json.JSONDecodeError, TypeError):
+                    aliases = []
+                for alias in aliases:
+                    if find_whole_word(str(alias), verse_text_only):
+                        verse_entities.append(ent)
+                        break
+
+        for _, sym in gaz_sym.iterrows():
+            name = str(sym["name"])
+            if find_whole_word(name, verse_text_only):
+                verse_symbols.append(sym)
+            elif find_whole_word(name, commentary_text):
+                comm_symbols.append(sym)
+
+        # Ordenar por boost e limitar
+        verse_entities = sorted(verse_entities, key=lambda e: e["boost"], reverse=True)[:15]
+        comm_entities = sorted(comm_entities, key=lambda e: e["boost"], reverse=True)[:10]
+        verse_symbols = sorted(verse_symbols, key=lambda s: s["boost"], reverse=True)[:10]
+        comm_symbols = sorted(comm_symbols, key=lambda s: s["boost"], reverse=True)[:5]
+
+        has_any = verse_entities or verse_symbols or comm_entities or comm_symbols
+
+        if has_any:
+            def render_entity(ent):
+                etype = str(ent.get("type", ""))
+                color = TYPE_COLORS.get(etype, "#8B8072")
+                desc = html.escape(str(ent.get("description", "")))
+                st.markdown(
+                    f'<div style="background:#1A1D24;border-left:3px solid {color};border-radius:0 8px 8px 0;'
+                    f'padding:12px 16px;margin-bottom:6px;">'
+                    f'<span style="font-weight:600;color:{color};">{html.escape(ent["name"])}</span>'
+                    f'<span style="color:#5A5550;font-size:0.75rem;margin-left:8px;">{etype}</span>'
+                    f'<div style="color:#E8E0D4;margin-top:4px;font-size:0.9rem;">{desc}</div>'
+                    f'</div>',
+                    unsafe_allow_html=True,
                 )
+
+            def render_symbol(sym):
+                color = "#00CC96"
+                literal = html.escape(str(sym.get("literal_meaning", "")))
+                symbolic_raw = sym.get("symbolic_meaning", "[]")
+                try:
+                    symbolic = json.loads(symbolic_raw) if isinstance(symbolic_raw, str) else (symbolic_raw or [])
+                except (json.JSONDecodeError, TypeError):
+                    symbolic = []
+                symbolic_text = ", ".join(str(s) for s in symbolic[:4])
+
+                st.markdown(
+                    f'<div style="background:#1A1D24;border-left:3px solid {color};border-radius:0 8px 8px 0;'
+                    f'padding:12px 16px;margin-bottom:6px;">'
+                    f'<span style="font-weight:600;color:{color};">{html.escape(sym["name"])}</span>'
+                    f'<span style="color:#5A5550;font-size:0.75rem;margin-left:8px;">{sym["type"]}</span>'
+                    f'<div style="color:#E8E0D4;margin-top:4px;font-size:0.9rem;">{literal}</div>'
+                    + (f'<div style="color:#D4A853;font-size:0.85rem;margin-top:2px;">{html.escape(symbolic_text)}</div>' if symbolic_text else "")
+                    + f'</div>',
+                    unsafe_allow_html=True,
+                )
+
+            # Secao: No versiculo
+            if verse_entities or verse_symbols:
+                label = "No texto do versiculo" if is_pt else "In verse text"
+                total = len(verse_entities) + len(verse_symbols)
+                st.markdown(
+                    f'<div class="section-label">{label} ({total})</div>',
+                    unsafe_allow_html=True,
+                )
+                for ent in verse_entities:
+                    render_entity(ent)
+                for sym in verse_symbols:
+                    render_symbol(sym)
+
+            # Secao: Nos comentarios
+            if comm_entities or comm_symbols:
+                label = "Nos comentarios" if is_pt else "In commentaries"
+                total = len(comm_entities) + len(comm_symbols)
+                st.markdown(
+                    f'<div class="section-label" style="margin-top:16px;">{label} ({total})</div>',
+                    unsafe_allow_html=True,
+                )
+                for ent in comm_entities:
+                    render_entity(ent)
+                for sym in comm_symbols:
+                    render_symbol(sym)
         else:
             st.info(
-                "Nenhum conteudo disponivel para analise de entidades."
+                "Nenhuma entidade ou simbolo identificado neste versiculo."
                 if is_pt else
-                "No content available for entity analysis."
+                "No entities or symbols identified in this verse."
             )
     else:
         st.info(
