@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" fill="none">
+  <!-- NEUU Logo — Minimal geometric mark + wordmark -->
+
+  <!-- Mark: abstract "connections" — 3 nodes linked (scripture, commentary, discovery) -->
+  <circle cx="18" cy="20" r="5" fill="#D4A853"/>
+  <circle cx="38" cy="38" r="5" fill="#D4A853"/>
+  <circle cx="46" cy="14" r="5" fill="#D4A853"/>
+
+  <!-- Links between nodes -->
+  <line x1="22" y1="22" x2="34" y2="36" stroke="#D4A853" stroke-width="1.8" opacity="0.6"/>
+  <line x1="22" y1="18" x2="41" y2="15" stroke="#D4A853" stroke-width="1.8" opacity="0.6"/>
+  <line x1="41" y1="36" x2="44" y2="19" stroke="#D4A853" stroke-width="1.8" opacity="0.6"/>
+
+  <!-- Small accent node (AI/enrichment) -->
+  <circle cx="52" cy="30" r="3" fill="#D4A853" opacity="0.4"/>
+  <line x1="47" y1="17" x2="50" y2="28" stroke="#D4A853" stroke-width="1.2" opacity="0.3"/>
+  <line x1="41" y1="37" x2="50" y2="31" stroke="#D4A853" stroke-width="1.2" opacity="0.3"/>
+
+  <!-- Wordmark: NEUU -->
+  <text x="68" y="38" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="32" font-weight="700" letter-spacing="3" fill="#E8E0D4">
+    NEUU
+  </text>
+
+  <!-- Tagline -->
+  <text x="69" y="52" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="8.5" font-weight="400" letter-spacing="4.5" fill="#8B8072" text-transform="uppercase">
+    BIBLICAL DATA
+  </text>
+</svg>

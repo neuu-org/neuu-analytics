@@ -355,60 +355,34 @@ def topics_to_parquet(repo_dir: Path, cfg: dict) -> Path:
 
         topic = data.get("topic", "")
         slug = data.get("slug", "")
-        topic_type = data.get("type", "")
         sources = data.get("sources", [])
-        definitions = data.get("definitions", [])
         def_refs = data.get("definition_refs", [])
         biblical_refs = data.get("biblical_references", [])
         ref_groups = data.get("reference_groups", [])
-        ai = data.get("ai_enrichment", {})
+        see_also = data.get("see_also", [])
 
-        # First letter from slug or topic
         letter = slug[0].upper() if slug else (topic[0].upper() if topic else "")
 
-        has_ai = bool(ai)
-        has_definitions = len(definitions) > 0
+        source_nav = "NAV" in sources
+        source_tor = "TOR" in sources
         has_def_refs = len(def_refs) > 0
         n_ref_groups = len(ref_groups)
         n_biblical_refs = len(biblical_refs)
         n_def_refs = len(def_refs)
-
-        # Extract source codes
-        source_nav = "NAV" in sources
-        source_tor = "TOR" in sources
-        source_eas = "EAS" in sources
-        source_smi = "SMI" in sources
-
-        # Get definition text (first definition preview)
-        first_def = definitions[0].get("text", "")[:200] if definitions else ""
-
-        # Get AI summary if available
-        ai_summary = ""
-        if ai:
-            summary = ai.get("summary", ai.get("one_sentence", ""))
-            if isinstance(summary, dict):
-                ai_summary = summary.get("one_sentence", "")
-            else:
-                ai_summary = str(summary)[:200]
+        n_see_also = len(see_also)
 
         rows.append({
             "topic": topic,
             "slug": slug,
             "letter": letter,
-            "type": topic_type,
             "source_nav": source_nav,
             "source_tor": source_tor,
-            "source_eas": source_eas,
-            "source_smi": source_smi,
             "n_sources": len(sources),
-            "has_definitions": has_definitions,
             "has_def_refs": has_def_refs,
-            "has_ai": has_ai,
             "n_ref_groups": n_ref_groups,
             "n_biblical_refs": n_biblical_refs,
             "n_def_refs": n_def_refs,
-            "first_definition": first_def,
-            "ai_summary": ai_summary,
+            "n_see_also": n_see_also,
         })
 
     if rows:
