@@ -204,13 +204,16 @@ for i, (_, row) in enumerate(page_data.iterrows()):
             year_text = str(int(completion))
 
         if image_url:
+            uploading_msg = "Fazendo upload... disponivel em instantes" if is_pt else "Uploading... available shortly"
             st.markdown(
                 f'<div style="border-radius:8px;overflow:hidden;background:#1A1D24;'
                 f'border:1px solid #2A2D34;min-height:180px;">'
                 f'<img src="{image_url}" style="width:100%;display:block;border-radius:8px;"'
                 f' onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'
                 f'<div style="display:none;height:180px;align-items:center;justify-content:center;'
-                f'color:#5A5550;font-size:0.8rem;">Uploading...</div>'
+                f'flex-direction:column;gap:8px;color:#5A5550;font-size:0.75rem;text-align:center;padding:16px;">'
+                f'<span style="font-size:1.5rem;">&#9697;</span>'
+                f'{uploading_msg}</div>'
                 f'</div>',
                 unsafe_allow_html=True,
             )
