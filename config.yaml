@@ -45,6 +45,14 @@ datasets:
     loader: dictionary
     enabled: true
 
+  topics:
+    name: "Bible Topics"
+    repo: bible-topics-dataset
+    description: "7,873 topicos biblicos unificados de Nave + Torrey com definicoes e AI enrichment"
+    data_glob: "data/01_parsed/**/*.json"
+    loader: topics
+    enabled: true
+
   images:
     name: "Bible Images"
     repo: bible-images-dataset

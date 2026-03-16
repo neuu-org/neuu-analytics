@@ -339,6 +339,89 @@ def dictionary_to_parquet(repo_dir: Path, cfg: dict) -> Path:
     return DATA_DIR / "dictionary.parquet"
 
 
+def topics_to_parquet(repo_dir: Path, cfg: dict) -> Path:
+    """Converte JSONs do bible-topics-dataset para Parquet."""
+    json_files = collect_json_files(repo_dir, cfg["data_glob"])
+    json_files = [f for f in json_files if f.name != "_index.json"]
+    print(f"  Encontrados {len(json_files)} arquivos de topicos")
+
+    rows = []
+    for jf in tqdm(json_files, desc="  Processando", unit="file"):
+        try:
+            with open(jf, encoding="utf-8") as f:
+                data = json.load(f)
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+
+        topic = data.get("topic", "")
+        slug = data.get("slug", "")
+        topic_type = data.get("type", "")
+        sources = data.get("sources", [])
+        definitions = data.get("definitions", [])
+        def_refs = data.get("definition_refs", [])
+        biblical_refs = data.get("biblical_references", [])
+        ref_groups = data.get("reference_groups", [])
+        ai = data.get("ai_enrichment", {})
+
+        # First letter from slug or topic
+        letter = slug[0].upper() if slug else (topic[0].upper() if topic else "")
+
+        has_ai = bool(ai)
+        has_definitions = len(definitions) > 0
+        has_def_refs = len(def_refs) > 0
+        n_ref_groups = len(ref_groups)
+        n_biblical_refs = len(biblical_refs)
+        n_def_refs = len(def_refs)
+
+        # Extract source codes
+        source_nav = "NAV" in sources
+        source_tor = "TOR" in sources
+        source_eas = "EAS" in sources
+        source_smi = "SMI" in sources
+
+        # Get definition text (first definition preview)
+        first_def = definitions[0].get("text", "")[:200] if definitions else ""
+
+        # Get AI summary if available
+        ai_summary = ""
+        if ai:
+            summary = ai.get("summary", ai.get("one_sentence", ""))
+            if isinstance(summary, dict):
+                ai_summary = summary.get("one_sentence", "")
+            else:
+                ai_summary = str(summary)[:200]
+
+        rows.append({
+            "topic": topic,
+            "slug": slug,
+            "letter": letter,
+            "type": topic_type,
+            "source_nav": source_nav,
+            "source_tor": source_tor,
+            "source_eas": source_eas,
+            "source_smi": source_smi,
+            "n_sources": len(sources),
+            "has_definitions": has_definitions,
+            "has_def_refs": has_def_refs,
+            "has_ai": has_ai,
+            "n_ref_groups": n_ref_groups,
+            "n_biblical_refs": n_biblical_refs,
+            "n_def_refs": n_def_refs,
+            "first_definition": first_def,
+            "ai_summary": ai_summary,
+        })
+
+    if rows:
+        df = pd.DataFrame(rows)
+        out = DATA_DIR / "topics.parquet"
+        df.to_parquet(out, index=False)
+        print(f"  Salvo: {out} ({len(df):,} linhas, {out.stat().st_size / 1024 / 1024:.1f} MB)")
+        return out
+
+    print("  Nenhum dado encontrado")
+    return DATA_DIR / "topics.parquet"
+
+
 def images_to_parquet(repo_dir: Path, cfg: dict) -> Path:
     """Converte o parquet do bible-images-dataset para formato otimizado."""
     src = repo_dir / cfg["data_glob"]
@@ -382,6 +465,7 @@ LOADERS = {
     "bibletext": bibletext_to_parquet,
     "gazetteers": gazetteers_to_parquet,
     "dictionary": dictionary_to_parquet,
+    "topics": topics_to_parquet,
     "images": images_to_parquet,
 }
 
