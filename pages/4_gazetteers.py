@@ -56,7 +56,7 @@ df_ent = load_entities(ENTITIES.stat().st_mtime)
 df_sym = load_symbols(SYMBOLS.stat().st_mtime)
 df_rel = load_rels(RELS.stat().st_mtime)
 
-title = "Dicionario Biblico — Analise" if is_pt else "Bible Gazetteers — Analysis"
+title = "Entidades e Simbolos — Analise" if is_pt else "Entities & Symbols — Analysis"
 st.title(f"📚 {title}")
 st.caption(
     "2.474 entidades, 347 simbolos e 436 relacionamentos biblicos"

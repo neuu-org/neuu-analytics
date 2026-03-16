@@ -4,6 +4,7 @@ Comentarios, autores, enriquecimento teologico, tudo num lugar so.
 """
 
 import html
+import json
 from collections import Counter
 from pathlib import Path
 
@@ -23,6 +24,8 @@ PARQUET = DATA_DIR / "commentaries.parquet"
 ENRICHED_PARQUET = DATA_DIR / "commentaries_enriched.parquet"
 CROSSREFS_PARQUET = DATA_DIR / "crossrefs.parquet"
 BIBLETEXT_PARQUET = DATA_DIR / "bibletext.parquet"
+GAZ_ENTITIES_PARQUET = DATA_DIR / "gazetteers_entities.parquet"
+GAZ_SYMBOLS_PARQUET = DATA_DIR / "gazetteers_symbols.parquet"
 
 from loading import show_loading
 show_loading()
@@ -367,8 +370,15 @@ df_enriched = get_enriched_data(verse_ref)
 # ---------------------------------------------------------------------------
 # Tabs: Comentarios | Analise | Visao Geral
 # ---------------------------------------------------------------------------
-tab_comm, tab_crossrefs, tab_translations, tab_analysis, tab_overview = st.tabs(
-    ["Comentarios", "Referencias Cruzadas", "Traducoes", "Analise Teologica", "Visao Geral"]
+tab_comm, tab_entities, tab_crossrefs, tab_translations, tab_analysis, tab_overview = st.tabs(
+    [
+        "Comentarios" if is_pt else "Commentaries",
+        "Entidades" if is_pt else "Entities",
+        "Referencias Cruzadas" if is_pt else "Cross-References",
+        "Traducoes" if is_pt else "Translations",
+        "Analise Teologica" if is_pt else "Theological Analysis",
+        "Visao Geral" if is_pt else "Overview",
+    ]
 )
 
 # --- Tab 1: Comentarios ---
@@ -460,7 +470,126 @@ with tab_comm:
 
         st.markdown(card_html, unsafe_allow_html=True)
 
-# --- Tab 2: Referencias Cruzadas ---
+# --- Tab 2: Entidades e Simbolos ---
+with tab_entities:
+    has_gaz = GAZ_ENTITIES_PARQUET.exists() and GAZ_SYMBOLS_PARQUET.exists()
+
+    if has_gaz:
+        # Buscar entidades que podem estar neste versiculo
+        # Verificar nos comentarios se alguma entidade eh mencionada
+        verse_content = ""
+        for _, row in df_verse.iterrows():
+            verse_content += " " + (row["content"] or "")
+
+        # Tambem buscar texto do versiculo
+        if main_verse_text:
+            verse_content = main_verse_text + " " + verse_content
+
+        verse_content_lower = verse_content.lower()
+
+        if verse_content_lower.strip():
+            # Carregar entidades e simbolos
+            @st.cache_data(ttl=3600)
+            def load_gaz_entities():
+                return con.sql(f"SELECT * FROM '{GAZ_ENTITIES_PARQUET}'").df()
+
+            @st.cache_data(ttl=3600)
+            def load_gaz_symbols():
+                return con.sql(f"SELECT * FROM '{GAZ_SYMBOLS_PARQUET}'").df()
+
+            gaz_ent = load_gaz_entities()
+            gaz_sym = load_gaz_symbols()
+
+            # Encontrar entidades mencionadas
+            found_entities = []
+            for _, ent in gaz_ent.iterrows():
+                name = str(ent["name"]).lower()
+                if len(name) > 2 and name in verse_content_lower:
+                    found_entities.append(ent)
+
+            # Encontrar simbolos mencionados
+            found_symbols = []
+            for _, sym in gaz_sym.iterrows():
+                name = str(sym["name"]).lower()
+                if len(name) > 2 and name in verse_content_lower:
+                    found_symbols.append(sym)
+
+            if found_entities or found_symbols:
+                if found_entities:
+                    st.markdown(
+                        f'<div class="section-label">'
+                        f'{"Entidades encontradas" if is_pt else "Entities found"} ({len(found_entities)})'
+                        f'</div>',
+                        unsafe_allow_html=True,
+                    )
+                    for ent in sorted(found_entities, key=lambda e: e["boost"], reverse=True):
+                        desc = html.escape(str(ent.get("description", "")))
+                        aliases_raw = ent.get("aliases", "[]")
+                        try:
+                            aliases = json.loads(aliases_raw) if isinstance(aliases_raw, str) else aliases_raw
+                        except (json.JSONDecodeError, TypeError):
+                            aliases = []
+                        aliases_text = ", ".join(str(a) for a in aliases[:5]) if aliases else ""
+
+                        st.markdown(
+                            f'<div style="background:#1A1D24;border:1px solid #2A2D34;border-radius:8px;'
+                            f'padding:14px 18px;margin-bottom:8px;">'
+                            f'<span style="font-weight:600;color:#D4A853;">{html.escape(ent["name"])}</span>'
+                            f'<span style="color:#8B8072;font-size:0.8rem;margin-left:8px;">{ent["type"]} · boost {ent["boost"]:.1f}</span>'
+                            f'<div style="color:#E8E0D4;margin-top:6px;font-size:0.95rem;">{desc}</div>'
+                            + (f'<div style="color:#5A5550;font-size:0.8rem;margin-top:4px;">Aliases: {html.escape(aliases_text)}</div>' if aliases_text else "")
+                            + f'</div>',
+                            unsafe_allow_html=True,
+                        )
+
+                if found_symbols:
+                    st.markdown(
+                        f'<div class="section-label" style="margin-top:16px;">'
+                        f'{"Simbolos encontrados" if is_pt else "Symbols found"} ({len(found_symbols)})'
+                        f'</div>',
+                        unsafe_allow_html=True,
+                    )
+                    for sym in sorted(found_symbols, key=lambda s: s["boost"], reverse=True):
+                        literal = html.escape(str(sym.get("literal_meaning", "")))
+                        symbolic_raw = sym.get("symbolic_meaning", "[]")
+                        try:
+                            symbolic = json.loads(symbolic_raw) if isinstance(symbolic_raw, str) else symbolic_raw
+                        except (json.JSONDecodeError, TypeError):
+                            symbolic = []
+                        symbolic_text = ", ".join(str(s) for s in symbolic[:5]) if symbolic else ""
+
+                        st.markdown(
+                            f'<div style="background:#1A1D24;border:1px solid #2A2D34;border-radius:8px;'
+                            f'padding:14px 18px;margin-bottom:8px;">'
+                            f'<span style="font-weight:600;color:#00CC96;">{html.escape(sym["name"])}</span>'
+                            f'<span style="color:#8B8072;font-size:0.8rem;margin-left:8px;">{sym["type"]} · boost {sym["boost"]:.1f}</span>'
+                            f'<div style="color:#E8E0D4;margin-top:6px;font-size:0.95rem;">'
+                            f'<strong>{"Literal" if is_pt else "Literal"}:</strong> {literal}</div>'
+                            + (f'<div style="color:#D4A853;font-size:0.9rem;margin-top:4px;">'
+                               f'<strong>{"Simbolico" if is_pt else "Symbolic"}:</strong> {html.escape(symbolic_text)}</div>' if symbolic_text else "")
+                            + f'</div>',
+                            unsafe_allow_html=True,
+                        )
+            else:
+                st.info(
+                    "Nenhuma entidade ou simbolo identificado neste versiculo."
+                    if is_pt else
+                    "No entities or symbols identified in this verse."
+                )
+        else:
+            st.info(
+                "Nenhum conteudo disponivel para analise de entidades."
+                if is_pt else
+                "No content available for entity analysis."
+            )
+    else:
+        st.info(
+            "Dataset de entidades e simbolos nao disponivel. Execute `python sync.py gazetteers`."
+            if is_pt else
+            "Entities & symbols dataset not available. Run `python sync.py gazetteers`."
+        )
+
+# --- Tab 3: Referencias Cruzadas ---
 with tab_crossrefs:
     df_crossrefs = get_crossrefs(selected_book, selected_chapter, selected_verse)
 

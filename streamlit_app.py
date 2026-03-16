@@ -99,7 +99,7 @@ bibletext = st.Page(
 
 gazetteers = st.Page(
     "pages/4_gazetteers.py",
-    title="Gazetteers" if not is_pt else "Dicionario Biblico",
+    title="Entities & Symbols" if not is_pt else "Entidades e Simbolos",
     icon=":material/library_books:",
 )
 
