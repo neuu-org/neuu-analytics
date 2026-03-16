@@ -140,18 +140,27 @@ else:
         key="topic_query",
     )
 
-    def render_card_grid(topics_df: pd.DataFrame, border_color: str, source_label: str):
-        """Render a grid of topic cards as buttons."""
-        cols = st.columns(4)
-        for i, (_, row) in enumerate(topics_df.iterrows()):
-            with cols[i % 4]:
-                if st.button(
-                    f"📖 {row['topic']}\n{row['n_biblical_refs']} refs",
-                    key=f"card_{row['slug']}",
-                    use_container_width=True,
-                ):
-                    st.query_params["topic"] = row["slug"]
-                    st.rerun()
+    def render_card(row, border_color: str, src_label: str, key_prefix: str):
+        """Render a single styled card with click."""
+        with st.container():
+            st.markdown(
+                f"""<div style="
+                    background: linear-gradient(135deg, #1A1D24 0%, #2A2D34 100%);
+                    border: 1px solid #3A3D44;
+                    border-left: 3px solid {border_color};
+                    border-radius: 8px;
+                    padding: 12px 16px;
+                    margin-bottom: 4px;
+                ">
+                    <div style="font-weight:600;color:#E8E0D4;font-size:0.9rem;">{row['topic']}</div>
+                    <div style="color:{border_color};font-size:0.75rem;margin-top:4px;">{row['n_biblical_refs']} refs</div>
+                    <div style="color:#5A5550;font-size:0.65rem;margin-top:2px;">{src_label}</div>
+                </div>""",
+                unsafe_allow_html=True,
+            )
+            if st.button("Abrir" if is_pt else "Open", key=f"{key_prefix}_{row['slug']}", use_container_width=True):
+                st.query_params["topic"] = row["slug"]
+                st.rerun()
 
     if not query:
         # Featured: both sources
@@ -162,35 +171,26 @@ else:
             "Topics present in both sources, sorted by references"
         )
         featured = df[df["n_sources"] == 2].nlargest(12, "n_biblical_refs")
-        render_card_grid(featured, "#D4A853", "Nave + Torrey")
+        cols = st.columns(4)
+        for i, (_, row) in enumerate(featured.iterrows()):
+            with cols[i % 4]:
+                render_card(row, "#D4A853", "Nave + Torrey", "feat")
 
         st.markdown("---")
 
-        # Nave only highlights
+        # Nave + Torrey highlights side by side
         col_a, col_b = st.columns(2)
         with col_a:
             st.markdown("#### " + ("Destaques Nave" if is_pt else "Nave Highlights"))
             nave_top = df[df["source_nav"] & ~df["source_tor"]].nlargest(8, "n_biblical_refs")
             for _, row in nave_top.iterrows():
-                if st.button(
-                    f"📗 {row['topic']} — {row['n_biblical_refs']} refs",
-                    key=f"nave_{row['slug']}",
-                    use_container_width=True,
-                ):
-                    st.query_params["topic"] = row["slug"]
-                    st.rerun()
+                render_card(row, "#4CAF50", "Nave", "nave")
 
         with col_b:
             st.markdown("#### " + ("Destaques Torrey" if is_pt else "Torrey Highlights"))
             torrey_top = df[df["source_tor"] & ~df["source_nav"]].nlargest(8, "n_biblical_refs")
             for _, row in torrey_top.iterrows():
-                if st.button(
-                    f"📘 {row['topic']} — {row['n_biblical_refs']} refs",
-                    key=f"torrey_{row['slug']}",
-                    use_container_width=True,
-                ):
-                    st.query_params["topic"] = row["slug"]
-                    st.rerun()
+                render_card(row, "#2196F3", "Torrey", "torrey")
 
     else:
         # Search results
@@ -201,18 +201,14 @@ else:
             st.warning("Nenhum resultado" if is_pt else "No results found")
         else:
             st.markdown(f"**{len(results)}** {'resultados' if is_pt else 'results'}")
-            for _, row in results.iterrows():
+            cols = st.columns(4)
+            for i, (_, row) in enumerate(results.iterrows()):
                 src_parts = []
                 if row["source_nav"]:
                     src_parts.append("Nave")
                 if row["source_tor"]:
                     src_parts.append("Torrey")
                 src_text = " + ".join(src_parts)
-
-                if st.button(
-                    f"📖 {row['topic']}  —  {row['n_biblical_refs']} refs · {src_text}",
-                    key=f"search_{row['slug']}",
-                    use_container_width=True,
-                ):
-                    st.query_params["topic"] = row["slug"]
-                    st.rerun()
+                color = "#D4A853" if len(src_parts) > 1 else ("#4CAF50" if "Nave" in src_parts else "#2196F3")
+                with cols[i % 4]:
+                    render_card(row, color, src_text, "search")
