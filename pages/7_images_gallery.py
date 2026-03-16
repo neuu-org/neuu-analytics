@@ -188,6 +188,84 @@ with nav_col3:
 st.markdown("---")
 
 # ---------------------------------------------------------------------------
+# Image detail dialog
+# ---------------------------------------------------------------------------
+@st.dialog("", width="large")
+def show_image_detail(key: str):
+    """Show full-size image with metadata in a modal dialog."""
+    img_row = df[df["key"] == key]
+    if img_row.empty:
+        st.error("Imagem nao encontrada." if is_pt else "Image not found.")
+        return
+    r = img_row.iloc[0]
+
+    url = r.get("hf_image_url", "")
+    t = r.get("title", "Untitled") or "Untitled"
+    a = r.get("artist", "Unknown") or "Unknown"
+    year = ""
+    if pd.notna(r.get("completion")) and int(r["completion"]) >= 100:
+        year = str(int(r["completion"]))
+    styles = r.get("styles", "") or ""
+    genres = r.get("genres", "") or ""
+    tags = r.get("tags", "") or ""
+    media = r.get("media", "") or ""
+
+    # Title
+    st.markdown(
+        f'<div style="font-size:1.4rem;font-weight:700;color:#E8E0D4;">{t}</div>'
+        f'<div style="font-size:1rem;color:#D4A853;margin-top:2px;">{a}'
+        f'{" — " + year if year else ""}</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown("")
+
+    # Full image
+    if url:
+        st.markdown(
+            f'<img src="{url}" style="width:100%;border-radius:10px;">',
+            unsafe_allow_html=True,
+        )
+
+    # Metadata pills
+    st.markdown("")
+    meta_parts = []
+    if styles:
+        for s in styles.split("|"):
+            if s.strip():
+                meta_parts.append(("Estilo" if is_pt else "Style", s.strip()))
+    if genres:
+        for g in genres.split("|"):
+            if g.strip():
+                meta_parts.append(("Genero" if is_pt else "Genre", g.strip()))
+    if media:
+        for m in media.split("|"):
+            if m.strip():
+                meta_parts.append(("Material" if is_pt else "Media", m.strip()))
+
+    if meta_parts:
+        pills_html = " ".join(
+            f'<span style="display:inline-block;padding:4px 12px;border-radius:20px;'
+            f'font-size:0.75rem;margin:3px;background:rgba(212,168,83,0.12);'
+            f'color:#D4A853;border:1px solid rgba(212,168,83,0.25);">'
+            f'{val}</span>'
+            for _, val in meta_parts
+        )
+        st.markdown(pills_html, unsafe_allow_html=True)
+
+    if tags:
+        tag_list = [t.strip() for t in tags.split("|") if t.strip()]
+        if tag_list:
+            tags_html = " ".join(
+                f'<span style="display:inline-block;padding:3px 10px;border-radius:20px;'
+                f'font-size:0.7rem;margin:2px;background:rgba(139,128,114,0.15);'
+                f'color:#8B8072;border:1px solid rgba(139,128,114,0.25);">'
+                f'{t}</span>'
+                for t in tag_list
+            )
+            st.markdown(tags_html, unsafe_allow_html=True)
+
+
+# ---------------------------------------------------------------------------
 # Image Grid (4 columns)
 # ---------------------------------------------------------------------------
 grid_cols = st.columns(4)
@@ -198,6 +276,7 @@ for i, (_, row) in enumerate(page_data.iterrows()):
         image_url = row.get("hf_image_url", "")
         title_text = row.get("title", "Untitled") or "Untitled"
         artist_text = row.get("artist", "Unknown") or "Unknown"
+        row_key = str(row.get("key", ""))
         year_text = ""
         completion = row.get("completion")
         if pd.notna(completion) and int(completion) >= 100:
@@ -205,7 +284,6 @@ for i, (_, row) in enumerate(page_data.iterrows()):
 
         if image_url:
             uploading_msg = "Fazendo upload... disponivel em instantes" if is_pt else "Uploading... available shortly"
-            # Use background-image CSS — if image fails to load, the fallback div shows through
             st.markdown(
                 f'<div style="border-radius:8px;overflow:hidden;background:#1A1D24;'
                 f'border:1px solid #2A2D34;min-height:200px;position:relative;">'
@@ -219,17 +297,18 @@ for i, (_, row) in enumerate(page_data.iterrows()):
                 unsafe_allow_html=True,
             )
 
-        # Title
-        st.markdown(
-            f'<div style="font-weight:600;color:#E8E0D4;font-size:0.85rem;'
-            f'line-height:1.3;margin-top:4px;">{title_text}</div>',
-            unsafe_allow_html=True,
-        )
+        # Title as clickable button to open detail dialog
+        if st.button(
+            title_text,
+            key=f"detail_{row_key}_{i}",
+            type="tertiary",
+        ):
+            show_image_detail(row_key)
 
-        # Artist name as clickable button
+        # Artist name as clickable button to filter
         if st.button(
             artist_text,
-            key=f"artist_{row.get('key', i)}",
+            key=f"artist_{row_key}_{i}",
             type="tertiary",
         ):
             st.session_state.gallery_artist = artist_text
