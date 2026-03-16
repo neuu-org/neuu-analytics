@@ -45,7 +45,7 @@ st.caption(
 # ---------------------------------------------------------------------------
 ITEMS_PER_PAGE = 20
 
-col_f1, col_f2, col_f3 = st.columns(3)
+col_f1, col_f2, col_f3, col_f4 = st.columns([1, 1, 1, 1])
 
 with col_f1:
     artists_sorted = sorted(df["artist"].dropna().unique())
@@ -76,6 +76,19 @@ with col_f3:
         placeholder="Ex: Jesus, Mary, crucifixion...",
     )
 
+with col_f4:
+    sort_options = {
+        "fame": "Mais Famosas" if is_pt else "Most Famous",
+        "aesthetic": "Mais Belas" if is_pt else "Most Beautiful",
+        "recent": "Mais Recentes" if is_pt else "Most Recent",
+        "oldest": "Mais Antigas" if is_pt else "Oldest First",
+    }
+    sort_by = st.selectbox(
+        "Ordenar" if is_pt else "Sort by",
+        options=list(sort_options.keys()),
+        format_func=lambda x: sort_options[x],
+    )
+
 # ---------------------------------------------------------------------------
 # Apply filters
 # ---------------------------------------------------------------------------
@@ -96,6 +109,16 @@ if tag_search.strip():
     search_lower = tag_search.strip().lower()
     mask = filtered["tags"].fillna("").str.lower().str.contains(search_lower, regex=False)
     filtered = filtered[mask]
+
+# Sort
+if sort_by == "fame" and "fame_score" in filtered.columns:
+    filtered = filtered.sort_values("fame_score", ascending=False)
+elif sort_by == "aesthetic":
+    filtered = filtered.sort_values("aesthetic", ascending=False)
+elif sort_by == "recent":
+    filtered = filtered.sort_values("completion", ascending=False, na_position="last")
+elif sort_by == "oldest":
+    filtered = filtered.sort_values("completion", ascending=True, na_position="last")
 
 total_filtered = len(filtered)
 st.markdown(
@@ -119,7 +142,7 @@ if "gallery_page" not in st.session_state:
     st.session_state.gallery_page = 1
 
 # Reset page when filters change
-filter_key = f"{selected_artist}|{'|'.join(selected_styles)}|{tag_search}"
+filter_key = f"{selected_artist}|{'|'.join(selected_styles)}|{tag_search}|{sort_by}"
 if st.session_state.get("_gallery_filter_key") != filter_key:
     st.session_state.gallery_page = 1
     st.session_state._gallery_filter_key = filter_key
