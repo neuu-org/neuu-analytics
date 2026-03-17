@@ -380,6 +380,9 @@ def topics_to_parquet(repo_dir: Path, cfg: dict) -> Path:
         books_mentioned = data.get("books_mentioned", [])
         stats = data.get("stats", {})
 
+        # Filter out NAV aspects (Nave parser needs improvement)
+        aspects_tor = [a for a in aspects if a.get("source") != "NAV"]
+
         rows.append({
             "topic": topic,
             "slug": slug,
@@ -395,7 +398,7 @@ def topics_to_parquet(repo_dir: Path, cfg: dict) -> Path:
             "ot_refs": stats.get("ot_refs", 0),
             "nt_refs": stats.get("nt_refs", 0),
             "n_books": stats.get("books_count", 0),
-            "aspects_json": json.dumps(aspects, ensure_ascii=False),
+            "aspects_json": json.dumps(aspects_tor, ensure_ascii=False),
             "see_also_json": json.dumps(see_also, ensure_ascii=False),
             "books_json": json.dumps(books_mentioned, ensure_ascii=False),
         })
