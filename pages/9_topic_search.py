@@ -162,14 +162,39 @@ def parse_ref(ref_str: str):
     return None, None, None
 
 
+# Map numeric-prefix book names to Roman numeral variants used by some translations
+_BOOK_ALIASES: dict[str, list[str]] = {
+    "1 chronicles": ["i chronicles"],
+    "2 chronicles": ["ii chronicles"],
+    "1 corinthians": ["i corinthians"],
+    "2 corinthians": ["ii corinthians"],
+    "1 john": ["i john"],
+    "2 john": ["ii john"],
+    "3 john": ["iii john"],
+    "1 kings": ["i kings"],
+    "2 kings": ["ii kings"],
+    "1 peter": ["i peter"],
+    "2 peter": ["ii peter"],
+    "1 samuel": ["i samuel"],
+    "2 samuel": ["ii samuel"],
+    "1 thessalonians": ["i thessalonians"],
+    "2 thessalonians": ["ii thessalonians"],
+    "1 timothy": ["i timothy"],
+    "2 timothy": ["ii timothy"],
+    "revelation": ["revelation of john"],
+}
+
+
 def lookup_verse(bible_df: pd.DataFrame, ref_str: str, translation: str) -> str | None:
     """Look up verse text from bibletext dataframe."""
     book, ch, vs = parse_ref(ref_str)
     if not book:
         return None
+    book_lower = book.lower()
+    candidates = [book_lower] + _BOOK_ALIASES.get(book_lower, [])
     mask = (
         (bible_df["translation"] == translation)
-        & (bible_df["book"].str.lower() == book.lower())
+        & (bible_df["book"].str.lower().isin(candidates))
         & (bible_df["chapter"] == ch)
         & (bible_df["verse"] == vs)
     )
