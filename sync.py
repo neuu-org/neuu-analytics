@@ -7,6 +7,7 @@ Uso:
 """
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -18,6 +19,17 @@ from tqdm import tqdm
 ROOT = Path(__file__).resolve().parent
 DATASETS_DIR = ROOT / "datasets"
 DATA_DIR = ROOT / "data"
+
+OT_BOOKS = {
+    "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
+    "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",
+    "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles",
+    "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs",
+    "Ecclesiastes", "Song of Solomon", "Isaiah", "Jeremiah",
+    "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos",
+    "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah",
+    "Haggai", "Zechariah", "Malachi",
+}
 CONFIG_PATH = ROOT / "config.yaml"
 
 
@@ -383,6 +395,26 @@ def topics_to_parquet(repo_dir: Path, cfg: dict) -> Path:
         # Filter out NAV aspects (Nave parser needs improvement)
         aspects_tor = [a for a in aspects if a.get("source") != "NAV"]
 
+        # Recalculate stats from TOR-only aspects
+        tor_refs = []
+        for a in aspects_tor:
+            tor_refs.extend(a.get("references", []))
+        n_biblical_refs_tor = len(tor_refs)
+
+        # Parse refs to compute OT/NT and book counts
+        tor_books = set()
+        ot_tor = 0
+        nt_tor = 0
+        for ref in tor_refs:
+            m = re.match(r"^(\d?\s?[A-Za-z ]+?)\s+\d+:", ref)
+            if m:
+                book = m.group(1).strip()
+                tor_books.add(book)
+                if book in OT_BOOKS:
+                    ot_tor += 1
+                else:
+                    nt_tor += 1
+
         rows.append({
             "topic": topic,
             "slug": slug,
@@ -392,15 +424,15 @@ def topics_to_parquet(repo_dir: Path, cfg: dict) -> Path:
             "n_sources": len(sources),
             "has_def_refs": has_def_refs,
             "n_ref_groups": n_ref_groups,
-            "n_biblical_refs": n_biblical_refs,
+            "n_biblical_refs": n_biblical_refs_tor,
             "n_def_refs": n_def_refs,
             "n_see_also": n_see_also,
-            "ot_refs": stats.get("ot_refs", 0),
-            "nt_refs": stats.get("nt_refs", 0),
-            "n_books": stats.get("books_count", 0),
+            "ot_refs": ot_tor,
+            "nt_refs": nt_tor,
+            "n_books": len(tor_books),
             "aspects_json": json.dumps(aspects_tor, ensure_ascii=False),
             "see_also_json": json.dumps(see_also, ensure_ascii=False),
-            "books_json": json.dumps(books_mentioned, ensure_ascii=False),
+            "books_json": json.dumps(sorted(tor_books), ensure_ascii=False),
         })
 
     if rows:
