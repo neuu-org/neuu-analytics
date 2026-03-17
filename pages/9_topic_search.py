@@ -180,8 +180,9 @@ def lookup_verse(bible_df: pd.DataFrame, ref_str: str, translation: str) -> str 
 
 
 def render_full_topic(row: pd.Series):
-    """Render a full topic in study format with verse text."""
+    """Render a full topic in study format with tabs like Verse Explorer."""
     import html as _html
+    import plotly.graph_objects as go
     topic_name = row["topic"]
 
     # Load bible text for verse lookups
@@ -189,112 +190,197 @@ def render_full_topic(row: pd.Series):
     if BIBLETEXT_FILE.exists():
         bible_df = load_bible_text(BIBLETEXT_FILE.stat().st_mtime)
 
-    # Pick translation from sidebar
     selected_translation = st.session_state.get("translation", "KJV")
 
-    src_labels = ["Torrey's Topical Textbook (1897)"]
-
     st.markdown(f'<div class="topic-title">{_html.escape(topic_name)}</div>', unsafe_allow_html=True)
-    st.caption(" · ".join(src_labels))
+    st.caption("Torrey's Topical Textbook (1897)")
 
-    # Stats row
     aspects = json.loads(row.get("aspects_json", "[]"))
     ot = int(row.get("ot_refs", 0))
     nt = int(row.get("nt_refs", 0))
     n_books = int(row.get("n_books", 0))
+    all_refs = []
+    for asp in aspects:
+        all_refs.extend(asp.get("references", []))
 
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Refs" if not is_pt else "Refs", int(row["n_biblical_refs"]))
+    c1.metric("Refs", int(row["n_biblical_refs"]))
     c2.metric("Aspects", len(aspects))
     c3.metric("Books" if not is_pt else "Livros", n_books)
     c4.metric("OT/NT" if not is_pt else "AT/NT", f"{ot}/{nt}")
 
     st.markdown("---")
 
-    # Aspects
-    if aspects:
-        st.markdown('<div class="section-label">ASPECTS</div>', unsafe_allow_html=True)
-        for i, asp in enumerate(aspects):
-            label = asp.get("label", "")
-            refs = asp.get("references", [])
-            source_tag = asp.get("source", "")
+    # ── TABS ──
+    tab_aspects, tab_refs, tab_books, tab_overview = st.tabs([
+        "Aspectos" if is_pt else "Aspects",
+        f"{'Referencias' if is_pt else 'References'} ({len(all_refs)})",
+        f"{'Livros' if is_pt else 'Books'} ({n_books})",
+        "Visao Geral" if is_pt else "Overview",
+    ])
 
-            tag_html = ""
-            if source_tag == "TOR":
-                tag_html = '<span class="tag-tor">TOR</span>'
+    # ── TAB: ASPECTS ──
+    with tab_aspects:
+        if aspects:
+            for asp in aspects:
+                label = asp.get("label", "")
+                refs = asp.get("references", [])
 
-            # Build refs with inline verse text
-            refs_parts = []
-            for ref in refs:
-                refs_parts.append(_html.escape(ref))
+                refs_html = ""
+                if refs:
+                    refs_html = f'<div class="aspect-refs">{" · ".join(_html.escape(r) for r in refs)}</div>'
 
-            refs_html = ""
-            if refs_parts:
-                refs_html = f'<div class="aspect-refs">{" · ".join(refs_parts)}</div>'
+                st.markdown(
+                    f'<div class="aspect-card">'
+                    f'<span class="aspect-label">{_html.escape(label)}</span>'
+                    f'{refs_html}'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
 
+                # Verse text expander
+                if refs and not bible_df.empty:
+                    show_limit = 20
+                    with st.expander(f"{'Ver versiculos' if is_pt else 'Show verses'} ({len(refs)})", expanded=False):
+                        for ref in refs[:show_limit]:
+                            text = lookup_verse(bible_df, ref, selected_translation)
+                            if text:
+                                st.markdown(
+                                    f'<div class="verse-inline">'
+                                    f'<span class="verse-ref-small">{_html.escape(ref)}</span><br/>'
+                                    f'{_html.escape(text)}'
+                                    f'</div>',
+                                    unsafe_allow_html=True,
+                                )
+                        if len(refs) > show_limit:
+                            st.caption(f"... {'e mais' if is_pt else 'and'} {len(refs) - show_limit} {'versiculos' if is_pt else 'more verses'}")
+        else:
+            st.info("Nenhum aspecto encontrado" if is_pt else "No aspects found")
+
+    # ── TAB: REFERENCES ──
+    with tab_refs:
+        if all_refs and not bible_df.empty:
+            for ref in all_refs:
+                text = lookup_verse(bible_df, ref, selected_translation)
+                if text:
+                    st.markdown(
+                        f'<div class="verse-inline">'
+                        f'<span class="verse-ref-small">{_html.escape(ref)}</span><br/>'
+                        f'{_html.escape(text)}'
+                        f'</div>',
+                        unsafe_allow_html=True,
+                    )
+                else:
+                    st.markdown(
+                        f'<div class="aspect-refs" style="margin:4px 0;">{_html.escape(ref)}</div>',
+                        unsafe_allow_html=True,
+                    )
+        elif all_refs:
+            for ref in all_refs:
+                st.markdown(
+                    f'<div class="aspect-refs" style="margin:4px 0;">{_html.escape(ref)}</div>',
+                    unsafe_allow_html=True,
+                )
+        else:
+            st.info("Nenhuma referencia encontrada" if is_pt else "No references found")
+
+    # ── TAB: BOOKS ──
+    with tab_books:
+        books = json.loads(row.get("books_json", "[]"))
+        if books:
+            # Count refs per book
+            from collections import Counter
+            book_counts = Counter()
+            for ref in all_refs:
+                book, _, _ = parse_ref(ref)
+                if book:
+                    book_counts[book] += 1
+
+            if book_counts:
+                bk_df = pd.DataFrame(
+                    sorted(book_counts.items(), key=lambda x: -x[1]),
+                    columns=["Book", "Refs"],
+                )
+                fig = go.Figure(go.Bar(
+                    x=bk_df["Refs"], y=bk_df["Book"],
+                    orientation="h",
+                    marker_color="#D4A853",
+                    text=bk_df["Refs"], textposition="auto",
+                ))
+                fig.update_layout(
+                    plot_bgcolor="rgba(0,0,0,0)",
+                    paper_bgcolor="rgba(0,0,0,0)",
+                    font_color="#E8E0D4",
+                    height=max(250, len(bk_df) * 28),
+                    margin=dict(l=0, r=0, t=10, b=10),
+                    yaxis=dict(autorange="reversed"),
+                )
+                st.plotly_chart(fig, use_container_width=True)
+
+            # OT/NT pie
+            if ot > 0 or nt > 0:
+                col1, col2 = st.columns([1, 2])
+                with col1:
+                    fig = go.Figure(go.Pie(
+                        labels=["AT" if is_pt else "OT", "NT"],
+                        values=[ot, nt],
+                        marker_colors=["#4CAF50", "#2196F3"],
+                        hole=0.45,
+                        textinfo="percent+value",
+                    ))
+                    fig.update_layout(
+                        plot_bgcolor="rgba(0,0,0,0)",
+                        paper_bgcolor="rgba(0,0,0,0)",
+                        font_color="#E8E0D4",
+                        height=250,
+                        margin=dict(l=0, r=0, t=10, b=10),
+                        showlegend=True,
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+
+                with col2:
+                    st.markdown(
+                        f'<div class="books-box">'
+                        f'<strong>{"Livros mencionados" if is_pt else "Books mentioned"}:</strong><br/>'
+                        f'{", ".join(books)}'
+                        f'</div>',
+                        unsafe_allow_html=True,
+                    )
+        else:
+            st.info("Nenhum livro encontrado" if is_pt else "No books found")
+
+    # ── TAB: OVERVIEW ──
+    with tab_overview:
+        st.markdown('<div class="section-label">METADATA</div>', unsafe_allow_html=True)
+
+        st.markdown(
+            f'<div class="aspect-card">'
+            f'<div class="stat-row">'
+            f'<div class="stat-item"><strong>{"Fonte" if is_pt else "Source"}:</strong> Torrey\'s Topical Textbook (1897)</div>'
+            f'</div>'
+            f'<div class="stat-row">'
+            f'<div class="stat-item"><strong>Aspects:</strong> {len(aspects)}</div>'
+            f'<div class="stat-item"><strong>Refs:</strong> {len(all_refs)}</div>'
+            f'<div class="stat-item"><strong>Books:</strong> {n_books}</div>'
+            f'<div class="stat-item"><strong>OT:</strong> {ot} · <strong>NT:</strong> {nt}</div>'
+            f'</div>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+
+        # See also — clicáveis
+        see_also = json.loads(row.get("see_also_json", "[]"))
+        if see_also:
+            see_links = []
+            for sa in see_also:
+                slug = sa.lower().replace(" ", "_").replace(",", "").replace("'", "")
+                see_links.append(f'<a href="?topic={slug}" style="color:#636EFA;text-decoration:none;">{_html.escape(sa)}</a>')
             st.markdown(
-                f'<div class="aspect-card">'
-                f'<span class="aspect-label">{_html.escape(label)}</span>{tag_html}'
-                f'{refs_html}'
+                f'<div class="see-also-box">'
+                f'<strong>See also:</strong> {" · ".join(see_links)}'
                 f'</div>',
                 unsafe_allow_html=True,
             )
-
-            # Show verse text for aspects with few refs (≤5) using expander
-            if refs and len(refs) <= 5 and not bible_df.empty:
-                with st.expander(f"{'Ver versiculos' if is_pt else 'Show verses'} ({len(refs)})", expanded=False):
-                    for ref in refs:
-                        # Handle multi-verse refs like "Genesis 1:1,2,3"
-                        text = lookup_verse(bible_df, ref, selected_translation)
-                        if text:
-                            st.markdown(
-                                f'<div class="verse-inline">'
-                                f'<span class="verse-ref-small">{_html.escape(ref)}</span><br/>'
-                                f'{_html.escape(text)}'
-                                f'</div>',
-                                unsafe_allow_html=True,
-                            )
-            elif refs and len(refs) > 5 and not bible_df.empty:
-                with st.expander(f"{'Ver versiculos' if is_pt else 'Show verses'} ({len(refs)})", expanded=False):
-                    for ref in refs[:20]:  # Limit to 20 to avoid overload
-                        text = lookup_verse(bible_df, ref, selected_translation)
-                        if text:
-                            st.markdown(
-                                f'<div class="verse-inline">'
-                                f'<span class="verse-ref-small">{_html.escape(ref)}</span><br/>'
-                                f'{_html.escape(text)}'
-                                f'</div>',
-                                unsafe_allow_html=True,
-                            )
-                    if len(refs) > 20:
-                        st.caption(f"... {'e mais' if is_pt else 'and'} {len(refs) - 20} {'versiculos' if is_pt else 'more verses'}")
-
-    st.markdown("---")
-
-    # Books mentioned
-    books = json.loads(row.get("books_json", "[]"))
-    if books:
-        st.markdown(
-            f'<div class="books-box">'
-            f'<strong>{"Livros mencionados" if is_pt else "Books mentioned"}:</strong> '
-            f'{", ".join(books)}'
-            f'</div>',
-            unsafe_allow_html=True,
-        )
-
-    # See also — clicáveis
-    see_also = json.loads(row.get("see_also_json", "[]"))
-    if see_also:
-        see_links = []
-        for sa in see_also:
-            slug = sa.lower().replace(" ", "_").replace(",", "").replace("'", "")
-            see_links.append(f'<a href="?topic={slug}" style="color:#636EFA;text-decoration:none;">{_html.escape(sa)}</a>')
-        st.markdown(
-            f'<div class="see-also-box">'
-            f'<strong>See also:</strong> {" · ".join(see_links)}'
-            f'</div>',
-            unsafe_allow_html=True,
-        )
 
 
 df = load_topics(TOPICS_FILE.stat().st_mtime)
