@@ -17,6 +17,7 @@ show_loading()
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 TOPICS_FILE = DATA_DIR / "topics.parquet"
+BIBLETEXT_FILE = DATA_DIR / "bibletext.parquet"
 
 if not TOPICS_FILE.exists():
     st.info("Dados nao encontrados. Execute `python sync.py topics`.")
@@ -115,11 +116,30 @@ st.markdown("""
     font-size: 0.9rem;
     color: #E8E0D4;
 }
+.verse-inline {
+    background: rgba(212, 168, 83, 0.06);
+    border-left: 2px solid rgba(212, 168, 83, 0.3);
+    padding: 8px 12px;
+    margin: 4px 0 4px 8px;
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #E8E0D4;
+    border-radius: 0 6px 6px 0;
+}
+.verse-inline .verse-ref-small {
+    font-style: normal;
+    font-size: 0.8rem;
+    color: #D4A853;
+    font-weight: 600;
+}
 </style>
 """, unsafe_allow_html=True)
 
 con = duckdb.connect()
 is_pt = st.session_state.get("language", "English") == "Portugues"
+import re as _re
 
 
 @st.cache_data(ttl=3600)
@@ -127,10 +147,50 @@ def load_topics(mtime: float) -> pd.DataFrame:
     return con.sql(f"SELECT * FROM '{TOPICS_FILE}'").df()
 
 
+@st.cache_data(ttl=3600)
+def load_bible_text(mtime: float) -> pd.DataFrame:
+    if not BIBLETEXT_FILE.exists():
+        return pd.DataFrame()
+    return con.sql(f"SELECT * FROM '{BIBLETEXT_FILE}'").df()
+
+
+def parse_ref(ref_str: str):
+    """Parse 'Genesis 1:2' or '1 Chronicles 2:10' into (book, chapter, verse)."""
+    m = _re.match(r"^(\d?\s?[A-Za-z ]+?)\s+(\d+):(\d+)", ref_str.strip())
+    if m:
+        return m.group(1).strip(), int(m.group(2)), int(m.group(3))
+    return None, None, None
+
+
+def lookup_verse(bible_df: pd.DataFrame, ref_str: str, translation: str) -> str | None:
+    """Look up verse text from bibletext dataframe."""
+    book, ch, vs = parse_ref(ref_str)
+    if not book:
+        return None
+    mask = (
+        (bible_df["translation"] == translation)
+        & (bible_df["book"].str.lower() == book.lower())
+        & (bible_df["chapter"] == ch)
+        & (bible_df["verse"] == vs)
+    )
+    matches = bible_df[mask]
+    if not matches.empty:
+        return matches.iloc[0]["text"]
+    return None
+
+
 def render_full_topic(row: pd.Series):
-    """Render a full topic in study format."""
+    """Render a full topic in study format with verse text."""
     import html as _html
     topic_name = row["topic"]
+
+    # Load bible text for verse lookups
+    bible_df = pd.DataFrame()
+    if BIBLETEXT_FILE.exists():
+        bible_df = load_bible_text(BIBLETEXT_FILE.stat().st_mtime)
+
+    # Pick translation from sidebar
+    selected_translation = st.session_state.get("translation", "KJV")
 
     src_labels = []
     if row["source_nav"]:
@@ -147,22 +207,18 @@ def render_full_topic(row: pd.Series):
     nt = int(row.get("nt_refs", 0))
     n_books = int(row.get("n_books", 0))
 
-    st.markdown(
-        f'<div class="stat-row">'
-        f'<div class="stat-item"><strong>{int(row["n_biblical_refs"])}</strong> {"referencias" if is_pt else "references"}</div>'
-        f'<div class="stat-item"><strong>{len(aspects)}</strong> aspects</div>'
-        f'<div class="stat-item"><strong>{n_books}</strong> {"livros" if is_pt else "books"}</div>'
-        f'<div class="stat-item"><strong>{ot}</strong> AT · <strong>{nt}</strong> NT</div>'
-        f'</div>',
-        unsafe_allow_html=True,
-    )
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Refs" if not is_pt else "Refs", int(row["n_biblical_refs"]))
+    c2.metric("Aspects", len(aspects))
+    c3.metric("Books" if not is_pt else "Livros", n_books)
+    c4.metric("OT/NT" if not is_pt else "AT/NT", f"{ot}/{nt}")
 
     st.markdown("---")
 
     # Aspects
     if aspects:
         st.markdown('<div class="section-label">ASPECTS</div>', unsafe_allow_html=True)
-        for asp in aspects:
+        for i, asp in enumerate(aspects):
             label = asp.get("label", "")
             refs = asp.get("references", [])
             source_tag = asp.get("source", "")
@@ -173,9 +229,14 @@ def render_full_topic(row: pd.Series):
             elif source_tag == "TOR":
                 tag_html = '<span class="tag-tor">TOR</span>'
 
+            # Build refs with inline verse text
+            refs_parts = []
+            for ref in refs:
+                refs_parts.append(_html.escape(ref))
+
             refs_html = ""
-            if refs:
-                refs_html = f'<div class="aspect-refs">{", ".join(_html.escape(r) for r in refs)}</div>'
+            if refs_parts:
+                refs_html = f'<div class="aspect-refs">{" · ".join(refs_parts)}</div>'
 
             st.markdown(
                 f'<div class="aspect-card">'
@@ -184,6 +245,37 @@ def render_full_topic(row: pd.Series):
                 f'</div>',
                 unsafe_allow_html=True,
             )
+
+            # Show verse text for aspects with few refs (≤5) using expander
+            if refs and len(refs) <= 5 and not bible_df.empty:
+                with st.expander(f"{'Ver versiculos' if is_pt else 'Show verses'} ({len(refs)})", expanded=False):
+                    for ref in refs:
+                        # Handle multi-verse refs like "Genesis 1:1,2,3"
+                        text = lookup_verse(bible_df, ref, selected_translation)
+                        if text:
+                            st.markdown(
+                                f'<div class="verse-inline">'
+                                f'<span class="verse-ref-small">{_html.escape(ref)}</span><br/>'
+                                f'{_html.escape(text)}'
+                                f'</div>',
+                                unsafe_allow_html=True,
+                            )
+            elif refs and len(refs) > 5 and not bible_df.empty:
+                with st.expander(f"{'Ver versiculos' if is_pt else 'Show verses'} ({len(refs)})", expanded=False):
+                    for ref in refs[:20]:  # Limit to 20 to avoid overload
+                        text = lookup_verse(bible_df, ref, selected_translation)
+                        if text:
+                            st.markdown(
+                                f'<div class="verse-inline">'
+                                f'<span class="verse-ref-small">{_html.escape(ref)}</span><br/>'
+                                f'{_html.escape(text)}'
+                                f'</div>',
+                                unsafe_allow_html=True,
+                            )
+                    if len(refs) > 20:
+                        st.caption(f"... {'e mais' if is_pt else 'and'} {len(refs) - 20} {'versiculos' if is_pt else 'more verses'}")
+
+    st.markdown("---")
 
     # Books mentioned
     books = json.loads(row.get("books_json", "[]"))
@@ -196,12 +288,16 @@ def render_full_topic(row: pd.Series):
             unsafe_allow_html=True,
         )
 
-    # See also
+    # See also — clicáveis
     see_also = json.loads(row.get("see_also_json", "[]"))
     if see_also:
+        see_links = []
+        for sa in see_also:
+            slug = sa.lower().replace(" ", "_").replace(",", "").replace("'", "")
+            see_links.append(f'<a href="?topic={slug}" style="color:#636EFA;text-decoration:none;">{_html.escape(sa)}</a>')
         st.markdown(
             f'<div class="see-also-box">'
-            f'<strong>See also:</strong> {", ".join(see_also)}'
+            f'<strong>See also:</strong> {" · ".join(see_links)}'
             f'</div>',
             unsafe_allow_html=True,
         )
