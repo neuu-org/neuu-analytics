@@ -279,28 +279,19 @@ for i, (_, row) in enumerate(page_data.iterrows()):
         if pd.notna(completion) and int(completion) >= 100:
             year_text = str(int(completion))
 
-        # Image — click opens detail dialog
+        # Image — click opens modal
         if image_url:
             st.image(image_url, width="stretch")
 
-        # Title — opens modal
         year_suffix = f" ({year_text})" if year_text else ""
+
+        # Single clickable line: "Title by Artist (year)" -> opens modal
         if st.button(
-            title_text,
+            f"{title_text} by {artist_text}{year_suffix}",
             key=f"detail_{row_key}_{i}",
             type="tertiary",
         ):
             show_image_detail(row_key)
-
-        # Artist + year — filters by artist
-        if st.button(
-            artist_text + year_suffix,
-            key=f"artist_{row_key}_{i}",
-            type="tertiary",
-        ):
-            st.session_state.gallery_artist = artist_text
-            st.session_state.gallery_page = 1
-            st.rerun()
 
 # Bottom pagination
 st.markdown("---")
