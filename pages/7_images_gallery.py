@@ -285,13 +285,22 @@ for i, (_, row) in enumerate(page_data.iterrows()):
 
         year_suffix = f" ({year_text})" if year_text else ""
 
-        # Single clickable line: "Title by Artist (year)" -> opens modal
-        if st.button(
-            f"{title_text} by {artist_text}{year_suffix}",
-            key=f"detail_{row_key}_{i}",
-            type="tertiary",
-        ):
-            show_image_detail(row_key)
+        # "Title by Artist (year)" — two separate links on one line
+        # Title -> opens modal | Artist -> filters by artist
+        tcol, acol = st.columns([3, 2])
+        with tcol:
+            if st.button(
+                title_text, key=f"detail_{row_key}_{i}", type="tertiary",
+            ):
+                show_image_detail(row_key)
+        with acol:
+            if st.button(
+                f"by {artist_text}{year_suffix}",
+                key=f"artist_{row_key}_{i}", type="tertiary",
+            ):
+                st.session_state.gallery_artist = artist_text
+                st.session_state.gallery_page = 1
+                st.rerun()
 
 # Bottom pagination
 st.markdown("---")
