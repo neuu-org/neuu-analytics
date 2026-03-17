@@ -192,11 +192,7 @@ def render_full_topic(row: pd.Series):
     # Pick translation from sidebar
     selected_translation = st.session_state.get("translation", "KJV")
 
-    src_labels = []
-    if row["source_nav"]:
-        src_labels.append("Nave's Topical Bible (1896)")
-    if row["source_tor"]:
-        src_labels.append("Torrey's Topical Textbook (1897)")
+    src_labels = ["Torrey's Topical Textbook (1897)"]
 
     st.markdown(f'<div class="topic-title">{_html.escape(topic_name)}</div>', unsafe_allow_html=True)
     st.caption(" · ".join(src_labels))
@@ -364,11 +360,8 @@ else:
         featured = df.nlargest(12, "n_biblical_refs")
         cols = st.columns(4)
         for i, (_, row) in enumerate(featured.iterrows()):
-            src = "Torrey"
-            if row["source_nav"] and row["source_tor"]:
-                src = "Nave + Torrey"
             with cols[i % 4]:
-                render_card(row, src, "feat")
+                render_card(row, "Torrey", "feat")
 
     else:
         mask = df["topic"].str.contains(query.upper(), na=False)
@@ -380,10 +373,5 @@ else:
             st.markdown(f"**{len(results)}** {'resultados' if is_pt else 'results'}")
             cols = st.columns(4)
             for i, (_, row) in enumerate(results.iterrows()):
-                src_parts = []
-                if row["source_nav"]:
-                    src_parts.append("Nave")
-                if row["source_tor"]:
-                    src_parts.append("Torrey")
                 with cols[i % 4]:
-                    render_card(row, " + ".join(src_parts), "search")
+                    render_card(row, "Torrey", "search")
