@@ -162,39 +162,63 @@ def parse_ref(ref_str: str):
     return None, None, None
 
 
-# Map numeric-prefix book names to Roman numeral variants used by some translations
-_BOOK_ALIASES: dict[str, list[str]] = {
-    "1 chronicles": ["i chronicles"],
-    "2 chronicles": ["ii chronicles"],
-    "1 corinthians": ["i corinthians"],
-    "2 corinthians": ["ii corinthians"],
-    "1 john": ["i john"],
-    "2 john": ["ii john"],
-    "3 john": ["iii john"],
-    "1 kings": ["i kings"],
-    "2 kings": ["ii kings"],
-    "1 peter": ["i peter"],
-    "2 peter": ["ii peter"],
-    "1 samuel": ["i samuel"],
-    "2 samuel": ["ii samuel"],
-    "1 thessalonians": ["i thessalonians"],
-    "2 thessalonians": ["ii thessalonians"],
-    "1 timothy": ["i timothy"],
-    "2 timothy": ["ii timothy"],
-    "revelation": ["revelation of john"],
-}
+# Canonical book order (matches Torrey/standard English names)
+_CANONICAL_BOOKS = [
+    "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
+    "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",
+    "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles",
+    "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs",
+    "Ecclesiastes", "Song of Solomon", "Isaiah", "Jeremiah",
+    "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos",
+    "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah",
+    "Haggai", "Zechariah", "Malachi",
+    "Matthew", "Mark", "Luke", "John", "Acts", "Romans",
+    "1 Corinthians", "2 Corinthians", "Galatians", "Ephesians",
+    "Philippians", "Colossians", "1 Thessalonians", "2 Thessalonians",
+    "1 Timothy", "2 Timothy", "Titus", "Philemon", "Hebrews",
+    "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John",
+    "Jude", "Revelation",
+]
 
 
-def lookup_verse(bible_df: pd.DataFrame, ref_str: str, translation: str) -> str | None:
+@st.cache_data(ttl=3600)
+def build_book_map(bible_mtime: float) -> dict[str, dict[str, str]]:
+    """Build canonical→translation book name map for each translation.
+
+    Returns {translation: {canonical_lower: actual_book_name}}
+    """
+    bible_df = load_bible_text(bible_mtime)
+    if bible_df.empty:
+        return {}
+    book_map: dict[str, dict[str, str]] = {}
+    for tr in bible_df["translation"].unique():
+        tr_books = []
+        seen = set()
+        for b in bible_df[bible_df["translation"] == tr]["book"]:
+            if b not in seen:
+                seen.add(b)
+                tr_books.append(b)
+        # Map by position: canonical[i] → translation[i]
+        mapping = {}
+        for i, canon in enumerate(_CANONICAL_BOOKS):
+            if i < len(tr_books):
+                mapping[canon.lower()] = tr_books[i]
+        book_map[tr] = mapping
+    return book_map
+
+
+def lookup_verse(bible_df: pd.DataFrame, ref_str: str, translation: str,
+                 book_map: dict[str, dict[str, str]] | None = None) -> str | None:
     """Look up verse text from bibletext dataframe."""
     book, ch, vs = parse_ref(ref_str)
     if not book:
         return None
-    book_lower = book.lower()
-    candidates = [book_lower] + _BOOK_ALIASES.get(book_lower, [])
+    # Resolve book name for this translation
+    tr_map = book_map.get(translation, {}) if book_map else {}
+    resolved = tr_map.get(book.lower(), book)
     mask = (
         (bible_df["translation"] == translation)
-        & (bible_df["book"].str.lower().isin(candidates))
+        & (bible_df["book"] == resolved)
         & (bible_df["chapter"] == ch)
         & (bible_df["verse"] == vs)
     )
@@ -212,8 +236,11 @@ def render_full_topic(row: pd.Series):
 
     # Load bible text for verse lookups
     bible_df = pd.DataFrame()
+    bk_map: dict[str, dict[str, str]] = {}
     if BIBLETEXT_FILE.exists():
-        bible_df = load_bible_text(BIBLETEXT_FILE.stat().st_mtime)
+        mtime = BIBLETEXT_FILE.stat().st_mtime
+        bible_df = load_bible_text(mtime)
+        bk_map = build_book_map(mtime)
 
     selected_translation = st.session_state.get("translation", "KJV")
 
@@ -268,7 +295,7 @@ def render_full_topic(row: pd.Series):
                     show_limit = 20
                     with st.expander(f"{'Ver versiculos' if is_pt else 'Show verses'} ({len(refs)})", expanded=False):
                         for ref in refs[:show_limit]:
-                            text = lookup_verse(bible_df, ref, selected_translation)
+                            text = lookup_verse(bible_df, ref, selected_translation, bk_map)
                             if text:
                                 st.markdown(
                                     f'<div class="verse-inline">'
@@ -286,7 +313,7 @@ def render_full_topic(row: pd.Series):
     with tab_refs:
         if all_refs and not bible_df.empty:
             for ref in all_refs:
-                text = lookup_verse(bible_df, ref, selected_translation)
+                text = lookup_verse(bible_df, ref, selected_translation, bk_map)
                 if text:
                     st.markdown(
                         f'<div class="verse-inline">'
