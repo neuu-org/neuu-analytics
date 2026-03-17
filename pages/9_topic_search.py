@@ -220,9 +220,7 @@ def render_full_topic(row: pd.Series):
             source_tag = asp.get("source", "")
 
             tag_html = ""
-            if source_tag == "NAV":
-                tag_html = '<span class="tag-nav">NAV</span>'
-            elif source_tag == "TOR":
+            if source_tag == "TOR":
                 tag_html = '<span class="tag-tor">TOR</span>'
 
             # Build refs with inline verse text
