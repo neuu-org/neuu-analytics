@@ -1,6 +1,6 @@
 """
 Pagina de analise do dataset Bible Topics.
-5,745 topicos biblicos unificados de Nave + Torrey.
+620 topicos biblicos de Torrey's Topical Textbook (Nave temporariamente indisponivel).
 """
 
 from pathlib import Path
@@ -43,9 +43,14 @@ df = load_topics(TOPICS_FILE.stat().st_mtime)
 title = "Topicos Biblicos — Analise" if is_pt else "Bible Topics — Analysis"
 st.title(f"📚 {title}")
 st.caption(
-    "5,745 topicos unificados de Nave's Topical Bible (1896) + Torrey's Topical Textbook (1897)"
+    f"{len(df):,} topicos de Torrey's New Topical Textbook (1897)"
     if is_pt else
-    "5,745 unified topics from Nave's Topical Bible (1896) + Torrey's Topical Textbook (1897)"
+    f"{len(df):,} topics from Torrey's New Topical Textbook (1897)"
+)
+st.info(
+    "Nave's Topical Bible esta temporariamente indisponivel enquanto o parser de referencias e aprimorado."
+    if is_pt else
+    "Nave's Topical Bible is temporarily unavailable while the reference parser is being improved."
 )
 
 # ============================================================
@@ -54,70 +59,22 @@ st.caption(
 st.header("1. " + ("Visao Geral" if is_pt else "Overview"))
 
 total = len(df)
-from_nave = int(df["source_nav"].sum())
-from_torrey = int(df["source_tor"].sum())
-both = int((df["source_nav"] & df["source_tor"]).sum())
 total_refs = int(df["n_biblical_refs"].sum())
 with_refs = int((df["n_biblical_refs"] > 0).sum())
-total_def_refs = int(df["n_def_refs"].sum())
+avg_refs = total_refs / total if total > 0 else 0
+with_see_also = int((df["n_see_also"] > 0).sum())
 
-cols = st.columns(6)
+cols = st.columns(5)
 cols[0].metric("Topicos" if is_pt else "Topics", f"{total:,}")
-cols[1].metric("Nave", f"{from_nave:,}")
-cols[2].metric("Torrey", f"{from_torrey:,}")
-cols[3].metric("Overlap", f"{both:,}")
-cols[4].metric("Refs", f"{total_refs:,}")
-cols[5].metric("Cobertura" if is_pt else "Coverage", f"{with_refs/total*100:.0f}%")
+cols[1].metric("Refs", f"{total_refs:,}")
+cols[2].metric("Media" if is_pt else "Average", f"{avg_refs:.1f} refs/topic")
+cols[3].metric("Cobertura" if is_pt else "Coverage", f"{with_refs/total*100:.0f}%")
+cols[4].metric("See Also", f"{with_see_also:,}")
 
 # ============================================================
-# 2. SOURCES VENN
+# 2. REFERENCES ANALYSIS
 # ============================================================
-st.header("2. " + ("Fontes" if is_pt else "Sources"))
-
-col1, col2 = st.columns(2)
-
-with col1:
-    only_nave = from_nave - both
-    only_torrey = from_torrey - both
-
-    fig = go.Figure(go.Funnel(
-        y=["Nave only", "Both", "Torrey only"],
-        x=[only_nave, both, only_torrey],
-        textinfo="value+percent total",
-        marker=dict(color=["#4CAF50", "#D4A853", "#2196F3"]),
-    ))
-    fig.update_layout(
-        **PLOTLY_LAYOUT,
-        title="Distribuicao por Fonte" if is_pt else "Source Distribution",
-        height=300,
-    )
-    st.plotly_chart(fig, use_container_width=True)
-
-with col2:
-    # Refs per source
-    nave_refs = int(df[df["source_nav"]]["n_biblical_refs"].sum())
-    torrey_refs = int(df[df["source_tor"]]["n_biblical_refs"].sum())
-
-    fig = go.Figure()
-    fig.add_trace(go.Bar(
-        name="Nave", x=["Refs"], y=[nave_refs],
-        marker_color="#4CAF50", text=[f"{nave_refs:,}"], textposition="auto",
-    ))
-    fig.add_trace(go.Bar(
-        name="Torrey", x=["Refs"], y=[torrey_refs],
-        marker_color="#2196F3", text=[f"{torrey_refs:,}"], textposition="auto",
-    ))
-    fig.update_layout(
-        **PLOTLY_LAYOUT,
-        title="Refs por Fonte" if is_pt else "Refs by Source",
-        barmode="group", height=300, showlegend=True,
-    )
-    st.plotly_chart(fig, use_container_width=True)
-
-# ============================================================
-# 3. REFERENCES ANALYSIS
-# ============================================================
-st.header("3. " + ("Analise de Referencias" if is_pt else "Reference Analysis"))
+st.header("2. " + ("Analise de Referencias" if is_pt else "Reference Analysis"))
 
 col1, col2 = st.columns(2)
 
@@ -132,22 +89,21 @@ with col1:
     st.plotly_chart(fig, use_container_width=True)
 
 with col2:
-    top_refs = df.nlargest(20, "n_biblical_refs")[["topic", "n_biblical_refs", "n_sources"]]
+    top_refs = df.nlargest(20, "n_biblical_refs")[["topic", "n_biblical_refs"]]
     fig = px.bar(
         top_refs.sort_values("n_biblical_refs", ascending=True),
         x="n_biblical_refs", y="topic", orientation="h",
         title="Top 20 Topicos com Mais Refs" if is_pt else "Top 20 Topics by Refs",
         labels={"n_biblical_refs": "Refs", "topic": ""},
-        color="n_sources",
-        color_continuous_scale=["#2A2D34", "#D4A853"],
+        color_discrete_sequence=["#D4A853"],
     )
     fig.update_layout(**PLOTLY_LAYOUT, height=500, showlegend=False)
     st.plotly_chart(fig, use_container_width=True)
 
 # ============================================================
-# 4. ALPHABETICAL DISTRIBUTION
+# 3. ALPHABETICAL DISTRIBUTION
 # ============================================================
-st.header("4. " + ("Distribuicao Alfabetica" if is_pt else "Alphabetical Distribution"))
+st.header("3. " + ("Distribuicao Alfabetica" if is_pt else "Alphabetical Distribution"))
 
 letter_counts = df.groupby("letter").agg(
     topics=("topic", "count"),
@@ -158,7 +114,7 @@ fig = go.Figure()
 fig.add_trace(go.Bar(
     name="Topicos" if is_pt else "Topics",
     x=letter_counts["letter"], y=letter_counts["topics"],
-    marker_color="#4CAF50", yaxis="y",
+    marker_color="#2196F3", yaxis="y",
 ))
 fig.add_trace(go.Scatter(
     name="Refs",
@@ -175,32 +131,48 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 
 # ============================================================
-# 5. DATA QUALITY
+# 4. OT/NT DISTRIBUTION
 # ============================================================
-st.header("5. " + ("Qualidade dos Dados" if is_pt else "Data Quality"))
+st.header("4. " + ("AT/NT" if is_pt else "OT/NT Distribution"))
 
-quality_data = pd.DataFrame({
-    "metric": [
-        "Com refs" if is_pt else "With refs",
-        "Com def_refs" if is_pt else "With def_refs",
-        "Com see_also" if is_pt else "With see_also",
-        "2 fontes" if is_pt else "2 sources",
-    ],
-    "percent": [
-        with_refs / total * 100,
-        with_def / total * 100,
-        (df["n_see_also"] > 0).sum() / total * 100,
-        both / total * 100,
-    ],
-})
+col1, col2 = st.columns(2)
+with col1:
+    ot_total = int(df["ot_refs"].sum())
+    nt_total = int(df["nt_refs"].sum())
+    fig = go.Figure(go.Pie(
+        labels=["AT" if is_pt else "OT", "NT"],
+        values=[ot_total, nt_total],
+        marker_colors=["#4CAF50", "#2196F3"],
+        hole=0.4,
+        textinfo="percent+value",
+    ))
+    fig.update_layout(
+        **PLOTLY_LAYOUT,
+        title="Refs AT vs NT" if is_pt else "OT vs NT Refs",
+        height=350,
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
-fig = px.bar(
-    quality_data.sort_values("percent"),
-    x="percent", y="metric", orientation="h",
-    title="Cobertura por Campo" if is_pt else "Field Coverage",
-    labels={"percent": "%", "metric": ""},
-    color="percent",
-    color_continuous_scale=["#2A2D34", "#4CAF50"],
-)
-fig.update_layout(**PLOTLY_LAYOUT, showlegend=False, height=250)
-st.plotly_chart(fig, use_container_width=True)
+with col2:
+    quality_data = pd.DataFrame({
+        "metric": [
+            "Com refs" if is_pt else "With refs",
+            "Com see_also" if is_pt else "With see_also",
+            "OT + NT" if is_pt else "OT + NT",
+        ],
+        "percent": [
+            with_refs / total * 100,
+            with_see_also / total * 100,
+            ((df["ot_refs"] > 0) & (df["nt_refs"] > 0)).sum() / total * 100,
+        ],
+    })
+    fig = px.bar(
+        quality_data.sort_values("percent"),
+        x="percent", y="metric", orientation="h",
+        title="Cobertura por Campo" if is_pt else "Field Coverage",
+        labels={"percent": "%", "metric": ""},
+        color="percent",
+        color_continuous_scale=["#2A2D34", "#D4A853"],
+    )
+    fig.update_layout(**PLOTLY_LAYOUT, showlegend=False, height=350)
+    st.plotly_chart(fig, use_container_width=True)

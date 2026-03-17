@@ -356,6 +356,11 @@ def topics_to_parquet(repo_dir: Path, cfg: dict) -> Path:
         topic = data.get("topic", "")
         slug = data.get("slug", "")
         sources = data.get("sources", [])
+
+        # Skip NAV-only topics (Nave parser needs improvement)
+        if "TOR" not in sources:
+            continue
+
         def_refs = data.get("definition_refs", [])
         biblical_refs = data.get("biblical_references", [])
         ref_groups = data.get("reference_groups", [])

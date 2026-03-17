@@ -329,9 +329,14 @@ else:
         unsafe_allow_html=True,
     )
     st.caption(
-        f"{len(df):,} topicos de Nave (1896) + Torrey (1897)"
+        f"{len(df):,} topicos de Torrey's New Topical Textbook (1897)"
         if is_pt else
-        f"{len(df):,} topics from Nave (1896) + Torrey (1897)"
+        f"{len(df):,} topics from Torrey's New Topical Textbook (1897)"
+    )
+    st.info(
+        "Nave's Topical Bible esta temporariamente indisponivel enquanto o parser de referencias e aprimorado."
+        if is_pt else
+        "Nave's Topical Bible is temporarily unavailable while the reference parser is being improved."
     )
 
     query = st.text_input(
@@ -352,30 +357,18 @@ else:
     if not query:
         st.markdown('<div class="section-label">FEATURED TOPICS</div>', unsafe_allow_html=True)
         st.caption(
-            "Topicos presentes em ambas as fontes"
+            "Topicos com mais referencias biblicas"
             if is_pt else
-            "Topics present in both sources"
+            "Topics with most biblical references"
         )
-        featured = df[df["n_sources"] == 2].nlargest(12, "n_biblical_refs")
+        featured = df.nlargest(12, "n_biblical_refs")
         cols = st.columns(4)
         for i, (_, row) in enumerate(featured.iterrows()):
+            src = "Torrey"
+            if row["source_nav"] and row["source_tor"]:
+                src = "Nave + Torrey"
             with cols[i % 4]:
-                render_card(row, "Nave + Torrey", "feat")
-
-        st.markdown("---")
-
-        col_a, col_b = st.columns(2)
-        with col_a:
-            st.markdown('<div class="section-label">NAVE HIGHLIGHTS</div>', unsafe_allow_html=True)
-            nave_top = df[df["source_nav"] & ~df["source_tor"]].nlargest(8, "n_biblical_refs")
-            for _, row in nave_top.iterrows():
-                render_card(row, "Nave", "nave")
-
-        with col_b:
-            st.markdown('<div class="section-label">TORREY HIGHLIGHTS</div>', unsafe_allow_html=True)
-            torrey_top = df[df["source_tor"] & ~df["source_nav"]].nlargest(8, "n_biblical_refs")
-            for _, row in torrey_top.iterrows():
-                render_card(row, "Torrey", "torrey")
+                render_card(row, src, "feat")
 
     else:
         mask = df["topic"].str.contains(query.upper(), na=False)
