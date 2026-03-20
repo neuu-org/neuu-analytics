@@ -1190,6 +1190,63 @@ def _render_patristic(refs: list[dict], additions: dict | None):
         )
 
 
+def _render_note_item_card(item: dict, index: int) -> str:
+    """Render a single structured item (interpretation, level, stage, etc.) as a styled card."""
+    # Detect the "title" field — could be view, name, level+name, or first string key
+    title = ""
+    if "view" in item:
+        title = item["view"]
+    elif "name" in item:
+        prefix = f'{item["level"]}. ' if "level" in item else ""
+        title = prefix + item["name"]
+    elif "stage" in item:
+        title = item["stage"]
+
+    # Collect detail fields (everything except the title field)
+    skip_keys = {"view", "name", "level", "stage"}
+    details = []
+    for k, v in item.items():
+        if k in skip_keys:
+            continue
+        label = k.replace("_", " ").title()
+        val = html.escape(str(v)) if not isinstance(v, str) else html.escape(v)
+        details.append((label, val))
+
+    # Pick accent color cycling through palette
+    accent_colors = ["#D4A853", "#636EFA", "#00CC96", "#EF553B", "#AB63FA", "#FF9800"]
+    color = accent_colors[index % len(accent_colors)]
+
+    card = f'<div style="background:#1A1D24;border-left:3px solid {color};border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:8px;">'
+    if title:
+        card += f'<div style="font-weight:600;color:{color};font-size:1rem;margin-bottom:6px;">{html.escape(title)}</div>'
+    for label, val in details:
+        card += (
+            f'<div style="margin-bottom:4px;">'
+            f'<span style="font-size:0.75rem;font-weight:600;color:#8B8072;text-transform:uppercase;letter-spacing:1px;">{html.escape(label)}</span>'
+            f'<div style="font-family:Crimson Pro,serif;font-size:0.95rem;color:#E8E0D4;line-height:1.6;margin-top:2px;">{val}</div>'
+            f'</div>'
+        )
+    card += '</div>'
+    return card
+
+
+def _render_note_list(items: list) -> str:
+    """Render a list of items — detects structured dicts vs plain strings."""
+    if not items:
+        return ""
+    # If list of dicts with recognized keys → render as cards
+    if isinstance(items[0], dict):
+        return "".join(_render_note_item_card(item, i) for i, item in enumerate(items))
+    # Otherwise plain list items
+    html_items = ""
+    for item in items:
+        html_items += (
+            f'<div style="padding:6px 0;border-bottom:1px solid #1A1D24;font-family:Crimson Pro,serif;'
+            f'color:#E8E0D4;font-size:0.95rem;line-height:1.6;">{html.escape(str(item))}</div>'
+        )
+    return html_items
+
+
 def _render_scholarly_notes(additions: dict | None):
     if not additions or not additions.get("scholarly_notes"):
         st.info(
@@ -1213,30 +1270,47 @@ def _render_scholarly_notes(additions: dict | None):
                 unsafe_allow_html=True,
             )
         elif isinstance(value, dict):
-            parts = []
-            for sub_key, sub_val in value.items():
-                sub_title = sub_key.replace("_", " ").title()
-                if isinstance(sub_val, str):
-                    parts.append(f'<div style="margin-bottom:8px;"><strong style="color:#D4A853;font-size:0.85rem;">{html.escape(sub_title)}</strong>'
-                                 f'<div style="font-family:Crimson Pro,serif;color:#E8E0D4;line-height:1.7;margin-top:4px;">{html.escape(sub_val)}</div></div>')
-                elif isinstance(sub_val, list):
-                    items = "".join(f"<li>{html.escape(str(item))}</li>" for item in sub_val)
-                    parts.append(f'<div style="margin-bottom:8px;"><strong style="color:#D4A853;font-size:0.85rem;">{html.escape(sub_title)}</strong>'
-                                 f'<ul style="color:#E8E0D4;margin-top:4px;">{items}</ul></div>')
-                else:
-                    parts.append(f'<div style="margin-bottom:8px;"><strong style="color:#D4A853;font-size:0.85rem;">{html.escape(sub_title)}</strong>'
-                                 f'<div style="color:#E8E0D4;margin-top:4px;">{html.escape(str(sub_val))}</div></div>')
+            # Render description first if present
+            desc = value.get("description", "")
+            if desc:
+                st.markdown(
+                    f'<div class="insight-box"><div class="theme">{html.escape(desc)}</div></div>',
+                    unsafe_allow_html=True,
+                )
 
-            st.markdown(
-                f'<div class="insight-box">{"".join(parts)}</div>',
-                unsafe_allow_html=True,
-            )
+            # Render list-type sub-fields as structured cards
+            for sub_key, sub_val in value.items():
+                if sub_key == "description":
+                    continue
+                sub_title = sub_key.replace("_", " ").title()
+
+                if isinstance(sub_val, list):
+                    st.markdown(
+                        f'<div style="font-size:0.8rem;font-weight:600;color:#5A5550;letter-spacing:1px;'
+                        f'text-transform:uppercase;margin:12px 0 6px 0;">{html.escape(sub_title)}</div>',
+                        unsafe_allow_html=True,
+                    )
+                    st.markdown(_render_note_list(sub_val), unsafe_allow_html=True)
+                elif isinstance(sub_val, str):
+                    st.markdown(
+                        f'<div style="background:#1A1D24;border-left:3px solid #D4A853;border-radius:0 8px 8px 0;'
+                        f'padding:12px 16px;margin-bottom:8px;">'
+                        f'<span style="font-weight:600;color:#D4A853;font-size:0.85rem;">{html.escape(sub_title)}</span>'
+                        f'<div style="font-family:Crimson Pro,serif;color:#E8E0D4;line-height:1.7;margin-top:4px;">'
+                        f'{html.escape(sub_val)}</div></div>',
+                        unsafe_allow_html=True,
+                    )
+                elif isinstance(sub_val, dict):
+                    st.markdown(_render_note_item_card(sub_val, 0), unsafe_allow_html=True)
+                else:
+                    st.markdown(
+                        f'<div style="color:#E8E0D4;margin-bottom:8px;">'
+                        f'<strong style="color:#D4A853;font-size:0.85rem;">{html.escape(sub_title)}</strong>: '
+                        f'{html.escape(str(sub_val))}</div>',
+                        unsafe_allow_html=True,
+                    )
         elif isinstance(value, list):
-            items = "".join(f"<li style='color:#E8E0D4;'>{html.escape(str(item))}</li>" for item in value)
-            st.markdown(
-                f'<div class="insight-box"><ul style="margin:0;padding-left:20px;">{items}</ul></div>',
-                unsafe_allow_html=True,
-            )
+            st.markdown(_render_note_list(value), unsafe_allow_html=True)
 
     # Also show reclassification if present
     reclass = additions.get("reclassification")
