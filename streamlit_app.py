@@ -15,7 +15,7 @@ st.set_page_config(
 # Idioma global (session_state para persistir entre paginas)
 # ---------------------------------------------------------------------------
 if "language" not in st.session_state:
-    st.session_state.language = "English"
+    st.session_state.language = "Portugues"
 
 # ---------------------------------------------------------------------------
 # Custom CSS
