@@ -1,0 +1,58 @@
+{
+  "query_id": "v2_mh_01",
+  "query": "espinho na carne",
+  "validated_by": "human",
+  "validated_at": "2026-03-19",
+  "methodology": "Cross-reference network (2CO.12.9→PHP.4.13=209v — ABSOLUTE RECORD of entire dataset; 37v→ISA.40.31) + patristic reading (15 entries on 12:7 with 5 unresolved interpretations debated 1800+ years; 10 entries on 12:9; Lapide 6+6 arguments; Chrysostom 'God gives one reason, Paul gives another') + CCEL (Barnes, Calvin, Denney) + dialectical structure mapping (thorn→prayer→refusal→acceptance→inversion)",
+  "existing_refs_confirmed": [
+    {"verse": "2 Corintios 12:7", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (4v→NUM.33.55, 4v→JDG.2.3, 3v→JOB.1.12, 3v→GAL.4.13)", "commentaries (15 entries! 5 interpretations debated 1800+ years: physical disease, persecution, concupiscence, demonic affliction, beatings)", "ccel (Barnes, Calvin)", "topics (THORN)"]},
+    {"verse": "2 Corintios 12:9", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (209v→PHP.4.13 — ABSOLUTE RECORD!, 37v→ISA.40.31)", "commentaries (10 entries: Lapide 6 reasons for power-in-weakness, Augustine 'cause of the fight IS weakness', Chrysostom 'God gives one reason Paul gives another', Cyprian 'adversity PROVES us')", "ccel (Barnes 'calamity is the occasion of virtue')", "topics (GRACE)"]},
+    {
+      "verse": "2 Corintios 11:30",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (4v→2CO.12.5-10, 4v→ROM.5.3, 5v→1CO.2.3)", "commentaries (Chrysostom 'NEVER glories in miracles but in persecutions — THIS is the mark of an apostle', Ambrosiaster, Lapide — 4 entries)", "ccel_scripcom (Denney 'bridge: climax of what precedes AND pointer to ch.12')"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Chrysostom: 'He NOWHERE glories of miracles, but of persecutions. This is the SPECIAL MARK of an apostle.' Denney identifies it as structural bridge between chapters 11 and 12. 4 votes to each of 2Co 12:5-10."}
+    },
+    {"verse": "2 Corintios 4:7", "relevance": 1, "status": "confirmed", "evidence": ["crossrefs (11v→2CO.5.1, 9v→2CO.3.5, 4v→1CO.1.27)", "commentaries (8 entries — see v2_hard_03 validation)"]}
+  ],
+  "new_refs_added": [
+    {"verse": "2 Corintios 12:10", "relevance": 3, "source": "manual_validation", "justification": "209v→PHP.4.13 (ABSOLUTE RECORD of entire dataset — surpasses ROM.8.29→EPH.1.4 at 136v). 37v→ISA.40.31. 8v→2CO.13.4. The verse that SUMMARIZES the entire paradox: 'when I am weak, then I am strong.' Inseparable from 12:9."},
+    {"verse": "2 Corintios 12:8", "relevance": 2, "source": "manual_validation", "justification": "Already in gold_references but MISSING from relevance_judgments. 26v→LUK.11.9. Lapide: '3 = number of universality. The physician makes antidote from viper's venom.' Ambrosiaster: 'asked something against his own interest.' The prayer that was REFUSED — essential for the dialectical structure."}
+  ],
+  "candidates_noted": [
+    {"verse": "Filipenses 4:13", "relevance": 1, "status": "candidate", "justification": "209v←2CO.12.9/10 — largest connection in entire dataset. 'I can do all things through him who strengthens me.' Positive response to the paradox."},
+    {"verse": "2 Corintios 13:4", "relevance": 1, "status": "candidate", "justification": "8v→2CO.12.10. 'Crucified in weakness but lives by the power of God.' Christological parallel: Christ's weakness on cross → life by power."},
+    {"verse": "Galatas 4:13", "relevance": 1, "status": "candidate", "justification": "4v de 2CO.12.7/8/9. Most direct evidence for physical illness interpretation: 'preached the gospel because of a bodily ailment.'"}
+  ],
+  "scholarly_notes": {
+    "absolute_record": {
+      "from": "2CO.12.9 and 2CO.12.10",
+      "to": "PHP.4.13",
+      "votes": 209,
+      "note": "NEW ABSOLUTE RECORD of entire bible-crossrefs-dataset (1.2M links). Surpasses ROM.8.29→EPH.1.4 (136v), MAT.4.4→DEU.8.3 (49v), PSA.95.11→HEB.3.7 (34v). 'My grace is sufficient' + 'when weak then strong' → 'I can do all things through him who strengthens me.'"
+    },
+    "the_great_debate": {
+      "description": "The identity of the 'thorn' has been debated for 1800+ years with NO consensus",
+      "interpretations": [
+        {"view": "Physical disease", "advocates": "Basil, Bede, Sedulius, Jerome, Augustine, Barnes", "evidence": "Galatians 4:13 mentions 'bodily ailment'"},
+        {"view": "Persecution/opposition", "advocates": "Chrysostom, Theodoret, Oecumenius, Severian", "evidence": "Aligns with catalogue of sufferings (11:23-29). 'Alexander the coppersmith, Hymenaeus, Philetus'"},
+        {"view": "Concupiscence/temptation", "advocates": "Lapide (most extensive), Augustine, Jerome, Anselm, Bede, Aquinas", "evidence": "Romans 7 (internal struggle); 'modesty made him hide it and call it metaphorically a thorn'"},
+        {"view": "Demonic affliction", "advocates": "Tertullian", "evidence": "'Messenger of Satan' taken literally"},
+        {"view": "Physical beatings", "advocates": "Some medievals", "evidence": "Less probable — Paul already glories in beatings"}
+      ],
+      "significance_for_tcc": "This unresolved debate means a search system should retrieve verses supporting ALL interpretations, not just one. The ambiguity is theologically productive."
+    },
+    "dialectical_structure": {
+      "description": "5-stage dialectical progression of power-in-weakness",
+      "stages": [
+        "1. THORN given (12:7) — prevents pride after revelations",
+        "2. PRAYER for removal (12:8) — tests faith, three times",
+        "3. DIVINE REFUSAL + offer of grace (12:9a) — not removal but sustenance",
+        "4. PARADOXICAL ACCEPTANCE (12:9b) — 'I will boast in weaknesses'",
+        "5. INVERSION (12:10) — 'when I am weak, then I am strong'"
+      ],
+      "lapide_analogy": "'As a physician from vipers' flesh makes a conserve against vipers' poison, so does God, out of our weakness, form a medicine against weakness.'"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "query_id": "v2_hard_08",
+  "query": "o bode expiatório",
+  "validated_by": "human",
+  "validated_at": "2026-03-19",
+  "methodology": "Cross-reference network (ISA.53.6→1PE.2.25=19v; ISA.53.4→1PE.2.24=14v; Lv16:21 50 total crossrefs) + patristic reading (Tertullian AD 220 'two goats=two natures'; Chrysostom 'bore to Father to FORGIVE'; Aquinas 'once for all'; 14 entries on Jn1:29) + CCEL (Edersheim 'sins confessed on LIVE goat'; Bushnell 'vicarious texture') + topic verification (SCAPEGOAT, ATONEMENT_DAY_OF) + ritual→prophecy→fulfillment chain mapping",
+  "existing_refs_confirmed": [
+    {"verse": "Levitico 16:21", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (50 total!, 3v→2CO.5.21, 3v→ISA.53.6, 2v→JHN.1.29, 2v→1PE.2.24)", "ccel_scripcom (Kellogg)", "topics (ATONEMENT_DAY_OF)"]},
+    {"verse": "Isaias 53:6", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (19v→1PE.2.25!, 13v→ROM.5.8, 11v→1PE.3.18)", "commentaries (Haydock 'LXX: abandoned to our sins as to executioners')"]},
+    {"verse": "Joao 1:29", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (10v→1PE.1.19, 8v→ACT.8.32)", "commentaries (14 entries! Cyril 'Law typified in part; one Lamb died for ALL', Chrysostom 'shadow→substance')", "ccel_scripcom (Johnson)"]},
+    {"verse": "Hebreus 9:28", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (8v→HEB.7.27, 8v→MAT.20.28)", "commentaries (Chrysostom 'bore to Father to FORGIVE — not destroy but reconcile', Haydock 'EXHAUST the sins', Aquinas 'once for all perfected forever')", "ccel_scripcom (Johnson)", "topics (ATONEMENT_DAY_OF)"]}
+  ],
+  "new_refs_added": [
+    {"verse": "1 Pedro 2:24", "relevance": 3, "source": "manual_validation", "justification": "14v de ISA.53.4. 15v→ACT.8.32. 11v→ISA.53.5-6. 14v→2CO.5.21. NT verse most directly echoing scapegoat language: 'He himself BORE our sins in his body on the TREE.' Combines carrying (scapegoat) + cross (sacrifice) in one verse."},
+    {"verse": "2 Corintios 5:21", "relevance": 2, "source": "manual_validation", "justification": "3v de LEV.16.21. 43v→JHN.3.16(!). 14v de 1PE.2.24. Explicit forensic substitution: 'He who knew no sin was MADE SIN for us.' The 'laying on of hands' (Lv 16:21) in Pauline theology."},
+    {"verse": "Isaias 53:4", "relevance": 2, "source": "manual_validation", "justification": "14v→1PE.2.24. 13v→MAT.8.17 (direct fulfillment citation). 69 total crossrefs — hub of Isaiah 53 network. Complements Is 53:6 with dimension of infirmity/sorrow: 'Surely he has borne our griefs and carried our sorrows.'"}
+  ],
+  "candidates_noted": [
+    {"verse": "Galatas 3:13", "relevance": 1, "status": "candidate", "justification": "9v de ISA.53.4. 14v→ROM.8.1. 11v→DEU.21.23. CURSE language echoes Tertullian's 'accursed' emissary goat."},
+    {"verse": "Isaias 53:12", "relevance": 1, "status": "candidate", "justification": "3v de LEV.16.22. 'Bore the sin of many' = identical language to Heb 9:28."},
+    {"verse": "Mateus 8:17", "relevance": 1, "status": "candidate", "justification": "20v→ISA.53.4 (direct fulfillment citation). 13v de ISA.53.4."}
+  ],
+  "scholarly_notes": {
+    "two_goats_one_christ": {
+      "source": "Tertullian of Carthage (AD 220), Commentary on Leviticus 16:8",
+      "interpretation": "Two goats represent two dimensions of Christ's work: (1) sacrificed goat = priestly sacrifice and death, (2) emissary goat = humiliation and passion. The emissary 'marked with all the signs of the Lord's passion: cursing, spitting, pulling, piercing.'",
+      "confirmed_by": "Edersheim: 'sins confessed NOT on the dead goat but on the LIVE one (emissary).' Christ fulfills BOTH: dies (goat 1) AND bears sins away (goat 2) simultaneously."
+    },
+    "chrysostom_inversion": {
+      "source": "Chrysostom on Hebrews 9:28",
+      "description": "Chrysostom inverts the destination: the OT goat carried sins to the wilderness (destruction/removal). Christ 'bore them TO THE FATHER — not to condemn but to FORGIVE.' The sins are not destroyed but reconciled.",
+      "significance": "Transforms the scapegoat from a removal metaphor to a reconciliation metaphor — the most theologically sophisticated reading in this query."
+    },
+    "ritual_prophecy_fulfillment_chain": {
+      "chain": [
+        {"stage": "Ritual", "verse": "Lv 16:21-22", "action": "Laying on of hands → confession → transfer → goat bears sins to wilderness"},
+        {"stage": "Prophecy", "verse": "Is 53:4-6", "action": "'The LORD laid on him the iniquity of us ALL.' LXX: 'abandoned him to our sins as to executioners'"},
+        {"stage": "Identification", "verse": "Jn 1:29", "action": "'Behold the Lamb of God who TAKES AWAY the sin of the world'"},
+        {"stage": "Fulfillment", "verse": "Hb 9:28", "action": "'Offered ONCE to bear the sins of many.' Chrysostom: 'bore to Father to forgive'"}
+      ]
+    },
+    "vocabulary_variation": {
+      "terms": ["bode expiatório/emissário (Lv)", "fez cair sobre ele (Is)", "tira o pecado (Jo)", "tirar os pecados (Hb)", "levou sobre si (Is, 1Pe)", "fez pecado por nós (2Co)"],
+      "significance": "6 different Portuguese constructions for the same concept of vicarious sin-bearing. Lexical search for 'bode' finds only Leviticus."
+    }
+  }
+}

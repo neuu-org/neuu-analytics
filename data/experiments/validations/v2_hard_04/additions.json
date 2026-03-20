@@ -1,0 +1,48 @@
+{
+  "query_id": "v2_hard_04",
+  "query": "a videira e os ramos",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network (JHN.15.1→JER.2.21=10v, JHN.15.5→COL.1.10=20v) + patristic reading (Augustine cites Jr2:21+Is5:4 in Jn15:1; Lapide cites Ps80 and contrasts Jr2:21; 12 entries on Jn15:1) + CCEL (Johnson explicit typology Israel→Christ) + topic verification (VINE 5 topics) + vocabulary variation mapping",
+  "existing_refs_confirmed": [
+    {"verse": "Joao 15:1", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (10v→JER.2.21, 5v→ISA.5.1/7, 5v→PSA.80.8)", "commentaries (Augustine cites Jr+Is, Lapide cites Ps80, Cyril, Chrysostom, Hippolytus — 12 entries)", "ccel_scripcom (Johnson explicit typology)", "topics (VINE, VINE_THE)"]},
+    {"verse": "Joao 15:5", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (20v→COL.1.10, 10v→GAL.5.22, 12v→PRO.11.30)", "commentaries (Lapide contrasts Jr2:21, Chrysostom)", "ccel_scripcom (Johnson)", "topics (VINE, BRANCH)"]},
+    {"verse": "Isaias 5:7", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (5v→JHN.15.1, 4v→PSA.80.8)", "commentaries (Haydock cites Ps79:9 and Mt20:1)", "topics (VINE_THE, VINEYARD)"]},
+    {"verse": "Salmos 80:8", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (6v→ISA.5.1, 5v→JER.2.21, 5v←JHN.15.1)", "commentaries (Augustine 'transplanted vine', Haydock cites Is5:1 and Hos10:1)", "topics (VINE)"]},
+    {
+      "verse": "Jeremias 2:21",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (10v←JHN.15.1!, 5v→ISA.5.4, 5v←PSA.80.8)", "commentaries (Augustine cites in Jn15:1, Lapide cites in Jn15:5)", "ccel_scripcom (Johnson cites)", "topics (VINE)"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "10 votes from JHN.15.1 (strongest connection). Cited DIRECTLY by Augustine and Lapide when commenting on John 15:1 and 15:5. Johnson: 'Israel proved a wild and fruitless Vine.' The negative counterpart that gives 'true vine' its meaning."}
+    }
+  ],
+  "new_refs_added": [
+    {"verse": "Joao 15:4", "relevance": 2, "source": "manual_validation", "justification": "Central verse for 'abiding' (μένω) concept. Explains branch↔vine relationship: 'As the branch cannot bear fruit by itself unless it abides in the vine, neither can you unless you abide in me.' Complements 15:1 and 15:5."},
+    {"verse": "Joao 15:2", "relevance": 2, "source": "manual_validation", "justification": "Topic VINE lists. Pruning as theological theme: fruitless branches cut (negative), fruitful branches cleaned (positive). Already in gold_references context but adds the pruning dimension."}
+  ],
+  "candidates_noted": [
+    {"verse": "Joao 15:6", "relevance": 1, "status": "candidate", "justification": "Extreme consequence: 'thrown away like a branch and withers.' Connects to Ez 15:2 (4v) — vine wood useless."},
+    {"verse": "Isaias 5:1", "relevance": 1, "status": "candidate", "justification": "6v→PSA.80.8, 5v→MAT.21.33. Foundation of the vineyard parable. Augustine cites Is 5:4 in Jn 15:1."},
+    {"verse": "Mateus 21:33", "relevance": 1, "status": "candidate", "justification": "5v de ISA.5.1. 4v de JHN.15.1. Parable of the wicked tenants — narrative version of the same vineyard metaphor."},
+    {"verse": "Oseias 10:1", "relevance": 1, "status": "candidate", "justification": "Haydock cites in Ps 80:8. Third prophetic voice on Israel-as-vine (besides Is and Jr). 'Israel is a luxuriant vine that yields fruit for itself.'"}
+  ],
+  "scholarly_notes": {
+    "vine_typology": {
+      "description": "Confirmed by Augustine + Johnson: Israel as failed vine → Christ as true vine",
+      "augustine": "'How are you turned into sourness, as a strange vine? [Jr 2:21] For how could that be a true vine which brought forth thorns? [Is 5:4]'",
+      "johnson": "'Israel proved a wild and fruitless Vine. Instead of it, Christ had now been planted by the Father as the True Vine.' (cites Is 5:1, Ps 80:8-16, Jr 2:21)",
+      "significance": "The 'true' (ἀληθινή) in John 15:1 is not merely 'real' but 'the genuine one that Israel was supposed to be but failed to become'"
+    },
+    "vocabulary_variation": {
+      "terms": ["videira (Jo)", "vinha (Is)", "vide (Jr)", "ramos (Jo)", "vides (Is)"],
+      "significance": "5 different Portuguese terms for the same metaphorical complex. Lexical search for 'videira' misses 'vinha' (Is) and 'vide' (Jr)."
+    },
+    "fruit_connections": {
+      "from": "JHN.15.5",
+      "strongest": "20v→COL.1.10 ('bearing fruit in every good work')",
+      "others": "12v→PRO.11.30, 10v→GAL.5.22 (fruit of the Spirit), 10v→PHP.1.11",
+      "significance": "The 'fruit' concept in Jn 15 connects to the broader NT theology of spiritual fruit, linking this query thematically to v2_med_02 (fruto do Espírito)"
+    }
+  }
+}

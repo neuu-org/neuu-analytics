@@ -1,0 +1,111 @@
+{
+  "query_id": "v2_mh_04",
+  "query": "o cântico novo",
+  "validated_by": "human",
+  "validated_at": "2026-03-20",
+  "methodology": "Cross-reference adjacency matrix (REV.14.3→REV.5.9 = 10v strongest link) + patristic evidence (19 citations: Augustine on every psalm, Clement of Alexandria 'Christ IS the New Song', Bede hear-vs-utter distinction, Ephrem gentile argument) + CCEL commentaries (Calvin, Henry, Barnes, JFB) + topics (SONG, PRAISE, MUSIC)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Salmos 33:3",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (5v→PSA.96.1, 4v→ISA.42.10, 3v→REV.5.9)",
+        "Catena Bible (Augustine 'grace of faith', Haydock 'canticle of the Lamb, Apocalypse')",
+        "CCEL (Calvin, Henry, JFB)",
+        "topics (SONG 'A new')"
+      ]
+    },
+    {
+      "verse": "Salmos 96:1",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (4v→1CH.16.23, 4v→PSA.33.3, 4v→PSA.98.1)",
+        "Catena Bible (Augustine 'singing IS building the house of God; cites Jn 13:34 new commandment')",
+        "CCEL (Calvin 'universal not just Israel', Henry 'NT song eternal never grows old' cites Rev 14:3)",
+        "topics (PRAISE)"
+      ]
+    },
+    {
+      "verse": "Salmos 149:1",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (5v→REV.14.3, 4v→PSA.33.3)",
+        "Catena Bible (Augustine 'old man=old song; new man=new song; love NEVER grows old; who separates from saints sings old song')",
+        "CCEL (Calvin 'alludes to Isaiah 42:10')"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Augustine extensive commentary on old/new man = old/new song. Love never grows old. 5v→REV.14.3. Calvin alludes to Is 42:10. Was missing score — assigned 2."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Isaias 42:10",
+      "relevance": 3,
+      "status": "upgraded_from_2_to_3",
+      "evidence": [
+        "crossrefs (5v→PSA.33.3, 4v→PSA.40.3, 3v→ROM.15.9)",
+        "Catena Bible (Clement of Alexandria 'CHRIST IS the New Song — the Logos manifested in flesh = the Song', Ephrem 'gentiles with MORE reason')",
+        "CCEL (Calvin 'cannot be sung but by renewed men', Henry, JFB 'never sung before')"
+      ],
+      "relevance_change": {"from": 2, "to": 3, "reason": "Prophetic source within 1st Servant Song (42:1-9). Clement of Alexandria: 'Christ IS the New Song' — most radical christological identification in the research. Calvin anticipates Rev 14:3 logic: 'cannot be sung but by renewed men.'"},
+      "justification": "Prophetic source within 1st Servant Song (42:1-9). Clement's christological identification is the most radical in the entire research. Calvin anticipates Rev 14:3 logic."
+    },
+    {
+      "verse": "Apocalipse 5:9",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (10v←REV.14.3, 5v→PSA.33.3, 5v→PSA.40.3, 6v→1CO.6.20, 6v→1PE.1.18)",
+        "Catena Bible (Bede 'NT sacrament complete in Christ', 'living creatures+elders = the Church')",
+        "CCEL (Barnes 'new because consequent on redemption' cites Ps40:3,96:1,144:9,Is42:10,Rev14:3)",
+        "topics (SONG, MUSIC)"
+      ]
+    },
+    {
+      "verse": "Apocalipse 14:3",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (10v→REV.5.9 strongest link, 5v→ISA.42.10, 5v→PSA.149.1, 6v→REV.2.17)",
+        "Catena Bible (Bede 'elect can HEAR but not UTTER the song; cites Is54:1,56:5')",
+        "CCEL (JFB 'as new as it is old as God's eternal purpose')",
+        "topics (SONG, MUSIC)"
+      ]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Salmos 40:3",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "UNIQUE: only verse where GOD PLACES the song in the mouth (not a command to sing). 5v←REV.5.9, 4v←ISA.42.10. Augustine: Christ speaks as Head of the Body. Henry: applicable to Christ's resurrection/exaltation. Topic SONG: 'A new'. Barnes cites in Rev 5:9. Anticipates Rev 14:3 (song as gift, not effort)."
+    },
+    {
+      "verse": "Apocalipse 15:3",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "Typological synthesis: song of Moses AND the Lamb = unifies OT and NT. 4v←REV.14.3, 7v←EXO.15.1. Does NOT contain 'new song' phrase — valuable semantic test (lexical search misses, semantic should find). Topic SONG: 'Of Moses and the Lamb'. Topic MUSIC: 'In heaven'."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Salmos 98:1",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Nearly identical to Ps 96:1 but with reason clause ('because he has done marvels'). Augustine: 'holy arm = Christ' (cites Is 53:1). 5v←PSA.96.1, 4v←REV.14.3. Marginal addition over Ps 96:1."
+    },
+    {
+      "verse": "Salmos 144:9",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Davidic/royal 'new song' with psaltery of 10 strings. Augustine: '10 strings = 10 commandments; who has no love can CARRY the psaltery but cannot SING'. 3v←PSA.33.3, 4v←REV.14.3."
+    }
+  ],
+  "scholarly_notes": {
+    "christological_identification": "Clement of Alexandria (AD 215) on Is 42:10: 'Christ IS the New Song — the Logos manifested in flesh = the Song itself.' The most radical christological claim in the entire validation corpus.",
+    "augustine_framework": "Augustine comments on EVERY psalm containing 'new song' (Ps 33, 40, 96, 98, 144, 149) with consistent framework: old man=old song, new man=new song, OT=old song, NT=new song. Love never grows old → song always new. Singing = building God's house.",
+    "hear_vs_utter": "Bede on Rev 14:3: the elect can HEAR the song but not UTTER it. Exclusivity is of EXPERIENCE, not salvation. The 144,000 have unique proximity to the Lamb.",
+    "redemptive_arc": "7-stage arc: (1) Psalms: each deliverance→new praise, (2) Ps 40:3: God PLACES the song, (3) Is 42:10: Servant brings 'new things'→unprecedented song, (4) Clement: Christ=Song, (5) Rev 5:9: Lamb slain→universal redemption→defined content, (6) Rev 14:3: experiential exclusivity, (7) Rev 15:3: synthesis Moses+Lamb."
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "query_id": "v2_hard_05",
+  "query": "o pão da vida",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network (MAT.4.4→DEU.8.3=49v — 3rd strongest in entire research; JHN.6.51→JHN.10.10=25v) + patristic reading (13 entries on Jn 6:35; Theophilus AD 184 earliest source; Cassiodorus cross-commentary Ex16:4→Jn6:51; Chrysostom Divinity-bread vs Body-bread; Cyril complete typology manna→12 loaves→12 apostles→Christ; Augustine eucharistic ecclesiology) + topic verification (MANNA, BREAD, COMMUNION) + 5-stage typological chain mapping",
+  "existing_refs_confirmed": [
+    {"verse": "Joao 6:35", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (13v→MAT.4.4, 5v→JHN.6.48/51, 10v→MRK.16.16)", "commentaries (13 entries! Chrysostom 2x, Cyril 2x, Lapide, Augustine, Tertullian, Hippolytus, Alcuin, Bede, Cyprian, Hilary, Theophilus)", "ccel_scripcom (Dods, Johnson)", "topics (BREAD, MANNA)", "ccel (Young, Whitefield)"]},
+    {"verse": "Joao 6:51", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (25v→JHN.10.10, 13v→MAT.4.4, 11v→JHN.14.6)", "commentaries (Augustine 'become body of Christ', Bede 'altar of cross', Cyril 2x, Haydock, Tertullian, Theophilus AD 184 'not merely sign but very flesh' — 7 entries)", "topics (MANNA)"]},
+    {"verse": "Exodo 16:4", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (5v→EXO.16.15, 4v→1CO.10.3, 3v→JHN.6.31)", "commentaries (Cassiodorus 'PREFIGURATION — cites Jn 6:51!', Haydock, Peter Chrysologus — 3 entries)", "ccel_scripcom (Chadwick)", "topics (MANNA)"]},
+    {"verse": "Deuteronomio 8:3", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (49v←MAT.4.4!, 8v→MAT.4.4)", "commentaries (Clement 'Word = infinite possession', Haydock, Challoner — 3 entries)", "ccel_scripcom (Johnson)", "topics (MANNA)"]},
+    {
+      "verse": "Mateus 4:4",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (49v→DEU.8.3 — 3rd strongest overall!, 20v→LUK.4.4, 13v→JHN.6.31/35/48/51)", "ccel_scripcom (Johnson)", "topics (MANNA)"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "49 votes to DEU.8.3 (3rd strongest connection in entire research). Verse where Jesus PERSONALLY connects Dt 8:3 to his ministry, creating the OT→NT bridge. Hub connecting ALL John 6 verses (13v each). Cannot be score 1 when it's the structural bridge of the entire typology."}
+    }
+  ],
+  "new_refs_added": [
+    {"verse": "Joao 6:48", "relevance": 3, "source": "manual_validation", "justification": "13v→MAT.4.4. 5v→JHN.6.51. Central repeated declaration 'I am the bread of life.' Cyril: 'manna was merely image/shadow.' Haydock: 'Christ shows all was FIGURE of spiritual food PRESENT.' 4 catena entries. Topic MANNA."},
+    {"verse": "Joao 6:31", "relevance": 2, "source": "manual_validation", "justification": "13v de MAT.4.4. 5v→NEH.9.15, PSA.105.40. Bridge verse: audience cites Ex 16 ('our fathers ate manna') → Jesus responds with Jn 6:35 ('I am the bread of life'). Without it, the typological dialogue is broken."},
+    {"verse": "1 Corintios 10:3", "relevance": 2, "source": "manual_validation", "justification": "5v→DEU.8.3. 4v→EXO.16.35. Chadwick cites in Ex 16:15 commentary. Paul reinterprets manna as 'spiritual food' — explicit typological bridge. Connects OT manna → NT sacrament."}
+  ],
+  "candidates_noted": [
+    {"verse": "Exodo 16:15", "relevance": 1, "status": "candidate", "justification": "5v→EXO.16.4, 6v→MAT.4.4. Cassiodorus: 'prefiguration.' Ambrose: 'Word of God nourishes.' Haydock: Eucharist surpasses manna."},
+    {"verse": "Joao 6:58", "relevance": 1, "status": "candidate", "justification": "6v→JHN.4.14. Closing declaration with explicit contrast: 'fathers ate and DIED; whoever eats this bread will LIVE forever.'"},
+    {"verse": "Apocalipse 2:17", "relevance": 1, "status": "candidate", "justification": "4v de JHN.6.48. Eschatological dimension: 'hidden manna' promised to overcomers."}
+  ],
+  "scholarly_notes": {
+    "five_stage_typology": {
+      "stages": [
+        {"stage": 1, "name": "Promise", "verse": "Gn 3:9 (Tree of Life)", "note": "Lapide: 'type of the Eucharist, as Irenaeus teaches'"},
+        {"stage": 2, "name": "Type", "verse": "Ex 16:4-15 (manna from heaven)", "note": "Temporal, perishable, physical sustenance"},
+        {"stage": 3, "name": "Principle", "verse": "Dt 8:3 (not by bread alone)", "note": "Clement: 'The Word is infinite possession'"},
+        {"stage": 4, "name": "Bridge", "verse": "Mt 4:4 (Jesus cites Dt 8:3)", "note": "49 votes! Jesus personally connects OT→NT"},
+        {"stage": 5, "name": "Fulfillment", "verse": "Jn 6:35→51 (I AM the bread of life → my flesh)", "note": "Chrysostom: progression from Divinity-bread to Body-bread"}
+      ]
+    },
+    "earliest_source": {
+      "commentator": "Theophilus of Antioch",
+      "date": "AD 184",
+      "verse": "John 6:51",
+      "quote": "Not only the sign of Christ's flesh, but is itself the very flesh of Christ, transmuted by a mystical benediction",
+      "significance": "Earliest substantial theological declaration in entire research. Pre-Nicene witness to real presence doctrine."
+    },
+    "chrysostom_dual_bread": {
+      "source": "Chrysostom on John 6:35",
+      "distinction": "Two dimensions: (1) Jn 6:35 = Christ's DIVINITY as bread, (2) Jn 6:51 = Christ's FLESH as bread",
+      "significance": "Tracks the progression within the Bread of Life discourse itself — not one concept but an unfolding revelation"
+    },
+    "manna_vs_eucharist": {
+      "source": "Haydock on Exodus 16:15",
+      "comparison": {
+        "manna": "1 day supply, corrupted if kept, satisfied physical hunger only, those who ate DIED",
+        "eucharist": "Eternal validity, incorruptible, gives eternal life, 'gives grace in this life and glory in the next'"
+      }
+    }
+  }
+}

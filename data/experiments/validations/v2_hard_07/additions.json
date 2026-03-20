@@ -1,0 +1,61 @@
+{
+  "query_id": "v2_hard_07",
+  "query": "água do rochedo",
+  "validated_by": "human",
+  "validated_at": "2026-03-19",
+  "methodology": "Cross-reference network (JHN.7.38→ISA.58.11=31v; 14 commentaries on 1Co10:4; 76 crossrefs from Jn7:38 hub) + patristic reading (Caesarius 'rock struck=Christ pierced on cross'; Augustine 'double blow=two beams'; Ephrem 'oceans from nothing'; Ambrose 'rod=spear, rock=Christ, water=side') + CCEL (Calvin, Barnes, Spurgeon, Ryle, Henry) + 5-stage typological chain + vocabulary mapping (rocha/pedra/água/água viva/rios/rio da água da vida/fonte)",
+  "existing_refs_confirmed": [
+    {"verse": "1 Corintios 10:4", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (7v←EXO.17.6, 4v←NUM.20.11)", "commentaries (14 entries! Ambrose, Ambrosiaster, Augustine, Caesarius, Clement, Lapide, Ephrem, Gregory Nyssa, Ignatius, Irenaeus, Chrysostom, Justin, Tertullian)", "ccel (Calvin, Barnes, Dods, Johnson)", "topics (ROCK, TYPES_OF_CHRIST)"]},
+    {"verse": "Exodo 17:6", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (7v→1CO.10.4, 4v→JHN.7.37/38, 5v→PSA.105.41)", "commentaries (Ambrose 2x, Caesarius 'rock=cross!', Haydock — 4 entries)", "ccel_scripcom (Chadwick)", "topics (WATER, TYPES_OF_CHRIST)"]},
+    {
+      "verse": "Joao 7:38",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (31v→ISA.58.11!, 22v→JHN.4.14, 17v→ISA.44.3, 16v→ISA.12.3, 76 total crossrefs)", "commentaries (Lapide 'rivers of charity, virginity, martyrdoms', Cyril, Haydock, Hippolytus, Ignatius — 6 entries)", "ccel_scripcom (Johnson)", "topics (WATER, FOUNTAIN)"],
+      "relevance_change": {"from": 2, "to": 3, "reason": "31 votes to ISA.58.11 (one of strongest in entire research). 22 votes to JHN.4.14. 76 total crossrefs — massive hub. Lapide writes extensively on 'rivers' (plural) of grace. Augustine: 'who drinks BECOMES the very fountain.'"}
+    },
+    {
+      "verse": "Apocalipse 22:1",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (8v→ZEC.14.8, 6v←EZE.47.1, 3v←JHN.7.38)", "commentaries (Haydock 'rivers of paradise and tree of life')", "topics (RIVER)"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Eschatological consummation of the entire water typology. 8 votes to ZEC.14.8, 6 votes from EZE.47.1. Haydock connects to 'rivers of paradise' (Gn 2) — closing the circle from creation to new creation."}
+    }
+  ],
+  "new_refs_added": [
+    {"verse": "Joao 7:37", "relevance": 3, "source": "manual_validation", "justification": "11v→ISA.55.1. 4v→EXO.17.6. Cyril: Jesus proclaims on the LAST day of Feast of Tabernacles — when water was ritually poured, He offers Himself as TRUE water. Augustine (12 entries): 'drinks and BECOMES the fountain.' Inseparable from 7:38."},
+    {"verse": "Numeros 20:11", "relevance": 2, "source": "manual_validation", "justification": "4v→1CO.10.4. 5v→PSA.105.41. Augustine: 'struck TWICE = TWO BEAMS of the cross.' Caesarius: 'two blows = horizontal beam (hands) + vertical beam (body).' The most original typological interpretation in this query."},
+    {"verse": "Joao 4:14", "relevance": 2, "source": "manual_validation", "justification": "22v←JHN.7.38. 17v→ISA.59.21. Lapide: 'paradox — earthly water flows down, this fountain flows UP.' 'A spring of water welling up to eternal life.' Connects Samaritan woman narrative to Bread of Life discourse."}
+  ],
+  "candidates_noted": [
+    {"verse": "Isaias 48:21", "relevance": 1, "status": "candidate", "justification": "5v→EXO.17.6. 36v→ISA.44.3. Prophetic echo of the rock miracle."},
+    {"verse": "Ezequiel 47:1", "relevance": 1, "status": "candidate", "justification": "6v→REV.22.1, ZEC.14.8. Prophetic vision of river from temple → precursor of Rev 22:1."},
+    {"verse": "Numeros 20:8", "relevance": 1, "status": "candidate", "justification": "Already in gold_references but not in relevance_judgments. 'Speak to the rock' vs 'strike the rock' — Moses's sin."}
+  ],
+  "scholarly_notes": {
+    "five_stage_chain": {
+      "stages": [
+        {"stage": 1, "name": "Rock Struck", "verse": "Ex 17:6, Nm 20:11", "note": "Caesarius: 'when Christ was struck on the cross, He brought forth the fountains of the NT'"},
+        {"stage": 2, "name": "Identification", "verse": "1Co 10:4", "note": "Paul: 'the rock was Christ.' 14 unanimous commentators."},
+        {"stage": 3, "name": "Double Blow = Cross", "verse": "Nm 20:11", "note": "Augustine: 'struck TWICE = TWO BEAMS.' Caesarius: 'horizontal (hands) + vertical (body).'"},
+        {"stage": 4, "name": "Transformation", "verse": "Jn 7:37-38", "note": "Augustine: 'drinks and BECOMES the fountain.' Lapide: 'rivers of charity, virginity, martyrdoms.'"},
+        {"stage": 5, "name": "Consummation", "verse": "Rev 22:1", "note": "'River of water of life from the throne of God and of the Lamb.'"}
+      ]
+    },
+    "caesarius_masterpiece": {
+      "source": "Caesarius of Arles on Exodus 17:6",
+      "quote": "Unless this rock is struck, it does not have any water at all... When Christ was struck on the cross, he brought forth the fountains of the NT. Therefore it was necessary for him to be pierced. If he had not been struck, so that water and blood flowed from his side, the whole world would have perished through suffering thirst for the word of God.",
+      "significance": "Most powerful single connection in the query: rod of Moses = soldier's spear; rock = Christ; water = side pierced (Jn 19:34). The world's thirst = need for the Word of God."
+    },
+    "augustine_double_blow": {
+      "source": "Augustine on Numbers 20:11",
+      "interpretation": "Rock struck TWICE = TWO BEAMS of the cross (horizontal + vertical). The rock HAD to be struck twice for water to flow.",
+      "confirmed_by": "Caesarius independently: 'two blows = horizontal beam (sacred hands) + vertical beam (sinless body from head to foot).'"
+    },
+    "augustine_becomes_fountain": {
+      "source": "Augustine on John 7:37",
+      "quote": "Let him drink from that water, and his conscience is quickened; he drinks in the whole fountain, nay, BECOMES THE VERY FOUNTAIN ITSELF.",
+      "significance": "Transformation theology: the receiver becomes a transmitter of grace. Not just drinking but becoming a source."
+    }
+  }
+}

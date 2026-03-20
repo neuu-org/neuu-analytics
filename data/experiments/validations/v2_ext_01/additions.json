@@ -1,0 +1,91 @@
+{
+  "query_id": "v2_ext_01",
+  "query": "silêncio de Deus",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis + patristic commentary reading + topic verification",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Salmos 22:1",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (3v→HAB.1.2)", "commentaries (Agostinho, Haydock)", "topics (DOUBTING, LAMA_SABACHTHANI)", "ccel (Spurgeon)"]
+    },
+    {
+      "verse": "Salmos 22:2",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (3v→JOB.30.20)", "commentaries (Agostinho, Gregório cita de Jó)", "topics (DOUBTING)"]
+    },
+    {
+      "verse": "Habacuque 1:2",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (3v→PSA.22.1, 5v→JER.14.9)", "commentaries (Haydock)", "topics (DOUBTING)", "ccel (White)"]
+    },
+    {
+      "verse": "1 Reis 19:12",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (presente)", "commentaries (Efrém Sírio)", "ccel (White)"]
+    },
+    {
+      "verse": "Jó 30:20",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (3v→PSA.22.2, 5v→JOB.19.7)", "commentaries (Gregório cita Sl 22:2)", "topics (DOUBTING)"]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Salmos 28:1",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "Vocabulário explícito de silêncio divino: 'A ti clamo, Senhor, rocha minha; não te emudeces para comigo, para que, se te calares, eu não me torne semelhante aos que descem à cova.' Contém literalmente 'não te emudeces' e 'se te calares'."
+    },
+    {
+      "verse": "Salmos 83:1",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "Vocabulário explícito: 'Ó Deus, não te cales; não te emudeças, nem fiques inativo, ó Deus.' Três imperativos negativos sobre o silêncio divino."
+    },
+    {
+      "verse": "Lamentações 3:8",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "Hub central na rede de cross-refs: 5 votes de PSA.22.2 e JOB.30.20. Haydock cita em JOB.19.7. Texto: 'Ainda quando clamo e grito, ele não admite a minha oração.'"
+    },
+    {
+      "verse": "Salmos 13:1",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "3 votes de HAB.1.2. Agostinho comenta sobre rosto escondido. Tópico DOUBTING referencia indiretamente. Texto: 'Até quando, SENHOR? Esquecer-te-ás de mim para sempre? Até quando ocultarás de mim o rosto?'"
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Jó 19:7",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "5 votes de JOB.30.20. Gregório e Haydock comentam. Paralelo mas satélite, não central ao conceito de silêncio."
+    },
+    {
+      "verse": "Salmos 88:14",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Agostinho conecta a Sl 22:1. 4 votes crossref de Sl 13:1. 'Rosto oculto' = silêncio. Mas verso satélite."
+    },
+    {
+      "verse": "Salmos 44:24",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Crossref para Sl 13:1, 88:14, Lm 5:20. Versão coletiva do lamento individual. Amplia escopo."
+    },
+    {
+      "verse": "Provérbios 1:28",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Silêncio invertido: Deus escolhe não responder como juízo. Salvian (AD 429) cita. Perspectiva teológica complementar."
+    }
+  ]
+}

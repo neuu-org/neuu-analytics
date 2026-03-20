@@ -1,0 +1,124 @@
+{
+  "query_id": "v2_ext_06",
+  "query": "gemido da criação",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (Genesis 3 curse → Romans 8 groaning → Revelation 21 resolution) + patristic commentary reading (11 evidences: Chrysostom, Ambrose, Augustine, Cyril, Aquinas, Lapide) + CCEL major works (Wesley Sermon 60 'The General Deliverance', Barnes NT Notes) + topic verification (CREATION, REDEMPTION) + theological structure mapping (3 levels of groaning)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Romanos 8:22",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (6v→GEN.3.17, 5v→JER.12.4,11)", "commentaries (Ambrose 'moon groans', Augustine 'debate on ktisis', Chrysostom, Ambrosiaster)", "ccel_scripcom (Johnson)", "topics (CREATION — 'Groans because of sin')", "ccel (Barnes, Wesley Sermon 60)"]
+    },
+    {
+      "verse": "Romanos 8:19",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (5v←ROM.8.23, 4v→REV.21.1, 5v→2PE.3.13)", "commentaries (Cyril 'parallel transformation', Haydock, Chrysostom, Hippolytus)", "ccel_scripcom (Johnson)"]
+    },
+    {
+      "verse": "Romanos 8:23",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (hub central: 5v→ROM.8.19, 6v→EPH.1.14, 4v→2CO.5.2, 5v→ROM.7.24)", "commentaries (Cyril 'body weighs soul', Chrysostom, Aquinas 'hierarchy of groans', Ambrose)", "ccel_scripcom (Johnson)", "topics (REDEMPTION)"],
+      "relevance_change": {"from": 2, "to": 3, "reason": "Hub central of the entire cross-reference network for this query. Connects to ALL other gold refs. 6 votes to EPH.1.14 (earnest of inheritance). 4 patristic commentators. Verse that transitions from cosmic groaning (v.22) to personal groaning — the pivot of the passage."}
+    },
+    {
+      "verse": "2 Corintios 5:2",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (5v→ROM.8.23, 4v→1CO.15.53)", "commentaries (Chrysostom 'incorruptible body', Lapide 'anti-platonism')", "ccel_scripcom (Denney, Johnson)"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Chrysostom and Lapide comment extensively. Lapide's refutation of Platonic body-escape interpretation is theologically significant. 5 votes bidirectional with ROM.8.23. The verse extends the groaning concept from Romans to Corinthians, proving it's not a one-passage idea."}
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Romanos 8:20",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "ESSENTIAL missing verse. 7 votes to GEN.3.17-19 (the curse). Chrysostom, Cyril, Ambrosiaster comment extensively. Explains the CAUSE of the groaning — without it, Rm 8:22 loses context. 'The creation was subjected to futility, not willingly, but because of him who subjected it.'"
+    },
+    {
+      "verse": "Romanos 8:21",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "6 votes to GEN.3.17. 4 votes to 2PE.3.13 and REV.22.3. Jerome: 'when the sons of God attain glory, creation will be freed.' The hope-verse that completes the groaning arc — without it, the concept is suffering without resolution. 'The creation itself will be set free from its bondage to corruption.'"
+    },
+    {
+      "verse": "2 Corintios 5:4",
+      "relevance": 1,
+      "source": "manual_validation",
+      "justification": "6 votes to 1CO.15.53-54. 4 votes to ROM.8.26. Chrysostom and Lapide comment. Contains the crucial distinction: groaning is NOT Platonic desire to escape the body, but desire for incorruptible clothing. Lapide explicitly refutes σῶμα=σῆμα interpretation."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Genesis 3:17",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "7 votes from ROM.8.20, 6 votes from ROM.8.21 and 8.22. Chrysostom cites explicitly. The original cause of cosmic groaning: 'cursed is the ground because of you.'"
+    },
+    {
+      "verse": "Apocalipse 21:4",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "4 votes from ROM.8.19. Tertullian and Irenaeus comment. Eschatological resolution: 'He will wipe away every tear... death shall be no more.' End of the groaning."
+    },
+    {
+      "verse": "Romanos 8:26",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "4 votes from ROM.8.23. 14 votes to EPH.6.18. Augustine: 'groans of the dove' (Nahum 2:7). The third groaning: the Spirit intercedes with 'groanings too deep for words.'"
+    }
+  ],
+  "scholarly_notes": {
+    "three_groanings": {
+      "description": "Three levels of groaning confirmed by multiple patristic commentators and cross-references",
+      "levels": [
+        {
+          "level": 1,
+          "name": "Cosmic Groaning",
+          "text": "Rm 8:19-22",
+          "subject": "toda a criação (κτίσις)",
+          "cause": "curse of Genesis 3:17 (7 votes)",
+          "form": "geme e suporta angústias (birth pangs)",
+          "commentators": "Ambrose (moon groans), Chrysostom (thorns), Cyril (parallel transformation)"
+        },
+        {
+          "level": 2,
+          "name": "Human Groaning",
+          "text": "Rm 8:23 + 2Co 5:2-4",
+          "subject": "nós que temos as primícias do Espírito",
+          "cause": "corruptible body weighing down the soul (Cyril)",
+          "form": "gememos em nosso íntimo + aspirando",
+          "commentators": "Cyril (body weighs soul), Lapide (NOT Platonic escape — desire for incorruptible clothing)"
+        },
+        {
+          "level": 3,
+          "name": "Spirit's Groaning",
+          "text": "Rm 8:26",
+          "subject": "o Espírito Santo",
+          "form": "gemidos inexprimíveis (στεναγμοῖς ἀλαλήτοις)",
+          "commentators": "Augustine ('groans of the dove', Nahum 2:7 — the Spirit makes US groan → intercession)"
+        }
+      ],
+      "resolution": "Rev 21:1-4 + Is 65:17 + 2Pe 3:13 — new heavens and new earth, end of groaning",
+      "significance_for_tcc": "A hybrid search for 'gemido da criação' must find ALL three levels to be complete. Pure lexical for 'gemido' finds only Rm 8:22-23 and 2Co 5:2-4. Semantic must connect to the CAUSE (Gn 3:17) and RESOLUTION (Rev 21:4) which don't use 'gemido' vocabulary."
+    },
+    "wesley_sermon_60": {
+      "source": "Wesley, Sermon 60 'The General Deliverance' (sermons.xml)",
+      "significance": "Most complete theological development of 'creation's groaning' found in CCEL. Systematic treatment: paradise → fall → restoration with detailed description of each state.",
+      "three_states": [
+        "1. Original State (Paradise): creatures had understanding, will, liberty, immortality",
+        "2. Present State (Groaning): loss of vigor, understanding; creatures flee from or attack man; subject to pain, disease",
+        "3. Future State (Liberation): complete restoration exceeding paradise; wolf dwells with lamb; no pain; perennial spring"
+      ]
+    },
+    "augustine_ktisis_debate": {
+      "source": "Augustine, Commentary on Romans 8:22",
+      "description": "Augustine documents the interpretive debate: does κτίσις mean all nature or only humanity? He himself oscillates between the two readings, noting the Manichaean error of attributing suffering to trees and stones.",
+      "significance": "Shows this verse has been exegetically contested since the 5th century — any search system must handle this ambiguity."
+    }
+  }
+}

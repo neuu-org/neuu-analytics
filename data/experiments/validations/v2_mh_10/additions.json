@@ -1,0 +1,172 @@
+{
+  "query_id": "v2_mh_10",
+  "query": "o tabernáculo e o templo",
+  "validated_by": "human",
+  "validated_at": "2026-03-20",
+  "methodology": "Cross-reference network (2CO.6.16→REV.21.3 = 40v STRONGEST in entire research, EXO.25.8→2CO.6.16 = 8v, JHN.2.21→1CO.6.19 = 7v Christ→believer bridge, 1CO.3.16↔1CO.6.19 = 15v cluster) + patristic evidence (12+ citations: Chrysostom triple identification body=tabernacle+veil+heaven, Tertullian 'Plato prison vs Paul temple', Ephrem 'transitory→eternal church', Cyril 'only Christ is temple in proper sense', Aquinas exemplar+shadow) + CCEL commentaries (Calvin 'effigy of heavenly', Wesley 'pencil sketch without colours', Henry 'Christ is substance and end') + topics (TABERNACLE 156 refs, TEMPLE_FIRST 99, SANCTUARY, HOLY_OF_HOLIES) + dictionary (Easton 'in final state ALL is sanctuary')",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Exodo 25:8",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (8v→2CO.6.16, 6v→REV.21.3, 5v→HEB.9.1)",
+        "Catena Bible (Haydock 'sanctuary=tabernacle as portable temple')",
+        "topics (TABERNACLE, SANCTUARY)"
+      ]
+    },
+    {
+      "verse": "Exodo 25:9",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (5v→EXO.25.40, 4v↔HEB.8.5)",
+        "Catena Bible (Ephrem 'transitory model replaced by the church, the perfect prototype lasting forever')",
+        "topics (TABERNACLE)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Contains 'model of the tabernacle' — defines the type/antitype relationship. Ephrem: 'transitory, replaced by the church.' 4v↔HEB.8.5."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "1 Reis 6:1",
+      "relevance": 1,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (4v→2CH.3.1)",
+        "Catena Bible (Bede numerology of 480 years, Haydock)",
+        "topics (TEMPLE_FIRST)"
+      ]
+    },
+    {
+      "verse": "Hebreus 8:1",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (5v→HEB.1.3, 5v→HEB.2.17, 3v→HEB.9.11)",
+        "Catena Bible (Chrysostom 'not the office of priest but of Him whom the priest serves')"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Christ as high priest seated at God's right hand — the person who ministers in the TRUE tabernacle. Chrysostom comment. 3v→HEB.9.11."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Hebreus 8:5",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (6v→EXO.25.40, 5v→COL.2.17, 5v→HEB.10.1, 4v↔EXO.25.9)",
+        "Catena Bible (Chrysostom 'the Church IS heaven', Aquinas exemplar+shadow, Haydock)",
+        "CCEL (Calvin 'effigy of heavenly', Wesley 'pencil sketch', Henry 'Christ is substance and end')",
+        "topics (TABERNACLE, SANCTUARY)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Key type/antitype verse: 'figure and shadow of heavenly things... according to the pattern shown on the mount.' Chrysostom: 'the Church is heavenly, nothing less than Heaven.' Aquinas: dual function exemplar+shadow. 5 CCEL commentators."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Hebreus 9:1",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (6v→EXO.25.8, 3v→HEB.9.11)",
+        "Catena Bible (4 comments: Chrysostom 'Holy Place=present time; Holy of Holies=HEAVEN')"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Opens the comparison: 'the first covenant had a TERRESTRIAL sanctuary.' Chrysostom: 'Holy Place = present time; Holy of Holies = HEAVEN.' Sets up 9:11 contrast."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Hebreus 9:11",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (85 refs hub!, 5v→HEB.10.1, 4v→2CO.5.1, 3v→JHN.1.14, 3v→HEB.9.24)",
+        "Catena Bible (3 comments: Chrysostom TRIPLE identification body=tabernacle+veil+heaven)",
+        "CCEL (Wesley 'not of this creation')",
+        "topics (TABERNACLE)"
+      ]
+    },
+    {
+      "verse": "Joao 2:19",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (6v→MAT.27.40, MRK.15.29, 5v→MRK.14.58)",
+        "Catena Bible (11 comments! Lapide 'fullness dwells BODILY and PERSONALLY', Cyril, Hippolytus)",
+        "topics (TEMPLE_FIRST)"
+      ]
+    },
+    {
+      "verse": "Joao 2:21",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (7v→1CO.6.19 Christ→believer bridge, 3v→1CO.3.16, JHN.1.14, COL.2.9)",
+        "Catena Bible (3 comments: Cyril 'ONLY Christ is temple in proper sense', Lapide)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Interpretive key: 'He was speaking of the temple of his BODY.' Cyril: 'only Christ is temple in proper sense.' 7v→1CO.6.19 = the Christ→believer bridge."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Joao 1:14",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "THE CHRISTOLOGICAL KEY. Greek eskēnōsen (tabernacled) invokes the ENTIRE tradition — translated 'habitou' in Portuguese, making the tabernacle allusion INVISIBLE to lexical search. 'Glory' (doxa/kavod) = same glory that filled tabernacle (Ex 40:34) and temple (1Ki 8:11). 3v←HEB.9.11, JHN.2.21. Topic TABERNACLE: 'Illustrative of Christ' cites Jn 1:14."
+    },
+    {
+      "verse": "Apocalipse 21:22",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "SHOCKING CONCLUSION of the entire arc: what began with 'make me a sanctuary' (Ex 25:8) ends with 'I SAW NO SANCTUARY — for the Lord God and the Lamb ARE the sanctuary.' Easton: 'in the final state ALL is sanctuary.' Haydock: 'no need of temple where God is present so perfectly.'"
+    },
+    {
+      "verse": "Apocalipse 21:3",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "Eschatological fulfillment of Ex 25:8. 40v←2CO.6.16 = STRONGEST connection in entire research! 6v←EXO.25.8. Contains 'tabernáculo' literally. 'God will DWELL with them' = final answer to 'make me a sanctuary that I may DWELL among them.'"
+    },
+    {
+      "verse": "1 Corintios 6:19",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "12 patristic comments! Tertullian: 'in Platonic view body=PRISON; in Paul, body=TEMPLE OF GOD.' 15v↔1CO.3.16 (strongest bidirectional in cluster). 7v←JHN.2.21 (Christ→believer bridge). Topic TEMPLE_FIRST: 'bodies of saints.' Completely missing stage of the dwelling arc."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Exodo 40:34",
+      "relevance": 2,
+      "status": "candidate",
+      "justification": "CONCLUSION of tabernacle narrative — glory fills the tabernacle, 'activating' it. Parallel with 1Ki 8:10-11. Contains 'tabernáculo' literally. 3v→1KI.8.10."
+    },
+    {
+      "verse": "Hebreus 9:24",
+      "relevance": 2,
+      "status": "candidate",
+      "justification": "Christ entered HEAVEN ITSELF, not a sanctuary made by hands. Chrysostom: 'Paul sets the whole HEAVEN against the temple.' Clement of Rome AD 99: 'the flesh is the copy of the spirit.' 7v→HEB.8.2."
+    },
+    {
+      "verse": "Efesios 2:21-22",
+      "relevance": 2,
+      "status": "candidate",
+      "justification": "Church as growing temple: 'grows into a sanctuary dedicated to the Lord... dwelling place of God in the Spirit.' 8v←1CO.3.16. 7v←1CO.6.19. Topic TEMPLE_FIRST: 'spiritual church.'"
+    },
+    {
+      "verse": "Colossenses 2:17",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Articulates the type/antitype principle: 'shadow of things to come; the body is of Christ.' 5v←HEB.8.5. 10v→HEB.10.1."
+    },
+    {
+      "verse": "1 Reis 8:10-11",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Exact parallel of Ex 40:34 in the temple. 'Cloud filled the house of the LORD... glory of the LORD filled the house.' Topic TEMPLE_FIRST: 'Filled with cloud of glory.'"
+    }
+  ],
+  "scholarly_notes": {
+    "nine_stage_dwelling_arc": "Eden (Gn 3:8) → Tabernacle (Ex 25:8, 40:34) → Solomon's Temple (1Ki 6:1, 8:10) → Second Temple → Christ's Body (Jn 1:14, 2:19) → Believer's Body (1Co 6:19) → The Church (Eph 2:21) → Heavenly Tabernacle (Heb 8:5, 9:11,24) → New Jerusalem (Rev 21:3,22). Gold set covers only 3 of 9 stages.",
+    "chrysostom_triple_identification": "On Heb 9:11: Christ's body = tabernacle (holds the Deity) + veil (hides the Deity) + heaven (separates the Holy of Holies). 'The Heaven is a veil; the flesh is a veil; the tabernacle holds the Godhead.' No parallel in other commentators.",
+    "eskēnōsen_invisible_key": "Jo 1:14 eskēnōsen (tabernacled) is translated 'habitou' in ARA. The allusion to the tabernacle tradition is INVISIBLE in Portuguese. This is the single best example of why semantic search is needed for biblical corpus — lexical search for 'tabernáculo' will NEVER find this verse in Portuguese.",
+    "strongest_connection": "2CO.6.16→REV.21.3 = 40 votes — strongest connection in the entire research for this query. Links 'we are sanctuary of the living God' to 'the tabernacle of God is with men.'"
+  }
+}

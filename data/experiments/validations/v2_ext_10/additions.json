@@ -1,0 +1,113 @@
+{
+  "query_id": "v2_ext_10",
+  "query": "eleição e predestinação",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (136-vote connection — absolute record in entire dataset across all queries) + patristic commentary reading (10+ commentators representing 6 distinct theological schools: conditional foreknowledge, grace-will integration, corporate election, anti-fatalism, Calvinism, Arminianism) + CCEL confessional documents (Canons of Dort, Westminster, Belgic Confession) + topic verification (ELECTION 53 aspects, PREDESTINATION 80 refs)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Romanos 8:29",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (136v→EPH.1.4/5 — ABSOLUTE RECORD, 84v→JER.1.5)", "commentaries (Diodorus, Augustine, Haydock, Symeon, Cyril — 10 entries)", "ccel_scripcom (Johnson)", "topics (ELECTION)"]
+    },
+    {
+      "verse": "Efesios 1:4",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (14v→ROM.8.28/29, 21v→2TI.1.9)", "commentaries (Jerome 'election FOR holiness', Chrysostom, Ambrosiaster, John of Damascus — 12 entries)", "ccel_scripcom (Findlay, Johnson)", "topics (ELECTION)"]
+    },
+    {
+      "verse": "Efesios 1:5",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (12v→EPH.1.11, 10v→ROM.8.29/30)", "commentaries (9 entries)", "ccel_scripcom (Findlay, Johnson)", "topics (ELECTION)"]
+    },
+    {
+      "verse": "Romanos 9:11",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (3v→2TH.2.13, 3v→EPH.1.4/5, 9v→MAL.1.2)", "commentaries (Ambrosiaster 'foreknowledge of future merit', Gennadius, Augustine — 5 entries)", "ccel_scripcom (Johnson 'national election')","topics (ELECTION)"]
+    },
+    {
+      "verse": "1 Pedro 1:2",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (7v→ROM.11.2, 6v→2TH.2.13, 5v→ROM.8.29)", "commentaries (Haydock 'three divine Persons conspire in salvation')", "ccel_scripcom (Johnson)", "topics (ELECTION)"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Uses 'foreknowledge' (πρόγνωσις) explicitly — the only gold ref that names the concept directly. Haydock integrates all three Persons of the Trinity in the election process: Father's foreknowledge, Spirit's sanctification, Son's blood. 7 votes to ROM.11.2."}
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Romanos 8:30",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "Already in gold_references but MISSING from relevance_judgments. 45 votes para PHP.1.6. 14 votes para EPH.1.4. The 'golden chain': predestined → called → justified → glorified. Augustine: 'one cannot be justified without being called.' Inseparable from 8:29."
+    },
+    {
+      "verse": "Efesios 1:11",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "73 votes para ROM.8.29. 12 votes de EPH.1.5. Uses 'predestined' explicitly: 'predestined according to the purpose of him who works all things according to the counsel of his will.' Third pillar of predestination in Ephesians."
+    },
+    {
+      "verse": "Romanos 9:16",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "6 votes para ROM.9.18. 3 votes para 2TH.2.13 and EPH.2.8-9. Key verse on divine sovereignty: 'So then it depends not on human will or exertion, but on God, who has mercy.' Complements Rm 9:11 (Jacob/Esau) with the principle."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Atos 13:48",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "6 votes para ROM.8.28. 5 votes para ROM.8.29-30. Only NARRATIVE verse (not epistolary) on predestination: 'as many as were appointed to eternal life believed.'"
+    },
+    {
+      "verse": "Joao 15:16",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "58 votes para LUK.11.9. Words of Jesus on election — gospel angle different from Pauline. 'You did not choose me, but I chose you.'"
+    },
+    {
+      "verse": "Romanos 11:5",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "6 votes para ROM.9.27. Connects OT election (Israel) → NT (remnant by grace). Topic ELECTION."
+    }
+  ],
+  "scholarly_notes": {
+    "absolute_record_connection": {
+      "from": "ROM.8.29",
+      "to": "EPH.1.4",
+      "votes": 136,
+      "note": "ABSOLUTE RECORD in the entire bible-crossrefs-dataset (1.2M links) across ALL 10 extreme queries validated. Confirms that Romans 8:29 and Ephesians 1:4-5 express the same Pauline concept of predestination in two different letters."
+    },
+    "six_theological_schools": {
+      "description": "This query uniquely reveals 6 distinct theological positions in the commentaries",
+      "schools": [
+        {"name": "Conditional Foreknowledge", "representatives": "Diodorus of Tarsus, Ambrosiaster, Johnson", "formula": "God foresees who will believe → predestines those believers → provides grace"},
+        {"name": "Grace-Will Integration", "representatives": "Haydock, Chrysostom", "formula": "Grace and free will cooperate without causal priority. Grace sufficient but not coercive."},
+        {"name": "Corporate Election", "representatives": "Johnson (on Eph 1:4)", "formula": "God elected the CHURCH as body, not unconditional individuals"},
+        {"name": "Anti-Fatalism (Eastern Orthodox)", "representatives": "Symeon the New Theologian (AD 1022)", "formula": "Foreknowledge ≠ causation. 'Zeal and deliberate choice of each effects the victory.'"},
+        {"name": "Calvinism", "representatives": "Boettner, Calvin, Edwards (CCEL)", "formula": "Unconditional election, irresistible grace. 'Foreknowledge is not the mother of election.'"},
+        {"name": "Arminianism", "representatives": "Arminius, Wesley (CCEL)", "formula": "Conditional election based on foreseen faith. Prevenient grace universal."}
+      ],
+      "significance_for_tcc": "The hybrid search must retrieve verses supporting ALL sides of this debate. A system biased toward any single theological tradition would miss relevant results. This query tests theological neutrality of the retrieval system."
+    },
+    "confessional_documents_in_ccel": {
+      "description": "Three major confessional documents in CCEL treat predestination as a central article",
+      "documents": [
+        {"name": "Canons of Dort", "file": "anonymous/canonsofdort.xml", "content": "5 points of Calvinism"},
+        {"name": "Westminster Confession", "file": "anonymous/westminster3.xml", "content": "Chapter on predestination"},
+        {"name": "Belgic Confession", "file": "anonymous/bcf.xml", "content": "Article on election"}
+      ]
+    },
+    "golden_chain": {
+      "source": "Romans 8:29-30, articulated by Augustine",
+      "chain": "foreknew → predestined → called → justified → glorified",
+      "augustine_note": "'Many are called but few are chosen. But since the elect have certainly been called, it is obvious that they have not been justified without being called.' — establishes logical ordering of the chain"
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "query_id": "v2_mh_08",
+  "query": "a eira de Araúna",
+  "validated_by": "human",
+  "validated_at": "2026-03-20",
+  "methodology": "Cross-reference network (1CH.21.18↔2CH.3.1 = 5v bidirectional, 1CH.22.1 hidden hub linking ALL gold refs, 2CH.3.1→GEN.22.2 = 3v Moriah link) + patristic evidence (10 citations: Jerome 'church among gentiles', Caesarius '50 shekels=Pentecost', Bede 'Ornan=enlightened=gentiles', Ambrose, Chrysostom) + CCEL commentaries (Henry/Lightfoot 'exact place of Abraham', JFB 'rock El Sakhara', Wesley 'Calvary not far off', Haydock 'Isaac carried wood as Christ the cross') + topics (ARAUNAH, ORNAN, MORIAH, THRESHING, TEMPLE_FIRST, ALTAR) + dictionary (Easton, Smith)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "2 Samuel 24:18",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (2v→1CH.21.18, 2v→1CH.22.1, 2v→2SA.24.16)",
+        "Catena Bible (Haydock 'terrified by the angel')",
+        "CCEL (JFB 'Mount Moriah', Henry)",
+        "topics (ARAUNAH, ORNAN, THRESHING, ALTAR), dictionary (Araunah)"
+      ]
+    },
+    {
+      "verse": "2 Samuel 24:24",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (4v→1CH.21.24-25, 2v→2CH.3.1)",
+        "Catena Bible (Caesarius '50 shekels=Pentecost, Christ bought threshing floor with Holy Spirit')",
+        "CCEL (Henry 'will not offer that which costs me nothing')",
+        "topics (ARAUNAH, ORNAN, THRESHING)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Contains the central theological principle: 'I will not offer burnt offerings that cost me nothing.' Caesarius: 50 shekels = Pentecost. The verse that explains WHY David bought the threshing floor."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "2 Samuel 24:25",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (6v→2SA.21.14, 3v→GEN.22.9 altar of Abraham!, 3v→1CH.21.26)",
+        "Catena Bible (Caesarius 'Christ the true David')",
+        "CCEL (Henry)",
+        "topics (ORNAN, THRESHING, ALTARS)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Altar built + plague ceased. 3v→GEN.22.9 connects David's altar to Abraham's altar on the SAME location. Parallel to 1Ch 21:26 (fire from heaven)."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "1 Cronicas 21:18",
+      "relevance": 3,
+      "status": "upgraded_from_2_to_3",
+      "evidence": [
+        "crossrefs (5v↔2CH.3.1 bidirectional strongest, 4v→1CH.22.1)",
+        "Catena Bible (Jerome 'church would grow not in Israel but among the GENTILES')",
+        "CCEL (JFB, Henry)",
+        "topics (ARAUNAH, ORNAN, THRESHING)"
+      ],
+      "relevance_change": {"from": 2, "to": 3, "reason": "Jerome's gentile typology reading. 5v bidirectional with 2Ch 3:1 (strongest link). The Angel MARKS the temple location in the threshing floor of a GENTILE — Jerome: 'thus early was it made plain that Christ's church would grow up among the Gentiles.'"}
+    },
+    {
+      "verse": "1 Cronicas 21:28",
+      "relevance": 1,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (4v→1CH.22.1)",
+        "CCEL (Henry)",
+        "topics (ORNAN, TEMPLE_FIRST)"
+      ],
+      "note": "Was missing relevance_judgment — scored 1 (narrative transition to 22:1)"
+    },
+    {
+      "verse": "2 Cronicas 3:1",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (5v↔1CH.21.18, 3v→GEN.22.2, 3v→GEN.22.14, 2v→1KI.6.1 — 39 refs)",
+        "Catena Bible (Haydock 'Moriah = place of Abraham')",
+        "CCEL (Henry 'typical of Christ's sacrifice', JFB 'rock El Sakhara', Wesley)",
+        "topics (MORIAH, ORNAN, TEMPLE, TEMPLE_FIRST, THRESHING), dictionary (Araunah, Moriah, Temple)"
+      ]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "2 Samuel 24:16",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "The CAUSAL EVENT — Angel STOPS at the threshing floor, making the location sacred. Contains literal phrase 'eira de Araúna.' Henry/Lightfoot: 'in the EXACT place where Abraham was stayed from slaying his son, this angel was stayed from destroying Jerusalem.' 2v→2CH.3.1. Topics ARAUNAH + ORNAN."
+    },
+    {
+      "verse": "1 Cronicas 22:1",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "HIDDEN HUB connecting ALL gold refs (5v→2CH.3.1, 4v→1CH.21.18/26/28, 2v→2SA.24.18/24). Formal declaration of temple location: 'Here shall be the house of the LORD God.' Henry: 'threshing floor = the Church of the living God, his threshing, the corn of his floor (Is 21:10).'"
+    },
+    {
+      "verse": "1 Cronicas 21:26",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "FIRE FROM HEAVEN = divine seal confirming the sacrifice. Parallel with Lv 9:24 (5v), 1Ki 18:38 (Elijah), 2Ch 7:1 (temple dedication). Bede: 'fire from heaven = God's acceptance, prefiguring Christ's cross.' 3v→2SA.24.25."
+    },
+    {
+      "verse": "Genesis 22:2",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "MORIAH connection — ~1000 years before David. 3v→2CH.3.1 (explicit link). Easton: 'the land of Moriah to which Abraham went; one thousand years after, David built an altar.' ALL commentators (Henry, JFB, Wesley, Haydock) confirm. ZERO lexical overlap with 'eira de Araúna' — valuable SEMANTIC TEST."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Genesis 22:14",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "'On the mount of the LORD it shall be provided.' Geographic prophecy fulfilled in 2Ch 3:1. 3v→2CH.3.1. Wesley: 'mount Calvary was not far off.' Haydock: 'verified when Christ was crucified.'"
+    }
+  ],
+  "scholarly_notes": {
+    "four_sacrifices_one_location": "One location, four sacrifices spanning ~2000 years: (1) Abraham offers Isaac ~2000 BC, (2) David buys threshing floor and offers ~1017 BC, (3) Solomon builds Temple ~1012 BC, (4) Christ crucified ~30 AD. Wesley: 'mount Calvary was not far off.' Haydock: 'Isaac carried the wood as Christ carried the cross.'",
+    "gentile_typology": "Jerome: threshing floor of a JEBUSITE (gentile) chosen for the temple = church would grow among gentiles. Caesarius: 'the true angel, Christ, visited the people of the Gentiles.' Bede: 'Ornan = enlightened = gentiles. Jebus (trampled on) → Jerusalem (vision of peace).' Henry: 'happy presage of the gospel temple among the Gentiles.'",
+    "fire_from_heaven_pattern": "Divine fire confirming sacrifice appears 4 times: Lv 9:24 (Moses/tabernacle), 1Ch 21:26 (David/threshing floor), 1Ki 18:38 (Elijah/Carmel), 2Ch 7:1 (Solomon/temple dedication). Bede: 'prefiguring Christ's cross.'",
+    "araunah_vs_ornan": "ARA uses 'Araúna' in 2 Samuel and 'Ornã' in 1 Chronicles — name variation that may affect lexical search. Both topics (ARAUNAH, ORNAN) exist in the dataset."
+  }
+}

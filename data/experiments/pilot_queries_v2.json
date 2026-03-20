@@ -1,0 +1,2715 @@
+[
+  {
+    "id": "v2_ext_01",
+    "query": "silêncio de Deus",
+    "query_type": "abstract_concept",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Conceito experiencial que nunca aparece literalmente. Testa compreensão profunda de lamento e ausência divina. Adicionados Sl 28:1 e Sl 83:1 por revisão humana (vocabulário explícito de silêncio).",
+    "seed_signals": {
+      "expected_books": [
+        "Salmos",
+        "Habacuque",
+        "Jó",
+        "1 Reis"
+      ],
+      "expected_terms": [
+        "silêncio",
+        "clamor",
+        "resposta",
+        "ouvir"
+      ],
+      "expected_terms_en": [
+        "silence",
+        "silent",
+        "cry",
+        "answer",
+        "hear",
+        "forsaken",
+        "desolate",
+        "absence",
+        "hidden_face"
+      ]
+    },
+    "gold_references": [
+      "Salmos 22:1",
+      "Salmos 22:2",
+      "Habacuque 1:2",
+      "1 Reis 19:11",
+      "1 Reis 19:12",
+      "1 Reis 19:13",
+      "Jó 30:20"
+    ],
+    "relevance_judgments": {
+      "Salmos 22:1": 3,
+      "Salmos 22:2": 3,
+      "Habacuque 1:2": 3,
+      "1 Reis 19:12": 3,
+      "Jó 30:20": 2
+    }
+  },
+  {
+    "id": "v2_ext_02",
+    "query": "sombra das coisas futuras",
+    "query_type": "typology",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Conceito hermenêutico abstrato sobre tipologia OT→NT. Vocabulário varia entre sombra, figura, tipo.",
+    "seed_signals": {
+      "expected_books": [
+        "Hebreus",
+        "Colossenses"
+      ],
+      "expected_terms": [
+        "sombra",
+        "figura",
+        "tipo",
+        "imagem"
+      ],
+      "expected_terms_en": [
+        "shadow",
+        "figure",
+        "type",
+        "pattern",
+        "copy",
+        "foreshadow",
+        "image",
+        "likeness"
+      ]
+    },
+    "gold_references": [
+      "Hebreus 8:5",
+      "Hebreus 10:1",
+      "Colossenses 2:17",
+      "Hebreus 9:9"
+    ],
+    "relevance_judgments": {
+      "Hebreus 10:1": 3,
+      "Colossenses 2:17": 3,
+      "Hebreus 8:5": 2,
+      "Hebreus 9:9": 2
+    }
+  },
+  {
+    "id": "v2_ext_03",
+    "query": "cegueira espiritual",
+    "query_type": "metaphor",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Metáfora visual para condição espiritual. Cruza profecia, evangelho, epístola, apocalipse.",
+    "seed_signals": {
+      "expected_books": [
+        "2 Corintios",
+        "Joao",
+        "Isaias",
+        "Mateus",
+        "Apocalipse"
+      ],
+      "expected_terms": [
+        "cego",
+        "olhos",
+        "ver",
+        "trevas"
+      ],
+      "expected_terms_en": [
+        "blind",
+        "blindness",
+        "eyes",
+        "darkness",
+        "sight",
+        "seeing",
+        "hardness",
+        "veil"
+      ]
+    },
+    "gold_references": [
+      "2 Corintios 4:4",
+      "Joao 9:39",
+      "Joao 9:41",
+      "Isaias 6:9",
+      "Isaias 6:10",
+      "Mateus 13:14",
+      "Mateus 13:15",
+      "Apocalipse 3:17"
+    ],
+    "relevance_judgments": {
+      "2 Corintios 4:4": 3,
+      "Joao 9:39": 3,
+      "Isaias 6:10": 2,
+      "Mateus 13:14": 2,
+      "Apocalipse 3:17": 2
+    }
+  },
+  {
+    "id": "v2_ext_04",
+    "query": "o descanso de Deus",
+    "query_type": "doctrine",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Conceito teológico que cruza criação, lei e graça. Hebreus reinterpreta o sábado da criação.",
+    "seed_signals": {
+      "expected_books": [
+        "Hebreus",
+        "Genesis",
+        "Salmos",
+        "Mateus"
+      ],
+      "expected_terms": [
+        "descanso",
+        "repouso",
+        "sábado",
+        "cessar"
+      ],
+      "expected_terms_en": [
+        "rest",
+        "sabbath",
+        "cease",
+        "remain",
+        "repose",
+        "sabbath_rest"
+      ]
+    },
+    "gold_references": [
+      "Hebreus 4:1",
+      "Hebreus 4:3",
+      "Hebreus 4:9",
+      "Hebreus 4:10",
+      "Hebreus 4:11",
+      "Genesis 2:2",
+      "Genesis 2:3",
+      "Salmos 95:11",
+      "Mateus 11:28",
+      "Mateus 11:29"
+    ],
+    "relevance_judgments": {
+      "Hebreus 4:9": 3,
+      "Hebreus 4:10": 3,
+      "Genesis 2:2": 2,
+      "Salmos 95:11": 2,
+      "Mateus 11:28": 2
+    }
+  },
+  {
+    "id": "v2_ext_05",
+    "query": "a loucura da pregação",
+    "query_type": "contrast",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Inversão sabedoria/loucura em Paulo. O que parece loucura é sabedoria divina.",
+    "seed_signals": {
+      "expected_books": [
+        "1 Corintios"
+      ],
+      "expected_terms": [
+        "loucura",
+        "sabedoria",
+        "pregação",
+        "cruz"
+      ],
+      "expected_terms_en": [
+        "foolishness",
+        "folly",
+        "wisdom",
+        "preaching",
+        "cross",
+        "wise",
+        "foolish"
+      ]
+    },
+    "gold_references": [
+      "1 Corintios 1:18",
+      "1 Corintios 1:21",
+      "1 Corintios 1:23",
+      "1 Corintios 1:25",
+      "1 Corintios 2:14",
+      "1 Corintios 3:19"
+    ],
+    "relevance_judgments": {
+      "1 Corintios 1:18": 3,
+      "1 Corintios 1:21": 3,
+      "1 Corintios 1:25": 2,
+      "1 Corintios 2:14": 2,
+      "1 Corintios 3:19": 1
+    }
+  },
+  {
+    "id": "v2_ext_06",
+    "query": "gemido da criação",
+    "query_type": "abstract_concept",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Conceito cósmico/escatológico único em Paulo. Criação como sujeito que geme pela redenção.",
+    "seed_signals": {
+      "expected_books": [
+        "Romanos",
+        "2 Corintios"
+      ],
+      "expected_terms": [
+        "gemido",
+        "criação",
+        "redenção",
+        "esperança"
+      ],
+      "expected_terms_en": [
+        "groan",
+        "groaning",
+        "creation",
+        "redemption",
+        "hope",
+        "travail",
+        "earnest_expectation"
+      ]
+    },
+    "gold_references": [
+      "Romanos 8:19",
+      "Romanos 8:20",
+      "Romanos 8:21",
+      "Romanos 8:22",
+      "Romanos 8:23",
+      "Romanos 8:26",
+      "2 Corintios 5:2",
+      "2 Corintios 5:4"
+    ],
+    "relevance_judgments": {
+      "Romanos 8:22": 3,
+      "Romanos 8:19": 3,
+      "Romanos 8:23": 2,
+      "2 Corintios 5:2": 1
+    }
+  },
+  {
+    "id": "v2_ext_07",
+    "query": "a noiva e o noivo",
+    "query_type": "metaphor",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Metáfora matrimonial Deus↔povo que cruza 6+ livros de diferentes gêneros e épocas.",
+    "seed_signals": {
+      "expected_books": [
+        "Apocalipse",
+        "Efesios",
+        "Oseias",
+        "Isaias",
+        "Cantares",
+        "2 Corintios"
+      ],
+      "expected_terms": [
+        "noiva",
+        "noivo",
+        "esposa",
+        "desposar"
+      ],
+      "expected_terms_en": [
+        "bride",
+        "bridegroom",
+        "wife",
+        "husband",
+        "marriage",
+        "wedding",
+        "espouse",
+        "betroth",
+        "nuptial"
+      ]
+    },
+    "gold_references": [
+      "Apocalipse 19:7",
+      "Apocalipse 19:9",
+      "Efesios 5:25",
+      "Efesios 5:27",
+      "2 Corintios 11:2",
+      "Oseias 2:19",
+      "Oseias 2:20",
+      "Isaias 62:5",
+      "Cantares 4:7"
+    ],
+    "relevance_judgments": {
+      "Apocalipse 19:7": 3,
+      "Efesios 5:25": 3,
+      "2 Corintios 11:2": 2,
+      "Oseias 2:19": 2,
+      "Isaias 62:5": 2,
+      "Cantares 4:7": 1
+    }
+  },
+  {
+    "id": "v2_ext_08",
+    "query": "esvaziamento de Cristo",
+    "query_type": "doctrine",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Kenosis: conceito teológico que não aparece como palavra. Filipenses 2 é o texto central.",
+    "seed_signals": {
+      "expected_books": [
+        "Filipenses",
+        "Joao",
+        "2 Corintios",
+        "Hebreus"
+      ],
+      "expected_terms": [
+        "esvaziar",
+        "forma",
+        "servo",
+        "humilhar"
+      ],
+      "expected_terms_en": [
+        "empty",
+        "emptied",
+        "form",
+        "servant",
+        "humble",
+        "humility",
+        "incarnation",
+        "condescension"
+      ]
+    },
+    "gold_references": [
+      "Filipenses 2:5",
+      "Filipenses 2:6",
+      "Filipenses 2:7",
+      "Filipenses 2:8",
+      "Joao 17:5",
+      "2 Corintios 8:9",
+      "Hebreus 2:9"
+    ],
+    "relevance_judgments": {
+      "Filipenses 2:7": 3,
+      "Filipenses 2:6": 3,
+      "Filipenses 2:8": 2,
+      "2 Corintios 8:9": 2,
+      "Joao 17:5": 1
+    }
+  },
+  {
+    "id": "v2_ext_09",
+    "query": "o véu rasgado do templo",
+    "query_type": "event",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Evento literal na crucificação com significado teológico profundo: acesso livre a Deus.",
+    "seed_signals": {
+      "expected_books": [
+        "Mateus",
+        "Marcos",
+        "Lucas",
+        "Hebreus"
+      ],
+      "expected_terms": [
+        "véu",
+        "templo",
+        "rasgou",
+        "acesso"
+      ],
+      "expected_terms_en": [
+        "veil",
+        "temple",
+        "torn",
+        "rent",
+        "access",
+        "curtain",
+        "holy_of_holies",
+        "sanctuary"
+      ]
+    },
+    "gold_references": [
+      "Mateus 27:51",
+      "Marcos 15:38",
+      "Lucas 23:45",
+      "Hebreus 10:19",
+      "Hebreus 10:20",
+      "Hebreus 6:19"
+    ],
+    "relevance_judgments": {
+      "Mateus 27:51": 3,
+      "Hebreus 10:19": 3,
+      "Hebreus 10:20": 3,
+      "Marcos 15:38": 2,
+      "Hebreus 6:19": 1
+    }
+  },
+  {
+    "id": "v2_ext_10",
+    "query": "eleição e predestinação",
+    "query_type": "doctrine",
+    "difficulty": "extreme",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Doutrina complexa espalhada por múltiplos livros sem vocabulário único consistente.",
+    "seed_signals": {
+      "expected_books": [
+        "Romanos",
+        "Efesios",
+        "1 Pedro",
+        "2 Tessalonicenses"
+      ],
+      "expected_terms": [
+        "eleição",
+        "predestinar",
+        "escolher",
+        "fundação"
+      ],
+      "expected_terms_en": [
+        "election",
+        "elect",
+        "predestination",
+        "predestinate",
+        "chosen",
+        "choose",
+        "foreknow",
+        "foreordain",
+        "appoint",
+        "calling"
+      ]
+    },
+    "gold_references": [
+      "Romanos 8:29",
+      "Romanos 8:30",
+      "Efesios 1:4",
+      "Efesios 1:5",
+      "Romanos 9:11",
+      "Romanos 9:13",
+      "1 Pedro 1:2",
+      "2 Tessalonicenses 2:13"
+    ],
+    "relevance_judgments": {
+      "Romanos 8:29": 3,
+      "Efesios 1:4": 3,
+      "Efesios 1:5": 3,
+      "Romanos 9:11": 2,
+      "1 Pedro 1:2": 1
+    }
+  },
+  {
+    "id": "v2_hard_01",
+    "query": "cordeiro de Deus",
+    "query_type": "typology",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Vocabulário varia: cordeiro, ovelha, cordeiro pascal. Cadeia tipológica Êxodo→Isaías→João→Apocalipse. Adicionado Ap 5:12 por revisão humana (adoração ao Cordeiro).",
+    "seed_signals": {
+      "expected_books": [
+        "Joao",
+        "Isaias",
+        "Exodo",
+        "Apocalipse",
+        "1 Pedro"
+      ],
+      "expected_terms": [
+        "cordeiro",
+        "ovelha",
+        "sacrifício",
+        "sangue"
+      ],
+      "expected_terms_en": [
+        "lamb",
+        "lamb_of_god",
+        "sheep",
+        "sacrifice",
+        "blood",
+        "passover",
+        "paschal",
+        "offering",
+        "slain"
+      ]
+    },
+    "gold_references": [
+      "Joao 1:29",
+      "Isaias 53:7",
+      "Exodo 12:3",
+      "Exodo 12:5",
+      "Apocalipse 5:6",
+      "1 Pedro 1:19"
+    ],
+    "relevance_judgments": {
+      "Joao 1:29": 3,
+      "Isaias 53:7": 3,
+      "Apocalipse 5:6": 3,
+      "Exodo 12:3": 2,
+      "1 Pedro 1:19": 2
+    }
+  },
+  {
+    "id": "v2_hard_02",
+    "query": "pedra angular",
+    "query_type": "metaphor",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Mesma metáfora em 6 livros de 3 gêneros. Cadeia cross-ref forte OT→NT.",
+    "seed_signals": {
+      "expected_books": [
+        "Salmos",
+        "Isaias",
+        "Mateus",
+        "Atos",
+        "Efesios",
+        "1 Pedro"
+      ],
+      "expected_terms": [
+        "pedra",
+        "angular",
+        "rejeitada",
+        "cabeça"
+      ],
+      "expected_terms_en": [
+        "stone",
+        "corner",
+        "cornerstone",
+        "rejected",
+        "head",
+        "chief",
+        "foundation",
+        "rock",
+        "stumbling"
+      ]
+    },
+    "gold_references": [
+      "Salmos 118:22",
+      "Isaias 28:16",
+      "Mateus 21:42",
+      "Atos 4:11",
+      "Efesios 2:20",
+      "1 Pedro 2:6",
+      "1 Pedro 2:7"
+    ],
+    "relevance_judgments": {
+      "Salmos 118:22": 3,
+      "Isaias 28:16": 3,
+      "Mateus 21:42": 3,
+      "Efesios 2:20": 2,
+      "1 Pedro 2:6": 2,
+      "Atos 4:11": 2
+    }
+  },
+  {
+    "id": "v2_hard_03",
+    "query": "vasos de barro",
+    "query_type": "metaphor",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Metáfora da fragilidade em 4 contextos completamente diferentes: epístola, profecia, narrativa militar.",
+    "seed_signals": {
+      "expected_books": [
+        "2 Corintios",
+        "Jeremias",
+        "Juizes",
+        "Romanos"
+      ],
+      "expected_terms": [
+        "vaso",
+        "barro",
+        "oleiro",
+        "tesouro"
+      ],
+      "expected_terms_en": [
+        "vessel",
+        "vessels",
+        "clay",
+        "potter",
+        "treasure",
+        "earthen",
+        "jar",
+        "pot"
+      ]
+    },
+    "gold_references": [
+      "2 Corintios 4:7",
+      "Jeremias 18:1",
+      "Jeremias 18:4",
+      "Jeremias 18:6",
+      "Juizes 7:16",
+      "Juizes 7:20",
+      "Romanos 9:21"
+    ],
+    "relevance_judgments": {
+      "2 Corintios 4:7": 3,
+      "Jeremias 18:6": 3,
+      "Romanos 9:21": 2,
+      "Juizes 7:16": 1
+    }
+  },
+  {
+    "id": "v2_hard_04",
+    "query": "a videira e os ramos",
+    "query_type": "metaphor",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Vinha como metáfora Israel→Cristo→Igreja. Cruza João, Isaías, Salmos, Jeremias.",
+    "seed_signals": {
+      "expected_books": [
+        "Joao",
+        "Isaias",
+        "Salmos",
+        "Jeremias"
+      ],
+      "expected_terms": [
+        "videira",
+        "vinha",
+        "ramos",
+        "fruto"
+      ],
+      "expected_terms_en": [
+        "vine",
+        "vineyard",
+        "branches",
+        "fruit",
+        "grape",
+        "husbandman",
+        "wine"
+      ]
+    },
+    "gold_references": [
+      "Joao 15:1",
+      "Joao 15:5",
+      "Joao 15:8",
+      "Isaias 5:1",
+      "Isaias 5:2",
+      "Isaias 5:7",
+      "Salmos 80:8",
+      "Jeremias 2:21"
+    ],
+    "relevance_judgments": {
+      "Joao 15:1": 3,
+      "Joao 15:5": 3,
+      "Isaias 5:7": 2,
+      "Salmos 80:8": 2,
+      "Jeremias 2:21": 1
+    }
+  },
+  {
+    "id": "v2_hard_05",
+    "query": "o pão da vida",
+    "query_type": "typology",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Maná → pão da vida. Cadeia tipológica OT→NT com João 6 como centro.",
+    "seed_signals": {
+      "expected_books": [
+        "Joao",
+        "Exodo",
+        "Deuteronomio",
+        "Mateus"
+      ],
+      "expected_terms": [
+        "pão",
+        "vida",
+        "maná",
+        "comer"
+      ],
+      "expected_terms_en": [
+        "bread",
+        "bread_of_life",
+        "life",
+        "manna",
+        "eat",
+        "living_bread",
+        "hunger"
+      ]
+    },
+    "gold_references": [
+      "Joao 6:35",
+      "Joao 6:48",
+      "Joao 6:51",
+      "Exodo 16:4",
+      "Exodo 16:15",
+      "Deuteronomio 8:3",
+      "Mateus 4:4"
+    ],
+    "relevance_judgments": {
+      "Joao 6:35": 3,
+      "Joao 6:51": 3,
+      "Exodo 16:4": 2,
+      "Deuteronomio 8:3": 2,
+      "Mateus 4:4": 1
+    }
+  },
+  {
+    "id": "v2_hard_06",
+    "query": "a serpente de bronze",
+    "query_type": "typology",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Números → João. Tipologia explícita citada por Jesus, mas rara e com poucos versos.",
+    "seed_signals": {
+      "expected_books": [
+        "Joao",
+        "Numeros",
+        "2 Reis"
+      ],
+      "expected_terms": [
+        "serpente",
+        "bronze",
+        "levantar",
+        "olhar"
+      ],
+      "expected_terms_en": [
+        "serpent",
+        "brass",
+        "bronze",
+        "brazen",
+        "lifted",
+        "look",
+        "fiery"
+      ]
+    },
+    "gold_references": [
+      "Joao 3:14",
+      "Joao 3:15",
+      "Numeros 21:8",
+      "Numeros 21:9",
+      "2 Reis 18:4"
+    ],
+    "relevance_judgments": {
+      "Joao 3:14": 3,
+      "Numeros 21:9": 3,
+      "Numeros 21:8": 2,
+      "2 Reis 18:4": 1
+    }
+  },
+  {
+    "id": "v2_hard_07",
+    "query": "água do rochedo",
+    "query_type": "typology",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Pedra → Cristo → rio da vida. Cadeia tipológica Êxodo → Paulo → João → Apocalipse.",
+    "seed_signals": {
+      "expected_books": [
+        "Exodo",
+        "Numeros",
+        "1 Corintios",
+        "Joao",
+        "Apocalipse"
+      ],
+      "expected_terms": [
+        "água",
+        "rocha",
+        "pedra",
+        "rio"
+      ],
+      "expected_terms_en": [
+        "water",
+        "rock",
+        "stone",
+        "river",
+        "drink",
+        "thirst",
+        "fountain",
+        "spring",
+        "well",
+        "living_water"
+      ]
+    },
+    "gold_references": [
+      "Exodo 17:6",
+      "Numeros 20:8",
+      "Numeros 20:11",
+      "1 Corintios 10:4",
+      "Joao 7:37",
+      "Joao 7:38",
+      "Apocalipse 22:1"
+    ],
+    "relevance_judgments": {
+      "1 Corintios 10:4": 3,
+      "Exodo 17:6": 3,
+      "Joao 7:38": 2,
+      "Apocalipse 22:1": 1
+    }
+  },
+  {
+    "id": "v2_hard_08",
+    "query": "o bode expiatório",
+    "query_type": "typology",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Ritual levítico → profecia → cumprimento. Cadeia sacrificial completa.",
+    "seed_signals": {
+      "expected_books": [
+        "Levitico",
+        "Isaias",
+        "Joao",
+        "Hebreus"
+      ],
+      "expected_terms": [
+        "bode",
+        "expiatório",
+        "pecado",
+        "levar"
+      ],
+      "expected_terms_en": [
+        "goat",
+        "scapegoat",
+        "atonement",
+        "sin",
+        "bear",
+        "azazel",
+        "expiation",
+        "propitiation"
+      ]
+    },
+    "gold_references": [
+      "Levitico 16:8",
+      "Levitico 16:10",
+      "Levitico 16:21",
+      "Levitico 16:22",
+      "Isaias 53:4",
+      "Isaias 53:6",
+      "Joao 1:29",
+      "Hebreus 9:28"
+    ],
+    "relevance_judgments": {
+      "Levitico 16:21": 3,
+      "Isaias 53:6": 3,
+      "Joao 1:29": 2,
+      "Hebreus 9:28": 2
+    }
+  },
+  {
+    "id": "v2_hard_09",
+    "query": "a escada de Jacó",
+    "query_type": "typology",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Gênesis → João. Poucos versos mas link tipológico profundo (céu↔terra).",
+    "seed_signals": {
+      "expected_books": [
+        "Genesis",
+        "Joao"
+      ],
+      "expected_terms": [
+        "escada",
+        "anjos",
+        "subir",
+        "descer"
+      ],
+      "expected_terms_en": [
+        "ladder",
+        "jacob",
+        "angels",
+        "ascend",
+        "descend",
+        "stairway",
+        "heaven",
+        "bethel"
+      ]
+    },
+    "gold_references": [
+      "Genesis 28:12",
+      "Joao 1:51"
+    ],
+    "relevance_judgments": {
+      "Genesis 28:12": 3,
+      "Joao 1:51": 3
+    }
+  },
+  {
+    "id": "v2_hard_10",
+    "query": "a sarça ardente",
+    "query_type": "event",
+    "difficulty": "hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Teofania OT citada no NT em contextos completamente diferentes.",
+    "seed_signals": {
+      "expected_books": [
+        "Exodo",
+        "Atos",
+        "Marcos"
+      ],
+      "expected_terms": [
+        "sarça",
+        "fogo",
+        "arder",
+        "santo"
+      ],
+      "expected_terms_en": [
+        "bush",
+        "burning",
+        "burning_bush",
+        "fire",
+        "holy",
+        "moses",
+        "flame",
+        "ground"
+      ]
+    },
+    "gold_references": [
+      "Exodo 3:2",
+      "Exodo 3:4",
+      "Exodo 3:6",
+      "Atos 7:30",
+      "Atos 7:33",
+      "Atos 7:34",
+      "Marcos 12:26"
+    ],
+    "relevance_judgments": {
+      "Exodo 3:2": 3,
+      "Exodo 3:6": 3,
+      "Atos 7:30": 2,
+      "Marcos 12:26": 1
+    }
+  },
+  {
+    "id": "v2_mh_01",
+    "query": "espinho na carne",
+    "query_type": "phrase",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Frase em 1 verso primário. Valor está na expansão semântica para o tema poder na fraqueza.",
+    "seed_signals": {
+      "expected_books": [
+        "2 Corintios"
+      ],
+      "expected_terms": [
+        "espinho",
+        "carne",
+        "fraqueza",
+        "graça"
+      ],
+      "expected_terms_en": [
+        "thorn",
+        "thorn_in_the_flesh",
+        "flesh",
+        "weakness",
+        "grace",
+        "strength",
+        "infirmity",
+        "sufficient"
+      ]
+    },
+    "gold_references": [
+      "2 Corintios 12:7",
+      "2 Corintios 12:8",
+      "2 Corintios 12:9",
+      "2 Corintios 11:30",
+      "2 Corintios 4:7"
+    ],
+    "relevance_judgments": {
+      "2 Corintios 12:7": 3,
+      "2 Corintios 12:9": 3,
+      "2 Corintios 11:30": 1,
+      "2 Corintios 4:7": 1
+    }
+  },
+  {
+    "id": "v2_mh_02",
+    "query": "Melquisedeque",
+    "query_type": "figure",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Figura tipológica rara que aparece em 3 contextos separados por ~1000 anos. Reclassificado de medium_hard para medium por revisão humana: nome próprio facilita busca lexical, dificuldade real está no ranking.",
+    "seed_signals": {
+      "expected_books": [
+        "Genesis",
+        "Salmos",
+        "Hebreus"
+      ],
+      "expected_terms": [
+        "Melquisedeque",
+        "sacerdote",
+        "rei",
+        "Salém"
+      ],
+      "expected_terms_en": [
+        "melchizedek",
+        "melchisedec",
+        "priest",
+        "king",
+        "salem",
+        "order",
+        "priesthood",
+        "tithe"
+      ]
+    },
+    "gold_references": [
+      "Genesis 14:18",
+      "Genesis 14:19",
+      "Genesis 14:20",
+      "Salmos 110:4",
+      "Hebreus 5:6",
+      "Hebreus 5:10",
+      "Hebreus 7:1",
+      "Hebreus 7:3",
+      "Hebreus 7:17"
+    ],
+    "relevance_judgments": {
+      "Hebreus 7:1": 3,
+      "Salmos 110:4": 3,
+      "Genesis 14:18": 3,
+      "Hebreus 5:6": 2
+    }
+  },
+  {
+    "id": "v2_mh_03",
+    "query": "armadura de Deus",
+    "query_type": "metaphor",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Paulo adapta metáfora militar de Isaías. Vocabulário parcialmente diferente entre OT e NT.",
+    "seed_signals": {
+      "expected_books": [
+        "Efesios",
+        "Isaias",
+        "1 Tessalonicenses",
+        "Romanos"
+      ],
+      "expected_terms": [
+        "armadura",
+        "espada",
+        "escudo",
+        "couraça"
+      ],
+      "expected_terms_en": [
+        "armor",
+        "armour",
+        "whole_armour",
+        "sword",
+        "shield",
+        "breastplate",
+        "helmet",
+        "warfare",
+        "soldier"
+      ]
+    },
+    "gold_references": [
+      "Efesios 6:11",
+      "Efesios 6:13",
+      "Efesios 6:14",
+      "Efesios 6:16",
+      "Efesios 6:17",
+      "Isaias 59:17",
+      "1 Tessalonicenses 5:8",
+      "Romanos 13:12"
+    ],
+    "relevance_judgments": {
+      "Efesios 6:11": 3,
+      "Efesios 6:17": 3,
+      "Isaias 59:17": 2,
+      "1 Tessalonicenses 5:8": 2,
+      "Romanos 13:12": 1
+    }
+  },
+  {
+    "id": "v2_mh_04",
+    "query": "o cântico novo",
+    "query_type": "phrase",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Frase que aparece em Salmos, Isaías e Apocalipse com significado progressivo.",
+    "seed_signals": {
+      "expected_books": [
+        "Salmos",
+        "Isaias",
+        "Apocalipse"
+      ],
+      "expected_terms": [
+        "cântico",
+        "novo",
+        "cantar"
+      ],
+      "expected_terms_en": [
+        "song",
+        "new_song",
+        "sing",
+        "praise",
+        "hymn"
+      ]
+    },
+    "gold_references": [
+      "Salmos 33:3",
+      "Salmos 96:1",
+      "Salmos 149:1",
+      "Isaias 42:10",
+      "Apocalipse 5:9",
+      "Apocalipse 14:3"
+    ],
+    "relevance_judgments": {
+      "Apocalipse 5:9": 3,
+      "Salmos 96:1": 3,
+      "Isaias 42:10": 2,
+      "Salmos 33:3": 2,
+      "Apocalipse 14:3": 2
+    }
+  },
+  {
+    "id": "v2_mh_05",
+    "query": "a nuvem de testemunhas",
+    "query_type": "phrase",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Frase em Hebreus 12:1 que resume todo o capítulo 11 (galeria de heróis da fé).",
+    "seed_signals": {
+      "expected_books": [
+        "Hebreus"
+      ],
+      "expected_terms": [
+        "nuvem",
+        "testemunhas",
+        "fé",
+        "corrida"
+      ],
+      "expected_terms_en": [
+        "cloud",
+        "cloud_of_witnesses",
+        "witnesses",
+        "faith",
+        "race",
+        "run",
+        "endurance",
+        "patience"
+      ]
+    },
+    "gold_references": [
+      "Hebreus 12:1",
+      "Hebreus 11:1",
+      "Hebreus 11:4",
+      "Hebreus 11:8",
+      "Hebreus 11:24",
+      "Hebreus 11:32",
+      "Hebreus 11:39"
+    ],
+    "relevance_judgments": {
+      "Hebreus 12:1": 3,
+      "Hebreus 11:1": 2,
+      "Hebreus 11:8": 1,
+      "Hebreus 11:39": 1
+    }
+  },
+  {
+    "id": "v2_mh_06",
+    "query": "o Servo Sofredor",
+    "query_type": "figure",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "4 cânticos do Servo em Isaías + citações no NT. Figura messiânica central.",
+    "seed_signals": {
+      "expected_books": [
+        "Isaias",
+        "Mateus",
+        "Atos"
+      ],
+      "expected_terms": [
+        "servo",
+        "sofredor",
+        "ferido",
+        "traspassado"
+      ],
+      "expected_terms_en": [
+        "servant",
+        "suffering_servant",
+        "suffering",
+        "wounded",
+        "pierced",
+        "smitten",
+        "bruised",
+        "afflicted",
+        "grief"
+      ]
+    },
+    "gold_references": [
+      "Isaias 42:1",
+      "Isaias 49:6",
+      "Isaias 52:13",
+      "Isaias 53:3",
+      "Isaias 53:5",
+      "Isaias 53:7",
+      "Isaias 53:12",
+      "Mateus 12:18",
+      "Atos 8:32",
+      "Atos 8:35"
+    ],
+    "relevance_judgments": {
+      "Isaias 53:5": 3,
+      "Isaias 53:7": 3,
+      "Isaias 42:1": 2,
+      "Atos 8:32": 2,
+      "Mateus 12:18": 2
+    }
+  },
+  {
+    "id": "v2_mh_07",
+    "query": "o anjo do Senhor",
+    "query_type": "figure",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Teofania OT recorrente. Debate cristológico: anjo ou pré-encarnação de Cristo?",
+    "seed_signals": {
+      "expected_books": [
+        "Genesis",
+        "Exodo",
+        "Juizes",
+        "Zacarias"
+      ],
+      "expected_terms": [
+        "anjo",
+        "Senhor",
+        "apareceu"
+      ],
+      "expected_terms_en": [
+        "angel_of_the_lord",
+        "angel",
+        "appeared",
+        "theophany",
+        "messenger"
+      ]
+    },
+    "gold_references": [
+      "Genesis 22:11",
+      "Genesis 22:15",
+      "Exodo 3:2",
+      "Juizes 6:11",
+      "Juizes 6:22",
+      "Juizes 13:3",
+      "Juizes 13:21",
+      "Zacarias 1:12"
+    ],
+    "relevance_judgments": {
+      "Exodo 3:2": 3,
+      "Juizes 6:22": 3,
+      "Genesis 22:11": 2,
+      "Zacarias 1:12": 2
+    }
+  },
+  {
+    "id": "v2_mh_08",
+    "query": "a eira de Araúna",
+    "query_type": "event",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Local comprado por Davi → templo de Salomão construído. Conexão geográfica-teológica.",
+    "seed_signals": {
+      "expected_books": [
+        "2 Samuel",
+        "1 Cronicas",
+        "2 Cronicas"
+      ],
+      "expected_terms": [
+        "eira",
+        "Araúna",
+        "Ornã",
+        "templo"
+      ],
+      "expected_terms_en": [
+        "threshing_floor",
+        "threshingfloor",
+        "araunah",
+        "ornan",
+        "temple",
+        "altar"
+      ]
+    },
+    "gold_references": [
+      "2 Samuel 24:18",
+      "2 Samuel 24:24",
+      "2 Samuel 24:25",
+      "1 Cronicas 21:18",
+      "1 Cronicas 21:28",
+      "2 Cronicas 3:1"
+    ],
+    "relevance_judgments": {
+      "2 Cronicas 3:1": 3,
+      "2 Samuel 24:18": 3,
+      "1 Cronicas 21:18": 2
+    }
+  },
+  {
+    "id": "v2_mh_09",
+    "query": "as sete igrejas da Ásia",
+    "query_type": "entity",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "7 cartas distintas dentro de Apocalipse 2-3. Testa recuperação de seção narrativa longa.",
+    "seed_signals": {
+      "expected_books": [
+        "Apocalipse"
+      ],
+      "expected_terms": [
+        "igreja",
+        "Éfeso",
+        "Esmirna",
+        "Laodiceia"
+      ],
+      "expected_terms_en": [
+        "seven_churches",
+        "church",
+        "churches",
+        "ephesus",
+        "smyrna",
+        "pergamos",
+        "thyatira",
+        "sardis",
+        "philadelphia",
+        "laodicea"
+      ]
+    },
+    "gold_references": [
+      "Apocalipse 2:1",
+      "Apocalipse 2:8",
+      "Apocalipse 2:12",
+      "Apocalipse 2:18",
+      "Apocalipse 3:1",
+      "Apocalipse 3:7",
+      "Apocalipse 3:14"
+    ],
+    "relevance_judgments": {
+      "Apocalipse 2:1": 3,
+      "Apocalipse 2:8": 2,
+      "Apocalipse 3:14": 2,
+      "Apocalipse 3:1": 2
+    }
+  },
+  {
+    "id": "v2_mh_10",
+    "query": "o tabernáculo e o templo",
+    "query_type": "concept",
+    "difficulty": "medium_hard",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Estrutura OT (tabernáculo→templo) → teologia NT (corpo como templo, templo celestial).",
+    "seed_signals": {
+      "expected_books": [
+        "Exodo",
+        "1 Reis",
+        "Hebreus",
+        "Joao"
+      ],
+      "expected_terms": [
+        "tabernáculo",
+        "templo",
+        "santuário",
+        "habitação"
+      ],
+      "expected_terms_en": [
+        "tabernacle",
+        "temple",
+        "sanctuary",
+        "dwelling",
+        "tent",
+        "holy_place",
+        "most_holy"
+      ]
+    },
+    "gold_references": [
+      "Exodo 25:8",
+      "Exodo 25:9",
+      "1 Reis 6:1",
+      "Hebreus 8:1",
+      "Hebreus 8:5",
+      "Hebreus 9:1",
+      "Hebreus 9:11",
+      "Joao 2:19",
+      "Joao 2:21"
+    ],
+    "relevance_judgments": {
+      "Hebreus 9:11": 3,
+      "Exodo 25:8": 3,
+      "Joao 2:19": 2,
+      "1 Reis 6:1": 1
+    }
+  },
+  {
+    "id": "v2_med_01",
+    "query": "olho por olho",
+    "query_type": "contrast",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "OT e NT têm posições opostas. O search deve achar ambos os lados.",
+    "seed_signals": {
+      "expected_books": [
+        "Exodo",
+        "Levitico",
+        "Deuteronomio",
+        "Mateus"
+      ],
+      "expected_terms": [
+        "olho",
+        "dente",
+        "vingança",
+        "outra face"
+      ],
+      "expected_terms_en": [
+        "eye",
+        "eye_for_eye",
+        "tooth",
+        "vengeance",
+        "cheek",
+        "retaliation",
+        "revenge",
+        "smite"
+      ]
+    },
+    "gold_references": [
+      "Exodo 21:24",
+      "Levitico 24:20",
+      "Deuteronomio 19:21",
+      "Mateus 5:38",
+      "Mateus 5:39"
+    ],
+    "relevance_judgments": {
+      "Mateus 5:38": 3,
+      "Mateus 5:39": 3,
+      "Exodo 21:24": 2,
+      "Levitico 24:20": 2,
+      "Deuteronomio 19:21": 2
+    }
+  },
+  {
+    "id": "v2_med_02",
+    "query": "fruto do Espírito",
+    "query_type": "contrast",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Contraste fruto vs obras da carne + metáfora agrícola em João e Mateus.",
+    "seed_signals": {
+      "expected_books": [
+        "Galatas",
+        "Romanos",
+        "Mateus",
+        "Joao"
+      ],
+      "expected_terms": [
+        "fruto",
+        "Espírito",
+        "carne",
+        "obras"
+      ],
+      "expected_terms_en": [
+        "fruit",
+        "fruit_of_the_spirit",
+        "spirit",
+        "flesh",
+        "works",
+        "love_joy_peace",
+        "gentleness",
+        "temperance"
+      ]
+    },
+    "gold_references": [
+      "Galatas 5:22",
+      "Galatas 5:23",
+      "Galatas 5:19",
+      "Romanos 8:5",
+      "Romanos 8:8",
+      "Mateus 7:16",
+      "Mateus 7:20",
+      "Joao 15:2",
+      "Joao 15:5"
+    ],
+    "relevance_judgments": {
+      "Galatas 5:22": 3,
+      "Galatas 5:23": 3,
+      "Galatas 5:19": 2,
+      "Mateus 7:16": 2,
+      "Joao 15:5": 1
+    }
+  },
+  {
+    "id": "v2_med_03",
+    "query": "a mulher virtuosa",
+    "query_type": "narrative",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Provérbios 31 descreve o ideal; Rute é a narrativa que o encarna. Link indireto.",
+    "seed_signals": {
+      "expected_books": [
+        "Proverbios",
+        "Rute"
+      ],
+      "expected_terms": [
+        "mulher",
+        "virtuosa",
+        "valor",
+        "excelente"
+      ],
+      "expected_terms_en": [
+        "virtuous",
+        "virtuous_woman",
+        "woman",
+        "worthy",
+        "excellent",
+        "wife",
+        "noble",
+        "good_wife"
+      ]
+    },
+    "gold_references": [
+      "Proverbios 31:10",
+      "Proverbios 31:25",
+      "Proverbios 31:30",
+      "Proverbios 31:31",
+      "Rute 3:11"
+    ],
+    "relevance_judgments": {
+      "Proverbios 31:10": 3,
+      "Rute 3:11": 3,
+      "Proverbios 31:30": 2
+    }
+  },
+  {
+    "id": "v2_med_04",
+    "query": "Marta e Maria",
+    "query_type": "narrative",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Contemplação vs ação. Aparece em Lucas (jantar) e João (Lázaro, unção).",
+    "seed_signals": {
+      "expected_books": [
+        "Lucas",
+        "Joao"
+      ],
+      "expected_terms": [
+        "Marta",
+        "Maria",
+        "servir",
+        "ouvir"
+      ],
+      "expected_terms_en": [
+        "martha",
+        "mary",
+        "serve",
+        "listen",
+        "bethany",
+        "sit_at_feet",
+        "careful",
+        "troubled"
+      ]
+    },
+    "gold_references": [
+      "Lucas 10:38",
+      "Lucas 10:39",
+      "Lucas 10:40",
+      "Lucas 10:41",
+      "Lucas 10:42",
+      "Joao 11:1",
+      "Joao 11:20",
+      "Joao 12:2",
+      "Joao 12:3"
+    ],
+    "relevance_judgments": {
+      "Lucas 10:42": 3,
+      "Lucas 10:38": 2,
+      "Joao 11:1": 1,
+      "Joao 12:3": 1
+    }
+  },
+  {
+    "id": "v2_med_05",
+    "query": "circuncisão do coração",
+    "query_type": "metaphor",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Literal → espiritual. OT já reinterpreta o próprio ritual (Deuteronômio, Jeremias), Paulo completa.",
+    "seed_signals": {
+      "expected_books": [
+        "Deuteronomio",
+        "Jeremias",
+        "Romanos",
+        "Colossenses"
+      ],
+      "expected_terms": [
+        "circuncisão",
+        "coração",
+        "espírito",
+        "interior"
+      ],
+      "expected_terms_en": [
+        "circumcision",
+        "circumcise",
+        "heart",
+        "spirit",
+        "inward",
+        "uncircumcised"
+      ]
+    },
+    "gold_references": [
+      "Deuteronomio 10:16",
+      "Deuteronomio 30:6",
+      "Jeremias 4:4",
+      "Romanos 2:28",
+      "Romanos 2:29",
+      "Colossenses 2:11"
+    ],
+    "relevance_judgments": {
+      "Romanos 2:29": 3,
+      "Deuteronomio 30:6": 3,
+      "Jeremias 4:4": 2,
+      "Colossenses 2:11": 2
+    }
+  },
+  {
+    "id": "v2_med_06",
+    "query": "o jugo suave",
+    "query_type": "phrase",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Contraste jugo pesado (lei, reis opressores) vs jugo suave (Cristo).",
+    "seed_signals": {
+      "expected_books": [
+        "Mateus",
+        "Jeremias",
+        "1 Reis",
+        "Atos"
+      ],
+      "expected_terms": [
+        "jugo",
+        "suave",
+        "leve",
+        "descanso"
+      ],
+      "expected_terms_en": [
+        "yoke",
+        "easy",
+        "light",
+        "rest",
+        "burden",
+        "heavy",
+        "labor",
+        "weary"
+      ]
+    },
+    "gold_references": [
+      "Mateus 11:28",
+      "Mateus 11:29",
+      "Mateus 11:30",
+      "Jeremias 2:20",
+      "1 Reis 12:4",
+      "Atos 15:10"
+    ],
+    "relevance_judgments": {
+      "Mateus 11:29": 3,
+      "Mateus 11:30": 3,
+      "1 Reis 12:4": 1,
+      "Atos 15:10": 1
+    }
+  },
+  {
+    "id": "v2_med_07",
+    "query": "a viúva e o juiz injusto",
+    "query_type": "narrative",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Parábola sobre persistência na oração. Narrativa como ensino.",
+    "seed_signals": {
+      "expected_books": [
+        "Lucas"
+      ],
+      "expected_terms": [
+        "viúva",
+        "juiz",
+        "oração",
+        "perseverança"
+      ],
+      "expected_terms_en": [
+        "widow",
+        "judge",
+        "prayer",
+        "persistence",
+        "unjust",
+        "importunity",
+        "avenge"
+      ]
+    },
+    "gold_references": [
+      "Lucas 18:1",
+      "Lucas 18:2",
+      "Lucas 18:3",
+      "Lucas 18:7",
+      "Lucas 18:8"
+    ],
+    "relevance_judgments": {
+      "Lucas 18:1": 3,
+      "Lucas 18:7": 3,
+      "Lucas 18:8": 2
+    }
+  },
+  {
+    "id": "v2_med_08",
+    "query": "a carta e o espírito da lei",
+    "query_type": "contrast",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Conceito paulino de letra vs espírito. Vocabulário técnico teológico.",
+    "seed_signals": {
+      "expected_books": [
+        "2 Corintios",
+        "Romanos"
+      ],
+      "expected_terms": [
+        "letra",
+        "espírito",
+        "lei",
+        "novo"
+      ],
+      "expected_terms_en": [
+        "letter",
+        "spirit",
+        "law",
+        "new",
+        "old",
+        "minister",
+        "covenant",
+        "kill"
+      ]
+    },
+    "gold_references": [
+      "2 Corintios 3:6",
+      "Romanos 2:29",
+      "Romanos 7:6"
+    ],
+    "relevance_judgments": {
+      "2 Corintios 3:6": 3,
+      "Romanos 7:6": 2,
+      "Romanos 2:29": 2
+    }
+  },
+  {
+    "id": "v2_med_09",
+    "query": "sal da terra",
+    "query_type": "metaphor",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Metáfora nos sinópticos e Paulo com nuances diferentes de significado.",
+    "seed_signals": {
+      "expected_books": [
+        "Mateus",
+        "Marcos",
+        "Lucas",
+        "Colossenses"
+      ],
+      "expected_terms": [
+        "sal",
+        "terra",
+        "sabor",
+        "insípido"
+      ],
+      "expected_terms_en": [
+        "salt",
+        "salt_of_the_earth",
+        "earth",
+        "savor",
+        "tasteless",
+        "seasoned",
+        "speech"
+      ]
+    },
+    "gold_references": [
+      "Mateus 5:13",
+      "Marcos 9:50",
+      "Lucas 14:34",
+      "Lucas 14:35",
+      "Colossenses 4:6"
+    ],
+    "relevance_judgments": {
+      "Mateus 5:13": 3,
+      "Marcos 9:50": 2,
+      "Lucas 14:34": 2,
+      "Colossenses 4:6": 1
+    }
+  },
+  {
+    "id": "v2_med_10",
+    "query": "o rico e Lázaro",
+    "query_type": "narrative",
+    "difficulty": "medium",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Parábola escatológica + paralelo com beatitudes. Inversão ricos/pobres.",
+    "seed_signals": {
+      "expected_books": [
+        "Lucas"
+      ],
+      "expected_terms": [
+        "rico",
+        "Lázaro",
+        "Abraão",
+        "tormento"
+      ],
+      "expected_terms_en": [
+        "rich",
+        "rich_man",
+        "lazarus",
+        "abraham",
+        "torment",
+        "bosom",
+        "flame",
+        "beggar"
+      ]
+    },
+    "gold_references": [
+      "Lucas 16:19",
+      "Lucas 16:22",
+      "Lucas 16:23",
+      "Lucas 16:25",
+      "Lucas 16:31",
+      "Lucas 6:20",
+      "Lucas 6:24"
+    ],
+    "relevance_judgments": {
+      "Lucas 16:23": 3,
+      "Lucas 16:25": 3,
+      "Lucas 16:19": 2,
+      "Lucas 6:24": 1
+    }
+  },
+  {
+    "id": "v2_base_01",
+    "query": "filho pródigo",
+    "query_type": "narrative",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Parábola famosa. Fácil para lexical e semântico. Controle. Reclassificado de baseline para medium por revisão humana: 'pródigo' não aparece no texto bíblico (é tradição interpretativa). Adicionados Lc 15:1-2 como contexto.",
+    "seed_signals": {
+      "expected_books": [
+        "Lucas"
+      ],
+      "expected_terms": [
+        "filho",
+        "pródigo",
+        "pai",
+        "voltou"
+      ],
+      "expected_terms_en": [
+        "prodigal",
+        "prodigal_son",
+        "son",
+        "father",
+        "return",
+        "lost",
+        "famine",
+        "swine",
+        "riotous"
+      ]
+    },
+    "gold_references": [
+      "Lucas 15:11",
+      "Lucas 15:13",
+      "Lucas 15:17",
+      "Lucas 15:20",
+      "Lucas 15:24",
+      "Lucas 15:32"
+    ],
+    "relevance_judgments": {
+      "Lucas 15:20": 3,
+      "Lucas 15:24": 3,
+      "Lucas 15:11": 2,
+      "Lucas 15:32": 2
+    }
+  },
+  {
+    "id": "v2_base_02",
+    "query": "caminho estreito",
+    "query_type": "phrase",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Frase direta, poucos versos. Match lexical forte.",
+    "seed_signals": {
+      "expected_books": [
+        "Mateus",
+        "Lucas"
+      ],
+      "expected_terms": [
+        "caminho",
+        "porta",
+        "estreito",
+        "largo"
+      ],
+      "expected_terms_en": [
+        "narrow",
+        "narrow_way",
+        "way",
+        "gate",
+        "broad",
+        "strait",
+        "wide",
+        "destruction"
+      ]
+    },
+    "gold_references": [
+      "Mateus 7:13",
+      "Mateus 7:14",
+      "Lucas 13:24"
+    ],
+    "relevance_judgments": {
+      "Mateus 7:14": 3,
+      "Mateus 7:13": 3,
+      "Lucas 13:24": 2
+    }
+  },
+  {
+    "id": "v2_base_03",
+    "query": "quem é meu próximo",
+    "query_type": "narrative",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Pergunta → parábola do bom samaritano. Match lexical bom.",
+    "seed_signals": {
+      "expected_books": [
+        "Lucas"
+      ],
+      "expected_terms": [
+        "próximo",
+        "samaritano",
+        "misericórdia"
+      ],
+      "expected_terms_en": [
+        "neighbor",
+        "neighbour",
+        "samaritan",
+        "good_samaritan",
+        "mercy",
+        "compassion"
+      ]
+    },
+    "gold_references": [
+      "Lucas 10:29",
+      "Lucas 10:30",
+      "Lucas 10:33",
+      "Lucas 10:36",
+      "Lucas 10:37"
+    ],
+    "relevance_judgments": {
+      "Lucas 10:37": 3,
+      "Lucas 10:33": 3,
+      "Lucas 10:29": 2
+    }
+  },
+  {
+    "id": "v2_base_04",
+    "query": "Noé e o dilúvio",
+    "query_type": "event",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Narrativa extensa OT + citações NT. Fácil de localizar.",
+    "seed_signals": {
+      "expected_books": [
+        "Genesis",
+        "Mateus",
+        "1 Pedro",
+        "2 Pedro"
+      ],
+      "expected_terms": [
+        "Noé",
+        "dilúvio",
+        "arca",
+        "águas"
+      ],
+      "expected_terms_en": [
+        "noah",
+        "flood",
+        "ark",
+        "waters",
+        "deluge",
+        "rain",
+        "covenant",
+        "rainbow"
+      ]
+    },
+    "gold_references": [
+      "Genesis 6:9",
+      "Genesis 7:1",
+      "Genesis 7:17",
+      "Genesis 8:1",
+      "Mateus 24:37",
+      "Mateus 24:38",
+      "1 Pedro 3:20",
+      "2 Pedro 2:5"
+    ],
+    "relevance_judgments": {
+      "Genesis 7:17": 3,
+      "Mateus 24:37": 2,
+      "1 Pedro 3:20": 2,
+      "Genesis 6:9": 2
+    }
+  },
+  {
+    "id": "v2_base_05",
+    "query": "a criação do mundo",
+    "query_type": "event",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase2",
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Conceito universal, lexical forte. Gênesis + prólogo de João + Colossenses.",
+    "seed_signals": {
+      "expected_books": [
+        "Genesis",
+        "Joao",
+        "Colossenses",
+        "Hebreus"
+      ],
+      "expected_terms": [
+        "criação",
+        "princípio",
+        "criou",
+        "mundo"
+      ],
+      "expected_terms_en": [
+        "creation",
+        "beginning",
+        "created",
+        "world",
+        "made",
+        "heaven_and_earth",
+        "genesis"
+      ]
+    },
+    "gold_references": [
+      "Genesis 1:1",
+      "Genesis 1:27",
+      "Genesis 2:1",
+      "Joao 1:1",
+      "Joao 1:3",
+      "Colossenses 1:16",
+      "Colossenses 1:17",
+      "Hebreus 1:2"
+    ],
+    "relevance_judgments": {
+      "Genesis 1:1": 3,
+      "Joao 1:1": 3,
+      "Colossenses 1:16": 2,
+      "Hebreus 1:2": 2
+    }
+  },
+  {
+    "id": "v2_base_06",
+    "query": "os dez mandamentos",
+    "query_type": "doctrine",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "topics",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Texto canônico, fácil de localizar. Duas versões (Êxodo e Deuteronômio) + resumo NT.",
+    "seed_signals": {
+      "expected_books": [
+        "Exodo",
+        "Deuteronomio",
+        "Mateus"
+      ],
+      "expected_terms": [
+        "mandamentos",
+        "não matarás",
+        "não furtarás"
+      ],
+      "expected_terms_en": [
+        "commandments",
+        "ten_commandments",
+        "ten",
+        "thou_shalt_not",
+        "law",
+        "decalogue",
+        "statutes"
+      ]
+    },
+    "gold_references": [
+      "Exodo 20:1",
+      "Exodo 20:3",
+      "Exodo 20:13",
+      "Exodo 20:17",
+      "Deuteronomio 5:6",
+      "Deuteronomio 5:21",
+      "Mateus 22:37",
+      "Mateus 22:39"
+    ],
+    "relevance_judgments": {
+      "Exodo 20:1": 3,
+      "Exodo 20:3": 3,
+      "Deuteronomio 5:6": 2,
+      "Mateus 22:37": 2
+    }
+  },
+  {
+    "id": "v2_base_07",
+    "query": "a última ceia",
+    "query_type": "event",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Sinópticos + Paulo. Match lexical bom entre os 4 relatos paralelos.",
+    "seed_signals": {
+      "expected_books": [
+        "Mateus",
+        "Marcos",
+        "Lucas",
+        "1 Corintios"
+      ],
+      "expected_terms": [
+        "ceia",
+        "pão",
+        "cálice",
+        "corpo",
+        "sangue"
+      ],
+      "expected_terms_en": [
+        "supper",
+        "last_supper",
+        "lords_supper",
+        "bread",
+        "cup",
+        "body",
+        "blood",
+        "communion",
+        "eucharist"
+      ]
+    },
+    "gold_references": [
+      "Mateus 26:26",
+      "Mateus 26:28",
+      "Marcos 14:22",
+      "Marcos 14:24",
+      "Lucas 22:19",
+      "Lucas 22:20",
+      "1 Corintios 11:23",
+      "1 Corintios 11:25"
+    ],
+    "relevance_judgments": {
+      "1 Corintios 11:23": 3,
+      "Mateus 26:26": 3,
+      "Lucas 22:19": 2,
+      "Marcos 14:22": 2
+    }
+  },
+  {
+    "id": "v2_base_08",
+    "query": "a torre de Babel",
+    "query_type": "event",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Narrativa OT + inversão em Pentecostes (Atos 2). Controle com expansão semântica.",
+    "seed_signals": {
+      "expected_books": [
+        "Genesis",
+        "Atos"
+      ],
+      "expected_terms": [
+        "torre",
+        "Babel",
+        "línguas",
+        "confundir"
+      ],
+      "expected_terms_en": [
+        "tower",
+        "babel",
+        "tower_of_babel",
+        "tongues",
+        "confound",
+        "language",
+        "scatter"
+      ]
+    },
+    "gold_references": [
+      "Genesis 11:1",
+      "Genesis 11:4",
+      "Genesis 11:7",
+      "Genesis 11:9",
+      "Atos 2:4",
+      "Atos 2:6",
+      "Atos 2:11"
+    ],
+    "relevance_judgments": {
+      "Genesis 11:9": 3,
+      "Genesis 11:4": 2,
+      "Atos 2:4": 2,
+      "Atos 2:6": 1
+    }
+  },
+  {
+    "id": "v2_base_09",
+    "query": "Davi e Golias",
+    "query_type": "narrative",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "Narrativa famosa, localização clara. Controle puro.",
+    "seed_signals": {
+      "expected_books": [
+        "1 Samuel"
+      ],
+      "expected_terms": [
+        "Davi",
+        "Golias",
+        "funda",
+        "gigante"
+      ],
+      "expected_terms_en": [
+        "david",
+        "goliath",
+        "david_and_goliath",
+        "sling",
+        "giant",
+        "philistine",
+        "champion"
+      ]
+    },
+    "gold_references": [
+      "1 Samuel 17:4",
+      "1 Samuel 17:40",
+      "1 Samuel 17:45",
+      "1 Samuel 17:49",
+      "1 Samuel 17:50"
+    ],
+    "relevance_judgments": {
+      "1 Samuel 17:49": 3,
+      "1 Samuel 17:45": 3,
+      "1 Samuel 17:4": 2
+    }
+  },
+  {
+    "id": "v2_base_10",
+    "query": "a conversão de Paulo",
+    "query_type": "event",
+    "difficulty": "baseline",
+    "status": "curated_v2",
+    "phase_targets": [
+      "phase3"
+    ],
+    "validation_sources": [
+      "crossrefs",
+      "commentaries",
+      "manual_curation"
+    ],
+    "notes": "3 relatos em Atos + autobiografia em Gálatas. Match lexical forte.",
+    "seed_signals": {
+      "expected_books": [
+        "Atos",
+        "Galatas"
+      ],
+      "expected_terms": [
+        "Saulo",
+        "Paulo",
+        "Damasco",
+        "luz",
+        "conversão"
+      ],
+      "expected_terms_en": [
+        "conversion",
+        "conversion_of_paul",
+        "paul",
+        "saul",
+        "damascus",
+        "light",
+        "blinded",
+        "ananias"
+      ]
+    },
+    "gold_references": [
+      "Atos 9:3",
+      "Atos 9:4",
+      "Atos 9:6",
+      "Atos 9:18",
+      "Atos 22:6",
+      "Atos 22:10",
+      "Atos 26:13",
+      "Atos 26:15",
+      "Galatas 1:15",
+      "Galatas 1:16"
+    ],
+    "relevance_judgments": {
+      "Atos 9:4": 3,
+      "Atos 26:15": 3,
+      "Galatas 1:15": 2,
+      "Atos 22:6": 2
+    }
+  }
+]

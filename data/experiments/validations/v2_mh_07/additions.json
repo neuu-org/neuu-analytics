@@ -1,0 +1,143 @@
+{
+  "query_id": "v2_mh_07",
+  "query": "o anjo do Senhor",
+  "validated_by": "human",
+  "validated_at": "2026-03-20",
+  "methodology": "Cross-reference network (JOS.5.13→GEN.18.2 = 9v strongest in entire study, EXO.3.2 = 66 refs hub) + patristic evidence (13 citations: Eusebius christophanic identification, Didymus mediating position, Gregory of Nyssa 'pele=divine incomprehensibility', Hippolytus pre-incarnate Son) + CCEL commentaries (JFB 'Jehovah-Jesus' systematic chain, Henry 'eternal Word', Wesley, Calvin 'agree with ancients', Barnes) + topics (ANGEL HOLY TRINITY = 25 refs classifying as 'ONE OF THE HOLY TRINITY') + dictionary (Easton 'foreshadowings of incarnation', Smith 'Christ's visible form before incarnation')",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Genesis 22:11",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (3v→GEN.16.7,9,10, 3v→HEB.11.17)",
+        "CCEL (Henry 'God himself, the eternal Word, angel of the covenant', Wesley identical)",
+        "topics (ANGEL HOLY TRINITY)"
+      ]
+    },
+    {
+      "verse": "Genesis 22:15",
+      "relevance": 1,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (weak: max 2v)",
+        "CCEL (via Henry on 22:11)",
+        "topics (ANGEL HOLY TRINITY)"
+      ],
+      "note": "Was missing relevance_judgment — scored 1 (extension of 22:11, v.16 'I swore by MYSELF says the LORD')"
+    },
+    {
+      "verse": "Exodo 3:2",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (5v→ACT.7.30-35, 4v→EXO.23.20, 3v→ISA.63.9, 3v→JHN.1.14 — 66 refs hub)",
+        "CCEL (JFB 'Jehovah-Jesus, angel of the covenant', Barnes 'implies God was there', Henry, Wesley)",
+        "topics (ANGEL HOLY TRINITY), dictionary (Easton, Smith)"
+      ]
+    },
+    {
+      "verse": "Juizes 6:11",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (5v→HEB.11.32, 4v↔JDG.13.3)",
+        "Catena Bible (Haydock presents both positions, Ambrose typology)",
+        "CCEL (Henry 'JEHOVAH, incommunicable name of God v.14,16', JFB, Calvin)",
+        "topics (ANGEL HOLY TRINITY)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Full theophany with identity-switch pattern: narrator changes from 'Angel' to 'the LORD' (v.14). Henry: 'called Jehovah, the incommunicable name.' Haydock presents both positions. 4v↔JDG.13.3 bidirectional."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Juizes 6:22",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (5v→EXO.33.20 'cannot see me and live', 5v→GEN.32.30 'saw God face to face', 5v→LUK.1.12)",
+        "CCEL (JFB 'miraculous fire and disappearance as spirit')",
+        "topics (ANGEL HOLY TRINITY)"
+      ]
+    },
+    {
+      "verse": "Juizes 13:3",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (5v→GEN.18.2, 5v→LUK.1.13 NT parallel, 4v→JDG.6.11, 3v→JDG.2.1)",
+        "CCEL (JFB 'Wonderful' name = divinity, Henry cites Is 9:6)",
+        "topics (ANGEL HOLY TRINITY)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Full theophany to Manoah. Name 'Wonderful' (pele') = Gregory of Nyssa: divine incomprehensibility. Henry connects to Is 9:6. Ascension in the flame (v.20). 5v→LUK.1.13 NT parallel."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Juizes 13:21",
+      "relevance": 1,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (4v→JDG.6.22)",
+        "topics (ANGEL HOLY TRINITY)"
+      ],
+      "note": "Was missing relevance_judgment — scored 1 (narrative closure, v.22 has the theological content)"
+    },
+    {
+      "verse": "Zacarias 1:12",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (4v→DAN.9.2, JER.29.10, PSA.102.13, 3v→REV.6.10)",
+        "CCEL (JFB 'Jehovah, second person of Trinity, manifested in man's form', Wesley, Henry)"
+      ]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Genesis 16:7",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "FIRST appearance of Angel of the LORD in the Bible. Gn 16:10 has 75 refs (most connected). Links to 5/8 gold refs. Hagar names him 'El Roi' (God who sees) in 16:13 — narrative confirmation of divine identity. Didymus: 'God dwelt in him.' Calvin: 'Christ the Mediator present in all oracles.' Topic ANGEL(HOLY TRINITY) includes Gn 16:7,9."
+    },
+    {
+      "verse": "Josue 5:13-14",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "7 patristic comments! Eusebius: 'no other than he who spoke to Moses' — most explicit christophanic identification. ACCEPTS WORSHIP (contrast Rev 19:10 where created angel REFUSES). v.15 = EXACT echo of Ex 3:5 ('remove sandals'). 9v→GEN.18.2 (strongest connection in ENTIRE study). JFB: 'angel of the covenant.'"
+    },
+    {
+      "verse": "Juizes 2:1",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "STRONGEST identity claim of any appearance: Angel claims YHWH's historical acts in 1st person ('I brought you up from Egypt, I said I will never break my covenant'). No created angel could claim the Exodus. 3v←JDG.13.3."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Exodo 23:20-21",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Key theological text: 'my Name is in him' — in Semitic thought, God's Name IS God's presence. 4v←EXO.3.2. JFB cites in complete identification chain."
+    },
+    {
+      "verse": "Isaias 63:9",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "'Angel of his PRESENCE' (mal'ak panav) — theological synthesis of the entire tradition. Cross-ref in multiple gold files (v=2-3). Topic ANGEL(HOLY TRINITY) includes."
+    },
+    {
+      "verse": "Numeros 22:22",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Balaam episode — only case where Angel acts as ADVERSARY (satan). 23 refs. Haydock identifies as Michael. Topic ANGEL(HOLY TRINITY) includes."
+    }
+  ],
+  "scholarly_notes": {
+    "identity_switch_phenomenon": "In nearly EVERY appearance, text begins calling figure 'Angel' then switches to 'LORD' or 'God' speaking in 1st person. Patterns: (A) Narrator switches referents (Ex 3:2→3:4→3:6 = 3 terms in 4 verses), (B) Angel speaks in divine 1st person (Gn 22:12, 16:10, Jdg 2:1), (C) Humans respond as if seeing GOD (Gn 16:13, Jdg 6:22, 13:22), (D) Distinction within unity (Zec 3:2 speaks AS YHWH but references YHWH in 3rd person). No other angel (Gabriel, Michael) ever exhibits this pattern.",
+    "three_theological_positions": {
+      "christophany": "Eusebius, Hippolytus, Henry, Wesley, JFB, Barnes, Calvin (with nuance). Henry: 'prelude to what he intended in the fulness of time.' JFB: 'ALL OT manifestations in the person of the Divine Son.'",
+      "created_angel_ambassador": "Haydock, Challoner, John Damascene, Augustine (partially). Principle of agency: ambassador speaks in sender's 1st person.",
+      "mediating": "Calvin, Didymus, Jerome (partially). Didymus: 'God DWELT in him.' Jerome: typical significance points to Christ even if literal figure is created angel."
+    },
+    "strongest_connection": "JOS.5.13→GEN.18.2 = 9 votes — strongest individual connection in the entire study. Links Commander of LORD's army to Abraham's three visitors: two theophanies with 'drawn sword.'"
+  }
+}

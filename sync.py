@@ -494,6 +494,60 @@ LOADERS = {
 }
 
 
+def sync_experiments(config: dict):
+    """Sync experiments data from bible-hybrid-search into data/experiments/ for deploy."""
+    import shutil
+
+    exp_cfg = config.get("experiments", {})
+    source_path = exp_cfg.get("source_path", "../../bible-hybrid-search/experiments")
+    source = (ROOT / source_path).resolve()
+
+    if not source.exists():
+        print(f"\n⚠ Experiments source not found: {source}")
+        print("  Skipping experiments sync.")
+        return
+
+    dest = DATA_DIR / "experiments"
+    print(f"\n{'='*50}")
+    print(f"📦 Thematic Studies (experiments)")
+    print(f"{'='*50}")
+
+    # Files to copy
+    files_to_sync = [
+        ("queries/pilot_queries_v2.json", "pilot_queries_v2.json"),
+        ("gold_set/gold_set_final.json", "gold_set_final.json"),
+    ]
+
+    dest.mkdir(exist_ok=True)
+    validations_dest = dest / "validations"
+    validations_dest.mkdir(exist_ok=True)
+
+    # Copy main JSON files
+    for src_rel, dst_name in files_to_sync:
+        src_file = source / src_rel
+        if src_file.exists():
+            shutil.copy2(src_file, dest / dst_name)
+            size_kb = src_file.stat().st_size / 1024
+            print(f"  Copiado: {dst_name} ({size_kb:.1f} KB)")
+        else:
+            print(f"  ⚠ Nao encontrado: {src_rel}")
+
+    # Copy all validation additions.json files
+    validations_src = source / "queries" / "validations"
+    count = 0
+    if validations_src.exists():
+        for additions_file in sorted(validations_src.glob("*/additions.json")):
+            query_id = additions_file.parent.name
+            query_dest = validations_dest / query_id
+            query_dest.mkdir(exist_ok=True)
+            shutil.copy2(additions_file, query_dest / "additions.json")
+            count += 1
+
+    print(f"  Copiado: {count} validacoes (additions.json)")
+    total_size = sum(f.stat().st_size for f in dest.rglob("*.json")) / 1024
+    print(f"  Total: {total_size:.1f} KB em data/experiments/")
+
+
 def main():
     config = load_config()
     org = config["org"]
@@ -502,9 +556,15 @@ def main():
     DATASETS_DIR.mkdir(exist_ok=True)
     DATA_DIR.mkdir(exist_ok=True)
 
+    # Sync experiments if requested or no specific target
+    if target == "experiments" or target is None:
+        sync_experiments(config)
+
     for key, cfg in config["datasets"].items():
         if target and key != target:
             continue
+        if target == "experiments":
+            continue  # Already handled above
         if not cfg.get("enabled", False):
             print(f"\n⏭ {cfg['name']} (desabilitado)")
             continue

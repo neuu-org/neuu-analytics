@@ -334,7 +334,7 @@ TYPE_LABELS = {
 
 @st.cache_data(ttl=3600)
 def load_queries() -> list[dict]:
-    path = EXPERIMENTS / "queries" / "pilot_queries_v2.json"
+    path = EXPERIMENTS / "pilot_queries_v2.json"
     if not path.exists():
         return []
     with open(path, encoding="utf-8") as f:
@@ -343,7 +343,7 @@ def load_queries() -> list[dict]:
 
 @st.cache_data(ttl=3600)
 def load_gold_set() -> dict:
-    path = EXPERIMENTS / "gold_set" / "gold_set_final.json"
+    path = EXPERIMENTS / "gold_set_final.json"
     if not path.exists():
         return {}
     with open(path, encoding="utf-8") as f:
@@ -353,7 +353,7 @@ def load_gold_set() -> dict:
 
 @st.cache_data(ttl=3600)
 def load_additions(query_id: str) -> dict | None:
-    path = EXPERIMENTS / "queries" / "validations" / query_id / "additions.json"
+    path = EXPERIMENTS / "validations" / query_id / "additions.json"
     if not path.exists():
         return None
     with open(path, encoding="utf-8") as f:

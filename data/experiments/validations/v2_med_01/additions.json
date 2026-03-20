@@ -1,0 +1,17 @@
+{
+  "query_id": "v2_med_01",
+  "query": "olho por olho",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Doctrinal contrast analysis (OT lex talionis vs NT inversion)",
+  "existing_refs_confirmed": [
+    {"verse": "Exodo 21:24", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs", "commentaries"]},
+    {"verse": "Levitico 24:20", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs"]},
+    {"verse": "Deuteronomio 19:21", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs"]},
+    {"verse": "Mateus 5:38", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs", "commentaries"]},
+    {"verse": "Mateus 5:39", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs", "commentaries"]}
+  ],
+  "new_refs_added": [],
+  "notes": "No changes needed. 5/5 Gold-3 confirmed. Key observation: Mt 5:39 ('oferece a outra face') does NOT contain 'olho por olho' — it needs the context of v.38. This tests whether the search system handles verse-level granularity vs passage-level context.",
+  "candidates_noted": []
+}

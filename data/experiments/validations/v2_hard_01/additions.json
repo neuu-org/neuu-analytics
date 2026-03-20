@@ -1,0 +1,102 @@
+{
+  "query_id": "v2_hard_01",
+  "query": "cordeiro de Deus",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (41-vote connection 1Pe1:19→Rev13:8, 18-vote Is53:7→Act8:32) + patristic commentary reading (14 entries on Jn 1:29: Cyril, Chrysostom, Augustine; Bede chronological typology; Hippolytus on paschal lamb) + complete 8-link typological chain mapping (Gn 22 → Ex 12 → Is 53 → Jn 1 → 1Co 5 → 1Pe 1 → Rev 5 → Rev 13) + topic verification (LAMB_OF_GOD, LAMB, PASSOVER, BLOOD, ATONEMENT) + vocabulary variation analysis",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Joao 1:29",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (10v→1PE.1.19, 10v→ACT.8.32, 7v→REV.5.6, 6v→ISA.53.7)", "commentaries (Cyril cites Is 53:7 directly, Chrysostom 'shadows of Law + prophecy of Isaiah', Augustine, Theophilus, Haydock — 14 entries)", "ccel (Barnes, Johnson)", "topics (LAMB_OF_GOD)"]
+    },
+    {
+      "verse": "Isaias 53:7",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (18v→ACT.8.32, 6v→JHN.1.29, 3v→1CO.5.7)", "commentaries (Haydock 'voluntarily offered')", "ccel (MacLaren 'pathetic imagery of the lamb')"]
+    },
+    {
+      "verse": "Apocalipse 5:6",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (7v→JHN.1.29, 5v→REV.13.8, 4v→ISA.53.7, 4v→1PE.1.19)", "commentaries (Bede 'Lamb dying = Lion conquering', Haydock 'marks of passion in heaven → cites Jn 1:29', Irenaeus, Cyprian, Victorinus — 8 entries)", "ccel_scripcom (Johnson)", "topics (LAMB_OF_GOD)"]
+    },
+    {
+      "verse": "Exodo 12:3",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (4v→1CO.5.7, 3v→1PE.1.19)", "commentaries (Bede chronological typology, Haydock 'paschal lamb prefigured Christ', Augustine, Jerome — 4+2 entries)", "ccel_scripcom (Chadwick)", "topics (PASSOVER)"]
+    },
+    {
+      "verse": "1 Pedro 1:19",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (41v→REV.13.8!, 7v←JHN.1.29)", "commentaries (Clement, Lactantius, Tertullian, Apostolic Constitutions — 4 entries)", "ccel_scripcom (Johnson, Lumby)"]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "1 Corintios 5:7",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "Most direct identification: 'Cristo, nosso Cordeiro pascal, foi imolado.' 4 votes de EXO.12.5. 3 votes de ISA.53.7 and REV.5.6. Hippolytus, Tertullian, Chrysostom comment. Bridge verse: Passover→Christ. Uses 'Cordeiro pascal' explicitly."
+    },
+    {
+      "verse": "Atos 8:32",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "18 votes de ISA.53.7 (direct quotation). 10 votes de JHN.1.29. Haydock, Irenaeus, Chrysostom comment. Narrative bridge: Philip explains Is 53 to the Ethiopian eunuch as referring to Christ. McGarvey: Isaiah 53 is 'unintelligible without the gospel.'"
+    },
+    {
+      "verse": "Genesis 22:8",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "Oldest prototype: 'God will provide for himself the lamb.' 7 votes para JHN.1.36. 6 votes para JHN.1.29. 5 votes para REV.5.12. 3 votes para REV.13.8. Ambrose and Ephrem comment. Abraham's answer is fulfilled ~2000 years later in John 1:29."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Apocalipse 13:8",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "41 votes de 1PE.1.19. 5 votes de REV.5.6. 'The Lamb slain from the foundation of the world.' Eternal dimension of the sacrifice — the Lamb was 'slain' before creation."
+    },
+    {
+      "verse": "Apocalipse 5:12",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "6 votes para REV.4.11. 5 votes de GEN.22.8. Worship hymn: 'Worthy is the Lamb that was slain to receive power and riches and wisdom.' Liturgical culmination of the Lamb theme."
+    }
+  ],
+  "scholarly_notes": {
+    "complete_typological_chain": {
+      "description": "8-link typological chain — the longest documented in this research",
+      "chain": [
+        {"link": 1, "verse": "Gn 22:8", "role": "Prototype", "content": "'God will provide the lamb' — promise"},
+        {"link": 2, "verse": "Ex 12:3-5", "role": "Paschal type", "content": "Lamb without blemish, slain at Passover"},
+        {"link": 3, "verse": "Is 53:7", "role": "Prophecy", "content": "'Like a lamb led to slaughter' — suffering servant"},
+        {"link": 4, "verse": "Jn 1:29", "role": "Identification", "content": "'Behold the Lamb of God' — John the Baptist"},
+        {"link": 5, "verse": "1Co 5:7", "role": "Pauline doctrine", "content": "'Christ our Paschal Lamb has been sacrificed'"},
+        {"link": 6, "verse": "1Pe 1:19", "role": "Petrine doctrine", "content": "'Precious blood, like a lamb without blemish'"},
+        {"link": 7, "verse": "Rev 5:6", "role": "Cosmic vision", "content": "'A Lamb standing as though slain'"},
+        {"link": 8, "verse": "Rev 13:8", "role": "Eternal dimension", "content": "'Lamb slain from the foundation of the world'"}
+      ],
+      "significance_for_tcc": "A hybrid search for 'cordeiro de Deus' should ideally retrieve verses from ALL 8 links. BM25 finds 'cordeiro' in links 1,2,4,5,6,7,8 but misses link 3 (Isaiah uses 'ovelha'/sheep). Semantic search must connect the sacrificial concept across vocabulary variants."
+    },
+    "augustine_triple_connection": {
+      "source": "Augustine, Commentary on John 19:31",
+      "description": "Augustine connects three texts in a single sentence: Exodus 12 (bone not broken) + Isaiah 53:7 (lamb to slaughter) + John 19:31 (crucifixion). This demonstrates that the patristic tradition saw the Lamb typology as a unified chain, not isolated references."
+    },
+    "vocabulary_variation": {
+      "description": "The Lamb concept uses different vocabulary across books, challenging lexical search",
+      "variations": [
+        {"word": "cordeiro", "books": ["João", "Êxodo", "Apocalipse", "1 Pedro"], "note": "Most common"},
+        {"word": "ovelha", "books": ["Isaías", "Atos"], "note": "Different animal word"},
+        {"word": "Cordeiro pascal", "books": ["1 Coríntios"], "note": "Compound term"},
+        {"word": "Cordeiro de Deus", "books": ["João"], "note": "Titular phrase"}
+      ]
+    }
+  }
+}

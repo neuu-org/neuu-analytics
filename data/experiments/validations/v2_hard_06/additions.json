@@ -1,0 +1,54 @@
+{
+  "query_id": "v2_hard_06",
+  "query": "a serpente de bronze",
+  "validated_by": "human",
+  "validated_at": "2026-03-19",
+  "methodology": "Cross-reference network (JHN.3.14→NUM.21=9v each; 'lifted up' chain Jn3:14→8:28→12:32; 'look→salvation' pattern Nm21:8→Is45:22) + patristic reading (14/14 unanimous on Jo 3:14; 12 commentators from AD 108 to AD 1849; 4-dimension paradox framework) + CCEL (Owen justification typology, Spurgeon 3 dedicated sermons, Wesley on Nehushtan) + topic verification (BRAZEN_SERPENT, TYPES_OF_CHRIST, SERPENT)",
+  "existing_refs_confirmed": [
+    {"verse": "Joao 3:14", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (9v→NUM.21.7/8/9, 6v→JHN.8.28, 4v→JHN.12.32)", "commentaries (14 entries — ALL unanimous: Augustine, Cyril, Chrysostom 2x, Theophilus AD 184, Ignatius AD 108, Justin Martyr, Irenaeus, Haydock, Bede, Clement, Cyprian, Hippolytus, Tertullian)", "ccel (Owen, Spurgeon 3 sermons)", "topics (BRAZEN_SERPENT, TYPES_OF_CHRIST)"]},
+    {"verse": "Numeros 21:9", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (6v→JHN.3.14, 6v→2KI.18.4, 4v→ZEC.12.10, 3v→ROM.8.3, 3v→2CO.5.21)", "commentaries (Augustine 'great sacrament', Ephrem Eden→desert→cross, Gregory 'CONTRAST not type', Justin, Haydock — 6 entries)", "topics (BRAZEN_SERPENT, SERPENT, TYPES_OF_CHRIST)"]},
+    {"verse": "Numeros 21:8", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (9v←JHN.3.14, 5v→ISA.45.22)", "commentaries (Haydock)", "topics (SERPENT)"]},
+    {"verse": "2 Reis 18:4", "relevance": 1, "status": "confirmed", "evidence": ["crossrefs (6v←NUM.21.9, 4v→NUM.21.8/9, 3v←JHN.3.14)", "commentaries (Haydock 'Nehushtan')", "ccel (Wesley 'nothing but a piece of brass')", "topics (BRAZEN_SERPENT)"]}
+  ],
+  "new_refs_added": [
+    {"verse": "Joao 3:15", "relevance": 3, "source": "manual_validation", "justification": "Already in gold_references but MISSING from relevance_judgments. 6v de NUM.21.9. Chrysostom develops 5-dimension parallel. Inseparable from 3:14 — declares the PURPOSE of the lifting: 'that whoever believes may have eternal life.'"},
+    {"verse": "Joao 12:32", "relevance": 2, "source": "manual_validation", "justification": "6v de JHN.3.14. 7v↔JHN.8.28. Lapide cites 'cap. iii:14' directly. Haydock cross-refs 'John iii.14 and viii.28.' Third occurrence of 'lifted up' — completes the Johannine arc: 3:14 (as Moses lifted) → 8:28 (when you lift up) → 12:32 (if I am lifted up, I will draw ALL)."}
+  ],
+  "candidates_noted": [
+    {"verse": "Joao 8:28", "relevance": 1, "status": "candidate", "justification": "6v de JHN.3.14. 7v↔JHN.12.32. Second 'lifted up' — reveals divine identity ('then you will know that I AM')."},
+    {"verse": "Romanos 8:3", "relevance": 1, "status": "candidate", "justification": "3v de NUM.21.9. Cyril cites in Jn 3:14. 'In the likeness of sinful flesh' — theological foundation of the form-without-essence paradox."},
+    {"verse": "Isaias 45:22", "relevance": 1, "status": "candidate", "justification": "5v de NUM.21.8. Same look→salvation pattern. OT establishes the principle that Nm 21 enacts and Jn 3:14 fulfills."},
+    {"verse": "Zacarias 12:10", "relevance": 1, "status": "candidate", "justification": "4v de NUM.21.9. 'They will look on the one they have pierced.' Eschatological echo of the look→salvation pattern."}
+  ],
+  "scholarly_notes": {
+    "paradox_four_dimensions": {
+      "description": "The serpent paradox articulated in 4 dimensions by patristic commentators",
+      "dimensions": [
+        {"name": "Inversion", "source": "Augustine", "formula": "Serpent (cause of death) → instrument of salvation. 'Healed of death by believing in one who died.'"},
+        {"name": "Form without Essence", "source": "Theophilus (AD 184), Cyril", "formula": "Bronze serpent: appearance of the beast WITHOUT venom. Christ: likeness of sinful flesh WITHOUT sin (Rom 8:3)."},
+        {"name": "Temporal → Eternal", "source": "Chrysostom", "formula": "Bronze serpent heals temporal death. Crucified Christ heals eternal death. A fortiori: 'how much MORE.'"},
+        {"name": "Eyes of Body → Eyes of Spirit", "source": "Ephrem", "formula": "Bodily eyes + bronze serpent = bodily life. Spiritual eyes + Christ on cross = spiritual life."}
+      ]
+    },
+    "gregory_contrast_view": {
+      "source": "Gregory the Theologian on Numbers 21:9",
+      "view": "The serpent is NOT a positive type but a CONTRAST (negative inversion) — what died killed with it the powers subject to it. 'O death, where is your sting?'",
+      "significance": "Only dissenting voice among 14 commentators — not disagreeing with the typology but reframing it as contrast rather than correspondence. Both readings coexist in patristic tradition."
+    },
+    "lifted_up_chain": {
+      "description": "Three occurrences of 'lifted up' (ὑψωθῆναι) in John form a complete theological arc",
+      "chain": [
+        {"verse": "Jn 3:14", "content": "'As Moses lifted up the serpent' — comparison with OT type"},
+        {"verse": "Jn 8:28", "content": "'When YOU lift up the Son of Man' — human agency in crucifixion"},
+        {"verse": "Jn 12:32", "content": "'If I am lifted up, I will draw ALL to myself' — universal scope"}
+      ],
+      "confirmed_by": "Lapide on Jn 12:32 cites 'cap. iii:14'; Haydock cross-refs all three"
+    },
+    "unanimous_consensus": {
+      "verse": "John 3:14",
+      "catena_entries": 14,
+      "consensus": "14/14 commentators agree on the serpent→cross typology. This is the only verse in the entire research with UNANIMOUS patristic consensus across all entries.",
+      "earliest": "Ignatius of Antioch (AD 108) — ~10 years after the apostle John's death"
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "query_id": "v2_ext_04",
+  "query": "o descanso de Deus",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (including 34-vote connection — strongest in dataset) + patristic commentary reading (17 evidences: Chrysostom, Augustine, Aquinas, Bede, Ephrem, Haydock, Cyril, Theophylact) + CCEL major works (Calvin Hebrews commentary, Matthew Henry, Baxter Saints' Rest, Johnson PNT) + topic verification (REST, SABBATH, CANAAN) + theological progression mapping (6 levels of rest)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Hebreus 4:9",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (4v→REV.14.13, 3v→MAT.11.29)", "commentaries (Chrysostom — 'sabbatismos' as eternal state)", "ccel_scripcom (Johnson)", "topics (REST, SABBATH)", "ccel (Calvin, Baxter)"]
+    },
+    {
+      "verse": "Hebreus 4:10",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (5v→REV.14.13, 4v→HEB.4.3)", "commentaries (Chrysostom — 10KB extensive commentary)", "ccel_scripcom (Johnson)", "topics (REST)", "ccel (Calvin)"]
+    },
+    {
+      "verse": "Genesis 2:2",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (7v→HEB.4.4, 7v→EXO.31.17)", "commentaries (Aquinas 'two senses of rest', Bede '7 ages', Ephrem 'true rest future', Haydock)", "ccel_scripcom (Johnson cites in Hb 4)", "topics (SABBATH)", "ccel (Calvin)"]
+    },
+    {
+      "verse": "Salmos 95:11",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (34v→HEB.3.7 — strongest connection in dataset, 7v→HEB.4.3, 7v→NUM.14.23)", "commentaries (Augustine 'joy and fear', Haydock 'David speaks of future rest')", "ccel_scripcom (Johnson)", "topics (CANAAN)"],
+      "relevance_change": {"from": 2, "to": 3, "reason": "34 votes to HEB.3.7 is the strongest cross-reference connection found in the entire dataset. This OT verse is the foundation of the entire Hebrews 3-4 argument about divine rest. Haydock confirms David spoke of a FUTURE rest, not Canaan."}
+    },
+    {
+      "verse": "Mateus 11:28",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (6v←HEB.4.1, 23v→JHN.7.37, 19v→GAL.5.1)", "commentaries (Chrysostom, Cyril, Augustine, Theophylact, Simeon — 6 entries)", "ccel_scripcom (Johnson)", "topics (REST)", "ccel (Matthew Henry — 'begun in grace, perfected in glory')"]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Hebreus 4:4",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "7 votes de GEN.2.2. 4 votes de HEB.4.10. Verso-ponte que cita Gênesis 2:2 diretamente dentro do argumento de Hebreus 4. Sem ele, a cadeia Gn 2→Hb 4 perde o elo citacional explícito."
+    },
+    {
+      "verse": "Hebreus 3:11",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "34 votes de PSA.95.11 (citação direta — conexão mais forte do dataset). 6 votes de HEB.4.3. Hub da conexão Salmos 95→Hebreus 4. Texto: 'Assim jurei na minha ira: Não entrarão no meu descanso.'"
+    },
+    {
+      "verse": "Apocalipse 14:13",
+      "relevance": 1,
+      "source": "manual_validation",
+      "justification": "5 votes de HEB.4.10. 4 votes de HEB.4.9 e HEB.4.11. Johnson comenta. Consumação escatológica do tema: 'descansem das suas fadigas, pois as suas obras os acompanham.' Completa a progressão teológica do nível 6 (descanso final)."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Isaias 28:12",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "6 votes para MAT.11.28 e MAT.11.29. Eco OT do convite de Cristo: 'Este é o descanso, dai descanso ao cansado.' Paralelo com Sl 95:11 em 'não quiseram ouvir.'"
+    },
+    {
+      "verse": "Jeremias 6:16",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "3 votes de PSA.95.11. Linguagem quase idêntica a Mt 11:29: 'achareis descanso para a vossa alma.' Rejeição paralela: 'Não andaremos.'"
+    },
+    {
+      "verse": "Exodo 33:14",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "3 votes de PSA.95.11. 13 votes para DEU.31.8. 'A minha presença irá contigo, e eu te darei descanso.' Descanso = presença divina."
+    }
+  ],
+  "scholarly_notes": {
+    "theological_progression": {
+      "description": "6 levels of 'rest' in Scripture, confirmed by patristic and Reformation commentators",
+      "levels": [
+        {"level": 1, "name": "Descanso da Criação", "text": "Gn 2:2-3", "nature": "Arquétipo — Deus cessa e se satisfaz", "commentator": "Aquinas (two senses), Augustine ('sabbath without evening')"},
+        {"level": 2, "name": "Sábado Mosaico", "text": "Ex 20:11, 31:17", "nature": "Institucional — ritmo semanal", "commentator": "Johnson: 'not THE rest'"},
+        {"level": 3, "name": "Terra Prometida", "text": "Dt 12:9, Sl 95:11", "nature": "Provisório — Canaã como tipo", "commentator": "Calvin: 'evanescent'; Haydock: 'David speaks of another'"},
+        {"level": 4, "name": "Descanso de Cristo", "text": "Mt 11:28-29", "nature": "Soteriológico — paz da alma", "commentator": "Chrysostom: 'total security'; Cyril: 'freedom from the Law'"},
+        {"level": 5, "name": "Sabatismo Escatológico", "text": "Hb 4:9-10", "nature": "Eterno — união com Deus", "commentator": "Calvin: 'summum bonum'; Chrysostom: 'no night'"},
+        {"level": 6, "name": "Descanso Final", "text": "Ap 14:13", "nature": "Consumado — cessação das fadigas", "commentator": "Johnson: 'labors not lost'"}
+      ],
+      "significance_for_tcc": "A hybrid search for 'descanso de Deus' should ideally retrieve verses from ALL 6 levels, showing the progression from archetype (Gn 2) to consummation (Ap 14). Pure lexical search finds 'descanso' in levels 1,3,4,5 but misses level 6 ('fadigas') and level 2 ('sábado'). Semantic search should connect all."
+    },
+    "strongest_connection": {
+      "from": "PSA.95.11",
+      "to": "HEB.3.7",
+      "votes": 34,
+      "note": "This is the strongest cross-reference connection found in the entire bible-crossrefs-dataset (1.2M links). It represents a direct OT quotation in the NT."
+    },
+    "calvin_three_rests": {
+      "source": "Calvin, Commentary on Hebrews 4 (calcom44.xml)",
+      "framework": [
+        "1. Creation rest (Gn 2) — divine archetype",
+        "2. Canaan rest (Jos/Ps 95) — 'evanescent', temporary type",
+        "3. Spiritual rest (Hb 4/Mt 11) — 'union with God', summum bonum"
+      ]
+    },
+    "henry_formula": {
+      "source": "Matthew Henry, Commentary on Matthew 11:28 (mhc5.xml)",
+      "formula": "begun in grace, perfected in glory",
+      "significance": "Connects Mt 11:28 (present grace) → Hb 4:9 (future glory) in a single theological formula"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "query_id": "v2_base_01",
+  "query": "filho pródigo",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Textual analysis of term absence in biblical text + narrative context",
+  "existing_refs_confirmed": [
+    {"verse": "Lucas 15:11", "relevance": 2, "status": "confirmed", "evidence": ["symbols (Filho pródigo)", "entities (via topics)"]},
+    {"verse": "Lucas 15:13", "relevance": 2, "status": "confirmed", "evidence": ["entities (via topics)"]},
+    {"verse": "Lucas 15:17", "relevance": 2, "status": "confirmed", "evidence": ["entities (via topics)"]},
+    {"verse": "Lucas 15:20", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs", "entities"]},
+    {"verse": "Lucas 15:24", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (Lc 15:32, 6 votes)"]},
+    {"verse": "Lucas 15:32", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (Lc 15:24, 5 votes)"]}
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Lucas 15:1",
+      "relevance": 1,
+      "source": "manual_validation",
+      "justification": "Contexto narrativo: 'publicanos e pecadores se aproximavam' — motiva Jesus a contar as 3 parábolas do perdido."
+    },
+    {
+      "verse": "Lucas 15:2",
+      "relevance": 1,
+      "source": "manual_validation",
+      "justification": "Contexto narrativo: fariseus murmuram — provoca Jesus a contar a parábola. Essencial para entender o porquê da parábola."
+    }
+  ],
+  "reclassification": {
+    "original_difficulty": "baseline",
+    "proposed_difficulty": "medium",
+    "justification": "The biblical text NEVER uses the expression 'filho pródigo' — this is an interpretive tradition. The text says 'um homem tinha dois filhos'. A lexical search for 'pródigo' finds ZERO verses in most Portuguese translations. The word only appears in some translations as a pericope title, not in the body text. This makes lexical retrieval unreliable, elevating difficulty above baseline."
+  },
+  "candidates_noted": [
+    {
+      "verse": "Lucas 15:7",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Conclusão da parábola da ovelha perdida — paralelo temático com o filho pródigo (alegria pelo perdido que retorna)."
+    }
+  ]
+}

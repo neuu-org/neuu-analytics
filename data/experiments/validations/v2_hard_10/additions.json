@@ -1,0 +1,50 @@
+{
+  "query_id": "v2_hard_10",
+  "query": "a sarça ardente",
+  "validated_by": "human",
+  "validated_at": "2026-03-19",
+  "methodology": "Cross-reference network (EXO.3.14→JHN.8.58=14v 'I AM' chain; 3 different NT contexts: apologetic/eschatological/christological) + patristic reading (Chrysostom 'Son of God called Angel, in desert NOT temple'; Haydock 'holy ground by presence'; Johnson 'I AM not I WAS'; McGarvey 'rejection→commission pattern') + CCEL (Calvin 17K lines on Ex 3, Smith acacia=tabernacle wood, Tauler mystical) + topic verification (BURNING_BUSH, MOSES, GOD, HOLINESS, ANGEL) + cross-query link to v2_hard_09 (Ex3:5→Gn28:16)",
+  "existing_refs_confirmed": [
+    {"verse": "Exodo 3:2", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (5v→ACT.7.30, 5v→EXO.24.17, 3v→MRK.12.26, 3v→JHN.1.14)", "ccel (Calvin 17K lines, Smith 'acacia=tabernacle wood')", "topics (BURNING_BUSH, GOD, MOSES)"]},
+    {"verse": "Exodo 3:6", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (7v→HEB.11.16, 6v→LUK.20.37, 5v→MAT.22.32, 4v→ACT.3.13)", "ccel_scripcom (Johnson 'I AM not I WAS — present tense proves patriarchs LIVE')", "topics (MOSES)"]},
+    {"verse": "Atos 7:30", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (5v←EXO.3.2, 4v→EXO.3.1)", "commentaries (Chrysostom 'Son of God called Angel, in desert NOT in temple', Haydock — 3 entries)", "ccel_scripcom (McGarvey 'rejection→commission pattern')", "topics (BURNING_BUSH, ANGEL)"]},
+    {
+      "verse": "Marcos 12:26",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (4v→LUK.20.37, 3v←EXO.3.2)", "commentaries (Haydock 'resurrection doctrine clearly in Moses')", "ccel_scripcom (Johnson)"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Jesus DELIBERATELY chose the burning bush passage (not another) to prove resurrection. The argument is theologically sophisticated: 'I AM the God of Abraham' (present tense) proves the patriarchs are ALIVE. Haydock: 'doctrine of resurrection clearly in the book of Moses.'"}
+    }
+  ],
+  "new_refs_added": [
+    {"verse": "Exodo 3:14", "relevance": 3, "source": "manual_validation", "justification": "14v→JHN.8.58 ('before Abraham was, I AM'). 12v→EXO.6.3. 10v→HEB.13.8, REV.1.8. The divine self-revelation 'I AM WHO I AM' (Ehyeh Asher Ehyeh) — theological center of the burning bush theophany. The strongest christological connection in this query."},
+    {"verse": "Exodo 3:5", "relevance": 2, "source": "manual_validation", "justification": "5v→JOS.5.15 and ACT.7.33. 4v→2PE.1.18. 2v→GEN.28.16 (cross-query link to Jacob's ladder!). 'Holy ground' — sanctity comes from divine PRESENCE, not location. Haydock: 'if an angel makes the place holy, how much more the incarnation of the Son!'"},
+    {"verse": "Lucas 20:37", "relevance": 2, "source": "manual_validation", "justification": "6v de EXO.3.6. 4v de MRK.12.26. Synoptic parallel using the same expression 'in the passage about the bush.' Links burning bush directly to resurrection argument."}
+  ],
+  "candidates_noted": [
+    {"verse": "Joao 8:58", "relevance": 1, "status": "candidate", "justification": "14v←EXO.3.14 (bidirectional with 10v). Jesus claims the 'I AM' name from the bush for himself. Christology of pre-existence."},
+    {"verse": "Mateus 22:32", "relevance": 1, "status": "candidate", "justification": "5v→EXO.3.6. Synoptic parallel: 'He is not the God of the dead but of the living.'"}
+  ],
+  "scholarly_notes": {
+    "three_nt_contexts": {
+      "description": "The burning bush is cited in 3 COMPLETELY DIFFERENT NT contexts — unique among all queries",
+      "contexts": [
+        {"context": "Apologetic", "verse": "Acts 7:30-35", "use": "Stephen retells Moses' story to show rejection→divine commission pattern (parallel Moses/Christ)", "key_insight": "McGarvey: 'Israel rejected Moses → God commissioned him at the bush = Israel rejected Jesus → God exalted him'"},
+        {"context": "Eschatological", "verse": "Mark 12:26, Luke 20:37, Matt 22:32", "use": "Jesus proves RESURRECTION using Ex 3:6 ('I AM the God of Abraham' — present tense = they LIVE now)", "key_insight": "Johnson: 'I AM, not I WAS — present tense implies patriarchs live now'"},
+        {"context": "Christological", "verse": "John 8:58 via Exodus 3:14", "use": "Jesus claims the divine name 'I AM' from the bush for himself — proof of DIVINITY and PRE-EXISTENCE", "key_insight": "EXO.3.14→JHN.8.58 = 14 votes (strongest connection in this query)"}
+      ],
+      "significance_for_tcc": "A search for 'sarça ardente' must retrieve verses from ALL 3 contexts. Lexical search for 'sarça' finds Ex 3 and possibly Acts 7, but completely misses Mark 12:26 (which says 'trecho referente à sarça') and John 8:58 (which doesn't mention 'sarça' at all). Semantic search must understand that the 'I AM' in Jn 8:58 echoes the 'I AM' revealed in the bush."
+    },
+    "chrysostom_desert_not_temple": {
+      "source": "Chrysostom on Acts 7:30",
+      "quote": "Not in a temple. See how many miracles are taking place, and no word of Temple, no word of Sacrifice. And here also not simply in the desert, but in the bush.",
+      "significance": "God encounters Moses OUTSIDE religious institutions — in a bush, in a desert. This transcends the temple-centered theology of Second Temple Judaism."
+    },
+    "cross_query_link": {
+      "from": "v2_hard_10 (burning bush)",
+      "to": "v2_hard_09 (Jacob's ladder)",
+      "connection": "EXO.3.5→GEN.28.16 (2 votes) — both are theophanies where the PLACE becomes holy by divine presence. 'How awesome is this place!' (Gn 28:17) echoes 'the place where you stand is holy ground' (Ex 3:5).",
+      "significance": "Cross-query validation: two different queries from our set are linked by their shared theme of theophany → holy ground."
+    }
+  }
+}

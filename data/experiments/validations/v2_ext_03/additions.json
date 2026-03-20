@@ -1,0 +1,115 @@
+{
+  "query_id": "v2_ext_03",
+  "query": "cegueira espiritual",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (strongest connections in dataset: 17-18 votes) + patristic commentary reading (11 commentators across Catena Bible and CCEL) + topic verification (6 related topics) + linguistic pattern analysis (6 vocabulary patterns for spiritual blindness in Portuguese)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "2 Corintios 4:4",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (17v→JHN.12.40, 8v↔ISA.6.10)", "commentaries (Ambrosiaster, Dídimo the Blind, Chrysostom, Irenaeus, Tertullian, Jerome, Lactantius — 11 entries)", "ccel_scripcom (Johnson, Denney)", "topics (BLINDNESS_SPIRITUAL, UNBELIEF)", "ccel (Spurgeon 2 sermons, Watson, Gill, Wesley)"]
+    },
+    {
+      "verse": "Joao 9:39",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (5v←ISA.6.10, 3v→REV.3.17)", "commentaries (Chrysostom 'two blindnesses', Cyril, Haydock, Theophilus)", "ccel_scripcom (Johnson)", "topics (BLINDNESS_SPIRITUAL)", "ccel (Spurgeon)"]
+    },
+    {
+      "verse": "Isaias 6:10",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (17v→MAT.13.14, 13v→JHN.12.40, 8v→2CO.4.4)", "commentaries (Augustine, Haydock, Maximus of Turin)", "topics (REPROBACY, UNBELIEF)"],
+      "relevance_change": {"from": 2, "to": 3, "reason": "Most cited OT verse on blindness in the NT (6 citations confirmed by Haydock). 17 votes to Mt 13:14. Foundational OT text for the entire 'spiritual blindness' theme."}
+    },
+    {
+      "verse": "Mateus 13:14",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (17v←ISA.6.9, 10v→1CO.2.14, 5v→2CO.3.14)", "commentaries (Chrysostom 3 entries)", "ccel_scripcom (Johnson)", "topics (BLINDNESS_SPIRITUAL, REPROBACY)", "ccel (Calvin)"]
+    },
+    {
+      "verse": "Apocalipse 3:17",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (3v←JHN.9.39, 3v←JHN.9.41)", "commentaries (Tertullian, Cyprian, Anonymous AD 255)", "ccel_scripcom (Johnson cites 2Co 4:4)", "topics (BLINDNESS_SPIRITUAL 2x)", "ccel (Watson)"]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Joao 12:40",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "Hub central da rede: 17 votes de 2CO.4.4, 13 votes de ISA.6.9 e ISA.6.10. Cita Isaías 6:10 diretamente no contexto joanino. Cornelius a Lapide confirma explicitamente. Texto: 'Cegou-lhes os olhos e endureceu-lhes o coração.' Verso-ponte que conecta a profecia de Isaías ao ministério de Jesus."
+    },
+    {
+      "verse": "2 Corintios 3:14",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "8 votes de 2CO.4.4. 5 votes de MAT.13.14. Johnson conecta explicitamente: 'véu de cegueira cairá.' Metáfora do véu = mecanismo que explica COMO a cegueira opera. Complementa 2Co 4:4 (quem cega) com o como (véu sobre a mente)."
+    },
+    {
+      "verse": "Romanos 11:8",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "9 votes de ISA.6.9. Ambrosiaster distingue dois tipos de cegueira (permanente vs temporária). Johnson cita Is 6:9 e Mt 13:14-15 no comentário. Tópico UNBELIEF. Texto: 'Deus lhes deu espírito de entorpecimento, olhos para não ver.'"
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Efesios 4:18",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Crossref 3v→2CO.4.4. Tópico BLINDNESS_SPIRITUAL lista Ef 4:17-19. 'Obscurecidos de entendimento, alheios à vida de Deus pela dureza do coração.'"
+    },
+    {
+      "verse": "1 Joao 2:11",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "3 votes de JHN.9.39. Tópico BLINDNESS_SPIRITUAL. Vocabulário explícito: 'trevas cegaram os olhos.' Conecta cegueira → ódio ao irmão."
+    },
+    {
+      "verse": "Atos 28:26",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "8 votes de ISA.6.9. Última citação de Is 6:9-10 no NT (Paulo em Roma). Johnson: 'citada 6 vezes no NT, sempre aplicada à incredulidade judaica.'"
+    }
+  ],
+  "scholarly_notes": {
+    "isaiah_6_citation_chain": {
+      "description": "Isaiah 6:9-10 is cited 6 times in the NT, confirmed by Haydock (AD 1849)",
+      "citations": [
+        {"location": "Mateus 13:14-15", "context": "Jesus explains why he uses parables"},
+        {"location": "Marcos 4:12", "context": "Parallel to Matthew's parable explanation"},
+        {"location": "Lucas 8:10", "context": "Lucan parallel"},
+        {"location": "João 12:40", "context": "John's theological summary of Jewish unbelief"},
+        {"location": "Atos 28:26-27", "context": "Paul's final address to Roman Jews"},
+        {"location": "Romanos 11:8", "context": "Paul's argument about Israel's hardening"}
+      ],
+      "significance": "The most quoted OT passage on spiritual perception in the NT. Any hybrid search for 'cegueira espiritual' that doesn't retrieve at least 3-4 of these citations is failing at cross-testament linking."
+    },
+    "vocabulary_patterns": {
+      "description": "6 distinct Portuguese vocabulary patterns for spiritual blindness",
+      "patterns": [
+        {"pattern": "cegou/cego", "mechanism": "direct blinding", "examples": ["2Co 4:4", "Jo 9:39-41", "Jo 12:40", "Ap 3:17"]},
+        {"pattern": "olhos fechados/não ver", "mechanism": "voluntary blindness", "examples": ["Is 6:10", "Mt 13:15", "At 28:27"]},
+        {"pattern": "véu/embotaram", "mechanism": "veil over the mind", "examples": ["2Co 3:14-15", "Is 25:7"]},
+        {"pattern": "trevas/escuridão", "mechanism": "existential darkness", "examples": ["Ef 4:18", "1Jo 2:11", "Jo 1:5"]},
+        {"pattern": "endurecido/torpor", "mechanism": "judicial hardening", "examples": ["Rm 11:7-8", "Is 29:10", "Dt 29:4"]},
+        {"pattern": "entendimento obscurecido", "mechanism": "cognitive inability", "examples": ["Ef 4:18", "Rm 1:21"]}
+      ],
+      "significance_for_tcc": "Lexical search for 'cegueira' finds only pattern 1 (4 verses). Semantic search must understand that patterns 2-6 express the same concept with different vocabulary. This query is the strongest test case for semantic superiority over lexical."
+    },
+    "commentator_contributions": [
+      {"name": "Chrysostom", "era": "AD 407", "unique": "Doctrine of 'two blindnesses' (sensible and spiritual). Emphasizes voluntary self-blinding."},
+      {"name": "Cyril of Alexandria", "era": "AD 444", "unique": "Connects John 9:39 → Isaiah explicitly. Distinguishes involuntary ignorance from deliberate rejection."},
+      {"name": "Augustine", "era": "AD 430", "unique": "Blindness → election → grace connection. 'They did not believe because they did not will it.'"},
+      {"name": "Jerome", "era": "AD 420", "unique": "'They closed their eyes' = act of will, not natural deficiency."},
+      {"name": "Ambrosiaster", "era": "AD 400", "unique": "Two types: permanent vs temporary blindness. God 'dims' the hostile."},
+      {"name": "Didymus the Blind", "era": "AD 398", "unique": "Physically blind scholar commenting on spiritual blindness. 'Every unbeliever is of this world.'"},
+      {"name": "Thomas Watson", "era": "17th c.", "unique": "'Satan leaves men their left eye [worldly knowledge] but plucks out the right eye [spiritual knowledge].'"}
+    ]
+  }
+}

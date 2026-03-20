@@ -1,0 +1,112 @@
+{
+  "query_id": "v2_ext_05",
+  "query": "a loucura da pregação",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (49-vote connection — absolute record in dataset) + patristic commentary reading (14 evidences from Chrysostom, Lapide, Tertullian, Irenaeus, Augustine, Jerome, Gregory, Neander) + OT citation chain verification (Is 29:14, Job 5:13) + topic verification (WISDOM_OF_GOD, CROSS, STUMBLING)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "1 Corintios 1:18",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (17v←1CO.2.14, 8v→1CO.1.23, 8v→1CO.1.25)", "commentaries (Chrysostom, Lapide, Tertullian, Irenaeus, Haydock, Ignatius — 7 entries)", "ccel_scripcom (Dods, Johnson)", "topics (CROSS)", "ccel (Spurgeon, Barnes)"]
+    },
+    {
+      "verse": "1 Corintios 1:21",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (5v→1CO.1.18, 3v→ISA.29.14)", "commentaries (Ambrosiaster, Athanasius, Clement, Lapide, Haydock, Chrysostom, Lactantius, Methodius, Tertullian — 10 entries)", "ccel_scripcom (Dods, Johnson)", "ccel (Whitefield)"]
+    },
+    {
+      "verse": "1 Corintios 1:25",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (8v←1CO.1.18)", "commentaries (Ambrosiaster, Augustine, Lapide, Chrysostom 2x, Tertullian — 6 entries)", "ccel_scripcom (Johnson)"]
+    },
+    {
+      "verse": "1 Corintios 2:14",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (17v→1CO.1.18, 10v→MAT.13.11)", "commentaries (Clement, Lapide, Haydock, Gregory, Hippolytus, Irenaeus 2x, Chrysostom 3x, Tatian, Tertullian, Urban — 13 entries!)", "ccel_scripcom (Dods, Johnson, Neander → Jas 3:15)"],
+      "relevance_change": {"from": 2, "to": 3, "reason": "17 votes to 1CO.1.18 and 13 patristic commentaries (richest single verse in this query). Explains WHY preaching appears foolish: 'the natural man does not accept the things of the Spirit.' Chrysostom's eye/light analogy is foundational."}
+    },
+    {
+      "verse": "1 Corintios 3:19",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (49v→PRO.3.5 — absolute record!, 11v→JOB.5.13, 5v→1CO.1.19)", "commentaries (Arnobius, Clement, Lapide, Chrysostom 2x, Pseudo-Dionysius, Tertullian, Urban — 8 entries)", "ccel_scripcom (Dods, Johnson)"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "49 votes to PRO.3.5 (absolute record in entire cross-refs dataset). 11 votes to JOB.5.13 (direct OT citation by Paul). 8 patristic entries. The verse that closes Paul's argument: worldly wisdom = foolishness before God."}
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "1 Corintios 1:23",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "Already in gold_references but MISSING from relevance_judgments. 8 votes de 1CO.1.18. 7 votes para 1CO.2.14. Verso central que nomeia a dupla rejeição: 'escândalo para os judeus, loucura para os gentios.' Tópico CROSS e STUMBLING referenciam."
+    },
+    {
+      "verse": "1 Corintios 1:19",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "12 votes para ISA.29.14 (citação direta de Paulo). 5 votes de 1CO.3.19. Lapide, Agostinho, Jerônimo comentam. Ponte OT→NT explícita: 'Destruirei a sabedoria dos sábios.'"
+    },
+    {
+      "verse": "1 Corintios 1:27",
+      "relevance": 1,
+      "source": "manual_validation",
+      "justification": "11 votes para JAS.2.5. 6 votes de 1CO.1.20. Aplicação prática da inversão: 'Deus escolheu as coisas loucas do mundo para envergonhar os sábios.' Concretiza a doutrina."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Isaias 29:14",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "12 votes de 1CO.1.19. Augustine and Jerome cite 1 Corinthians WHEN commenting on Isaiah 29:14 (reverse connection). OT foundation of the doctrine."
+    },
+    {
+      "verse": "Jó 5:13",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "11 votes de 1CO.3.19. Cited directly by Paul. Gregory the Great comments extensively with biblical examples (Joseph, Saul, Jonah, crucifixion)."
+    },
+    {
+      "verse": "1 Corintios 1:24",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "8 votes de 1CO.1.18. 7 votes para COL.2.3. The positive pole: Christ AS wisdom and power. Topic WISDOM_OF_GOD references."
+    }
+  ],
+  "scholarly_notes": {
+    "query_particularity": {
+      "description": "Unlike previous queries that span multiple books, this query is concentrated in a single section (1 Corinthians 1-3). The challenge is not cross-testament linking but cluster identification + OT source expansion.",
+      "search_challenges": [
+        "1. Identify the correct cluster (1Co 1:18-3:19) from just 'loucura da pregação'",
+        "2. Expand to OT sources (Is 29:14, Job 5:13) that Paul cites explicitly",
+        "3. Capture the semantic inversion: 'loucura' (μωρία) used for BOTH human rejection AND divine strategy"
+      ],
+      "vocabulary_density": {
+        "loucura": "6x in 1Co 1-3",
+        "sabedoria": "15x in 1Co 1-3",
+        "poder": "5x",
+        "cruz": "3x",
+        "escândalo": "1x"
+      }
+    },
+    "double_inversion": {
+      "description": "The concept operates as a double inversion documented by patristic commentators",
+      "inversions": [
+        "1. Human wisdom → foolishness before God (1Co 3:19, Job 5:13)",
+        "2. God's 'foolishness' (the cross) → wisdom and power (1Co 1:18, 1:25)"
+      ],
+      "lapide_contribution": "Lapide shows that Paul EXPANDS Isaiah 29:14 from Pharisaic wisdom alone to ALL worldly wisdom"
+    },
+    "record_connection": {
+      "from": "1CO.3.19",
+      "to": "PRO.3.5",
+      "votes": 49,
+      "note": "Absolute record in the entire bible-crossrefs-dataset (1.2M links). 'Trust in the LORD with all your heart, and do not lean on your own understanding.' The structural antithesis to worldly wisdom."
+    }
+  }
+}

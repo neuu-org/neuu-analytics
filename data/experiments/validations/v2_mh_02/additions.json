@@ -1,0 +1,48 @@
+{
+  "query_id": "v2_mh_02",
+  "query": "Melquisedeque",
+  "validated_by": "human",
+  "validated_at": "2026-03-19",
+  "methodology": "Cross-reference network (PSA.110.4→HEB.7.17=7v axis; ~3000-year typological arc Gn14→Ps110→Hb5-7) + patristic reading (Ephrem 'Melchizedek=Shem'; Cyprian 'bread/wine=Eucharist prefigured'; Chrysostom 'tithe proves superiority' + 'type vs reality: scriptural silence vs ontological eternity'; Aquinas 'without father=virgin birth, without mother=eternal generation'; Augustine 'priest by flesh, not by divine nature'; Haydock 5 proofs of superiority) + CCEL (Westcott 'aboriginal religion', Spurgeon 'majestic and sublime', Calvin 'chief father of the Church') + topic verification (MELCHIZEDEK, TYPES_OF_CHRIST)",
+  "existing_refs_confirmed": [
+    {"verse": "Hebreus 7:1", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (5v↔GEN.14.18, 5v→JHN.5.46)", "commentaries (Chrysostom 'superiority by tithe', Haydock '5 proofs')", "ccel (Westcott, Johnson)", "topics (MELCHIZEDEK)"]},
+    {"verse": "Salmos 110:4", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (7v→HEB.7.17!, 6v→HEB.5.6, 6v→HEB.7.21, 5v→ZEC.6.13)", "commentaries (Augustine 'priest by flesh assumed', Haydock)", "ccel_scripcom (Edwards)", "topics (MELCHIZEDEK)"]},
+    {"verse": "Genesis 14:18", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (6v→PSA.110.4, 5v→HEB.5.6, 5v→HEB.7.1)", "commentaries (Ephrem 'this is Shem', Cyprian 'Eucharist prefigured — offered the SAME thing', Haydock 'non-bloody sacrifice', Theophilus, Ambrose)", "ccel (Calvin)", "topics (MELCHIZEDEK, TYPES_OF_CHRIST)"]},
+    {"verse": "Hebreus 5:6", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (6v↔PSA.110.4, 6v→HEB.7.17)", "commentaries (Haydock, Chrysostom)", "ccel_scripcom (Johnson)", "topics (MELCHIZEDEK)"]}
+  ],
+  "new_refs_added": [
+    {"verse": "Hebreus 7:3", "relevance": 3, "source": "manual_validation", "justification": "Most theologically dense verse: 'Without father, without mother, without genealogy; without beginning of days or end of life, made like the Son of God.' 5v→JHN.1.1 and ISA.9.6. Aquinas: dual mystery (virgin birth + eternal generation + freedom from Levitical priesthood). Chrysostom: type ('we don't know because NOT WRITTEN') vs reality ('we don't know because it DOESN'T EXIST')."},
+    {"verse": "Hebreus 7:17", "relevance": 2, "source": "manual_validation", "justification": "7v de PSA.110.4 (strongest connection in the network). 6v de HEB.5.6. Citation of Psalm 110:4 applied to Christ: 'You are a priest forever, after the order of Melchizedek.'"},
+    {"verse": "Hebreus 6:20", "relevance": 2, "source": "manual_validation", "justification": "7v→HEB.4.14. 6v→HEB.5.6. Bridge verse: 'Jesus has entered as a forerunner on our behalf, having become a high priest forever after the order of Melchizedek.' Connects priesthood to entry into the Holy of Holies (links to v2_ext_09 veil query)."}
+  ],
+  "candidates_noted": [
+    {"verse": "Hebreus 7:21", "relevance": 1, "status": "candidate", "justification": "6v→PSA.110.4. Divine oath = irrevocability. 'The Lord has sworn and will not change his mind.'"},
+    {"verse": "Zacarias 6:13", "relevance": 1, "status": "candidate", "justification": "5v de PSA.110.4. Prophetically confirms king-priest duality: 'He shall be a priest on his throne.'"}
+  ],
+  "reclassification": {
+    "original_difficulty": "medium_hard",
+    "proposed_difficulty": "medium",
+    "justification": "The proper noun 'Melquisedeque' appears literally in every gold reference, making lexical retrieval trivial. 9/9 Gold-3 in enrichment confirms all sources agree. The real challenge is ranking: Hebrews 7 (theological exposition) should rank above Genesis 14 (brief narrative). Difficulty is in ranking precision, not retrieval."
+  },
+  "scholarly_notes": {
+    "four_theological_questions": {
+      "description": "4 questions about Melchizedek answered by patristic commentators",
+      "questions": [
+        {"question": "Who IS Melchizedek?", "answers": ["Ephrem: Shem son of Noah", "Haydock: righteous Gentile, priest of true God", "Ambrose: type of Christ ('Son of God')", "Haydock REJECTS: not Shem, not the Son, not the Spirit"]},
+        {"question": "Why superior to Aaron?", "answers": ["Chrysostom: Abraham paid tithe (inferior→superior)", "Haydock: 5 systematic proofs", "Author of Hebrews: 'if Aaron's law sufficed, no need for another priesthood'"]},
+        {"question": "What do bread and wine mean?", "answers": ["Cyprian: 'prefiguration of Eucharist — offered the SAME thing'", "Haydock: 'NON-BLOODY sacrifice (≠ Aaron's bloody sacrifices)'", "Distinction: Melchizedek=bread/wine, Aaron=animal blood, Christ=body/blood in Eucharist"]},
+        {"question": "Why 'without genealogy'?", "answers": ["Aquinas: dual layer — virgin birth + eternal generation + freedom from Levitical tribal restriction", "Chrysostom: type (scriptural silence) vs reality (ontological eternity)", "Jerome: 'not that he had no father, but that it is not RECORDED'"]}
+      ]
+    },
+    "typological_arc": {
+      "span": "~3000 years (not ~1000 as initially estimated)",
+      "stages": ["Genesis 14:18 (~2100 BC)", "Psalm 110:4 (~1000 BC)", "Hebrews 5-7 (~65 AD)"],
+      "significance": "One of the longest typological arcs in Scripture. The ~1100-year silence between Psalm 110 and Hebrews is broken only by Christ."
+    },
+    "chrysostom_type_vs_reality": {
+      "source": "Chrysostom on Hebrews 7:3",
+      "distinction": "TYPE (Melchizedek): 'We do not know his origin because it is NOT WRITTEN.' REALITY (Christ): 'We do not know his origin because it DOES NOT EXIST (he has no beginning).'",
+      "significance": "Brilliant hermeneutical distinction: the same 'without genealogy' means something fundamentally different when applied to the type vs the antitype."
+    }
+  }
+}

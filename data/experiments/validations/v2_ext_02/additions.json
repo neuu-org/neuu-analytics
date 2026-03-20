@@ -1,0 +1,87 @@
+{
+  "query_id": "v2_ext_02",
+  "query": "sombra das coisas futuras",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis + patristic commentary reading (Chrysostom, Aquinas, Methodius, Haydock, Johnson) + typological terminology mapping (Greek → Latin → Portuguese) + topic verification",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Hebreus 10:1",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (10v←COL.2.17, 6v→HEB.8.5)", "commentaries (Chrysostom, Haydock, Methodius)", "topics (TYPES)", "ccel (Barnes, Allestree)"]
+    },
+    {
+      "verse": "Colossenses 2:17",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (10v→HEB.10.1, 8v→HEB.8.5)", "commentaries (B.W. Johnson via ccel_scripcom)", "topics (TYPES)", "ccel (Barnes)"]
+    },
+    {
+      "verse": "Hebreus 8:5",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (6v←EXO.25.40, 5v→HEB.10.1)", "commentaries (Chrysostom, Aquinas, Haydock, Methodius)", "topics (TYPES, PATTERN, SYMBOLS)", "ccel (Barnes)"],
+      "relevance_change": {"from": 2, "to": 3, "reason": "Evidence comparable to score-3 refs: directly cites Exodus 25:40, 4 patristic commentators, appears in 3 topics. Verse-ponte fundamental OT→NT."}
+    },
+    {
+      "verse": "Hebreus 9:9",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (4v→COL.2.17)", "commentaries (Chrysostom, Haydock)", "topics (SYMBOLS)"]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Hebreus 9:23",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "6 votes crossref de HEB.8.5. Chrysostom e Haydock comentam extensamente. Tópico PATTERN referencia. Usa 'figuras das coisas nos céus' (hypodeigmata). Complementa naturalmente o cluster tipológico."
+    },
+    {
+      "verse": "Exodo 25:40",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "Fundação OT da doutrina da sombra. 6 votes crossref de HEB.8.5. Citado diretamente no texto de Hebreus 8:5. Methodius de Olimpo e Chrysostom citam como origem da tipologia. Essencial para testar cross-testament retrieval."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Romanos 5:14",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Usa 'prefigurava' (typos). Tópico TYPES_OF_CHRIST referencia. Crossref 4v→1Co15:45. Ângulo diferente: tipologia pessoal (Adão→Cristo) vs tipologia ritual (tabernáculo→céu)."
+    },
+    {
+      "verse": "1 Corintios 10:11",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "10 votes para Rm 15:4. Usa 'exemplos' (typoi). Doutrina geral de tipologia mas menos específico que 'sombra'. Bom para testar expansão semântica."
+    },
+    {
+      "verse": "Galatas 4:24",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "5 votes de 1Co 10:11. Usa 'alegoricamente'. Variante do conceito sombra/tipo. Alegoria Sara/Agar como dois pactos."
+    }
+  ],
+  "scholarly_notes": {
+    "typological_terminology": {
+      "description": "Systematic mapping of typological vocabulary across languages and biblical locations",
+      "terms": [
+        {"greek": "σκιά (skia)", "latin": "umbra", "portuguese": "sombra", "locations": ["Hb 8:5", "Hb 10:1", "Cl 2:17"]},
+        {"greek": "τύπος (typos)", "latin": "typus", "portuguese": "figura/tipo/modelo", "locations": ["Hb 8:5", "Rm 5:14", "1Co 10:6,11"]},
+        {"greek": "παραβολή (parabolē)", "latin": "parabola", "portuguese": "parábola", "locations": ["Hb 9:9"]},
+        {"greek": "ὑπόδειγμα (hypodeigma)", "latin": "exemplar", "portuguese": "exemplo/cópia", "locations": ["Hb 8:5", "Hb 9:23"]},
+        {"greek": "εἰκών (eikōn)", "latin": "imago", "portuguese": "imagem", "locations": ["Hb 10:1"]},
+        {"greek": "ἀντίτυπα (antitypa)", "latin": "antitypus", "portuguese": "figuras/cópias", "locations": ["Hb 9:24"]},
+        {"greek": "σῶμα (sōma)", "latin": "corpus", "portuguese": "corpo/substância", "locations": ["Cl 2:17"]}
+      ]
+    },
+    "three_level_typology": {
+      "source": "Methodius of Olympus (AD 311), commentary on Exodus 25:40",
+      "levels": ["sombra (shadow) — esboço/contorno", "imagem (image) — representação fiel", "realidade (reality) — a coisa mesma"],
+      "significance": "Establishes that OT cult is not merely incomplete but operates at a fundamentally different ontological level from NT realities"
+    }
+  }
+}

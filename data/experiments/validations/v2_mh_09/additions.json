@@ -1,0 +1,113 @@
+{
+  "query_id": "v2_mh_09",
+  "query": "as sete igrejas da Ásia",
+  "validated_by": "human",
+  "validated_at": "2026-03-20",
+  "methodology": "Cross-reference network (REV.1.4/1.11/1.20 each cross-ref ALL 7 gold refs, REV.1.4→REV.3.1 = 10v strongest) + patristic evidence (16 comments on Rev 1:4 alone: Augustine 'totality of the one Church', Bede 'universality via 7 days', Victorinus AD 303 oldest Revelation commentator) + CCEL commentaries (JFB '7=3+4=covenant number, representative churches', Wesley 'rejects dispensationalism explicitly', Henry 'what is said to one concerns ALL') + topics (ANGEL_OF_THE_CHURCHES + 7 individual city topics) + dictionary (Easton, Smith)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Apocalipse 2:1",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (hub: 2-3v→all other churches, 7v←REV.1.20)",
+        "Catena Bible (3 comments: Bede etymology + candlesticks)",
+        "CCEL (Henry 'intimate presence', JFB structural pattern)",
+        "topics (ANGEL_OF_THE_CHURCHES, EPHESUS)"
+      ]
+    },
+    {
+      "verse": "Apocalipse 2:8",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (2v←REV.2.1)",
+        "Catena Bible (3 comments: Bede 'myrrh=mortification', Haydock identifies angel as Polycarp)",
+        "topics (ANGEL_OF_THE_CHURCHES, SMYRNA)"
+      ]
+    },
+    {
+      "verse": "Apocalipse 2:12",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (2v←REV.2.1)",
+        "Catena Bible (3 comments: Bede 'dividing horns' + judicial power)",
+        "topics (ANGEL_OF_THE_CHURCHES, PERGAMOS)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Full letter to Pergamos with Satan's throne + Balaam doctrine. Bede: 'dividing their horns = judicial power.' Same structural importance as other church letters."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Apocalipse 2:18",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (2v←REV.2.1)",
+        "Catena Bible (5 comments: Bede 'for sacrifice', Victorinus)",
+        "topics (ANGEL_OF_THE_CHURCHES, THYATIRA)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Full letter to Thyatira with Jezebel warning. 5 Catena comments. Bede: 'Thyatira = for sacrifice; saints present their bodies a living sacrifice.' Same structural importance as other church letters."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Apocalipse 3:1",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (3v←REV.2.1, 10v←REV.1.4, 5v←REV.1.20)",
+        "Catena Bible (Victorinus AD 303 'Christians only in name', Shepherd of Hermas AD 150)",
+        "topics (ANGEL_OF_THE_CHURCHES, SARDIS)"
+      ]
+    },
+    {
+      "verse": "Apocalipse 3:7",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (5v→REV.3.14, 4v→ISA.22.22 key of David)",
+        "Catena Bible (5 comments: Bede 'brotherly love', Victorinus)",
+        "topics (ANGEL_OF_THE_CHURCHES, PHILADELPHIA)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Full letter to Philadelphia with key of David (Is 22:22 link). 5 Catena comments. Bede: 'Philadelphia = brotherly love, to it the door of the kingdom opened.' Same structural importance as other church letters."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Apocalipse 3:14",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (5v←REV.3.7, 4v→REV.1.5 faithful witness)",
+        "Catena Bible (6 comments: Bede 'lovely tribe OR in vomiting', Victorinus)",
+        "topics (ANGEL_OF_THE_CHURCHES, LAODICEA)"
+      ]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Apocalipse 1:4",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "Contains the EXACT query phrase 'sete igrejas que estão na Ásia'! 16 patristic comments (Augustine: 'totality of the one Church', Bede: 'universality via 7 days', Victorinus AD 303). Cross-refs ALL 7 gold refs (10v→REV.3.1). A system that does NOT return this verse for the query is objectively wrong."
+    },
+    {
+      "verse": "Apocalipse 1:11",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "NAMES all 7 cities explicitly: Ephesus, Smyrna, Pergamum, Thyatira, Sardis, Philadelphia, Laodicea. Contains 'sete igrejas.' Cross-refs ALL 7 gold refs (3-5v each). JFB: 'representative churches, ideally complete, embody chief spiritual characteristics in all ages.'"
+    },
+    {
+      "verse": "Apocalipse 1:20",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "Contains 'sete igrejas' TWICE. INTERPRETIVE KEY: 'seven stars = angels of the seven churches, seven candlesticks = the seven churches.' Cross-refs ALL 7 gold refs (7v→REV.2.1). Topic ANGEL_OF_THE_CHURCHES includes. Haydock: 'angels = bishops.'"
+    }
+  ],
+  "candidates_noted": [],
+  "scholarly_notes": {
+    "seven_equals_universality": "Unanimous consensus: Augustine 'totality of the one Church', Bede 'all time evolves from 7 days', JFB '7=3(divine)+4(world)=covenant number', Victorinus 'sevenfold Spirit of Is 11:2.'",
+    "anti_dispensationalist": "Wesley EXPLICITLY rejects periodic reading: 'not in one age after another, but in EVERY age.' JFB calls it 'fanciful.' Victorinus treats each church as a coexisting 'class' of Christians.",
+    "bede_hermeneutic_principle": "On Rev 2:7: 'What he writes to each church individually he writes for ALL the churches.' The letter to Ephesus is not for Ephesus alone.",
+    "structural_pairs": "JFB identifies: Smyrna (persecuted to death) ↔ Sardis (name of living, actually dead); Laodicea (self-sufficient, lukewarm) ↔ Philadelphia (little strength, open door); Ephesus (zeal, lost first love) ↔ Thyatira (love and works, tolerates Jezebel)."
+  }
+}

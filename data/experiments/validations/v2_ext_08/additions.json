@@ -1,0 +1,114 @@
+{
+  "query_id": "v2_ext_08",
+  "query": "esvaziamento de Cristo",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (preexistence → kenosis → humiliation → exaltation arc) + patristic commentary reading (Philippians 2:7 = 41 commentaries — absolute record in Catena Bible; Augustine, Gregory of Nyssa, Leo of Rome, Hilary, Chrysostom, Cyril) + CCEL works (Calvin) + topic verification (HUMILITY_OF_CHRIST, SELF_DENIAL, CONDESCENSION_OF_GOD)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Filipenses 2:7",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (10v→2CO.8.9, 7v→JHN.1.14, 7v→GAL.4.4)", "commentaries (41 entries! — absolute record: Augustine, Gregory of Nyssa, Leo of Rome, Hilary, Chrysostom, Cyril)", "ccel (Calvin)", "topics (HUMILITY_OF_CHRIST)"]
+    },
+    {
+      "verse": "Filipenses 2:6",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (10v→HEB.1.3, 10v→JHN.5.18, 7v→2CO.8.9, 7v→JHN.17.5)", "commentaries (28 entries: Chrysostom, Fulgentius, Athanasius)", "ccel (Calvin)", "topics (HUMILITY_OF_CHRIST)"]
+    },
+    {
+      "verse": "Filipenses 2:8",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (9v→JHN.19.30, 7v→HEB.12.2, 7v→JHN.10.18)", "commentaries (13 entries — Chrysostom cites Isaiah 53:12)", "topics (SELF_DENIAL)"]
+    },
+    {
+      "verse": "2 Corintios 8:9",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (10v←PHP.2.7, 7v→PHP.2.6/7/8, 9v→MAT.20.28)", "commentaries (10 entries — Augustine cites Phil 2:6-7 directly, Chrysostom 'poverty productive of riches')", "ccel_scripcom (Johnson)"]
+    },
+    {
+      "verse": "Joao 17:5",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (7v→PHP.2.6, 5v→JHN.1.1)", "commentaries (7 entries — Augustine 'predestined glory', Lapide 'threefold glory')","ccel (Calvin)"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Establishes the PRE-EXISTENCE glory without which kenosis makes no theological sense. Lapide articulates 'threefold glory' (uncreated, created, manifested). Augustine connects predestination to glorification. 7 votes to PHP.2.6."}
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Filipenses 2:5",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "13 votes para MAT.11.29. Introductory verse that frames kenosis as ETHICAL MODEL: 'Have this mind among yourselves, which is yours in Christ Jesus.' Topic HUMILITY_OF_CHRIST. Without it, the kenosis passage lacks its practical application."
+    },
+    {
+      "verse": "Joao 1:14",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "8 votes de PHP.2.6. 7 votes de PHP.2.7. 19 votes para 1TI.3.16. The incarnation verse — kenosis in narrative action: 'The Word became flesh and dwelt among us.' The most concrete description of what 'emptying himself' looks like."
+    },
+    {
+      "verse": "Filipenses 2:9",
+      "relevance": 1,
+      "source": "manual_validation",
+      "justification": "8 votes para HEB.2.9 and MAT.28.18. 12 votes para ISA.45.23. Athanasius: 'exaltation is of the humanity, not of the divine nature.' Completes the kenosis→exaltation arc. Topic HUMILITY_OF_CHRIST: 'His exaltation, the result of.'"
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Galatas 4:4",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "7 votes de PHP.2.7. Concrete incarnation: 'born of a woman, born under the law' = form of servant in Pauline terms."
+    },
+    {
+      "verse": "Isaias 53:3",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Chrysostom cites Is 53:12 in Phil 2:8 commentary. Topic HUMILITY_OF_CHRIST lists Is 53:3,7. OT prefiguration of the emptying."
+    }
+  ],
+  "scholarly_notes": {
+    "patristic_consensus_on_kenosis": {
+      "description": "Unanimous patristic formula confirmed by 41 commentators on Philippians 2:7",
+      "formula": "kenosis = ADDITION of humanity, NOT SUBTRACTION of divinity",
+      "key_articulations": [
+        {"commentator": "Augustine", "era": "AD 430", "formula": "'Emptied himself' by TAKING the form of a servant, not by LOSING the form of God. The nature by which he is equal to the Father remained immutable."},
+        {"commentator": "Gregory of Nyssa", "era": "AD 394", "formula": "The ineffable glory CONTRACTED within our small compass. What he was remained great and incomprehensible; what he assumed was commensurate with our nature."},
+        {"commentator": "Leo of Rome", "era": "AD 461", "formula": "A sovereign act of stooping in majestic pity, NOT a defect of power."},
+        {"commentator": "Hilary of Poitiers", "era": "AD 368", "formula": "Not changed but 'emptying himself' and hiding WITHIN himself."},
+        {"commentator": "Chrysostom", "era": "AD 407", "formula": "Had he been subjected without choosing it, it would not have been humility. He had equality not by seizure but by nature."}
+      ],
+      "what_was_emptied": [
+        "Manifestation/display of divine glory",
+        "Visible exercise of divine power",
+        "Prerogatives of majesty",
+        "Status and appearance of divine equality"
+      ],
+      "what_was_NOT_emptied": [
+        "Divine nature (Augustine: 'remained immutable')",
+        "Equality with the Father (Chrysostom: 'by nature')",
+        "Intrinsic power (Leo: 'not defect of power')",
+        "Divine substance (Gregory: 'remained great')"
+      ]
+    },
+    "record_commentary_count": {
+      "verse": "Filipenses 2:7",
+      "catena_entries": 41,
+      "note": "Absolute record in the entire Catena Bible corpus across all queries validated. The kenosis verse attracted more patristic commentary than any other single verse examined in this research."
+    },
+    "kenosis_exaltation_arc": {
+      "description": "Complete theological arc confirmed by cross-references and commentaries",
+      "stages": [
+        "1. Preexistence: Jn 17:5, Phil 2:6 — 'glory before the world', 'form of God'",
+        "2. Kenosis: Phil 2:7, 2Co 8:9 — 'emptied himself', 'being rich, became poor'",
+        "3. Incarnation: Jn 1:14, Gal 4:4 — 'Word became flesh', 'born of woman'",
+        "4. Humiliation: Phil 2:8, Heb 2:9 — 'obedient unto death, even death on a cross'",
+        "5. Exaltation: Phil 2:9-11, Is 45:23 — 'God highly exalted him', 'every knee shall bow'"
+      ]
+    }
+  }
+}

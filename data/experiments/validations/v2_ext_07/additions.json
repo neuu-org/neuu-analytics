@@ -1,0 +1,112 @@
+{
+  "query_id": "v2_ext_07",
+  "query": "a noiva e o noivo",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (8-book cross-testamental chain) + patristic commentary reading (11 evidences: Jerome, Peter Chrysologus, Athanasius, Bernard of Clairvaux, Chrysostom, Augustine, Lapide, Methodius, Haydock, Bede) + CCEL works (Gill 122 sermons on Song, Calvin, Barnes) + topic verification (BRIDE, BRIDEGROOM, HUSBAND, MARRIAGE, BETROTHAL)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Apocalipse 19:7",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (12v→ISA.61.10, 11v→REV.21.9, 10v→REV.21.2)", "commentaries (Bede, Haydock)", "ccel_scripcom (Johnson)", "topics (BRIDE)"]
+    },
+    {
+      "verse": "Efesios 5:25",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (8v→EPH.5.27↔2CO.11.2)", "commentaries (Cyprian, Chrysostom, Tertullian — 6 entries)", "ccel_scripcom (Findlay, Johnson)", "topics (MARRIAGE)"]
+    },
+    {
+      "verse": "2 Corintios 11:2",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (6v→HOS.2.19, 5v→REV.19.7, 5v→EPH.5.32)", "commentaries (Augustine, Lapide 1600+ chars, Chrysostom, Cyprian, Peter Chrysologus, Caesarius — 12 entries!)", "ccel_scripcom (Denney, Johnson)"],
+      "relevance_change": {"from": 2, "to": 3, "reason": "12 patristic commentaries — richest verse in this query. Lapide writes 1600+ chars synthesizing Canticles, Rev 21:2, Jerome, Augustine. Augustine develops the virgin-mother paradox. Peter Chrysologus creates a direct cross-commentary chain: Hos 2:19 → Jn 3:29 → 2Co 11:2."}
+    },
+    {
+      "verse": "Oseias 2:19",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (4v→2CO.11.2, 2v→REV.19.7, 2v→REV.21.2)", "commentaries (Jerome '3 betrothals', Peter Chrysologus, Ambrose, Haydock — 7 entries)", "topics (HUSBAND)"]
+    },
+    {
+      "verse": "Isaias 62:5",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (6v→REV.19.7, 2v→HOS.2.19, 2v→JHN.3.29)", "commentaries (Haydock)", "ccel (Gill)"]
+    },
+    {
+      "verse": "Cantares 4:7",
+      "relevance": 1,
+      "status": "confirmed",
+      "evidence": ["crossrefs (2v→EPH.5.25, 2v→EPH.5.27, 2v→REV.21.2)", "commentaries (Haydock → Eph 5:27 explicit cross-ref)", "ccel (Gill — 122 sermons on Song of Solomon)", "topics (BRIDEGROOM)"]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Apocalipse 21:2",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "10 votes de REV.19.7. Climax escatológico da metáfora nupcial: 'a nova Jerusalém, ataviada como noiva adornada para o seu esposo.' Bede, Haydock, Johnson comentam. Verso que RESOLVE a metáfora — a noiva finalmente adornada e apresentada."
+    },
+    {
+      "verse": "Joao 3:29",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "6 votes para MAT.9.15. 3 votes de 2CO.11.2. Agostinho, Lapide, Cirilo, Crisóstomo comentam. Verso onde Jesus é IDENTIFICADO como noivo por João Batista: 'O que tem a noiva é o noivo; o amigo do noivo se alegra.' Peter Chrysologus cita diretamente ao comentar Os 2:19."
+    },
+    {
+      "verse": "Efesios 5:32",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "5 votes de 2CO.11.2. Metódio (Adão/Eva como tipo Cristo/Igreja), Jerônimo, Agostinho, Dídimo comentam. 'Grande é este mistério, mas eu me refiro a Cristo e à igreja.' Verso que NOMEIA a metáfora como mysterion."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Isaias 54:5",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "4 votes de 2CO.11.2. 3 votes de EPH.5.25. Haydock: 'dois esposos — sinagoga e Igreja.' OT declaration: 'teu Criador é teu marido.'"
+    },
+    {
+      "verse": "Mateus 25:1",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "6 votes para REV.19.7. Lapide: 'desposório nesta vida, casamento eterno na glória.' Parable of the ten virgins — readiness of the bride."
+    },
+    {
+      "verse": "Apocalipse 21:9",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "11 votes de REV.19.7. 'A esposa, a mulher do Cordeiro.' Final explicit identification."
+    }
+  ],
+  "scholarly_notes": {
+    "cross_testamental_span": {
+      "description": "Most cross-testamental query in the entire set — 8 books connected",
+      "chain": "Hosea → Isaiah → Song of Solomon → Matthew → John → Ephesians → 2 Corinthians → Revelation",
+      "significance_for_tcc": "Tests whether hybrid search can connect OT marriage covenant theology (Hosea) through wisdom poetry (Song) to NT ecclesiology (Ephesians) and eschatology (Revelation). Pure lexical for 'noiva' finds only verses with that exact word; semantic must understand the marriage metaphor across vocabulary variants: 'desposar', 'esposa', 'mulher do Cordeiro', 'virgem pura'."
+    },
+    "jerome_three_betrothals": {
+      "source": "Jerome, Commentary on Hosea 2:19",
+      "framework": [
+        "1. Abraham — betrothal in promise",
+        "2. Sinai — betrothal in Law",
+        "3. Cross/Resurrection — betrothal in faith and gospel grace"
+      ],
+      "significance": "Maps the entire salvation history as progressive betrothal, culminating in the cross"
+    },
+    "methodius_adam_eve_typology": {
+      "source": "Methodius of Olympus, Commentary on Ephesians 5:31-32",
+      "typology": "Adam slept → Eve from his side | Christ died → Church from his wounded side",
+      "quote": "'The Word left his Father in heaven. He came down to be bonded with this woman, the church. Then he fell into the sleep of his passion.'"
+    },
+    "augustine_virgin_mother_paradox": {
+      "source": "Augustine, Commentary on 2 Corinthians 11:2",
+      "paradox": "The Church is simultaneously virgin-bride AND fruitful mother — parallel with Mary",
+      "quote": "'She is a virgin and she also brings forth children. She imitates Mary, who gave birth to the Lord.'"
+    }
+  }
+}

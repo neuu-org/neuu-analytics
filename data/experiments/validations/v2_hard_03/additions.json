@@ -1,0 +1,28 @@
+{
+  "query_id": "v2_hard_03",
+  "query": "vasos de barro",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network (Isaiah 64:8 hidden hub, 55 crossrefs) + patristic reading (Chrysostom bridges 2Co4:7→Jdg7→1Sam17; Augustine massa damnata 5 entries; Jerome dual treasure) + JFB cross-refs + 4-context vocabulary mapping",
+  "existing_refs_confirmed": [
+    {"verse": "2 Corintios 4:7", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (11v→2CO.5.1, 6v→LAM.4.2)", "commentaries (Chrysostom cites Gideon+David, Lapide, Jerome, Clement, Tertullian — 8 entries)", "topics (TREASURE)"]},
+    {"verse": "Jeremias 18:6", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (9v→ISA.64.8, 5v→ISA.45.9)", "JFB (cites Is45:9, 64:8, Rm9:20-21, Mt27:9, Ps2:9, Rev2:27)", "topics (CLAY, POTTERY)"]},
+    {"verse": "Romanos 9:21", "relevance": 2, "status": "confirmed", "evidence": ["crossrefs (7v→ISA.64.8, 6v→ISA.45.9, 5v→2TI.2.20)", "commentaries (Augustine massa damnata 5 entries, Chrysostom, Tertullian — 10 entries)", "topics (CLAY, POTTERY)"]},
+    {"verse": "Juizes 7:16", "relevance": 1, "status": "confirmed", "evidence": ["crossrefs (2v→2CO.4.7)", "commentaries (Chrysostom cites in 2Co4:7 — cross-commentary bridge)"]}
+  ],
+  "new_refs_added": [
+    {"verse": "Isaias 64:8", "relevance": 2, "source": "manual_validation", "justification": "Hidden hub: 9v de JER.18.6, 7v de ROM.9.21, 8v→GEN.2.7, 55 total crossrefs. 'We are the clay, you are our potter.' Connects ALL 4 contexts."},
+    {"verse": "Jeremias 18:4", "relevance": 2, "source": "manual_validation", "justification": "Vessel RESHAPED: 'marred in his hand, he reworked it.' 6v→ISA.64.8, 5v→ROM.9.20. Dynamic element: clay re-formed, not discarded."}
+  ],
+  "candidates_noted": [
+    {"verse": "Isaias 45:9", "relevance": 1, "status": "candidate", "justification": "6v de ROM.9.20. 'Woe to the one who contends with the Creator!'"},
+    {"verse": "2 Timoteo 2:20", "relevance": 1, "status": "candidate", "justification": "5v de ROM.9.21. Vessels of honor/dishonor in a great house."},
+    {"verse": "Lamentacoes 4:2", "relevance": 1, "status": "candidate", "justification": "6v de 2CO.4.7. 'Precious sons of Zion regarded as clay pots.'"}
+  ],
+  "scholarly_notes": {
+    "four_contexts": ["Power in Weakness (2Co 4:7)", "Divine Sovereignty (Jr 18:1-6)", "Election Doctrine (Rm 9:21)", "Military Narrative (Jdg 7:16)"],
+    "chrysostom_bridge": "On 2Co 4:7 explicitly connects: apostles (earthen vessels) = Gideon's 300 (pitchers) = David vs Goliath. Same principle: divine power through human fragility.",
+    "augustine_massa_damnata": "All humanity as condemned clay in Adam. Vessels of wrath = deserved penalty; vessels of mercy = undeserved grace.",
+    "isaiah_64_8_hub": "Hidden hub with 55 crossrefs connecting ALL contexts. Not in original gold set but essential."
+  }
+}

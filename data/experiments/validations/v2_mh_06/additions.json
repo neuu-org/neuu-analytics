@@ -1,0 +1,169 @@
+{
+  "query_id": "v2_mh_06",
+  "query": "o Servo Sofredor",
+  "validated_by": "human",
+  "validated_at": "2026-03-20",
+  "methodology": "Cross-reference network (ACT.8.32↔ISA.53.7 = 28v, ISA.53.6→1PE.2.25 = 19v strongest individual connection, ISA.53.10 = 193 refs richest file) + patristic evidence (20 citations: Athanasius 'suffered and did not suffer' paradox, Gregory 'deification through servitude', Polycarp AD 155 cites 1Pe 2:24, Irenaeus on Acts 8:32) + CCEL commentaries (Calvin, JFB, Henry, Barnes) + topics (SUFFERING, ATONEMENT, REDEMPTION, VICARIOUS) + symbols (sacrifice, cross, blood, scapegoat, flint stone)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Isaias 42:1",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (10v→PHP.2.7, 9v→ISA.52.13, 4v→ISA.49.6, 4v→ISA.50.6, 4v→MAT.12.18)",
+        "Catena Bible (7 comments: Augustine 'form of servant' cites Phil 2:7, Gregory 'deification', Eusebius contra corporate reading)",
+        "topics (SUFFERING)"
+      ]
+    },
+    {
+      "verse": "Isaias 49:6",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (15v→ACT.13.47, 4v→ISA.42.1)",
+        "Catena Bible (5 comments: Ambrose 'Son by nature, Servant by economy', Cyril dual reading)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "2nd Servant Song expanding scope to gentiles. Ambrose: Son by nature, Servant by economy. 5 patristic comments. 15v→ACT.13.47."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Isaias 52:13",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (5v→ISA.42.1, 4v→PHP.2.7-11, 3v→ISA.53.10,12)",
+        "Catena Bible (Haydock 'in vain do the Jews attempt to apply this to any other')"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Opening of 4th Servant Song. Language echoes Is 6:1 theophany ('exalted and lifted up'). Haydock: even Jewish Targum compelled to apply to Messiah."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Isaias 53:3",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (7v→GEN.3.15, 3v→ISA.50.6, 3v→PHP.2.7)",
+        "Catena Bible (Haydock)"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "'Man of sorrows' (ish makhovot) is iconic phrase. 'We hid our faces' = active revulsion. Central identity verse of the Servant."},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Isaias 53:5",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (15v→1PE.2.24, 14v→1PE.3.18, 12v→ROM.5.6, 11v→ROM.4.25, 8v→2CO.5.21)",
+        "Catena Bible (Haydock cites Col 2:14)",
+        "CCEL (Calvin 'extends through whole life', JFB 'pierced=literally perfurated for crucifixion', Henry 'sins=thorns,nails,spear')"
+      ]
+    },
+    {
+      "verse": "Isaias 53:7",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (18v←ACT.8.32 strongest, 7v→MAT.26.63, 6v→JHN.1.29, 6v→1PE.2.23)",
+        "Catena Bible (Haydock 'voluntarily, knowing inefficacy of legal victims')",
+        "CCEL (JFB 'exaction of the debt')"
+      ]
+    },
+    {
+      "verse": "Isaias 53:12",
+      "relevance": 2,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (7v←LUK.22.37 Jesus quotes directly, 5v→MRK.15.27, 5v→2CO.5.21, 3v→MRK.10.45)",
+        "Catena Bible (Haydock 'the gospel could not speak more plainly')",
+        "CCEL (Calvin 'triumphs over conquered enemies', JFB 'intercession began at the cross')"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Jesus QUOTES this verse directly in Lk 22:37. Introduces INTERCESSORY/priestly dimension unique among the Songs. 7v←LUK.22.37. Haydock: 'gospel could not speak more plainly.'"},
+      "note": "Was missing relevance_judgment — now scored 2"
+    },
+    {
+      "verse": "Mateus 12:18",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (4v←ISA.42.1, 5v→LUK.4.18)",
+        "Catena Bible (Jerome 'Spirit upon humanity not upon the Word', Chrysostom 'meekness+power')"
+      ]
+    },
+    {
+      "verse": "Atos 8:32",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (18v→ISA.53.7, 15v→1PE.2.21-24, 6v→JHN.1.29)",
+        "Catena Bible (3 comments: Chrysostom 'Isaiah the most sublime', Irenaeus 'whom did Philip preach?')"
+      ]
+    },
+    {
+      "verse": "Atos 8:35",
+      "relevance": 1,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (5v→ACT.18.28, 5v→LUK.24.27)",
+        "Catena Bible (Chrysostom 'Passion, Resurrection and Gift in one passage')"
+      ],
+      "note": "Was missing relevance_judgment — scored 1 (narrative bridge, not direct Servant text)"
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Isaias 50:6",
+      "relevance": 3,
+      "source": "manual_validation",
+      "justification": "3rd Servant Song COMPLETELY ABSENT from gold set. 7 patristic comments (Athanasius: 'suffered and did NOT suffer — body suffers, Word is impassible'; Basil; Cyril of Jerusalem; Jerome). 9v→MAT.26.67. Without this verse, the 4-Song progressive arc (mission→scope→cost→death) loses its 3rd act."
+    },
+    {
+      "verse": "Isaias 53:4",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "First vicarious suffering declaration in chapter. Cited in Mt 8:17. 14v→1PE.2.24. 7v→ISA.53.5. Barnes: 'griefs' = physical diseases in Hebrew. Haydock: 'many Jews converted by reading this chapter.' The 'nagua' (smitten) = same term as leprosy in Lv 13."
+    },
+    {
+      "verse": "Isaias 53:6",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "19v→1PE.2.25 — strongest individual connection in ALL files researched. JFB: 'innocent punished AS IF guilty, guilty rewarded AS IF innocent — could not be said of any mere martyr.' Calvin: 'no one exempt, prophet includes ALL.' Henry: scapegoat comparison."
+    },
+    {
+      "verse": "Isaias 53:10",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "193 refs — RICHEST file in entire research. Theologically foundational: (a) suffering = God's WILL, (b) asham = guilt offering (Lv 5-7 specific category), (c) 'shall see offspring + prolong days' = LIFE AFTER DEATH (remarkable in OT). 6v→JHN.19.30."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "1 Pedro 2:22-24",
+      "relevance": 2,
+      "status": "candidate",
+      "justification": "Most extensive NT application of Is 53 (weaves 53:5, 53:6, 53:9). 15v←ACT.8.32. 15v←ISA.53.5. 19v←ISA.53.6. Polycarp AD 155 cites directly. Ethical paradigm ('leaving you an example') beyond expiatory."
+    },
+    {
+      "verse": "Marcos 10:45",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Jesus' SELF-INTERPRETATION as Suffering Servant. 'Many' (pollon) echoes rabbim of Is 53:11-12. 'Ransom' (lytron) = sacrificial language. 3v←ISA.53.10,11,12. Topic REDEMPTION cites Mk 10:45."
+    },
+    {
+      "verse": "Filipenses 2:7",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "10v←ISA.42.1. 4v←ISA.52.13. 'Form of servant' (morphē doulou) = deepest NT reflection on what it means to be the Servant. Augustine, Gregory, Haydock all cite Phil 2:7 when commenting on Is 42:1."
+    }
+  ],
+  "reclassification": {
+    "from_difficulty": "medium_hard",
+    "proposed_difficulty": "hard",
+    "reasoning": "'Suffering Servant' is NOT a biblical phrase — it's a theological construct. The Hebrew has 'ebed' (servant) and various suffering terms separately. The 3rd Song (Is 50) doesn't even use 'ebed'. The 4 Songs span non-contiguous chapters (42, 49, 50, 52-53). NT applications (1Pe, Phil, Mk) require conceptual linkage without lexical overlap. Lexical search returns near-zero. However, Isaiah 53 is among the most famous OT chapters, which may help semantic models."
+  },
+  "scholarly_notes": {
+    "four_songs_progressive_arc": "1st (Is 42): MISSION defined — gentle, Spirit, justice for gentiles. 2nd (Is 49): SCOPE expanded — 'too small to restore Israel.' 3rd (Is 50): COST revealed — back, cheeks, spitting. 4th (Is 52-53): COST PAID — vicarious death + exaltation. Progression: mission → frustration → suffering → death → resurrection.",
+    "athanasius_christological_paradox": "On Is 50:6: 'He suffered and did NOT suffer. He suffered because his own body suffered and he was in it. He suffered not because the Word, being by nature God, is IMPASSIBLE.' Central to patristic Christology.",
+    "jfb_substitution_formula": "On Is 53:6: 'The innocent was punished AS IF guilty, that the guilty might be rewarded AS IF innocent. This verse could be said of no mere martyr.' Strongest formulation of vicarious substitution in the research.",
+    "corporate_vs_individual": "Eusebius: 'names of Jacob and Israel are ABSENT' → individual reading. Cyril of Alexandria: allows dual reading. The debate is relevant for search: a system should retrieve BOTH interpretations."
+  }
+}

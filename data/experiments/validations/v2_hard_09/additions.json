@@ -1,0 +1,47 @@
+{
+  "query_id": "v2_hard_09",
+  "query": "a escada de Jacó",
+  "validated_by": "human",
+  "validated_at": "2026-03-19",
+  "methodology": "Cross-reference network (9v bidirectional GEN.28.12↔JHN.1.51; 7v 'heaven opened' pattern to Act7:56, Eze1:1, Lk3:21) + patristic reading (10 commentaries on Gn 28:12 with 4 distinct interpretations: Christological, Soteriological/Cross, Ecclesiological, Incarnational) + CCEL (MacLaren 'everywhere the ladder stands', White 'only medium of communication') + topic verification (JACOB, ANGELS, VISIONS, LADDER)",
+  "existing_refs_confirmed": [
+    {"verse": "Genesis 28:12", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (9v↔JHN.1.51 bidirectional, 7v→ACT.7.56, 7v→EZE.1.1, 7v→LUK.3.21)", "commentaries (10 entries! 4 distinct interpretations: Aphrahat 'gate+cross', Ambrose 'foresaw Christ', Augustine 'Church as living ladder', Bede 'born on earth lives in heaven', Caesarius 3x 'lean on ladder=hang on cross', Chromatius 'cross with virtue-steps', Cyril 'Christ on top as God', Haydock 'Incarnation')", "ccel (MacLaren, White)", "topics (JACOB, ANGELS, VISIONS, LADDER)"]},
+    {"verse": "Joao 1:51", "relevance": 3, "status": "confirmed", "evidence": ["crossrefs (9v↔GEN.28.12, 7v→ACT.7.56, 7v→EZE.1.1, 6v→MAT.3.16)", "commentaries (Chrysostom 'angelic chronology: birth→ministry→cross→resurrection→ascension', Cyril 'proof of divine nature', Haydock)", "ccel_scripcom (Dods)", "topics (ANGELS)"]}
+  ],
+  "new_refs_added": [
+    {"verse": "Genesis 28:17", "relevance": 2, "source": "manual_validation", "justification": "Aphrahat: 'gate of heaven = Christ' (John 10:7-9). 'How awesome is this place! This is the gate of heaven.' Echoes 'heaven opened' in Jn 1:51. Names Bethel ('house of God'). Completes the vision narrative."}
+  ],
+  "candidates_noted": [
+    {"verse": "Genesis 28:13", "relevance": 1, "status": "candidate", "justification": "6v→GEN.13.15. Cyril: 'Christ on top, as God and Lord.' God standing at the top of the ladder = divine presence."},
+    {"verse": "Atos 7:56", "relevance": 1, "status": "candidate", "justification": "7v de GEN.28.12 AND JHN.1.51. 'I see heaven opened and the Son of Man standing at the right hand of God.' Direct echo of Jacob's ladder in Stephen's martyrdom."},
+    {"verse": "Joao 14:6", "relevance": 1, "status": "candidate", "justification": "Haydock cites in Gn 28:12. JHN.14.6→JHN.10.9 = 66v. 'I am the way' = the ladder personified. 1Tim 2:5 ('one mediator') complements."}
+  ],
+  "scholarly_notes": {
+    "four_interpretations": {
+      "description": "4 distinct patristic interpretations of the ladder coexisting without contradiction",
+      "interpretations": [
+        {"name": "Christological", "representatives": "Aphrahat, Ambrose, Haydock", "formula": "The ladder IS Christ — the person who bridges heaven and earth. 'The gate of heaven is Christ' (Aphrahat). 'Foresaw Christ on earth' (Ambrose). 'Incarnation of Jesus Christ' (Haydock)."},
+        {"name": "Soteriological (Cross)", "representatives": "Aphrahat, Caesarius, Chromatius", "formula": "The ladder IS the cross. 'Leaning on the ladder = hanging on the cross' (Caesarius). 'Steps of virtue: faith, justice, chastity, holiness, patience, piety' (Chromatius)."},
+        {"name": "Ecclesiological", "representatives": "Augustine, Bede", "formula": "The ladder IS the Church. 'Angels = good preachers of Christ' (Augustine). 'Born on earth but way of life in heaven' (Bede)."},
+        {"name": "Incarnational", "representatives": "Caesarius, Cyril", "formula": "Christ simultaneously at top (heaven) AND bottom (earth). 'No one has ascended to heaven except the Son of Man who IS in heaven' (Jn 3:13)."}
+      ],
+      "significance_for_tcc": "A search for 'escada de Jacó' should retrieve Gn 28:12 and Jn 1:51, but the theological depth resides in the commentaries. The 4 interpretations show that the same image can sustain multiple valid readings — this is a test of whether semantic search captures the concept beyond the literal 'ladder' vocabulary."
+    },
+    "typological_substitution": {
+      "description": "Jesus replaces the LADDER with HIMSELF",
+      "old": "Gn 28:12: 'angels ascending and descending ON IT (the ladder)'",
+      "new": "Jn 1:51: 'angels ascending and descending ON THE SON OF MAN'",
+      "significance": "The mediator is not a STRUCTURE but a PERSON. Christ does not point to the ladder — He IS the ladder."
+    },
+    "jerome_cross_query_link": {
+      "source": "Jerome on Genesis 28:11",
+      "discovery": "Jerome identifies Jacob's STONE (pillow) as Christ the CORNERSTONE (Is 28:16, 1Pe 2:4-8). This creates an unexpected link between query v2_hard_09 (Jacob's ladder) and v2_hard_02 (cornerstone).",
+      "significance": "Cross-query validation: the same narrative (Gn 28) connects to TWO different queries in our set, confirming both are theologically related."
+    },
+    "heaven_opened_pattern": {
+      "description": "7 votes consistently connecting 'heaven opened' events",
+      "chain": ["Gn 28:12 (Jacob's dream)", "Mt 3:16 (Jesus' baptism)", "Act 7:56 (Stephen's martyrdom)", "Eze 1:1 (Ezekiel's vision)"],
+      "significance": "Heaven opens in CHRISTOLOGICAL events — the pattern established in Jacob's dream recurs at key moments in salvation history."
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "query_id": "v2_hard_02",
+  "query": "pedra angular",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (36-vote ISA.28.16↔PSA.118.22, 27-vote ISA.28.16→ACT.4.11) + patristic commentary reading (13 entries on Is 28:16: Augustine, Jerome, Cyril of Jerusalem, Eusebius, Gregory of Nyssa, Peter Chrysologus; 8 entries on Eph 2:20: Chrysostom quadruple unity) + dual nature mapping (foundation vs stumbling) + topic verification (CORNERSTONE, FOUNDATION, STUMBLING, ROCK)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Salmos 118:22",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (36v↔ISA.28.16, 15v→MAT.21.42, 13v→ACT.4.11, 13v→EPH.2.20, 12v→1PE.2.4)", "commentaries (Augustine, Haydock — cites Is+Mt+Act+1Pe in one comment)", "topics (CORNERSTONE)"]
+    },
+    {
+      "verse": "Isaias 28:16",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (36v↔PSA.118.22, 27v→ACT.4.11, 22v←1PE.2.7/8)", "commentaries (13 entries! Augustine 'two walls', Jerome cites 1Pe+Mt+Rm, Cyril of Jerusalem, Eusebius 'Moses+Gospel', Gregory of Nyssa Gn28+Dn2, Peter Chrysologus)", "topics (CORNERSTONE, FOUNDATION)"]
+    },
+    {
+      "verse": "Mateus 21:42",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (16v→PSA.118.22, 9v→ISA.28.16, 9v→ACT.4.11)", "commentaries (Chrysostom 'builders = teachers of Israel', Haydock, Theophylact)", "topics (CORNERSTONE)"]
+    },
+    {
+      "verse": "Efesios 2:20",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (8v→ISA.28.16, 8v→REV.21.14, 7v→1PE.2.6)", "commentaries (Chrysostom 'quadruple unity: Jews+Gentiles+Apostles+Prophets', Ambrosiaster, Clement, Tertullian, Victorinus — 8 entries)", "topics (CORNERSTONE, FOUNDATION)"]
+    },
+    {
+      "verse": "1 Pedro 2:6",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (14v→ISA.28.16, 12v→PSA.118.22)", "commentaries (Methodius)", "topics (CORNERSTONE)"]
+    },
+    {
+      "verse": "Atos 4:11",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (27v←ISA.28.16, 13v←PSA.118.22, 9v←MAT.21.42)", "commentaries (Erasmus 'unites Jews and Gentiles')", "ccel_scripcom (Johnson, McGarvey)", "topics (CORNERSTONE)"]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "1 Pedro 2:7",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "22 votes para ISA.28.16. 9 votes para ROM.9.33. Repeats Psalm 118:22 and completes the positive/negative pair with 2:8. 'For you who believe, it is precious; but for the disobedient, the stone the builders rejected has become the cornerstone.'"
+    },
+    {
+      "verse": "Romanos 9:33",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "15 votes para ISA.28.16. 9 votes para 1PE.2.6-8. Ambrosiaster connects to Daniel 2:34 and 1 Corinthians 10:4. The NEGATIVE face of the metaphor: 'a stone of stumbling and a rock of offense.' Essential for testing whether search retrieves BOTH sides of the dual nature."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "1 Pedro 2:8",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "22 votes para ISA.28.16. 7 votes para ISA.8.14. Completes the triad 2:6-7-8. 'A stone of stumbling and a rock of offense.'"
+    },
+    {
+      "verse": "Lucas 20:17",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "17 votes de PSA.118.22. Synoptic parallel to Mt 21:42."
+    },
+    {
+      "verse": "Daniel 2:34",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "3 votes de MAT.21.44. Ambrosiaster cites in Rm 9:33. Gregory of Nyssa cites in Is 28:16. Eschatological dimension: stone cut without hands."
+    }
+  ],
+  "scholarly_notes": {
+    "dual_nature_of_the_stone": {
+      "description": "The SAME stone produces opposite effects depending on the response (faith or rejection)",
+      "positive_face": {
+        "name": "Foundation/Cornerstone",
+        "chain": "Is 28:16 → Eph 2:20 → 1Pe 2:6",
+        "effect": "'Whoever believes in it will not be put to shame'",
+        "function": "Unites Jews and Gentiles as two walls joined at the corner (Augustine)"
+      },
+      "negative_face": {
+        "name": "Stumbling Stone",
+        "chain": "Is 8:14 → Rm 9:33 → 1Pe 2:8 → Mt 21:44",
+        "effect": "'Whoever falls on it will be broken; on whoever it falls, it will crush'",
+        "function": "Judgment on those who reject"
+      },
+      "significance_for_tcc": "A search for 'pedra angular' must retrieve BOTH the foundation texts (Is 28:16, Eph 2:20) AND the stumbling texts (Rm 9:33, 1Pe 2:8). Systems that only match 'angular' miss the stumbling dimension entirely."
+    },
+    "chrysostom_quadruple_unity": {
+      "source": "Chrysostom on Ephesians 2:20",
+      "description": "The cornerstone binds FOUR groups: Jews + Gentiles + Apostles + Prophets",
+      "significance": "Goes beyond the common interpretation (two walls = Jews/Gentiles) to include the temporal dimension (Prophets before, Apostles after)"
+    },
+    "isaiah_28_16_as_hub": {
+      "verse": "Isaiah 28:16",
+      "catena_entries": 13,
+      "crossref_connections": "36v→PSA.118.22, 27v→ACT.4.11, 22v←1PE.2.7/8, 15v←ROM.9.33",
+      "note": "Central hub of the entire 'cornerstone' network — every other gold ref connects back to this verse. 6 different patristic commentators each bring unique insights."
+    }
+  }
+}

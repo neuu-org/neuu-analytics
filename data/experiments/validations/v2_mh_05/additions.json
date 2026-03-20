@@ -1,0 +1,125 @@
+{
+  "query_id": "v2_mh_05",
+  "query": "a nuvem de testemunhas",
+  "validated_by": "human",
+  "validated_at": "2026-03-20",
+  "methodology": "Cross-reference network (ISA.40.31→HEB.12.1 = 27v, 2CO.5.7→HEB.11.1 = 43v strongest link, 1CO.9.24→HEB.12.1 = 22v athletic cluster) + patristic evidence (16 citations: Chrysostom on every key verse 'cloud=protective shade', Clement of Rome AD 99, Aquinas scholastic definition, Spurgeon 'saints observe from heaven') + CCEL commentaries (Calvin 'associates not rivals', Barnes 'Homer cloud metaphor', JFB dual interpretation, Henry, Wesley Rev4:4 link) + topics (CLOUDS, FAITH, RACE, PATIENCE, PERSEVERANCE)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Hebreus 12:1",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (27v→ISA.40.31, 22v→1CO.9.24-27, 22v→2TI.4.7, 13v→HEB.10.36-39, 13v→PHP.3.10-14)",
+        "Catena Bible (4 comments: Chrysostom 'cloud=shade that relieves suffering', Clement of Rome AD 99)",
+        "CCEL (Calvin 'associates not rivals', Barnes 'Homer metaphor', JFB dual, Spurgeon 'saints observe')",
+        "topics (CLOUDS 'multitudes of persons', RACE, PATIENCE, PERSEVERANCE)"
+      ]
+    },
+    {
+      "verse": "Hebreus 11:1",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (43v→2CO.5.7 strongest link, 41v→2CO.4.18, 32v→ROM.8.24-25, 13v→HEB.11.13)",
+        "Catena Bible (8 comments! Chrysostom 'faith IS the substance', Aquinas scholastic definition — largest entry)",
+        "topics (FAITH)"
+      ]
+    },
+    {
+      "verse": "Hebreus 11:4",
+      "relevance": 1,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (5v→GEN.4.10, 5v→HEB.12.24, 5v→MAT.23.35)",
+        "Catena Bible (3 comments: Chrysostom 'who encourages others SPEAKS' — Abel IS a witness)"
+      ],
+      "note": "Was missing relevance_judgment — now scored 1"
+    },
+    {
+      "verse": "Hebreus 11:8",
+      "relevance": 1,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (7v→GEN.12.1, 6v→2CO.5.7)",
+        "Catena Bible (2 comments: Chrysostom 'no prophet saw, no example had')"
+      ]
+    },
+    {
+      "verse": "Hebreus 11:24",
+      "relevance": 1,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (6v→MAT.13.44, 5v→MRK.10.29)",
+        "Catena Bible (Haydock 'looked to reward in heaven')"
+      ],
+      "note": "Was missing relevance_judgment — now scored 1"
+    },
+    {
+      "verse": "Hebreus 11:32",
+      "relevance": 1,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (10v→1CO.16.13)",
+        "Catena Bible (3 comments: Chrysostom defends Samson/Jephthah inclusion — 'did they not shine in Faith?')"
+      ],
+      "note": "Was missing relevance_judgment — now scored 1"
+    },
+    {
+      "verse": "Hebreus 11:39",
+      "relevance": 2,
+      "status": "upgraded_from_1_to_2",
+      "evidence": [
+        "crossrefs (7v→HEB.11.13, 6v→HEB.11.2 — inclusio with same verb emartyrēthēsan, 4v→1PE.1.12)",
+        "Catena Bible (Chrysostom 'before us in conflicts but NOT before us in crowns — ONE TIME OF CROWNING for ALL')"
+      ],
+      "relevance_change": {"from": 1, "to": 2, "reason": "Crucial bridge verse: closes the catalogue with inclusio (11:2↔11:39 same verb emartyrēthēsan). Chrysostom: 'before us in conflicts but NOT before us in crowns — ONE TIME OF CROWNING for ALL.' Explains WHY the cloud exists."},
+      "justification": "Crucial bridge verse: closes the catalogue with inclusio (11:2↔11:39 same verb). Chrysostom's 'waiting for us' theology explains WHY the cloud exists."
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Hebreus 12:2",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "CHRISTOLOGICAL TELOS — without this verse the gold set stops at the 'cloud' (12:1) without reaching the GOAL (Jesus). Chrysostom: 'looking to Jesus = learning to run.' Calvin: 'Christ extends his hand.' JFB: 'distinct from ALL examples in Heb 11.' Topic FAITH: 'Author and Finisher'. Inseparable from 12:1."
+    },
+    {
+      "verse": "Hebreus 11:13",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "The 'NOT YET' that explains WHY the cloud exists. 13v←HEB.11.1. 7v←HEB.11.39. Chrysostom: 'all virtue is to be a stranger in this world' + 'hints at something MYSTICAL: they received beforehand the resurrection.' Structural bridge: 11.1→11.13→11.39."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Hebreus 11:2",
+      "relevance": 2,
+      "status": "candidate",
+      "justification": "Lexical link: verb emartyrēthēsan (form of martyres=witnesses) DEFINES who composes the cloud. Inclusio with 11:39 (same verb). 6v←HEB.11.39."
+    },
+    {
+      "verse": "Hebreus 10:36",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "13v→HEB.12.1. Same word hypomonē (perseverance). Theological launchpad for the entire Heb 11 catalogue."
+    },
+    {
+      "verse": "Hebreus 10:38",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Habakkuk 2:4 citation — 'the just shall live by faith' = THESIS of the entire chapter 11 catalogue."
+    }
+  ],
+  "scholarly_notes": {
+    "cloud_interpretation_debate": {
+      "Chrysostom": "SHADE that relieves suffering — 'not lifted above us but COMPASSING us about' (greater security)",
+      "Calvin": "TESTIMONIES (forensic sense) — 'not rivals but ASSOCIATES who applaud our victory'",
+      "Barnes": "SPECTATORS (figurative) — 'we ought to act AS IF they saw us' (cautious: 'cannot be affirmed')",
+      "JFB": "DUAL — (1) attest God's faithfulness, (2) witness our struggle (but second sense 'not directly sustained by Scripture')",
+      "Spurgeon": "POSITIVE — 'the glorified spirits OBSERVE our conversation from yon blue heaven'"
+    },
+    "one_crowning_for_all": "Chrysostom on 11:39-40: 'They were before us in conflicts but NOT before us in crowns. God appointed ONE TIME OF CROWNING FOR ALL.' Aquinas: 'The joy of each will be greater in the common joy of all.' This is the theological reason the cloud EXISTS.",
+    "rhetorical_structure": "Heb 10:36→12:3 = 9-step structure: (1) Thesis Hab 2:4, (2) Definition 11:1, (3) Catalogue 11:4-31, (4) Summary 11:32-38, (5) Not Yet 11:39, (6) Reason 11:40, (7) Therefore 12:1, (8) Telos 12:2, (9) Application 12:3. Gold set covers steps 1,2,3(samples),5,7. Additions cover 8 (12:2) and bridge 11:13."
+  }
+}

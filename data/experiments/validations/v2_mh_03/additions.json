@@ -1,0 +1,191 @@
+{
+  "query_id": "v2_mh_03",
+  "query": "armadura de Deus",
+  "validated_by": "human",
+  "validated_at": "2026-03-20",
+  "methodology": "Cross-reference network (1CO.16.13 = 44-53v to entire Eph 6 passage; HEB.4.12↔EPH.6.17 = 45v bidirectional) + patristic evidence (24 citations: Jerome armour=Christ, Chrysostom on every verse, Clement of Rome AD 99, Ignatius AD 108, Polycarp AD 155) + CCEL commentaries (Barnes, Calvin, JFB, Henry, Hodge, Wesley — 6 complete commentaries) + topics (8 topics: warfare_of_saints 89 refs, breastplate, helmet, shields, sword, girdle, armor, soldiers)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Efesios 6:11",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (17v↔2CO.10.4, 15v→ROM.13.12, 12v→EPH.6.13, 11v→1TH.5.8)",
+        "Catena Bible (6 comments: Jerome 'armour=Christ=Rm13:14', Chrysostom 'methodeia=disguise', Polycarp AD 155)",
+        "CCEL (Barnes, Calvin, JFB, Henry, Hodge, Wesley — all 6)",
+        "topics (armor, warfare_of_saints, soldiers)"
+      ]
+    },
+    {
+      "verse": "Efesios 6:13",
+      "relevance": 3,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (44v←1CO.16.13, 8v→each armor verse)",
+        "Catena Bible (5 comments — LONGEST entry: Chrysostom Exodus typology + 'stand after victory', Jerome 3 readings of 'evil day')",
+        "CCEL (all 6 commentaries)",
+        "topics (armor, warfare_of_saints)"
+      ],
+      "relevance_change": {"from": 1, "to": 3, "reason": "Core armor verse with 5 Catena comments (longest entry). Chrysostom Exodus typology. 44v←1CO.16.13. Was missing score — assigned 3 as central pericope verse."},
+      "note": "Was missing relevance_judgment — now scored 3"
+    },
+    {
+      "verse": "Efesios 6:14",
+      "relevance": 3,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (12v→ISA.59.17, 9v→1TH.5.8, 8v→ISA.11.5, 44v←1CO.16.13)",
+        "Catena Bible (7 comments: Chrysostom 'loins=ship keel', Victorinus 'faith↔righteousness', Jerome)",
+        "CCEL DEBATE: Calvin (practical) vs Hodge (imputed) vs Henry (both) vs Jerome (Christ)",
+        "topics (breastplate, girdle, warfare_of_saints)"
+      ],
+      "relevance_change": {"from": 1, "to": 3, "reason": "7 Catena comments with 4-position theological debate on breastplate. 12v→ISA.59.17. Contains 2 armor pieces (girdle+breastplate). Was missing score — assigned 3."},
+      "note": "Was missing relevance_judgment — now scored 3"
+    },
+    {
+      "verse": "Efesios 6:16",
+      "relevance": 3,
+      "status": "confirmed_and_scored",
+      "evidence": [
+        "crossrefs (44v←1CO.16.13, 6v→1JN.5.4, 6v→1PE.5.8)",
+        "Catena Bible (6 comments: Ignatius AD 108 'communal defence', Chrysostom 'faith=miraculous gift not knowledge')",
+        "CCEL (Barnes 'fiery darts=blasphemous thoughts', Hodge thureos 4×2.5 feet)",
+        "topics (shields, warfare_of_saints)"
+      ],
+      "relevance_change": {"from": 1, "to": 3, "reason": "6 Catena comments including Ignatius AD 108 (communal defence). Chrysostom: faith=miraculous gift not knowledge. Core armor piece (shield of faith). Was missing score — assigned 3."},
+      "note": "Was missing relevance_judgment — now scored 3"
+    },
+    {
+      "verse": "Efesios 6:17",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (30v←HEB.4.12, 9v→ISA.59.17, 6v→ISA.49.2, 6v→REV.19.15, 44v←1CO.16.13)",
+        "Catena Bible (6 comments: Cassian 'sword=soul surgery', Jerome 'senses in Christ', Chrysostom 'cut serpent head')",
+        "CCEL: JFB 'no armor for the BACK' + 'Trinity implied', Barnes 'Mt 4 temptation', Hodge 'HOC SIGNO VINCES'",
+        "topics (helmet, sword__the, warfare_of_saints)"
+      ]
+    },
+    {
+      "verse": "Isaias 59:17",
+      "relevance": 3,
+      "status": "upgraded_from_2_to_3",
+      "evidence": [
+        "crossrefs (9v→EPH.6.17, 8v→EPH.6.14, 7v→1TH.5.8, 6v→ROM.13.12 — connects to 4 gold refs)",
+        "CCEL (Wesley cites directly 'Isaiah lix,17', JFB 'similarly of Messiah', Hodge, Barnes, Henry)",
+        "topics (breastplate, helmet, soldiers)"
+      ],
+      "relevance_change": {"from": 2, "to": 3, "reason": "SOURCE of the entire metaphor: in Is 59 GOD wears the armor because Israel FAILED; in Eph 6 the BELIEVER wears God's armor. 5+ CCEL commentators confirm (Wesley, JFB, Hodge, Barnes, Henry). Connects to 4 gold refs bidirectionally."},
+      "justification": "SOURCE of the entire metaphor: in Is 59 GOD wears the armor because Israel FAILED; in Eph 6 the BELIEVER wears God's armor. This theological transfer is the core of the query. 5+ CCEL commentators confirm."
+    },
+    {
+      "verse": "1 Tessalonicenses 5:8",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (hub: 11v→1PE.5.8, links to 7 gold refs)",
+        "Catena Bible (2 comments: Chrysostom faith-love-hope triad, cites 1Co 13:13; Haydock 'not faith alone')",
+        "CCEL (JFB, Calvin, Barnes)",
+        "topics (breastplate, helmet, warfare_of_saints)"
+      ]
+    },
+    {
+      "verse": "Romanos 13:12",
+      "relevance": 1,
+      "status": "confirmed",
+      "evidence": [
+        "crossrefs (20v→EPH.5.14, 6v→ISA.59.17, 15v←EPH.6.11)",
+        "Catena Bible (8 comments: Augustine, Chrysostom 'arms of LIGHT!', Clement 'light=Son', Ambrosiaster, Cyprian)",
+        "CCEL (JFB 'described at length in Eph 6:11-18')",
+        "topics (armor, warfare_of_saints)"
+      ]
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Efesios 6:10",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "Theological opening of the pericope: strength is DERIVED ('in the Lord'). 53v←1CO.16.13. 3 Catena comments (Chrysostom: 'every house is a camp'). Completes Ef 6:10-18 block."
+    },
+    {
+      "verse": "Efesios 6:12",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "MOST COMMENTED verse of the pericope (11 Catena comments!). Defines the cosmic ENEMY. Jerome: kosmokratoras is Pauline NEOLOGISM. Completes Ef 6:10-18 block."
+    },
+    {
+      "verse": "Efesios 6:15",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "MISSING armor piece in gold set. 7 Catena comments. Clement of Rome AD 99 (oldest testimony). 13v→ISA.52.7. Completes Ef 6:10-18 block."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Efesios 6:18",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "8 Catena comments. Prayer activates all armor. Henry: 'Prayer must BUCKLE ON all other parts'. JFB: prayer = 'the spear'. 44v←1CO.16.13."
+    },
+    {
+      "verse": "2 Corintios 10:3-4",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "17v↔EPH.6.11 (bidirectional). Parallel military metaphor with same hopla terminology. Clement of Alexandria cites with Eph 6:11."
+    },
+    {
+      "verse": "Hebreus 4:12",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "30v→EPH.6.17 + 15v←EPH.6.17 = 45v total. Defines what the 'sword of the Spirit' MEANS. Jerome cites in Eph 6:11 comment."
+    },
+    {
+      "verse": "Isaias 11:5",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Messianic root of the girdle. 8v←EPH.6.14. Wesley and Henry cite directly."
+    },
+    {
+      "verse": "1 Corintios 16:13",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "53v→EPH.6.10 + 44v→each of EPH.6.13-18. MOST CONNECTED verse to entire armor passage in crossrefs dataset."
+    },
+    {
+      "verse": "Isaias 52:7",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "13v→EPH.6.15. OT source for the 'shoes of the gospel of peace'."
+    },
+    {
+      "verse": "Isaias 49:2",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "6v→EPH.6.17. 22v→HEB.4.12. Servant Song: 'He made my mouth like a sharp sword.'"
+    },
+    {
+      "verse": "Romanos 13:14",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "Jerome: 'Put on the Lord Jesus Christ' = 'Put on the whole armor of God'. JFB confirms."
+    }
+  ],
+  "scholarly_notes": {
+    "theological_transfer": "In Is 59:17 GOD wears the armor because Israel failed. In Eph 6:10-18 the BELIEVER wears God's armor. The genitive 'tou Theou' is crucial: it's not the believer's armor — it BELONGS to God and He GRANTS it. Jerome: 'to put on the armor of God = to put on the Lord Jesus Christ' (Rm 13:14).",
+    "breastplate_debate_4_positions": {
+      "Calvin": "Practical righteousness (holy life) — 'not imputation, subject is blameless life'",
+      "Hodge": "Imputed righteousness of Christ — 'infinite obedience and sufferings of the Son of God' (Phil 3:8-9)",
+      "Henry": "BOTH — 'Imputed = against divine wrath. Implanted = against Satan's attacks'",
+      "Jerome": "Armor = Christ himself — 'Christ is called both truth and righteousness — he IS the belt and breastplate'"
+    },
+    "no_armor_for_the_back": "JFB, Henry, and Wesley all note: 'There is no armor for the BACK.' Implication: NEVER turn your back to the enemy.",
+    "deuterocanonical_bridge": "Wisdom 5:17-20 describes God arming CREATION (holiness=breastplate, judgment=helmet, justice=SHIELD, wrath=sword). The SHIELD is absent from Is 59 but PRESENT in Wisdom 5:19 — argument for deuterocanonical mediation. Not in ARA dataset (Protestant translation).",
+    "earliest_witnesses": {
+      "Clement_of_Rome_AD_99": "Shoes = gospel of peace (earliest testimony, 1st century)",
+      "Ignatius_AD_108": "Communal worship destroys fiery darts",
+      "Polycarp_AD_155": "Arm ourselves with armor of righteousness"
+    },
+    "1CO_16_13_strongest_connection": "44-53 votes to EVERY verse in Eph 6:10-18. The single most connected verse to the entire armor passage in the crossrefs dataset."
+  }
+}

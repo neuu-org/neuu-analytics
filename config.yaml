@@ -62,5 +62,8 @@ datasets:
     enabled: true
 
 # Dados de experimentos do bible-hybrid-search (estudos tematicos)
+# source_path: onde o sync.py busca os dados originais (local dev)
+# base_path: onde o app carrega em runtime (commitado no repo)
 experiments:
-  base_path: "../../bible-hybrid-search/experiments"
+  source_path: "../../bible-hybrid-search/experiments"
+  base_path: "./data/experiments"

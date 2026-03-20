@@ -1,0 +1,111 @@
+{
+  "query_id": "v2_ext_09",
+  "query": "o véu rasgado do templo",
+  "validated_by": "human",
+  "validated_at": "2026-03-18",
+  "methodology": "Cross-reference network analysis (33-vote connection Hb10:19→Hb13:6) + patristic commentary reading (Lapide quadruple hermeneutics, Ephrem, Chrysostom, Haydock) + CCEL major discovery (Bonar 'The Rent Veil' — 5096 lines dedicated to this theme) + OT typological chain (Lv 16 → Ex 26 → Hb 9 → Mt 27) + topic verification (ACCESS_TO_GOD, ATONEMENT, TABERNACLE)",
+  "existing_refs_confirmed": [
+    {
+      "verse": "Mateus 27:51",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (6v→MRK.15.38, 4v→HEB.10.19/20)", "commentaries (Lapide quadruple reading, Haydock, Hilary, Jerome — 5 entries)", "ccel_scripcom (Johnson)", "ccel (Calvin)"]
+    },
+    {
+      "verse": "Hebreus 10:19",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (33v→HEB.13.6, 10v→JHN.14.6, 4v→LEV.16.2)", "commentaries (Chrysostom 'figures vs reality')", "ccel_scripcom (Edwards, Johnson)", "topics (ACCESS_TO_GOD)", "ccel (Barnes)"]
+    },
+    {
+      "verse": "Hebreus 10:20",
+      "relevance": 3,
+      "status": "confirmed",
+      "evidence": ["crossrefs (9v→HEB.4.16, 5v→HEB.9.3, 4v→JHN.14.6)", "commentaries (Chrysostom 'flesh = veil, first cut the way', Haydock)", "ccel_scripcom (Johnson 'rent veil = body of Christ')", "ccel (Bonar entire work — 5096 lines!)"]
+    },
+    {
+      "verse": "Marcos 15:38",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (6v←MAT.27.51, 3v→LUK.23.45)", "commentaries (Ephrem 'Spirit tore the curtain', Gregory the Theologian)", "ccel_scripcom (Johnson)"]
+    },
+    {
+      "verse": "Hebreus 6:19",
+      "relevance": 2,
+      "status": "confirmed",
+      "evidence": ["crossrefs (19v→HEB.11.1, 6v→LEV.16.2, 6v→LEV.16.15, 6v→HEB.9.3)", "commentaries (Chrysostom 'veil = type of heaven, through hope we are already in heaven')", "ccel_scripcom (Edwards, Johnson)"],
+      "relevance_change": {"from": 1, "to": 2, "reason": "19 votes to HEB.11.1 (faith/hope). 6 votes to LEV.16.2 and LEV.16.15 (Levitical foundation). Chrysostom: 'through hope we are already in heaven.' The verse that bridges the physical veil (OT) to the spiritual reality (hope penetrating beyond the veil)."}
+    }
+  ],
+  "new_refs_added": [
+    {
+      "verse": "Hebreus 9:8",
+      "relevance": 2,
+      "source": "manual_validation",
+      "justification": "5 votes para JHN.14.6. Haydock cites Mt 27:51 DIRECTLY when commenting on this verse! Explains WHY the veil existed: 'the way of the Holy Place was not yet manifested while the first tabernacle was still standing.' Essential 'before' context for the tearing event."
+    },
+    {
+      "verse": "Hebreus 4:16",
+      "relevance": 1,
+      "source": "manual_validation",
+      "justification": "9 votes de HEB.10.20. 15 votes para EPH.3.12. Practical result of the torn veil: 'Let us draw near with confidence to the throne of grace.' Topic ACCESS_TO_GOD. Completes the chain: prohibition (Lv 16) → tearing (Mt 27) → access (Hb 4:16)."
+    }
+  ],
+  "candidates_noted": [
+    {
+      "verse": "Levitico 16:2",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "6 votes de HEB.6.19 and HEB.10.19. Haydock connects explicitly to Hb 10:19-20. OT prohibition foundation: 'do not enter the sanctuary at all times, inside the veil.'"
+    },
+    {
+      "verse": "Hebreus 9:3",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "6 votes de HEB.6.19. 5 votes de HEB.10.20 and EXO.26.33. Architectural description: 'behind the second veil, the Holy of Holies.' Context for what was torn."
+    },
+    {
+      "verse": "Exodo 26:31",
+      "relevance": 1,
+      "status": "candidate",
+      "justification": "5 votes de HEB.9.3. Material description of the veil. Colors (blue, purple, scarlet) carry typological significance (royalty, priesthood)."
+    }
+  ],
+  "scholarly_notes": {
+    "central_equation": {
+      "description": "Equation confirmed by multiple patristic commentators",
+      "identifications": [
+        "Veil of the temple = Flesh/Body of Christ (Hb 10:20, confirmed by Chrysostom, Johnson)",
+        "Veil torn = Body of Christ torn on the cross (Mt 27:51 ↔ Hb 10:20)",
+        "Holy of Holies = Heaven (Chrysostom on Hb 6:19, Haydock on Lv 16:2)",
+        "Access to Holy of Holies = Access to God (Hb 10:19, topic ACCESS_TO_GOD)"
+      ]
+    },
+    "lapide_quadruple_hermeneutic": {
+      "source": "Cornelius a Lapide, Commentary on Matthew 27:51",
+      "levels": [
+        "1. Literal: The veil tore from top to bottom — divine action, not human",
+        "2. Allegorical: The veil of legal ceremonies was opened, fulfilled in Christ",
+        "3. Moral: Knowledge of God/Christ/Mysteries now open to Jews AND Gentiles",
+        "4. Anagogical: The way to Heaven opened — Holy of Holies was type of Heaven, veil meant it was closed until Christ broke through by His death"
+      ],
+      "significance": "Classic patristic fourfold interpretation (Quadriga) applied to a single event — demonstrates the depth of meaning the Church Fathers saw in this moment"
+    },
+    "bonar_discovery": {
+      "source": "Horatius Bonar, 'The Rent Veil' (b/bonar/rentveil.xml)",
+      "size": "5096 lines — entire monograph dedicated to this theme",
+      "key_quote": "'Through the veil, which is His flesh, is our one access to God; not merely at first when we believed, but day by day, to the last.'",
+      "significance": "Validates that this theme carries sufficient theological weight for monographic treatment. Rare to find an entire CCEL work dedicated to a single concept in our query set."
+    },
+    "typological_chain": {
+      "description": "Complete OT → event → theology chain",
+      "chain": [
+        "Lv 16:2 (prohibition: do not enter) → Hb 9:8 (way not yet manifested)",
+        "→ Mt 27:51 / Mk 15:38 / Lk 23:45 (veil torn — the EVENT)",
+        "→ Hb 10:19-20 (the THEOLOGY: new and living way through his flesh)",
+        "→ Hb 6:19 (hope as anchor beyond the veil)",
+        "→ Hb 4:16 (practical result: draw near with confidence)"
+      ]
+    }
+  }
+}
