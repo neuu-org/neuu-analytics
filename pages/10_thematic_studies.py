@@ -245,6 +245,46 @@ st.markdown(
         margin-top: 8px;
         font-style: italic;
     }
+    .info-tip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px; height: 16px;
+        border-radius: 50%;
+        background: rgba(212, 168, 83, 0.15);
+        color: #D4A853;
+        font-size: 0.6rem;
+        font-weight: 700;
+        cursor: help;
+        margin-left: 6px;
+        vertical-align: middle;
+        position: relative;
+    }
+    .info-tip .tip-text {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        bottom: 130%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1A1D24;
+        border: 1px solid #2A2D34;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: #E8E0D4;
+        width: 280px;
+        line-height: 1.5;
+        z-index: 100;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        transition: opacity 0.2s;
+        text-align: left;
+    }
+    .info-tip:hover .tip-text {
+        visibility: visible;
+        opacity: 1;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -454,6 +494,62 @@ def extract_authors_from_evidence(evidence_list: list[str]) -> list[dict]:
                         "evidence": ev,
                     }
     return sorted(found.values(), key=lambda x: x["date"])
+
+
+# ---------------------------------------------------------------------------
+# Tooltip helper
+# ---------------------------------------------------------------------------
+_TIPS = {
+    "votes": (
+        "Votos indicam quantas fontes independentes de referencias cruzadas (OpenBible, TSK, e outras) "
+        "concordam que esses dois versiculos estao conectados. Mais votos = maior consenso entre estudiosos.",
+        "Votes indicate how many independent cross-reference sources (OpenBible, TSK, and others) "
+        "agree these two verses are connected. More votes = stronger scholarly consensus.",
+    ),
+    "core": (
+        "Conexoes entre versiculos que fazem parte do gold set deste estudo. "
+        "Representam o nucleo tematico — as relacoes internas mais diretas.",
+        "Connections between verses that are part of this study's gold set. "
+        "These represent the thematic core — the most direct internal relationships.",
+    ),
+    "expansion": (
+        "Conexoes de um gold ref para versiculos externos ao estudo. "
+        "Expandem o tema para outros livros e contextos, mas nao sao o eixo central.",
+        "Connections from a gold ref to verses outside this study. "
+        "They expand the theme to other books and contexts, but are not the central axis.",
+    ),
+    "relevance": (
+        "Relevancia 3 = Essencial (verso central do tema). "
+        "Relevancia 2 = Importante (contribui significativamente). "
+        "Relevancia 1 = Suporte (relacionado, mas periferico).",
+        "Relevance 3 = Essential (central verse of the theme). "
+        "Relevance 2 = Important (significant contribution). "
+        "Relevance 1 = Supporting (related, but peripheral).",
+    ),
+    "sources": (
+        "AI = curado por inteligencia artificial. "
+        "Humano = confirmado por validacao humana. "
+        "Manual = adicionado manualmente pelo pesquisador. "
+        "Enrichment = confirmado por 2+ datasets independentes.",
+        "AI = curated by artificial intelligence. "
+        "Human = confirmed by human validation. "
+        "Manual = manually added by the researcher. "
+        "Enrichment = confirmed by 2+ independent datasets.",
+    ),
+    "patristic": (
+        "Autores extraidos das evidencias de validacao. A timeline mostra quando cada comentarista viveu, "
+        "revelando como a interpretacao deste tema evoluiu ao longo dos seculos.",
+        "Authors extracted from validation evidence. The timeline shows when each commentator lived, "
+        "revealing how the interpretation of this theme evolved across centuries.",
+    ),
+}
+
+
+def tip(key: str) -> str:
+    """Return an inline tooltip HTML span."""
+    text = _TIPS.get(key, ("", ""))
+    content = text[0] if is_pt else text[1]
+    return f'<span class="info-tip">?<span class="tip-text">{content}</span></span>'
 
 
 # ---------------------------------------------------------------------------
@@ -723,7 +819,7 @@ def _render_gold_refs(refs: list[dict]):
         if not group:
             continue
         label_map = {3: "Essenciais" if is_pt else "Essential", 2: "Importantes" if is_pt else "Important", 1: "Suporte" if is_pt else "Supporting"}
-        st.markdown(f'<div class="section-label">{label_map[score]} ({len(group)})</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="section-label">{label_map[score]} ({len(group)}){tip("relevance") if score == 3 else ""}</div>', unsafe_allow_html=True)
 
         for ref in group:
             verse = ref.get("verse", "")
@@ -750,7 +846,7 @@ def _render_gold_refs(refs: list[dict]):
                     <div style="font-size:0.7rem;color:#5A5550;margin-top:6px;">{selected_translation}</div>
                 </div>"""
 
-            card_html += f'<div style="margin-top:8px;">{source_tags_html(sources)}</div>'
+            card_html += f'<div style="margin-top:8px;">{source_tags_html(sources)}{tip("sources")}</div>'
 
             if evidence:
                 ev_html = "".join(
@@ -913,7 +1009,8 @@ def _render_network(refs: list[dict], additions: dict | None):
         '<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#636EFA;vertical-align:middle;"></span> '
         + ("Externo" if is_pt else "External")
         + '</span>'
-        '</div>',
+        + tip("votes")
+        + '</div>',
         unsafe_allow_html=True,
     )
     st.plotly_chart(fig, use_container_width=True)
@@ -924,7 +1021,7 @@ def _render_network(refs: list[dict], additions: dict | None):
         st.markdown(
             f'<div class="section-label">'
             + ("Conexoes do Nucleo" if is_pt else "Core Connections")
-            + f' ({len(sorted_core)})</div>',
+            + f' ({len(sorted_core)}){tip("core")}</div>',
             unsafe_allow_html=True,
         )
         for (src, tgt), votes in sorted_core:
@@ -948,7 +1045,7 @@ def _render_network(refs: list[dict], additions: dict | None):
         st.markdown(
             f'<div class="section-label" style="margin-top:24px;">'
             + ("Expansao Teologica" if is_pt else "Theological Expansion")
-            + f' ({len(sorted_expansion)})</div>',
+            + f' ({len(sorted_expansion)}){tip("expansion")}</div>',
             unsafe_allow_html=True,
         )
         for (src, tgt), votes in sorted_expansion[:10]:
@@ -1072,6 +1169,7 @@ def _render_patristic(refs: list[dict], additions: dict | None):
         f'<div style="font-size:0.75rem;color:#5A5550;text-align:center;margin-bottom:16px;">'
         f'{len(all_authors)} {"autores ao longo de" if is_pt else "authors across"} '
         f'{all_authors[-1]["date"] - all_authors[0]["date"]} {"anos" if is_pt else "years"}'
+        f'{tip("patristic")}'
         f'</div>',
         unsafe_allow_html=True,
     )
