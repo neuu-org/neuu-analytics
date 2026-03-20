@@ -769,7 +769,7 @@ def _render_gold_refs(refs: list[dict]):
 
 
 def _render_network(refs: list[dict], additions: dict | None):
-    """Render cross-reference network as a Plotly graph."""
+    """Render cross-reference network as a Plotly graph with core/expansion separation."""
     # Collect all edges from gold refs evidence
     all_edges = []
     verse_set = set()
@@ -804,8 +804,19 @@ def _render_network(refs: list[dict], additions: dict | None):
         key = (src, tgt) if src < tgt else (tgt, src)
         edge_map[key] = max(edge_map.get(key, 0), votes)
 
-    # Filter to top edges for readability
-    sorted_edges = sorted(edge_map.items(), key=lambda x: -x[1])[:30]
+    # Classify edges: core (both vertices are gold refs) vs expansion (one is external)
+    core_edges = {}
+    expansion_edges = {}
+    for (src, tgt), votes in edge_map.items():
+        if src in verse_set and tgt in verse_set:
+            core_edges[(src, tgt)] = votes
+        else:
+            expansion_edges[(src, tgt)] = votes
+
+    sorted_core = sorted(core_edges.items(), key=lambda x: -x[1])[:20]
+    sorted_expansion = sorted(expansion_edges.items(), key=lambda x: -x[1])[:15]
+    sorted_edges = sorted_core + sorted_expansion
+
     if not sorted_edges:
         st.info("Sem conexoes suficientes." if is_pt else "Not enough connections.")
         return
@@ -824,31 +835,42 @@ def _render_network(refs: list[dict], additions: dict | None):
     node_x = [math.cos(i * angle_step) for i in range(n)]
     node_y = [math.sin(i * angle_step) for i in range(n)]
 
-    # Node properties
+    # Node properties — gold refs are gold+large, external are blue+small
     node_colors = []
     node_sizes = []
     for nd in node_list:
-        is_gold = nd in verse_set
-        node_colors.append("#D4A853" if is_gold else "#636EFA")
-        node_sizes.append(18 if is_gold else 12)
+        if nd in verse_set:
+            node_colors.append("#D4A853")
+            node_sizes.append(18)
+        else:
+            node_colors.append("#636EFA")
+            node_sizes.append(12)
 
-    # Build edge traces
+    # Build edge traces — core=gold, expansion=blue/dashed
     edge_traces = []
-    annotations = []
     max_votes = max(v for _, v in sorted_edges) if sorted_edges else 1
 
     for (src, tgt), votes in sorted_edges:
         si, ti = node_idx[src], node_idx[tgt]
+        is_core = (src, tgt) in core_edges or (tgt, src) in core_edges
         width = max(1, (votes / max_votes) * 5)
-        opacity = max(0.2, min(1.0, votes / max_votes))
+        opacity = max(0.3, min(1.0, votes / max_votes))
+
+        if is_core:
+            line_color = f"rgba(212,168,83,{opacity})"
+            dash = None
+        else:
+            line_color = f"rgba(99,110,250,{opacity})"
+            dash = "dot"
+
         edge_traces.append(
             go.Scatter(
                 x=[node_x[si], node_x[ti], None],
                 y=[node_y[si], node_y[ti], None],
                 mode="lines",
-                line=dict(width=width, color=f"rgba(212,168,83,{opacity})"),
+                line=dict(width=width, color=line_color, dash=dash),
                 hoverinfo="text",
-                text=f"{src} ↔ {tgt}: {votes}v",
+                text=f"{src} ↔ {tgt}: {votes}v" + (" (nucleo)" if is_core else " (expansao)"),
                 showlegend=False,
             )
         )
@@ -859,7 +881,7 @@ def _render_network(refs: list[dict], additions: dict | None):
         y=node_y,
         mode="markers+text",
         marker=dict(size=node_sizes, color=node_colors, line=dict(width=1, color="#2A2D34")),
-        text=[nd.split(" ")[-1] if len(nd) > 15 else nd for nd in node_list],  # Short labels
+        text=[nd.split(" ")[-1] if len(nd) > 15 else nd for nd in node_list],
         textposition="top center",
         textfont=dict(size=9, color="#E8E0D4"),
         hovertext=node_list,
@@ -877,24 +899,75 @@ def _render_network(refs: list[dict], additions: dict | None):
         height=500,
         margin=dict(l=20, r=20, t=30, b=20),
     )
+
+    # Legend hint
+    st.markdown(
+        '<div style="display:flex;gap:24px;margin-bottom:8px;font-size:0.75rem;">'
+        '<span><span style="color:#D4A853;">━━</span> '
+        + ("Nucleo (entre gold refs)" if is_pt else "Core (between gold refs)")
+        + '</span>'
+        '<span><span style="color:#636EFA;">┈┈</span> '
+        + ("Expansao teologica" if is_pt else "Theological expansion")
+        + '</span>'
+        '<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#D4A853;vertical-align:middle;"></span> Gold ref</span>'
+        '<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#636EFA;vertical-align:middle;"></span> '
+        + ("Externo" if is_pt else "External")
+        + '</span>'
+        '</div>',
+        unsafe_allow_html=True,
+    )
     st.plotly_chart(fig, use_container_width=True)
 
-    # Edge table below
-    st.markdown(f'<div class="section-label">{"Conexoes Mais Fortes" if is_pt else "Strongest Connections"}</div>', unsafe_allow_html=True)
-    for (src, tgt), votes in sorted_edges[:15]:
-        bar_pct = int((votes / max_votes) * 100)
+    # --- Core connections table ---
+    if sorted_core:
+        max_core = max(v for _, v in sorted_core) if sorted_core else 1
         st.markdown(
-            f"""<div style="display:flex;align-items:center;gap:12px;padding:6px 0;border-bottom:1px solid #1A1D24;">
-                <span style="color:#E8E0D4;font-size:0.85rem;min-width:200px;">{html.escape(src)}</span>
-                <span style="color:#5A5550;">↔</span>
-                <span style="color:#E8E0D4;font-size:0.85rem;min-width:200px;">{html.escape(tgt)}</span>
-                <div style="flex:1;background:#1A1D24;border-radius:4px;height:8px;">
-                    <div style="width:{bar_pct}%;background:#D4A853;height:100%;border-radius:4px;"></div>
-                </div>
-                <span style="color:#D4A853;font-weight:600;font-size:0.85rem;">{votes}v</span>
-            </div>""",
+            f'<div class="section-label">'
+            + ("Conexoes do Nucleo" if is_pt else "Core Connections")
+            + f' ({len(sorted_core)})</div>',
             unsafe_allow_html=True,
         )
+        for (src, tgt), votes in sorted_core:
+            bar_pct = int((votes / max_core) * 100)
+            st.markdown(
+                f"""<div style="display:flex;align-items:center;gap:12px;padding:6px 0;border-bottom:1px solid #1A1D24;">
+                    <span style="color:#E8E0D4;font-size:0.85rem;min-width:200px;">{html.escape(src)}</span>
+                    <span style="color:#D4A853;">↔</span>
+                    <span style="color:#E8E0D4;font-size:0.85rem;min-width:200px;">{html.escape(tgt)}</span>
+                    <div style="flex:1;background:#1A1D24;border-radius:4px;height:8px;">
+                        <div style="width:{bar_pct}%;background:#D4A853;height:100%;border-radius:4px;"></div>
+                    </div>
+                    <span style="color:#D4A853;font-weight:600;font-size:0.85rem;">{votes}v</span>
+                </div>""",
+                unsafe_allow_html=True,
+            )
+
+    # --- Expansion connections table ---
+    if sorted_expansion:
+        max_exp = max(v for _, v in sorted_expansion) if sorted_expansion else 1
+        st.markdown(
+            f'<div class="section-label" style="margin-top:24px;">'
+            + ("Expansao Teologica" if is_pt else "Theological Expansion")
+            + f' ({len(sorted_expansion)})</div>',
+            unsafe_allow_html=True,
+        )
+        for (src, tgt), votes in sorted_expansion[:10]:
+            bar_pct = int((votes / max_exp) * 100)
+            # Identify which vertex is external
+            ext = tgt if src in verse_set else src
+            gold = src if src in verse_set else tgt
+            st.markdown(
+                f"""<div style="display:flex;align-items:center;gap:12px;padding:6px 0;border-bottom:1px solid #1A1D24;">
+                    <span style="color:#D4A853;font-size:0.85rem;min-width:200px;">{html.escape(gold)}</span>
+                    <span style="color:#636EFA;">→</span>
+                    <span style="color:#636EFA;font-size:0.85rem;min-width:200px;">{html.escape(ext)}</span>
+                    <div style="flex:1;background:#1A1D24;border-radius:4px;height:8px;">
+                        <div style="width:{bar_pct}%;background:#636EFA;height:100%;border-radius:4px;"></div>
+                    </div>
+                    <span style="color:#636EFA;font-weight:600;font-size:0.85rem;">{votes}v</span>
+                </div>""",
+                unsafe_allow_html=True,
+            )
 
 
 def _render_patristic(refs: list[dict], additions: dict | None):
