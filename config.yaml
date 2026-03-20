@@ -60,3 +60,7 @@ datasets:
     data_glob: "data/00_raw/wikiart/filtered_religious.parquet"
     loader: images
     enabled: true
+
+# Dados de experimentos do bible-hybrid-search (estudos tematicos)
+experiments:
+  base_path: "../../bible-hybrid-search/experiments"
