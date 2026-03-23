@@ -541,19 +541,21 @@ def render_reader(work_data: dict, catalog_work: dict, is_pt: bool):
         marker = "" if has_pt or not is_pt else " [EN]"
         chapter_options.append(f"{ci+1}. {ch_title}{marker}")
 
+    def _on_chapter_change():
+        sel = st.session_state._chapter_sel
+        new_i = chapter_options.index(sel)
+        st.session_state.ebook_chapter_idx = new_i
+
     col_sel, col_back = st.columns([4, 1])
     with col_sel:
-        selected = st.selectbox(
+        st.selectbox(
             "Capitulo" if is_pt else "Chapter",
             chapter_options,
             index=idx,
-            key="chapter_select",
+            key="_chapter_sel",
             label_visibility="collapsed",
+            on_change=_on_chapter_change,
         )
-        new_idx = chapter_options.index(selected)
-        if new_idx != idx:
-            st.session_state.ebook_chapter_idx = new_idx
-            st.rerun()
 
     with col_back:
         if st.button("← " + ("Catalogo" if is_pt else "Catalog"), key="back_catalog"):
@@ -605,11 +607,15 @@ def render_reader(work_data: dict, catalog_work: dict, is_pt: bool):
         if idx > 0:
             if st.button("← " + ("Anterior" if is_pt else "Previous"), key="prev_ch", use_container_width=True):
                 st.session_state.ebook_chapter_idx = idx - 1
+                if "_chapter_sel" in st.session_state:
+                    del st.session_state["_chapter_sel"]
                 st.rerun()
     with col_next:
         if idx < len(content_chapters) - 1:
-            if st.button(("Proximo" if is_pt else "Next") + " →", key="next_ch", use_container_width=True):
+            if st.button(("Próximo" if is_pt else "Next") + " →", key="next_ch", use_container_width=True):
                 st.session_state.ebook_chapter_idx = idx + 1
+                if "_chapter_sel" in st.session_state:
+                    del st.session_state["_chapter_sel"]
                 st.rerun()
 
 
