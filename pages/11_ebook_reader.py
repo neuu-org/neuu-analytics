@@ -605,14 +605,14 @@ def render_reader(work_data: dict, catalog_work: dict, is_pt: bool):
     col_prev, col_next = st.columns(2)
     with col_prev:
         if idx > 0:
-            if st.button("← " + ("Anterior" if is_pt else "Previous"), key="prev_ch", use_container_width=True):
+            if st.button("← " + ("Anterior" if is_pt else "Previous"), key=f"prev_{idx}", use_container_width=True):
                 st.session_state.ebook_chapter_idx = idx - 1
                 if "_chapter_sel" in st.session_state:
                     del st.session_state["_chapter_sel"]
                 st.rerun()
     with col_next:
         if idx < len(content_chapters) - 1:
-            if st.button(("Próximo" if is_pt else "Next") + " →", key="next_ch", use_container_width=True):
+            if st.button(("Próximo" if is_pt else "Next") + " →", key=f"next_{idx}", use_container_width=True):
                 st.session_state.ebook_chapter_idx = idx + 1
                 if "_chapter_sel" in st.session_state:
                     del st.session_state["_chapter_sel"]
