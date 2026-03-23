@@ -637,6 +637,7 @@ if "ebook_work_id" in st.session_state:
         "athanasius:incarnation": ("athanasius", "incarnation.json"),
         "kempis:imitation": ("kempis", "imitation_book1.json"),
         "lawrence:practice": ("lawrence", "practice.json"),
+        "anselm:meditations": ("anselm", "meditations.json"),
     }
 
     if work_id in work_files:
