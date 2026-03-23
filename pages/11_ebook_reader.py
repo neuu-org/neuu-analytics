@@ -24,15 +24,15 @@ META_PATH = CLASSICS_DIR / "_meta.json"
 # ---------------------------------------------------------------------------
 # Data loading
 # ---------------------------------------------------------------------------
-@st.cache_data(ttl=3600)
-def load_catalog() -> dict:
+@st.cache_data(ttl=300)
+def load_catalog(_mtime: float = 0) -> dict:
     if META_PATH.exists():
         with open(META_PATH, encoding="utf-8") as f:
             return json.load(f)
     return {"works": {}}
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=300)
 def load_work(author: str, filename: str) -> dict | None:
     path = CLASSICS_DIR / "02_translated" / "pt" / author / filename
     if path.exists():
@@ -620,7 +620,8 @@ st.markdown(EBOOK_CSS, unsafe_allow_html=True)
 
 is_pt = st.session_state.get("language", "Portugues") == "Portugues"
 
-catalog = load_catalog()
+_meta_mtime = META_PATH.stat().st_mtime if META_PATH.exists() else 0
+catalog = load_catalog(_mtime=_meta_mtime)
 
 # Determine if we're viewing catalog or reading a book
 if "ebook_work_id" in st.session_state:
