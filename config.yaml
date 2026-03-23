@@ -61,6 +61,14 @@ datasets:
     loader: images
     enabled: true
 
+  classics:
+    name: "Bible Classics"
+    repo: bible-classics-dataset
+    description: "Edicoes bilingues EN/PT de classicos cristaos (CCEL)"
+    data_glob: "data/02_translated/**/*.json"
+    loader: classics
+    enabled: true
+
 # Dados de experimentos do bible-hybrid-search (estudos tematicos)
 # source_path: onde o sync.py busca os dados originais (local dev)
 # base_path: onde o app carrega em runtime (commitado no repo)

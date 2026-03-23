@@ -482,6 +482,36 @@ def images_to_parquet(repo_dir: Path, cfg: dict) -> Path:
     return out
 
 
+def classics_sync(repo_dir: Path, cfg: dict) -> Path:
+    """Copia JSONs bilingues do bible-classics-dataset para data/classics/."""
+    import shutil
+
+    src_meta = repo_dir / "_meta.json"
+    src_translated = repo_dir / "data" / "02_translated"
+    dest = DATA_DIR / "classics"
+
+    dest.mkdir(parents=True, exist_ok=True)
+
+    # Copiar _meta.json
+    if src_meta.exists():
+        shutil.copy2(src_meta, dest / "_meta.json")
+        print(f"  Copiado: _meta.json")
+
+    # Copiar JSONs traduzidos
+    count = 0
+    for json_file in src_translated.rglob("*.json"):
+        rel = json_file.relative_to(src_translated)
+        out = dest / "02_translated" / rel
+        out.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(json_file, out)
+        count += 1
+
+    print(f"  Copiado: {count} arquivos bilingues para data/classics/")
+    total_size = sum(f.stat().st_size for f in dest.rglob("*.json")) / 1024
+    print(f"  Total: {total_size:.1f} KB em data/classics/")
+    return dest
+
+
 # Mapa de loaders por nome
 LOADERS = {
     "commentaries": commentaries_to_parquet,
@@ -491,6 +521,7 @@ LOADERS = {
     "dictionary": dictionary_to_parquet,
     "topics": topics_to_parquet,
     "images": images_to_parquet,
+    "classics": classics_sync,
 }
 
 

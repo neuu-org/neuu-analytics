@@ -139,16 +139,24 @@ thematic_studies = st.Page(
     icon=":material/psychology:",
 )
 
+ebook_reader = st.Page(
+    "pages/11_ebook_reader.py",
+    title="Library" if not is_pt else "Biblioteca",
+    icon=":material/local_library:",
+)
+
 # ---------------------------------------------------------------------------
 # Navegacao agrupada
 # ---------------------------------------------------------------------------
 section_explorer = "Explorer" if not is_pt else "Explorador"
+section_library = "Library" if not is_pt else "Biblioteca"
 section_studies = "Studies" if not is_pt else "Estudos"
 section_analytics = "Dataset Analytics" if not is_pt else "Analise de Datasets"
 
 pg = st.navigation({
     "": [home],
     section_explorer: [explorer, topic_search, images_gallery],
+    section_library: [ebook_reader],
     section_studies: [thematic_studies],
     section_analytics: [commentaries, crossrefs, bibletext, gazetteers, dictionary, topics, images_analytics],
 })
