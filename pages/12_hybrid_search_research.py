@@ -268,7 +268,7 @@ with tab_data:
     )
 
     result_files = {
-        "Gold Set": str(RESEARCH_ROOT / "experiments" / "gold_set" / "gold_set_final.json"),
+        "Gold Set": str(ROOT / "data" / "experiments" / "gold_set_final.json"),
         "Exp5 Summary": str(EXP5_DIR / "summary.json"),
         "CCEL Bridge Index": str(CCEL_DIR / "query_commentary_index.json"),
         "CCEL Coverage": str(CCEL_DIR / "coverage_analysis.json"),
