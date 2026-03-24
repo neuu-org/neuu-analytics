@@ -208,7 +208,8 @@ with tab_figures:
     for filename, caption in figures:
         fig_path = FIGURES_DIR / filename
         if fig_path.exists():
-            st.image(str(fig_path), caption=caption, use_container_width=True)
+            col_fig = st.columns([1, 3, 1])[1]
+            col_fig.image(str(fig_path), caption=caption, use_container_width=True)
             st.markdown("---")
         else:
             st.warning(f"Figura nao encontrada: {filename}")
@@ -246,7 +247,8 @@ with tab_text:
                         caption = img_match.group(1)
                         img_path = WRITING_DIR / img_match.group(2)
                         if img_path.exists():
-                            st.image(str(img_path), caption=caption, use_container_width=True)
+                            col_img = st.columns([1, 3, 1])[1]
+                            col_img.image(str(img_path), caption=caption, use_container_width=True)
                         else:
                             st.warning(f"Imagem nao encontrada: {img_path.name}")
                     else:
