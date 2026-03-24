@@ -237,7 +237,21 @@ with tab_text:
             chapter_path = WRITING_DIR / filename
             if chapter_path.exists():
                 content = chapter_path.read_text(encoding="utf-8")
-                st.markdown(content)
+                # Render markdown with inline images replaced by st.image()
+                import re
+                parts = re.split(r'(!\[.*?\]\(.*?\))', content)
+                for part in parts:
+                    img_match = re.match(r'!\[(.*?)\]\((.*?)\)', part)
+                    if img_match:
+                        caption = img_match.group(1)
+                        img_path = WRITING_DIR / img_match.group(2)
+                        if img_path.exists():
+                            st.image(str(img_path), caption=caption, use_container_width=True)
+                        else:
+                            st.warning(f"Imagem nao encontrada: {img_path.name}")
+                    else:
+                        if part.strip():
+                            st.markdown(part)
             else:
                 st.warning(f"Arquivo nao encontrado: {filename}")
             break

@@ -131,7 +131,7 @@ Fonte: Resultados originais da pesquisa
 
 A configuração E5_ccel_inject alcançou P@10=0,338 (+21% versus controle), R@20=0,513 (+23%), MAP=0,334 (+20%) e NDCG@10=0,453 (+19%). O R@20 ultrapassou pela primeira vez a barreira dos 50%, significando que mais da metade de todas as referências gold são agora encontradas nos 20 primeiros resultados. A Figura 6 apresenta o espaço Precision × Recall para todas as configurações do Experimento 5, onde E5_ccel_inject (estrela vermelha) ocupa o canto superior direito — dominando todas as demais configurações em ambas as dimensões.
 
-![Figura 6. Espaço Precision@10 × Recall@20 para todas as configurações do Experimento 5. A configuração E5_ccel_inject (estrela) domina o espaço com P@10=0,338 e R@20=0,513, enquanto os controles negativos (×) agrupam-se com o controle sem CCEL](../docs/figures/fig6_scatter_precision_recall.png)
+![Figura 6. Espaço Precision@10 × Recall@20 para todas as configurações do Experimento 5. A configuração E5_ccel_inject (estrela) domina o espaço com P@10=0,338 e R@20=0,513, enquanto os controles negativos (×) agrupam-se com o controle sem CCEL](figures/fig6_scatter_precision_recall.png)
 
 Figura 6. Espaço Precision@10 × Recall@20 para todas as configurações do Experimento 5, mostrando a dominância de CCEL inject (estrela vermelha) sobre todas as demais configurações, incluindo os controles negativos (×)
 Fonte: Resultados originais da pesquisa O mecanismo responsável é a injeção: 1.578 versículos citados em parágrafos da CCEL mas ausentes nos top-30 da API foram adicionados ao pool de candidatos. Esses versículos representam conexões teológicas que existem na tradição interpretativa cristã mas não são capturadas pela similaridade semântica direta entre consulta e versículo.
@@ -154,7 +154,7 @@ Fonte: Resultados originais da pesquisa
 
 A Figura 4 visualiza essa relação: as barras vermelhas (CCEL inject) superam progressivamente as barras azuis (controle) da direita para a esquerda, com as anotações percentuais evidenciando o gradiente de ganho.
 
-![Figura 4. Comparação de R@20 por nível de dificuldade entre E5_ctrl (azul) e E5_ccel_inject (vermelho). Os ganhos são anotados como percentual sobre cada barra, evidenciando o padrão de ganho inversamente proporcional à especificidade lexical](../docs/figures/fig4_difficulty_gain.png)
+![Figura 4. Comparação de R@20 por nível de dificuldade entre E5_ctrl (azul) e E5_ccel_inject (vermelho). Os ganhos são anotados como percentual sobre cada barra, evidenciando o padrão de ganho inversamente proporcional à especificidade lexical](figures/fig4_difficulty_gain.png)
 
 Figura 4. Ganho em R@20 por nível de dificuldade — CCEL inject versus controle sem CCEL. As anotações percentuais mostram ganhos de +41% (extreme) a -1% (baseline)
 Fonte: Resultados originais da pesquisa
@@ -167,7 +167,7 @@ Para ilustrar o mecanismo, considere-se a consulta "cegueira espiritual" (extrem
 
 A Figura 7 compara visualmente as três métricas principais (P@10, R@20, MAP) entre o controle, os dois controles negativos e as configurações CCEL reais.
 
-![Figura 7. Validação por controles negativos — comparação de P@10, R@20 e MAP entre controle sem CCEL, boost aleatório, mapeamento embaralhado, CCEL real (w=0.3) e CCEL inject](../docs/figures/fig7_negative_controls.png)
+![Figura 7. Validação por controles negativos — comparação de P@10, R@20 e MAP entre controle sem CCEL, boost aleatório, mapeamento embaralhado, CCEL real (w=0.3) e CCEL inject](figures/fig7_negative_controls.png)
 
 Figura 7. Validação por controles negativos. As configurações Random e Shuffled são estatisticamente indistinguíveis do controle, enquanto CCEL real e CCEL inject apresentam melhorias significativas
 Fonte: Resultados originais da pesquisa
@@ -178,7 +178,7 @@ Os dois controles negativos confirmam que o sinal CCEL é genuíno e não artefa
 
 A Figura 3 apresenta a curva de peso CCEL, evidenciando os dois regimes e o efeito da injeção (estrela) que rompe o teto de R@20.
 
-![Figura 3. Curva de peso CCEL (w=0.0 a 1.0) para P@10, R@20, MAP e MRR. As estrelas indicam E5_ccel_inject (w=0.3 com inject=true), que rompe o plateau de R@20 ao expandir o pool de candidatos](../docs/figures/fig3_ccel_weight_sweep.png)
+![Figura 3. Curva de peso CCEL (w=0.0 a 1.0) para P@10, R@20, MAP e MRR. As estrelas indicam E5_ccel_inject (w=0.3 com inject=true), que rompe o plateau de R@20 ao expandir o pool de candidatos](figures/fig3_ccel_weight_sweep.png)
 
 Figura 3. Curva de peso CCEL mostrando dois regimes: reranking (w=0.1 a 1.0, R@20 satura em ~0,433) versus injeção (estrela, R@20=0,513). MRR melhora monotonicamente com o peso CCEL
 Fonte: Resultados originais da pesquisa
@@ -207,7 +207,7 @@ Nota: *** p<0,001; ** p<0,0071 (Bonferroni); * p<0,05; ns = não significativo. 
 
 A Figura 5 apresenta box plots da distribuição por consulta para as quatro métricas principais, evidenciando que a melhoria não se deve a outliers mas a um deslocamento generalizado da distribuição.
 
-![Figura 5. Distribuição por consulta (n=50) de P@10, R@20, MAP e NDCG@10 para E5_ctrl (azul) e E5_ccel_inject (vermelho). A mediana e os quartis são consistentemente superiores na configuração com CCEL](../docs/figures/fig5_boxplot_ctrl_vs_inject.png)
+![Figura 5. Distribuição por consulta (n=50) de P@10, R@20, MAP e NDCG@10 para E5_ctrl (azul) e E5_ccel_inject (vermelho). A mediana e os quartis são consistentemente superiores na configuração com CCEL](figures/fig5_boxplot_ctrl_vs_inject.png)
 
 Figura 5. Box plots comparando a distribuição per-query de E5_ctrl versus E5_ccel_inject. A melhoria é generalizada: medianas e quartis superiores para todas as métricas na configuração com CCEL
 Fonte: Resultados originais da pesquisa
@@ -236,14 +236,14 @@ Fonte: Resultados originais da pesquisa
 
 A Figura 1 visualiza essa evolução, evidenciando o declínio no Experimento 4 (unified) e a ascensão no Experimento 5 (CCEL), com R@20 ultrapassando 0,5 pela primeira vez.
 
-![Figura 1. Evolução das métricas de precisão (P@5, P@10, MAP) e recall (R@10, R@20) ao longo dos cinco experimentos. O Experimento 4 (unified) representa um resultado negativo controlado, e o Experimento 5 (CCEL) o novo campeão](../docs/figures/fig1_evolution_exp1_to_exp5.png)
+![Figura 1. Evolução das métricas de precisão (P@5, P@10, MAP) e recall (R@10, R@20) ao longo dos cinco experimentos. O Experimento 4 (unified) representa um resultado negativo controlado, e o Experimento 5 (CCEL) o novo campeão](figures/fig1_evolution_exp1_to_exp5.png)
 
 Figura 1. Evolução das métricas ao longo dos cinco experimentos. À esquerda: Precision e MAP. À direita: Recall. O Exp4 (unified) é resultado negativo intencional; o Exp5 (CCEL) supera todos os anteriores
 Fonte: Resultados originais da pesquisa
 
 A Figura 2 apresenta o heatmap de P@10 e R@20 por configuração × dificuldade para o Experimento 5, evidenciando que a configuração CCEL inject (última linha) domina em todas as colunas de dificuldade exceto baseline.
 
-![Figura 2. Heatmap de P@10 e R@20 por configuração × nível de dificuldade para o Experimento 5. Cores mais escuras indicam valores mais altos. A última linha (ccel_inject) apresenta os maiores valores em todos os estratos exceto baseline](../docs/figures/fig2_heatmap_difficulty_config.png)
+![Figura 2. Heatmap de P@10 e R@20 por configuração × nível de dificuldade para o Experimento 5. Cores mais escuras indicam valores mais altos. A última linha (ccel_inject) apresenta os maiores valores em todos os estratos exceto baseline](figures/fig2_heatmap_difficulty_config.png)
 
 Figura 2. Heatmap de P@10 (esquerda) e R@20 (direita) por configuração × dificuldade. A configuração inject domina com valores de R@20=0,505 (extreme) e 0,660 (medium)
 Fonte: Resultados originais da pesquisa
