@@ -1,6 +1,7 @@
 """
 NEUU Analytics — Hybrid Search Research (TCC)
 Pagina dedicada aos resultados da pesquisa de busca hibrida biblica.
+v2 — fixed all path references for Streamlit Cloud.
 """
 
 import json
