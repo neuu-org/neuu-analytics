@@ -151,6 +151,12 @@ hybrid_search_research = st.Page(
     icon=":material/science:",
 )
 
+research_insights = st.Page(
+    "pages/13_research_insights.py",
+    title="Discoveries & Insights" if not is_pt else "Descobertas e Insights",
+    icon=":material/auto_awesome:",
+)
+
 # ---------------------------------------------------------------------------
 # Navegacao agrupada
 # ---------------------------------------------------------------------------
@@ -166,7 +172,7 @@ pg = st.navigation({
     section_explorer: [explorer, topic_search, images_gallery],
     section_library: [ebook_reader],
     section_studies: [thematic_studies],
-    section_research: [hybrid_search_research],
+    section_research: [hybrid_search_research, research_insights],
     section_analytics: [commentaries, crossrefs, bibletext, gazetteers, dictionary, topics, images_analytics],
 })
 
