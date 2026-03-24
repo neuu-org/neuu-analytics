@@ -1,0 +1,40 @@
+{
+  "per_difficulty": {
+    "extreme": {
+      "gold_refs": 96,
+      "ccel_covered": 59,
+      "coverage_pct": 61.5,
+      "total_ccel_refs_found": 567
+    },
+    "hard": {
+      "gold_refs": 95,
+      "ccel_covered": 60,
+      "coverage_pct": 63.2,
+      "total_ccel_refs_found": 600
+    },
+    "medium_hard": {
+      "gold_refs": 78,
+      "ccel_covered": 45,
+      "coverage_pct": 57.7,
+      "total_ccel_refs_found": 729
+    },
+    "medium": {
+      "gold_refs": 98,
+      "ccel_covered": 69,
+      "coverage_pct": 70.4,
+      "total_ccel_refs_found": 613
+    },
+    "baseline": {
+      "gold_refs": 78,
+      "ccel_covered": 43,
+      "coverage_pct": 55.1,
+      "total_ccel_refs_found": 454
+    }
+  },
+  "global": {
+    "total_gold": 445,
+    "covered": 276,
+    "total_ccel_refs": 2963,
+    "coverage_pct": 62.0
+  }
+}

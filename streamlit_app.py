@@ -145,6 +145,12 @@ ebook_reader = st.Page(
     icon=":material/local_library:",
 )
 
+hybrid_search_research = st.Page(
+    "pages/12_hybrid_search_research.py",
+    title="Hybrid Search Research" if not is_pt else "Pesquisa: Busca Hibrida",
+    icon=":material/science:",
+)
+
 # ---------------------------------------------------------------------------
 # Navegacao agrupada
 # ---------------------------------------------------------------------------
@@ -153,11 +159,14 @@ section_library = "Library" if not is_pt else "Biblioteca"
 section_studies = "Studies" if not is_pt else "Estudos"
 section_analytics = "Dataset Analytics" if not is_pt else "Analise de Datasets"
 
+section_research = "Pesquisa" if is_pt else "Research"
+
 pg = st.navigation({
     "": [home],
     section_explorer: [explorer, topic_search, images_gallery],
     section_library: [ebook_reader],
     section_studies: [thematic_studies],
+    section_research: [hybrid_search_research],
     section_analytics: [commentaries, crossrefs, bibletext, gazetteers, dictionary, topics, images_analytics],
 })
 
