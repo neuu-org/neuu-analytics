@@ -50,8 +50,8 @@ with tab_summary:
     st.markdown("### " + ("Resumo da Pesquisa" if is_pt else "Research Summary"))
 
     col1, col2, col3 = st.columns(3)
-    col1.metric("Experimentos", "5")
-    col2.metric("Configuracoes" if is_pt else "Configurations", "46+")
+    col1.metric("Experimentos", "6")
+    col2.metric("Configuracoes" if is_pt else "Configurations", "57+")
     col3.metric("Queries", "50")
 
     col4, col5, col6 = st.columns(3)
@@ -66,12 +66,12 @@ with tab_summary:
     )
 
     evolution_data = {
-        "Experiment": ["Exp1", "Exp2", "Exp3", "Exp4 (unified)", "Exp5 (CCEL)"],
-        "P@10": [0.202, 0.216, 0.284, 0.178, 0.338],
-        "R@20": [0.326, 0.310, 0.419, 0.243, 0.513],
-        "MAP": [0.196, 0.203, 0.282, 0.175, 0.334],
+        "Experiment": ["Exp1", "Exp2", "Exp3", "Exp4 (unified)", "Exp5 (CCEL small)", "Exp6 (CCEL large)"],
+        "P@10": [0.202, 0.216, 0.284, 0.178, 0.338, 0.350],
+        "R@20": [0.326, 0.310, 0.419, 0.243, 0.513, 0.546],
+        "MAP": [0.196, 0.203, 0.282, 0.175, 0.334, 0.364],
     }
-    st.dataframe(evolution_data, use_container_width=True)
+    st.dataframe(evolution_data, width="stretch")
 
     st.markdown("---")
     st.markdown("#### " + ("Achados Principais" if is_pt else "Key Findings"))
@@ -89,6 +89,9 @@ with tab_summary:
         ("CCEL +21% P@10, +23% R@20",
          "Ganho inversamente proporcional a dificuldade: extreme +41%, baseline ~0%" if is_pt
          else "Gains inversely proportional to difficulty: extreme +41%, baseline ~0%"),
+        ("CCEL large > small (+10.1pp)",
+         "Controle pareado: mesmos 762K paragrafos, large encontra +45 gold refs" if is_pt
+         else "Paired control: same 762K paragraphs, large finds +45 gold refs"),
         ("p<0.001 (Bonferroni)" if is_pt else "p<0.001 (Bonferroni)",
          "5/7 metricas estatisticamente significativas apos correcao" if is_pt
          else "5/7 metrics statistically significant after correction"),
@@ -99,7 +102,7 @@ with tab_summary:
 
 # ===== TAB: RESULTADOS =====
 with tab_results:
-    st.markdown("### " + ("Resultados do Experimento 5" if is_pt else "Experiment 5 Results"))
+    st.markdown("### " + ("Resultados dos Experimentos 5 e 6" if is_pt else "Experiments 5 and 6 Results"))
 
     # Load exp5 summary
     summary_path = EXP5_DIR / "summary.json"
@@ -122,7 +125,7 @@ with tab_results:
                 "NDCG@10": round(metrics.get("ndcg@10", 0), 3),
                 "MRR": round(metrics.get("mrr", 0), 3),
             })
-        st.dataframe(rows, use_container_width=True)
+        st.dataframe(rows, width="stretch")
 
         # Statistical significance
         st.markdown("#### " + ("Significancia Estatistica" if is_pt else "Statistical Significance"))
@@ -139,7 +142,7 @@ with tab_results:
             {"Metrica": "NDCG@10", "Delta": "+0.072 (+19%)", "p-value": "<0.001", "Cohen d": "0.59", "Sig": "***"},
             {"Metrica": "MRR", "Delta": "+0.074 (+11%)", "p-value": "0.010", "Cohen d": "0.38", "Sig": "*"},
         ]
-        st.dataframe(stat_data, use_container_width=True)
+        st.dataframe(stat_data, width="stretch")
 
         # Per-difficulty
         st.markdown("#### " + ("Ganho por Dificuldade (R@20)" if is_pt else "Gain by Difficulty (R@20)"))
@@ -150,7 +153,7 @@ with tab_results:
             {"Dificuldade": "Medium-hard", "Ctrl": 0.427, "CCEL Inject": 0.447, "Delta": "+5%"},
             {"Dificuldade": "Baseline", "Ctrl": 0.394, "CCEL Inject": 0.389, "Delta": "-1%"},
         ]
-        st.dataframe(diff_data, use_container_width=True)
+        st.dataframe(diff_data, width="stretch")
     else:
         st.warning("Dados do Exp5 nao encontrados" if is_pt else "Exp5 data not found")
 
@@ -176,7 +179,7 @@ with tab_results:
             "CCEL Found": glob.get("covered", 0),
             "Cobertura": f"{glob.get('coverage_pct', 0)}%",
         })
-        st.dataframe(cov_rows, use_container_width=True)
+        st.dataframe(cov_rows, width="stretch")
 
 # ===== TAB: FIGURAS =====
 with tab_figures:
@@ -210,7 +213,7 @@ with tab_figures:
         fig_path = FIGURES_DIR / filename
         if fig_path.exists():
             col_fig = st.columns([1, 3, 1])[1]
-            col_fig.image(str(fig_path), caption=caption, use_container_width=True)
+            col_fig.image(str(fig_path), caption=caption, width="stretch")
             st.markdown("---")
         else:
             st.warning(f"Figura nao encontrada: {filename}")
@@ -249,7 +252,7 @@ with tab_text:
                         img_path = WRITING_DIR / img_match.group(2)
                         if img_path.exists():
                             col_img = st.columns([1, 3, 1])[1]
-                            col_img.image(str(img_path), caption=caption, use_container_width=True)
+                            col_img.image(str(img_path), caption=caption, width="stretch")
                         else:
                             st.warning(f"Imagem nao encontrada: {img_path.name}")
                     else:
@@ -277,7 +280,7 @@ with tab_data:
         {"Dataset": "Gazetteers", "Escala": "9.552 entidades + simbolos", "Formato": "JSON", "Papel": "Classificacao semantica"},
         {"Dataset": "CCEL Embeddings", "Escala": "1.513.182 paragrafos embedados", "Formato": "Parquet", "Papel": "Enriquecimento (Exp5)"},
     ]
-    st.dataframe(datasets, use_container_width=True)
+    st.dataframe(datasets, width="stretch")
 
     st.markdown("---")
     st.markdown(
