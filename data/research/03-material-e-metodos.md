@@ -2,7 +2,7 @@
 
 ## Visão geral do método experimental
 
-Este trabalho adota uma abordagem experimental quantitativa, organizada em cinco experimentos sequenciais, cada um isolando uma variável independente específica do pipeline de recuperação híbrida. O desenho progressivo permite atribuição causal: o Experimento 1 calibra parâmetros base, o Experimento 2 refina a curva de fusão léxico-semântica, o Experimento 3 avalia o impacto do modelo de embedding, o Experimento 4 testa fusão de embeddings multi-versão como experimento controlado negativo, e o Experimento 5 introduz enriquecimento por conhecimento externo da literatura cristã clássica.
+Este trabalho adota uma abordagem experimental quantitativa, organizada em seis experimentos sequenciais, cada um isolando uma variável independente específica do pipeline de recuperação híbrida. O desenho progressivo permite atribuição causal: o Experimento 1 calibra parâmetros base, o Experimento 2 refina a curva de fusão léxico-semântica, o Experimento 3 avalia o impacto do modelo de embedding, o Experimento 4 testa fusão de embeddings multi-versão como experimento controlado negativo, o Experimento 5 introduz enriquecimento por conhecimento externo da literatura cristã clássica, e o Experimento 6 avalia o impacto de embeddings large (3.072 dimensões) no corpus CCEL em comparação pareada controlada com embeddings small.
 
 A avaliação utiliza um padrão-ouro de 50 consultas com 445 referências graduadas, validadas contra seis datasets independentes e evidência patrística. Todas as métricas de recuperação de informação (Precision@K, Recall@K, MAP, NDCG@10, MRR) são calculadas por consulta e agregadas por nível de dificuldade, com testes estatísticos pareados (t de Student, Wilcoxon), intervalos de confiança bootstrap e correção de Bonferroni para comparações múltiplas.
 
@@ -22,7 +22,7 @@ Para cada um dos 528.995 versículos, foram gerados dois vetores de embedding ut
 
 Os embeddings foram armazenados em PostgreSQL com a extensão pgvector, utilizando índices IVFFlat para busca de similaridade por cosseno. A geração foi realizada via API OpenAI em lotes, com custo aproximado de USD 15 para o corpus completo. O processo levou aproximadamente 48 horas devido aos limites de taxa da API.
 
-Adicionalmente, 2,2 milhões de parágrafos da CCEL (Christian Classics Ethereal Library) foram embedados com text-embedding-3-small, armazenados em 222 arquivos Parquet (1,5 milhão de parágrafos com texto superior a 50 caracteres). Estes embeddings foram utilizados no Experimento 5 como camada de enriquecimento por conhecimento.
+Adicionalmente, 2,2 milhões de parágrafos da CCEL (Christian Classics Ethereal Library) foram embedados com text-embedding-3-small (1.536 dimensões), armazenados em 222 arquivos Parquet (1,5 milhão de parágrafos com texto superior a 50 caracteres). Estes embeddings foram utilizados no Experimento 5 como camada de enriquecimento por conhecimento. Posteriormente, aproximadamente 1 milhão desses parágrafos foram também embedados com text-embedding-3-large (3.072 dimensões) para utilização no Experimento 6, permitindo comparação pareada controlada do impacto da dimensionalidade do embedding no enriquecimento por conhecimento.
 
 ### Comentários bíblicos
 
@@ -59,7 +59,7 @@ A CCEL (Christian Classics Ethereal Library) é uma biblioteca digital que abran
 | Tópicos | Nave + Torrey | 7.873 tópicos unificados | JSON | Validação temática |
 | Dicionários | 5 fontes | 20.900 entradas | JSON | Validação definicional |
 | Gazetteers | 6 fontes | 9.552 entidades + símbolos | JSON | Classificação semântica |
-| CCEL embeddings | CCEL + OpenAI | 1.513.182 parágrafos embedados | Parquet | Enriquecimento (Exp5) |
+| CCEL embeddings | CCEL + OpenAI | 1.513.182 parágrafos embedados (small + large) | Parquet | Enriquecimento (Exp5–6) |
 
 ## Construção do padrão-ouro
 
@@ -162,6 +162,10 @@ O Experimento 4 testou se a fusão de embeddings de múltiplas versões bíblica
 ### Experimento 5 — Recuperação aumentada por conhecimento (CCEL)
 
 O Experimento 5 testou 11 configurações: um controle (reprodução do campeão do Experimento 3), quatro variações de peso CCEL (w=0,1, 0,3, 0,5, 1,0), um modo de injeção (w=0,3 com inject=true), três ablações (sem MMR, embedding small, alpha=0,5) e dois controles negativos (pontuações aleatórias e mapeamento embaralhado). O controle negativo com pontuações aleatórias substitui as similaridades CCEL reais por valores uniformes entre 0,3 e 0,8, verificando se qualquer boost numérico melhora os resultados independentemente do sinal semântico. O controle com mapeamento embaralhado permuta aleatoriamente a associação entre consultas e referências CCEL, verificando se o pareamento específico importa. As 11 configurações compartilham apenas 4 conjuntos únicos de parâmetros de API, resultando em 200 chamadas efetivas (as variações CCEL são aplicadas em pós-processamento offline).
+
+### Experimento 6 — Embeddings large no corpus CCEL
+
+O Experimento 6 avaliou o impacto de utilizar embeddings text-embedding-3-large (3.072 dimensões) no corpus CCEL, em substituição aos embeddings text-embedding-3-small (1.536 dimensões) utilizados no Experimento 5. O desenho experimental utiliza comparação pareada controlada: cada configuração do Experimento 5 é reproduzida com a única diferença sendo o modelo de embedding do corpus CCEL (small versus large), mantendo todos os demais parâmetros idênticos (alpha, peso CCEL, modo de injeção, MMR). Esse desenho permite atribuição causal direta ao modelo de embedding CCEL, isolando-o como única variável independente. Os embeddings large do corpus CCEL (3.072 dimensões) foram gerados para aproximadamente 1 milhão dos parágrafos CCEL, armazenados em formato Parquet.
 
 ## Métricas de avaliação
 

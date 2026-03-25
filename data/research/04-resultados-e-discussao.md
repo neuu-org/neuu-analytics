@@ -131,7 +131,7 @@ Fonte: Resultados originais da pesquisa
 
 A configuração E5_ccel_inject alcançou P@10=0,338 (+21% versus controle), R@20=0,513 (+23%), MAP=0,334 (+20%) e NDCG@10=0,453 (+19%). O R@20 ultrapassou pela primeira vez a barreira dos 50%, significando que mais da metade de todas as referências gold são agora encontradas nos 20 primeiros resultados. A Figura 6 apresenta o espaço Precision × Recall para todas as configurações do Experimento 5, onde E5_ccel_inject (estrela vermelha) ocupa o canto superior direito — dominando todas as demais configurações em ambas as dimensões.
 
-![Figura 6. Espaço Precision@10 × Recall@20 para todas as configurações do Experimento 5. A configuração E5_ccel_inject (estrela) domina o espaço com P@10=0,338 e R@20=0,513, enquanto os controles negativos (×) agrupam-se com o controle sem CCEL](figures/fig6_scatter_precision_recall.png)
+![Figura 6. Espaço Precision@10 × Recall@20 para todas as configurações do Experimento 5. A configuração E5_ccel_inject (estrela) domina o espaço com P@10=0,338 e R@20=0,513, enquanto os controles negativos (×) agrupam-se com o controle sem CCEL](../docs/figures/fig6_scatter_precision_recall.png)
 
 Figura 6. Espaço Precision@10 × Recall@20 para todas as configurações do Experimento 5, mostrando a dominância de CCEL inject (estrela vermelha) sobre todas as demais configurações, incluindo os controles negativos (×)
 Fonte: Resultados originais da pesquisa O mecanismo responsável é a injeção: 1.578 versículos citados em parágrafos da CCEL mas ausentes nos top-30 da API foram adicionados ao pool de candidatos. Esses versículos representam conexões teológicas que existem na tradição interpretativa cristã mas não são capturadas pela similaridade semântica direta entre consulta e versículo.
@@ -154,7 +154,7 @@ Fonte: Resultados originais da pesquisa
 
 A Figura 4 visualiza essa relação: as barras vermelhas (CCEL inject) superam progressivamente as barras azuis (controle) da direita para a esquerda, com as anotações percentuais evidenciando o gradiente de ganho.
 
-![Figura 4. Comparação de R@20 por nível de dificuldade entre E5_ctrl (azul) e E5_ccel_inject (vermelho). Os ganhos são anotados como percentual sobre cada barra, evidenciando o padrão de ganho inversamente proporcional à especificidade lexical](figures/fig4_difficulty_gain.png)
+![Figura 4. Comparação de R@20 por nível de dificuldade entre E5_ctrl (azul) e E5_ccel_inject (vermelho). Os ganhos são anotados como percentual sobre cada barra, evidenciando o padrão de ganho inversamente proporcional à especificidade lexical](../docs/figures/fig4_difficulty_gain.png)
 
 Figura 4. Ganho em R@20 por nível de dificuldade — CCEL inject versus controle sem CCEL. As anotações percentuais mostram ganhos de +41% (extreme) a -1% (baseline)
 Fonte: Resultados originais da pesquisa
@@ -167,7 +167,7 @@ Para ilustrar o mecanismo, considere-se a consulta "cegueira espiritual" (extrem
 
 A Figura 7 compara visualmente as três métricas principais (P@10, R@20, MAP) entre o controle, os dois controles negativos e as configurações CCEL reais.
 
-![Figura 7. Validação por controles negativos — comparação de P@10, R@20 e MAP entre controle sem CCEL, boost aleatório, mapeamento embaralhado, CCEL real (w=0.3) e CCEL inject](figures/fig7_negative_controls.png)
+![Figura 7. Validação por controles negativos — comparação de P@10, R@20 e MAP entre controle sem CCEL, boost aleatório, mapeamento embaralhado, CCEL real (w=0.3) e CCEL inject](../docs/figures/fig7_negative_controls.png)
 
 Figura 7. Validação por controles negativos. As configurações Random e Shuffled são estatisticamente indistinguíveis do controle, enquanto CCEL real e CCEL inject apresentam melhorias significativas
 Fonte: Resultados originais da pesquisa
@@ -178,7 +178,7 @@ Os dois controles negativos confirmam que o sinal CCEL é genuíno e não artefa
 
 A Figura 3 apresenta a curva de peso CCEL, evidenciando os dois regimes e o efeito da injeção (estrela) que rompe o teto de R@20.
 
-![Figura 3. Curva de peso CCEL (w=0.0 a 1.0) para P@10, R@20, MAP e MRR. As estrelas indicam E5_ccel_inject (w=0.3 com inject=true), que rompe o plateau de R@20 ao expandir o pool de candidatos](figures/fig3_ccel_weight_sweep.png)
+![Figura 3. Curva de peso CCEL (w=0.0 a 1.0) para P@10, R@20, MAP e MRR. As estrelas indicam E5_ccel_inject (w=0.3 com inject=true), que rompe o plateau de R@20 ao expandir o pool de candidatos](../docs/figures/fig3_ccel_weight_sweep.png)
 
 Figura 3. Curva de peso CCEL mostrando dois regimes: reranking (w=0.1 a 1.0, R@20 satura em ~0,433) versus injeção (estrela, R@20=0,513). MRR melhora monotonicamente com o peso CCEL
 Fonte: Resultados originais da pesquisa
@@ -207,7 +207,7 @@ Nota: *** p<0,001; ** p<0,0071 (Bonferroni); * p<0,05; ns = não significativo. 
 
 A Figura 5 apresenta box plots da distribuição por consulta para as quatro métricas principais, evidenciando que a melhoria não se deve a outliers mas a um deslocamento generalizado da distribuição.
 
-![Figura 5. Distribuição por consulta (n=50) de P@10, R@20, MAP e NDCG@10 para E5_ctrl (azul) e E5_ccel_inject (vermelho). A mediana e os quartis são consistentemente superiores na configuração com CCEL](figures/fig5_boxplot_ctrl_vs_inject.png)
+![Figura 5. Distribuição por consulta (n=50) de P@10, R@20, MAP e NDCG@10 para E5_ctrl (azul) e E5_ccel_inject (vermelho). A mediana e os quartis são consistentemente superiores na configuração com CCEL](../docs/figures/fig5_boxplot_ctrl_vs_inject.png)
 
 Figura 5. Box plots comparando a distribuição per-query de E5_ctrl versus E5_ccel_inject. A melhoria é generalizada: medianas e quartis superiores para todas as métricas na configuração com CCEL
 Fonte: Resultados originais da pesquisa
@@ -216,39 +216,82 @@ Cinco das sete métricas — P@10 (p=0,001), R@10 (p<0,001), R@20 (p=0,001), MAP
 
 A análise por dificuldade mostra que a significância concentra-se nos estratos extreme e hard: extreme R@20 p=0,031 (d=0,81, efeito grande), hard R@20 p=0,003 (d=1,20, efeito muito grande). Os estratos medium-hard e baseline não apresentam significância, confirmando quantitativamente que o enriquecimento CCEL beneficia seletivamente consultas onde o gap semântico é maior.
 
-## Evolução completa — Experimentos 1 a 5
+## Experimento 6 — CCEL Large Embeddings
 
-A Tabela 8 sintetiza a evolução do campeão de cada experimento ao longo dos cinco ciclos experimentais.
+O Experimento 6 testou três dimensões: (a) embeddings large (3072d) no corpus CCEL, (b) sweep de MMR lambda (0.1–0.5), e (c) sweep de pool size (100–1000).
+
+### 4.6.1 CCEL Large vs Small — Controle Pareado
+
+A comparação direta entre small e large exigiu um controle metodológico: o corpus CCEL large dispõe de 104 parquets (~762K parágrafos) enquanto o small tem 222 parquets (~1.5M parágrafos). Para isolar a variável "modelo de embedding" da variável "quantidade de corpus", executamos o índice small com os mesmos 104 parquets.
+
+| Variante | Parquets | Parágrafos | Modelo | Coverage Gold |
+|----------|----------|------------|--------|---------------|
+| small-222 (Exp5) | 222 | ~1.5M | 1536d | 276/445 (62.0%) |
+| small-104 (controle) | 104 | ~762K | 1536d | 254/445 (57.1%) |
+| large-104 (Exp6) | 104 | ~762K | 3072d | 299/445 (67.2%) |
+
+Na comparação pareada (mesmos 762K parágrafos), o large encontrou **45 referências a mais** (+10.1 pontos percentuais). O achado mais notável: large-104 com metade dos dados (67.2%) supera small-222 com todos os dados (62.0%). Qualidade do modelo supera quantidade de corpus.
+
+O ganho é proporcional à dificuldade: queries extreme ganham +14.6pp, hard +12.6pp, medium_hard +20.5pp, enquanto queries medium e baseline são praticamente neutras. O embedding de 3072 dimensões captura nuances teológicas — como a distinção entre "Suffering Servant" como conceito profético e "suffering" genérico — que o embedding de 1536 dimensões colapsa.
+
+### 4.6.2 Resultados Globais
+
+| Config | P@5 | P@10 | R@10 | R@20 | MAP | NDCG@10 | MRR |
+|--------|-----|------|------|------|-----|---------|-----|
+| E6_ctrl (small inject) | 0.416 | 0.338 | 0.403 | 0.513 | 0.332 | 0.449 | 0.734 |
+| E6_ccel_large w=0.3 | 0.432 | 0.330 | 0.393 | 0.540 | 0.343 | 0.446 | 0.739 |
+| **E6_ccel_large w=0.5** | **0.456** | **0.350** | **0.411** | **0.546** | **0.364** | **0.474** | **0.791** |
+| E6_ccel_large w=0.1 | 0.404 | 0.294 | 0.347 | 0.435 | 0.294 | 0.401 | 0.705 |
+
+A configuração E6_ccel_large com peso w=0.5 supera o campeão do Exp5 em todas as 7 métricas: P@5 +9.6%, P@10 +3.6%, R@20 +6.4%, MAP +9.6%, NDCG@10 +5.6%, MRR +7.8%.
+
+O peso ótimo subiu de w=0.3 (small) para w=0.5 (large): como os matches large são mais precisos, podemos confiar mais neles e atribuir-lhes peso maior na fusão.
+
+### 4.6.3 MMR Lambda e Pool Size — Resultados Negativos
+
+As 4 variações de MMR lambda (0.1, 0.2, 0.4, 0.5) produzem resultados idênticos. Da mesma forma, pool sizes de 100, 500 e 1000 são indistinguíveis do default (300). Esses resultados negativos indicam que: (a) o MMR da API é aplicado antes do CCEL inject offline, sendo neutralizado pelo reranking posterior; (b) o pool padrão já é suficiente para top_k=30 com deduplicação.
+
+### 4.6.4 Exemplos de Descobertas Exclusivas do Large
+
+O embedding large de 3072d encontrou conexões teológicas que o small não captura:
+
+- **"esvaziamento de Cristo" (kenosis)**: Large encontrou Phil 2:5, John 17:5, 2Cor 8:9, Heb 2:9 via Harnack, Berkhof e Edwards — 4 referências gold que o small não alcançou, elevando a cobertura de 44% para 89%.
+- **"o Servo Sofredor"**: Large encontrou Isa 52:13, 53:6, 53:7 (Quarto Cântico do Servo) via Boyce, Jamieson e Edersheim — elevando de 29% para 57%.
+- **"o anjo do Senhor"**: Large distinguiu teofanias (Exod 3:2, Josh 5:13, Judg 6:11) de aparições angélicas genéricas, via Hodge, Edwards e Maimonides — elevando de 36% para 64%.
+
+## Evolução completa — Experimentos 1 a 6
+
+A Tabela 8 sintetiza a evolução do campeão de cada experimento ao longo dos seis ciclos experimentais.
 
 Tabela 8. Evolução dos melhores resultados por experimento
 
-| Métrica | Exp1 | Exp2 | Exp3 | Exp4 (unif.) | Exp5 (CCEL) | Δ Exp1→5 |
-|---------|------|------|------|--------------|-------------|----------|
-| P@5 | 0,320 | 0,340 | 0,400 | 0,280¹ | **0,420** | +31% |
-| P@10 | 0,202 | 0,216 | 0,284 | 0,178¹ | **0,338** | +67% |
-| R@10 | 0,241 | 0,259 | 0,333 | 0,214¹ | **0,403** | +67% |
-| R@20 | 0,326 | 0,310 | 0,419 | 0,243¹ | **0,513** | +57% |
-| MAP | 0,196 | 0,203 | 0,282 | 0,175¹ | **0,334** | +70% |
+| Métrica | Exp1 | Exp2 | Exp3 | Exp4 (unif.) | Exp5 (CCEL) | Exp6 (CCEL large w=0.5) | Δ Exp1→6 |
+|---------|------|------|------|--------------|-------------|-------------------------|----------|
+| P@5 | 0,320 | 0,340 | 0,400 | 0,280¹ | 0,420 | **0,456** | +43% |
+| P@10 | 0,202 | 0,216 | 0,284 | 0,178¹ | 0,338 | **0,350** | +73% |
+| R@10 | 0,241 | 0,259 | 0,333 | 0,214¹ | 0,403 | **0,411** | +71% |
+| R@20 | 0,326 | 0,310 | 0,419 | 0,243¹ | 0,513 | **0,546** | +67% |
+| MAP | 0,196 | 0,203 | 0,282 | 0,175¹ | 0,334 | **0,364** | +86% |
 
 Fonte: Resultados originais da pesquisa
 
 ¹ Experimento 4 (unified) é resultado negativo controlado — demonstra que fusão de embeddings multi-versão degrada a qualidade.
 
-A Figura 1 visualiza essa evolução, evidenciando o declínio no Experimento 4 (unified) e a ascensão no Experimento 5 (CCEL), com R@20 ultrapassando 0,5 pela primeira vez.
+A Figura 1 visualiza essa evolução, evidenciando o declínio no Experimento 4 (unified) e a ascensão nos Experimentos 5 e 6 (CCEL), com R@20 ultrapassando 0,5 no Exp5 e atingindo 0,546 no Exp6.
 
-![Figura 1. Evolução das métricas de precisão (P@5, P@10, MAP) e recall (R@10, R@20) ao longo dos cinco experimentos. O Experimento 4 (unified) representa um resultado negativo controlado, e o Experimento 5 (CCEL) o novo campeão](figures/fig1_evolution_exp1_to_exp5.png)
+![Figura 1. Evolução das métricas de precisão (P@5, P@10, MAP) e recall (R@10, R@20) ao longo dos cinco experimentos. O Experimento 4 (unified) representa um resultado negativo controlado, e o Experimento 5 (CCEL) o novo campeão](../docs/figures/fig1_evolution_exp1_to_exp5.png)
 
 Figura 1. Evolução das métricas ao longo dos cinco experimentos. À esquerda: Precision e MAP. À direita: Recall. O Exp4 (unified) é resultado negativo intencional; o Exp5 (CCEL) supera todos os anteriores
 Fonte: Resultados originais da pesquisa
 
 A Figura 2 apresenta o heatmap de P@10 e R@20 por configuração × dificuldade para o Experimento 5, evidenciando que a configuração CCEL inject (última linha) domina em todas as colunas de dificuldade exceto baseline.
 
-![Figura 2. Heatmap de P@10 e R@20 por configuração × nível de dificuldade para o Experimento 5. Cores mais escuras indicam valores mais altos. A última linha (ccel_inject) apresenta os maiores valores em todos os estratos exceto baseline](figures/fig2_heatmap_difficulty_config.png)
+![Figura 2. Heatmap de P@10 e R@20 por configuração × nível de dificuldade para o Experimento 5. Cores mais escuras indicam valores mais altos. A última linha (ccel_inject) apresenta os maiores valores em todos os estratos exceto baseline](../docs/figures/fig2_heatmap_difficulty_config.png)
 
 Figura 2. Heatmap de P@10 (esquerda) e R@20 (direita) por configuração × dificuldade. A configuração inject domina com valores de R@20=0,505 (extreme) e 0,660 (medium)
 Fonte: Resultados originais da pesquisa
 
-A progressão revela uma lógica de otimização em camadas: os Experimentos 1-2 calibraram os parâmetros do pipeline (+7% P@10), o Experimento 3 melhorou a qualidade do modelo de embedding (+31% P@10 adicional), o Experimento 4 confirmou que a estratégia multi-versão é superior ao unificado, e o Experimento 5 adicionou uma camada de conhecimento externo (+19% P@10 adicional). A melhoria total de +67% em P@10 e +57% em R@20 do primeiro ao último experimento foi alcançada sem retreinar modelos, sem datasets proprietários e sem hardware especializado — apenas otimizando a combinação de componentes disponíveis e integrando conhecimento da tradição interpretativa cristã.
+A progressão revela uma lógica de otimização em camadas: os Experimentos 1-2 calibraram os parâmetros do pipeline (+7% P@10), o Experimento 3 melhorou a qualidade do modelo de embedding (+31% P@10 adicional), o Experimento 4 confirmou que a estratégia multi-versão é superior ao unificado, o Experimento 5 adicionou uma camada de conhecimento externo (+19% P@10 adicional), e o Experimento 6 demonstrou que embeddings large no corpus CCEL elevam todas as métricas (+3,6% P@10 adicional, com ganhos mais expressivos em MAP e MRR). A melhoria total de +73% em P@10, +67% em R@20 e +86% em MAP do primeiro ao último experimento foi alcançada sem retreinar modelos, sem datasets proprietários e sem hardware especializado — apenas otimizando a combinação de componentes disponíveis e integrando conhecimento da tradição interpretativa cristã.
 
 ## Discussão
 
@@ -288,7 +331,7 @@ Tabela 9. Comparação com trabalhos relacionados
 | Idiomas | Árabe | Latim | Hebraico | PT + EN |
 | Embedding | CBOW | E5-large | AlephBERT, MPNet | text-emb-3-large |
 | Gold refs | Não especificado | 545 (binário) | ~200 (implícito) | 445 (graduado 1-3) |
-| Métricas | P=76,9%, R=72,2% | R@10 ≈ 61% | Não medido | P@10=33,8%, R@20=51,3% |
+| Métricas | P=76,9%, R=72,2% | R@10 ≈ 61% | Não medido | P@10=35,0%, R@20=54,6% |
 | Multi-versão | Não | Não | Não | **Sim (17 versões)** |
 | Knowledge aug. | Não | Não | Não | **Sim (1,5M CCEL)** |
 | Per-difficulty | Não | Não | Não | **Sim (5 níveis)** |
