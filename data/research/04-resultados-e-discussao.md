@@ -300,6 +300,60 @@ O Experimento 7 revelou que a normalização do scoring afeta diretamente a inte
 
 Os 50 clusters promovidos no estágio final incluem temas teologicamente genuínos como Redenção, Criação, Sacerdócio, Aliança, Servo Sofredor, Sabedoria Divina e Ressurreição. Nenhum tema espúrio (artefato de clustering) foi promovido, confirmando que o pipeline com 9 camadas de evidência e três técnicas RAG produz resultados teologicamente válidos.
 
+## Verse Linking Final — Produto da Pesquisa
+
+Os Experimentos 1 a 7 otimizaram o motor de recuperação e validaram 50 temas bíblicos. O verse linking final aplica o pipeline completo para vincular cada tema a versículos específicos, ranqueados e verificados por múltiplas fontes independentes. Essa etapa constitui o produto prático de toda a pesquisa: um catálogo de temas bíblicos com versículos de confiança graduada.
+
+### Metodologia
+
+Cada tema é processado contra cinco fontes de evidência independentes: (1) busca híbrida em português (α=0,7, embedding-large, MMR, deduplicação), (2) busca híbrida em inglês, (3) HyDE com α=0,2, (4) CCEL bridge (embedding-large, w=0,5), e (5) expansão por cross-references (Treasury of Scripture Knowledge). O grade de cada versículo reflete o número de fontes que o identificaram: Grade 3 (3+ fontes), Grade 2 (2 fontes), Grade 1 (1 fonte).
+
+### Resultados globais
+
+Tabela 11. Resultados do verse linking final
+
+| Métrica | Valor |
+|---------|-------|
+| Temas processados | 50/50 (100%) |
+| Total de versículos vinculados | 6.173 |
+| Média de versículos por tema | 123,5 |
+| Média de livros por tema | 33,1 |
+
+Tabela 12. Distribuição de grades
+
+| Grade | Contagem | Percentual |
+|-------|----------|------------|
+| Grade 3 | 154 | 2,5% |
+| Grade 2 | 786 | 12,7% |
+| Grade 1 | 5.233 | 84,8% |
+| **Total** | **6.173** | **100%** |
+
+Fonte: Resultados originais da pesquisa
+
+A distribuição piramidal — poucos versículos de máxima confiança, uma camada intermediária substancial, e uma base ampla de candidatos — é esperada e desejável. Os 154 versículos Grade 3 representam vínculos de altíssima confiança: versículos que três ou mais fontes completamente independentes concordam que pertencem ao tema. A média de 33,1 livros por tema confirma que o pipeline não se restringe a seções específicas do cânon — cada tema é sustentado por versículos de aproximadamente metade dos livros bíblicos.
+
+### Study case: Sacrifício de Jesus
+
+Para ilustrar a qualidade do linking, a Tabela 13 apresenta os cinco versículos Grade 3 do tema "Sacrifício de Jesus" (evidence score 0,950, 129 versículos, 31 livros).
+
+Tabela 13. Top 5 versículos — Sacrifício de Jesus
+
+| Referência | Grade | Fontes | Texto |
+|-----------|-------|--------|-------|
+| 1 João 2:2 | 3 | hybrid_en, hyde, crossref, ccel | "He Himself is the atoning sacrifice for our sins, and not only for ours but also for the sins of the whole world." |
+| Hebreus 10:10 | 3 | hybrid_en, hybrid_pt, crossref, ccel | "Pelo cumprimento dessa vontade fomos santificados, por meio do sacrifício do corpo de Jesus Cristo, oferecido uma vez por todas." |
+| 2 Coríntios 5:21 | 3 | hybrid_en, hybrid_pt, crossref | "Daquele que não tinha pecado Deus fez um sacrifício pelo pecado em nosso favor, para que nele fôssemos feitos justiça de Deus." |
+| Hebreus 10:14 | 3 | hybrid_en, hybrid_pt, ccel | "porque, por meio de um único sacrifício, ele aperfeiçoou para sempre os que estão sendo santificados." |
+| Hebreus 9:28 | 3 | hybrid_en, hybrid_pt, hyde | "assim também Cristo foi oferecido em sacrifício uma única vez, para tirar os pecados de muitos" |
+
+Fonte: Resultados originais da pesquisa
+
+Os cinco versículos cobrem os aspectos centrais da doutrina da expiação: universalidade (1 Jo 2:2), santificação (Heb 10:10), substituição vicária (2 Co 5:21), perfeição (Heb 10:14) e unicidade histórica (Heb 9:28). As fontes que os identificaram combinam busca híbrida multilíngue, CCEL bridge e cross-references — demonstrando que o pipeline completo opera como projetado: cada camada contribui com uma perspectiva diferente que, em conjunto, produz identificação de alta confiança.
+
+### Conexão com o pipeline completo
+
+O verse linking final é o produto cumulativo de toda a pesquisa: os Experimentos 1-2 calibraram os parâmetros (α=0,7), o Experimento 3 selecionou o modelo (large), o Experimento 5 adicionou a camada CCEL, o Experimento 6 otimizou os embeddings CCEL (large), e o Experimento 7 descobriu e validou os 50 temas. Cada decisão experimental — do alpha ótimo à estratégia de injeção CCEL — contribui para a qualidade dos 6.173 vínculos tema-versículo gerados nesta etapa final.
+
 ## Evolução completa — Experimentos 1 a 7
 
 A Tabela 8 sintetiza a evolução do campeão de cada experimento ao longo dos sete ciclos experimentais.
