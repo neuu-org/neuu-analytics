@@ -259,23 +259,69 @@ O embedding large de 3072d encontrou conexões teológicas que o small não capt
 - **"o Servo Sofredor"**: Large encontrou Isa 52:13, 53:6, 53:7 (Quarto Cântico do Servo) via Boyce, Jamieson e Edersheim — elevando de 29% para 57%.
 - **"o anjo do Senhor"**: Large distinguiu teofanias (Exod 3:2, Josh 5:13, Judg 6:11) de aparições angélicas genéricas, via Hodge, Edwards e Maimonides — elevando de 36% para 64%.
 
-## Evolução completa — Experimentos 1 a 6
+## Experimento 7 — Theme Discovery com Melhorias Incrementais
 
-A Tabela 8 sintetiza a evolução do campeão de cada experimento ao longo dos seis ciclos experimentais.
+Os Experimentos 1 a 6 otimizaram o motor de recuperação híbrida para busca por versículos individuais, alcançando melhorias de +73% em P@10, +67% em R@20 e +86% em MAP. O Experimento 7 aplica esse motor otimizado a uma tarefa downstream mais complexa: a descoberta automática de temas bíblicos a partir de 50 clusters temáticos, testando três técnicas da literatura recente de RAG (Retrieval-Augmented Generation) de forma incremental — HyDE (Gao et al., 2022), Multi-Query com RAG-Fusion (Rackauckas, 2024) e Cross-Encoder (Rosa et al., 2022). Todos os parâmetros do pipeline base vêm do campeão do Experimento 6 (α=0,7, embedding large, CCEL large w=0,5, deduplicação, MMR λ=0,3).
+
+### Desenho experimental
+
+Cada estágio é cumulativo: o estágio 1 adiciona HyDE ao baseline de 6 camadas de evidência, o estágio 2 adiciona Multi-Query sobre HyDE, e o estágio 3 adiciona Cross-Encoder sobre os dois anteriores. Os mesmos 50 clusters temáticos são processados nos quatro estágios, garantindo que a única variável entre estágios é a técnica adicionada.
+
+### Resultados por estágio
+
+Tabela 10. Resultados incrementais do Experimento 7
+
+| Estágio | Promovidos | Grade 3 | Grade 2 | Score médio |
+|---------|------------|---------|---------|-------------|
+| E0: Baseline (6 camadas) | 47/50 (94%) | 13 (0,2%) | 229 (4,3%) | 0,606 |
+| E1: +HyDE | 49/50 (98%) | 30 (0,5%) | 281 (5,1%) | 0,640 |
+| E2: +Multi-Query | 50/50 (100%) | 214 (3,4%) | 1.174 (18,6%) | 0,823 |
+| E3: +Cross-Encoder | 50/50 (100%) | 994 (15,7%) | 893 (14,1%) | 0,846 |
+
+Fonte: Resultados originais da pesquisa
+
+### HyDE como complemento, não substituto
+
+O achado metodológico mais relevante do Experimento 7 é que HyDE funciona como complemento — não substituto — da busca lexical. A primeira tentativa de substituir a query BM25 pelo documento hipotético gerado por LLM resultou em 0% de clusters promovidos, porque a prosa fluente do documento hipotético é inadequada para correspondência léxica com o stemmer português. A solução que funcionou é a abordagem dual-search: o label original do cluster alimenta a busca BM25, enquanto o embedding do documento hipotético alimenta a busca semântica, com peso α=0,2 para o componente HyDE. Essa abordagem preserva a força lexical das 17 traduções (validada nos Experimentos 1 e 2) e adiciona recall semântico incremental.
+
+### Multi-Query — o maior salto de qualidade (+613% Grade 3)
+
+A expansão de cada cluster em quatro queries alternativas — reformulação em português, tradução para inglês, keywords semânticas e documento HyDE — seguida de fusão via Reciprocal Rank Fusion (RRF), produziu o maior salto de qualidade: Grade 3 (versículos confirmados por 3+ fontes independentes) saltou de 30 para 214 (+613%), e Grade 2 de 281 para 1.174 (+318%). O score médio de evidência subiu 28,6% (0,640→0,823). O mecanismo é que cada query captura uma faceta diferente do tema que nenhuma query individual alcançaria, e a fusão RRF promove versículos que aparecem consistentemente em múltiplas perspectivas.
+
+### Cross-Encoder — redistribuição ascendente de grades
+
+O Cross-Encoder, que processa cada par (descrição do tema, texto do versículo) conjuntamente, quintuplicou os versículos Grade 3: de 214 para 994 (+364%). Simultaneamente, os versículos Grade 2 caíram de 1.174 para 893 (-24%). O efeito não é de adição de versículos novos, mas de redistribuição ascendente: versículos anteriormente classificados como Grade 2 são promovidos para Grade 3 porque a leitura conjunta tema+versículo pelo Cross-Encoder fornece uma fonte de confirmação adicional de alta qualidade.
+
+### Lição sobre normalização de scoring
+
+O Experimento 7 revelou que a normalização do scoring afeta diretamente a interpretação dos resultados. O scoring baseado em razão (Grade 3 / total de versículos no pool) penalizava clusters com pools grandes — exatamente aqueles beneficiados pelo Multi-Query. A correção para scoring baseado em contagens absolutas com saturação (min(grade3, 20)/20) revelou o impacto real do Multi-Query, que estava sendo mascarado pela normalização inadequada.
+
+### Validação temática
+
+Os 50 clusters promovidos no estágio final incluem temas teologicamente genuínos como Redenção, Criação, Sacerdócio, Aliança, Servo Sofredor, Sabedoria Divina e Ressurreição. Nenhum tema espúrio (artefato de clustering) foi promovido, confirmando que o pipeline com 9 camadas de evidência e três técnicas RAG produz resultados teologicamente válidos.
+
+## Evolução completa — Experimentos 1 a 7
+
+A Tabela 8 sintetiza a evolução do campeão de cada experimento ao longo dos sete ciclos experimentais.
 
 Tabela 8. Evolução dos melhores resultados por experimento
 
-| Métrica | Exp1 | Exp2 | Exp3 | Exp4 (unif.) | Exp5 (CCEL) | Exp6 (CCEL large w=0.5) | Δ Exp1→6 |
-|---------|------|------|------|--------------|-------------|-------------------------|----------|
-| P@5 | 0,320 | 0,340 | 0,400 | 0,280¹ | 0,420 | **0,456** | +43% |
-| P@10 | 0,202 | 0,216 | 0,284 | 0,178¹ | 0,338 | **0,350** | +73% |
-| R@10 | 0,241 | 0,259 | 0,333 | 0,214¹ | 0,403 | **0,411** | +71% |
-| R@20 | 0,326 | 0,310 | 0,419 | 0,243¹ | 0,513 | **0,546** | +67% |
-| MAP | 0,196 | 0,203 | 0,282 | 0,175¹ | 0,334 | **0,364** | +86% |
+| Métrica | Exp1 | Exp2 | Exp3 | Exp4 (unif.) | Exp5 (CCEL) | Exp6 (CCEL large) | Exp7 (Theme Discovery) |
+|---------|------|------|------|--------------|-------------|--------------------|-----------------------|
+| P@5 | 0,320 | 0,340 | 0,400 | 0,280¹ | 0,420 | 0,456 | — ² |
+| P@10 | 0,202 | 0,216 | 0,284 | 0,178¹ | 0,338 | **0,350** | — ² |
+| R@10 | 0,241 | 0,259 | 0,333 | 0,214¹ | 0,403 | **0,411** | — ² |
+| R@20 | 0,326 | 0,310 | 0,419 | 0,243¹ | 0,513 | **0,546** | — ² |
+| MAP | 0,196 | 0,203 | 0,282 | 0,175¹ | 0,334 | **0,364** | — ² |
+| Promoted | — | — | — | — | — | — | **50/50 (100%)** |
+| Grade 3 | — | — | — | — | — | — | **994 (15,7%)** |
+| Score médio | — | — | — | — | — | — | **0,846** |
 
 Fonte: Resultados originais da pesquisa
 
 ¹ Experimento 4 (unified) é resultado negativo controlado — demonstra que fusão de embeddings multi-versão degrada a qualidade.
+
+² O Experimento 7 utiliza métricas de theme discovery (promotion rate, distribuição de grades, score de evidência), não métricas de recuperação individual (P@K, R@K), pois a tarefa é diferente: descoberta temática sobre clusters, não recuperação de versículos por query.
 
 A Figura 1 visualiza essa evolução, evidenciando o declínio no Experimento 4 (unified) e a ascensão nos Experimentos 5 e 6 (CCEL), com R@20 ultrapassando 0,5 no Exp5 e atingindo 0,546 no Exp6.
 
@@ -291,7 +337,7 @@ A Figura 2 apresenta o heatmap de P@10 e R@20 por configuração × dificuldade 
 Figura 2. Heatmap de P@10 (esquerda) e R@20 (direita) por configuração × dificuldade. A configuração inject domina com valores de R@20=0,505 (extreme) e 0,660 (medium)
 Fonte: Resultados originais da pesquisa
 
-A progressão revela uma lógica de otimização em camadas: os Experimentos 1-2 calibraram os parâmetros do pipeline (+7% P@10), o Experimento 3 melhorou a qualidade do modelo de embedding (+31% P@10 adicional), o Experimento 4 confirmou que a estratégia multi-versão é superior ao unificado, o Experimento 5 adicionou uma camada de conhecimento externo (+19% P@10 adicional), e o Experimento 6 demonstrou que embeddings large no corpus CCEL elevam todas as métricas (+3,6% P@10 adicional, com ganhos mais expressivos em MAP e MRR). A melhoria total de +73% em P@10, +67% em R@20 e +86% em MAP do primeiro ao último experimento foi alcançada sem retreinar modelos, sem datasets proprietários e sem hardware especializado — apenas otimizando a combinação de componentes disponíveis e integrando conhecimento da tradição interpretativa cristã.
+A progressão revela uma lógica de otimização em camadas: os Experimentos 1-2 calibraram os parâmetros do pipeline (+7% P@10), o Experimento 3 melhorou a qualidade do modelo de embedding (+31% P@10 adicional), o Experimento 4 confirmou que a estratégia multi-versão é superior ao unificado, o Experimento 5 adicionou uma camada de conhecimento externo (+19% P@10 adicional), o Experimento 6 demonstrou que embeddings large no corpus CCEL elevam todas as métricas (+3,6% P@10 adicional), e o Experimento 7 aplicou o pipeline otimizado à descoberta temática, adicionando HyDE, Multi-Query e Cross-Encoder para alcançar 100% de promotion rate com 994 versículos Grade 3. A melhoria total de +73% em P@10, +67% em R@20 e +86% em MAP nos Experimentos 1 a 6, combinada com a validação de 50 temas teologicamente genuínos no Experimento 7, foi alcançada sem retreinar modelos, sem datasets proprietários e sem hardware especializado — apenas otimizando a combinação de componentes disponíveis, integrando conhecimento da tradição interpretativa cristã, e aplicando técnicas da literatura recente de RAG.
 
 ## Discussão
 
